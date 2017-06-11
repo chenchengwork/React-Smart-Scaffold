@@ -1,0 +1,114 @@
+{
+    "env": {
+        "browser": true,
+        "commonjs": true,
+        "es6": true
+    },
+    "extends": "airbnb",
+    "parser": "babel-eslint",
+    "parserOptions": {
+        "ecmaFeatures": {
+            "experimentalObjectRestSpread": true,
+            "jsx": true
+        },
+        "sourceType": "module"
+    },
+    "ecmaFeatures": {
+        "jsx": true
+    },
+    "plugins": [
+        "react"
+    ],
+    "rules": {
+        // 标准缩进,4个空格
+        "indent": [
+            "error",
+            4,
+            {
+                "SwitchCase": 1
+            }
+        ],
+        // 换行符,unix换行符
+        "linebreak-style": [
+            "error",
+            "unix"
+        ],
+        // 字符串引号,使用单引号
+        "quotes": [
+            "error",
+            "single"
+        ],
+        // 分号,必须
+        "semi": [
+            "error",
+            "always"
+        ],
+        // 最后一个元素后的逗号
+        "comma-dangle": [
+            "error",
+            "never"
+        ],
+        // 单行最大长度
+        // http://eslint.org/docs/rules/max-len
+        "max-len": [
+            "error",
+            120,
+            2,
+            {
+                "ignoreUrls": true,
+                "ignoreComments": false,
+                "ignoreRegExpLiterals": true,
+                "ignoreStrings": true,
+                "ignoreTemplateLiterals": true
+            }
+        ],
+        "padded-blocks": 0,
+        // (关闭)i++,++1
+        "no-plusplus": 0,
+        // (关闭)
+        "default-case": 0,
+        // jsdoc注释
+        "require-jsdoc": [
+            "error",
+            {
+                "require": {
+                    // 函数描述
+                    "FunctionDeclaration": true,
+                    // 方法定义
+                    "MethodDefinition": false,
+                    // 类描述
+                    "ClassDeclaration": false,
+                    // 闭包函数描述
+                    "ArrowFunctionExpression": true
+                }
+            }
+        ],
+        // jsx的缩进
+        "react/jsx-indent": [
+            "error",
+            4
+        ],
+        // JSX 属性缩进
+        // https://github.com/yannickcr/eslint-plugin-react/blob/master/docs/rules/jsx-indent-props.md
+        "react/jsx-indent-props": [
+            "error",
+            4
+        ],
+        // (关闭)JSX组件在无使用声明周期方法,setState和ref时,必须声明成一个方法
+        // https://github.com/yannickcr/eslint-plugin-react/blob/master/docs/rules/prefer-stateless-function.md
+        "react/prefer-stateless-function": 0,
+        // (关闭)禁止的属性类型检查
+        "react/forbid-prop-types": 0,
+        // 属性类型定义检查,除了children属性,都检查类型定义
+        "react/prop-types": [
+            "error",
+            {
+                "ignore": [
+                    "children"
+                ]
+            }
+        ],
+        "jsx-a11y/label-has-for": 0,
+        "jsx-a11y/href-no-hash": 0
+    }
+}

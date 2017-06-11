@@ -1,0 +1,69 @@
+{
+  "name": "React-Smart-Scaffold",
+  "version": "0.0.1",
+  "author": "chencheng <cheng.chen@tianjishuju.com>",
+  "description": "React smart scaffold",
+  "main": "src/index",
+
+  "dependencies": {
+    "axios": "^0.16.0",
+    "lodash": "^4.17.4",
+
+    "react": "15.5.4",
+    "react-dom": "15.5.4",
+    "prop-types":"15.5.10",
+    "react-redux": "^4.4.6",
+    "react-router": "^3.0.2",
+    "redux": "^3.6.0"
+  },
+
+  "devDependencies": {
+    "autoprefixer": "^6.6.0",
+    "babel-cli": "^6.1.18",
+    "babel-core": "^6.10.4",
+    "babel-eslint": "^7.2.3",
+    "babel-loader": "^6.2.4",
+    "babel-polyfill": "^6.13.0",
+    "babel-preset-es2015": "^6.9.0",
+    "babel-preset-react": "^6.11.1",
+    "babel-preset-stage-0": "^6.5.0",
+    "bundle-loader": "^0.5.5",
+    "css-loader": "^0.26.1",
+    "css-to-string-loader": "^0.1.2",
+    "eslint": "^3.19.0",
+    "eslint-config-airbnb": "^14.1.0",
+    "eslint-plugin-import": "^2.2.0",
+    "eslint-plugin-jsx-a11y": "^4.0.0",
+    "eslint-plugin-react": "^6.10.3",
+    "extract-text-webpack-plugin": "^2.1.0",
+    "file-loader": "0.8.4",
+    "node-sass": "^3.11.2",
+    "postcss-loader": "^1.2.1",
+    "react-hot-loader": "^3.0.0-beta.7",
+    "sass-loader": "^4.0.2",
+    "style-loader": "^0.13.1",
+    "url-loader": "^0.5.7",
+
+    "webpack": "^2.5.1",
+    "webpack-dev-server": "^2.4.5"
+  },
+
+  "scripts": {
+    "dev": "BUILD_DEV=1 node server.js",
+    "build-dev": "BUILD_DEV=1 webpack --progress --config ./build/webpack.config.js",
+    "build": "BUILD_DEV=0 webpack --progress --optimize-minimize --config ./build/webpack.config.js"
+  },
+
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/chenchengwork/React-Smart-Scaffold.git"
+  },
+
+  "license": "ISC",
+
+  "bugs": {
+    "url": "https://github.com/chenchengwork/React-Smart-Scaffold/issues"
+  },
+
+  "homepage": "https://github.com/chenchengwork/React-Smart-Scaffold#readme"
+}
