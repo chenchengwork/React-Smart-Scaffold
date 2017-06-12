@@ -4,12 +4,12 @@
  * @license www.tianjishuju.com/license
  */
 import React from 'react';
-import { Route, IndexRedirect, IndexRoute, browserHistory } from 'react-router';
+import { Route, IndexRedirect} from 'react-router';
 
-import LazyLoad from '../templates/lazyLoad';
+import LazyLoad from './templates/lazyLoad';
 
 // 单页面
-import LoginComponent from '../components/login';
+import LoginComponent from './components/login';
 
 
 export default <Route path="/">

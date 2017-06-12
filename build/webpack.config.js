@@ -5,12 +5,15 @@
 const webpack = require('webpack');
 const CommonsChunkPlugin = webpack.optimize.CommonsChunkPlugin;   //提取公共库的插件
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
+const autoprefixer = require('autoprefixer');
 
 // 页面入口文件,使用异步加载方式
 const routesComponentsRegex = /src\/components\/([\w-])+?\/(((?!(components|templates)).)*\/)?index.jsx$/g;
 
 // 编译排除的文件
 const excludeRegex = /(node_modules|bower_modules)/;
+
+const path = require('path')
 
 module.exports = {
 
@@ -39,7 +42,7 @@ module.exports = {
         filename: '[name].js'
     },
     module: {
-        loaders: [
+		rules: [
             {
                 test: /\.(png|jpg|gif)$/,
                 use: 'url-loader?limit=8192' //  <= 8kb的图片base64内联
@@ -91,7 +94,7 @@ module.exports = {
                 )
             },
             {
-                test: /\.scss$/,
+                test: /\.scss/,
                 exclude: excludeRegex,
                 use: ExtractTextPlugin.extract(
                     {
@@ -119,6 +122,53 @@ module.exports = {
                     }
                 )
             },
+
+			{
+				test: /\.less/,
+				// exclude: excludeRegex,
+				use: ExtractTextPlugin.extract(
+					{
+						fallback: 'style-loader',
+						use: [
+							{
+								loader: 'css-loader',
+								options: {
+									sourceMap: true
+								}
+							},
+							{
+								loader: 'postcss-loader',
+								options: {
+									sourceMap: true,
+									ident: 'postcss', 	// https://webpack.js.org/guides/migrating/#complex-options
+									plugins: () => [
+										require('postcss-flexbugs-fixes'),
+										autoprefixer({
+											browsers: [
+												'>1%',
+												'last 4 versions',
+												'Firefox ESR',
+												'not ie < 9', // React doesn't support IE8 anyway
+											],
+											flexbox: 'no-2009',
+										}),
+									],
+								}
+							},
+							{
+								loader: 'less-loader',
+								options: {
+									sourceMap: true,
+			 						modifyVars: {
+										"@primary-color": "#1DA57A",		//antd的主题颜色
+									}
+								}
+							}
+						]
+					}
+				)
+			},
+
             {
                 test: routesComponentsRegex,
                 exclude: excludeRegex,
@@ -131,6 +181,7 @@ module.exports = {
                     }
                 ]
             },
+
             {
                 loader: 'babel-loader',
                 exclude: [
@@ -138,15 +189,18 @@ module.exports = {
                     routesComponentsRegex
                 ],
                 test: /\.jsx?$/,
-                query: {
-                    presets: [
-                        'babel-polyfill',
-                        'es2015',
-                        'react',
-                        'stage-0'
-                    ]
+				options:{
+					presets: [
+						'babel-polyfill',
+						'es2015',
+						'react',
+						'stage-0'
+					],
+					"plugins": [
+						["import", { libraryName: "antd", style: true }] // `style: true` for less
+					]
                 }
-            }
+            },
         ]
     },
     plugins: [
@@ -161,12 +215,12 @@ module.exports = {
             React:'react'
         }),
 
-        //提取文本
-        new ExtractTextPlugin({
-            filename: 'vendor.css?[hash]-[chunkhash]-[contenthash]-[name]',
-            disable: false,
-            allChunks: true
-        }),
+		//提取文本
+		new ExtractTextPlugin({
+			filename: 'vendor.css?[hash]-[chunkhash]-[contenthash]-[name]',
+			disable: false,
+			allChunks: true
+		}),
 
         // 开发环境和生产环境配置
         new webpack.DefinePlugin({

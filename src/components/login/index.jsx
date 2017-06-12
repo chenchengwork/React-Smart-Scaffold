@@ -5,7 +5,8 @@
  */
 
 import { Component } from 'react';
-import '../../resources/scss/modules/login/index.scss';
+import { DatePicker } from 'antd';
+// import '../../resources/scss/modules/login/index.scss';
 
 export default class LoginComponent extends Component {
 
@@ -17,6 +18,7 @@ export default class LoginComponent extends Component {
         return (
             <div className="container-fluid main" id="login">
                 login
+                <DatePicker />
             </div>
         );
     }

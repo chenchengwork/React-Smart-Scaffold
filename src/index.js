@@ -17,9 +17,12 @@ import routes from './routes';
 /**
  * 渲染程序
  */
-const renderApp = () => render(<Provider store={store}>
-    <Router history={browserHistory} routes={routes} />
-</Provider>, document.getElementById('wrapper'));
+const renderApp = () => render(
+	<Provider store={store}>
+    	<Router history={browserHistory} routes={routes} />
+	</Provider>,
+	document.getElementById('wrapper')
+);
 
 renderApp();
 
