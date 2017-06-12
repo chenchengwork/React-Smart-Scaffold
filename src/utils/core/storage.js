@@ -4,7 +4,7 @@
  * @license www.tianjishuju.com/license
  */
 
-import { isNone, each, eachRight, now } from '../utils/helper';
+import { isNone, each, eachRight, now } from './helper';
 
 // 本地存储的key
 const STORAGE_KEY = '__storage__';

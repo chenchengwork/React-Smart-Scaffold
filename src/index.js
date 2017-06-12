@@ -6,20 +6,24 @@
 
 import { render } from 'react-dom';
 import { Provider } from 'react-redux';
-import { Router, browserHistory } from 'react-router';
 
 // 加载启动程序
 // import './bootstrap';
 
 import store from './store';
-import routes from './routes';
+
+
+//加载路由
+import Routes from './routes/index';
 
 /**
  * 渲染程序
  */
 const renderApp = () => render(
 	<Provider store={store}>
-    	<Router history={browserHistory} routes={routes} />
+
+    	<Routes />
+
 	</Provider>,
 	document.getElementById('wrapper')
 );

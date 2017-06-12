@@ -6,9 +6,8 @@
 
 import { Component } from 'react';
 import { DatePicker } from 'antd';
-// import '../../resources/scss/modules/login/index.scss';
 
-export default class LoginComponent extends Component {
+export default class Login extends Component {
 
     constructor(props) {
         super(props);

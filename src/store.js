@@ -6,7 +6,7 @@
 
 import { createStore, compose } from 'redux';
 
-import { get as objectGet } from './utils/helper';
+import { get as objectGet } from './utils/core/helper';
 
 import reducers from './reducers';
 
