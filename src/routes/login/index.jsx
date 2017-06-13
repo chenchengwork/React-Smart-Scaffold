@@ -1,5 +1,5 @@
+import MainLayout from '../../templates/MainLayout/MainLayout'
+import Login from '../../components/User/User'
 
-import Login from '../../components/Login/Login'
 
-
-export default Login;
+export default () => <MainLayout><Login /></MainLayout>;

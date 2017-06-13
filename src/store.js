@@ -6,7 +6,7 @@
 
 import { createStore, compose } from 'redux';
 
-import { get as objectGet } from './utils/core/helper';
+// import { get as objectGet } from './utils/core/helper';
 
 import reducers from './reducers';
 
@@ -22,23 +22,5 @@ const store = createStore(reducers, {}, composeEnhancers());
 
 export const getState = store.getState;
 
-/**
- * 派发事件
- *
- * @param {string} type 事件名
- * @param {Object=} params 参数对象
- */
-export const dispatch = (type, params = {}) => store.dispatch({
-    ...params,
-    type
-});
-
-/**
- * 根据path获取state
- *
- * @param {string} path 路径
- * @return {*}
- */
-export const get = path => objectGet(getState(), path);
 
 export default store;

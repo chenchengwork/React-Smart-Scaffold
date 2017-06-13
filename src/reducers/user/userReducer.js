@@ -7,7 +7,7 @@ const initState = {};
  * @param {Object} action 动作对象
  * @return {{navigation: string}}
  */
-export default function reducer(state = initState, action) {
+export default function userReducer(state = initState, action) {
 
     switch (action.type) {
 
@@ -17,6 +17,5 @@ export default function reducer(state = initState, action) {
     }
 
     return state;
-
 }
 

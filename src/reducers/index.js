@@ -1,10 +1,8 @@
-
 import { combineReducers } from 'redux';
 
-// 首页reducer
-import query from './query';
+import userReducer from './user/userReducer';
 
 // 创建reducers
 export default combineReducers({
-    query
+	userReducer
 });
