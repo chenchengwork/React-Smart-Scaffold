@@ -5,15 +5,20 @@
  */
 
 import { Component } from 'react';
+import PropTypes from 'prop-types'
 import { Table } from 'antd';
 
 export default class Login extends Component {
+	static contextTypes = {
+		store:PropTypes.object.isRequired
+	}
 
     constructor(props) {
         super(props);
     }
 
     render() {
+		console.log(this.context.store.dispatch)
 		const dataSource = [
 			{
 				key: '1',

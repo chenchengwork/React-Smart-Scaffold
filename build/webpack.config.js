@@ -8,7 +8,6 @@ const ExtractTextPlugin = require('extract-text-webpack-plugin');
 const autoprefixer = require('autoprefixer');
 
 // 页面入口文件,使用异步加载方式
-// const routesComponentsRegex = /src\/components\/([\w-])+?\/(((?!(components)).)*\/)?index.jsx$/g;
 const routesComponentsRegex = /src\/routes\/([\w-])+?\/index.jsx$/g;
 
 // 编译排除的文件

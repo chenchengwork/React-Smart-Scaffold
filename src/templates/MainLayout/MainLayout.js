@@ -4,6 +4,9 @@ import { Layout, Menu, Breadcrumb, Icon } from 'antd';
 const { Content, Footer, Sider } = Layout;
 const SubMenu = Menu.SubMenu;
 
+import EnumRouter from '../../constants/EnumRouter'
+
+
 export default class MainLayout extends Component {
 	state = {
 		collapsed: false,
@@ -35,10 +38,10 @@ export default class MainLayout extends Component {
                             title={<span><Icon type="user" /><span className="nav-text">User</span></span>}
                         >
 							<Menu.Item key="1">
-								<Link to="/home">Home</Link>
+								<Link to={EnumRouter.home}>Home</Link>
 							</Menu.Item>
 							<Menu.Item key="2">
-								<Link to="/login">Login</Link>
+								<Link to={EnumRouter.user}>Login</Link>
 							</Menu.Item>
 
                         </SubMenu>
@@ -49,6 +52,7 @@ export default class MainLayout extends Component {
 							<span className="nav-text">File</span>
 						  </span>
                         </Menu.Item>
+
                     </Menu>
                 </Sider>
 

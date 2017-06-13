@@ -3,7 +3,8 @@
  */
 
 import lazyLoad from '../templates/LazyLoad';
-import Login from './login';
+
+import User from './user';
 import Home from './home';
 
 
@@ -14,16 +15,16 @@ import {
 } from 'react-router-dom'
 
 
-const Routes = () => (
+const Routes = ({store}) => (
 	<BrowserRouter
 		forceRefresh={!('pushState' in window.history)}
 		keyLength={12}
 	>
 		<Switch>
-			<Route exact path="/" component={lazyLoad(Home)} />
+			<Route exact path="/" component={lazyLoad(Home,store)} />
 
-			<Route path="/home" component={lazyLoad(Home)} />
-			<Route path="/login" component={lazyLoad(Login)} />
+			<Route path="/home" component={lazyLoad(Home,store)} />
+			<Route path="/user" component={lazyLoad(User,store)} />
 			<Route component={NoMatch} />
 		</Switch>
 

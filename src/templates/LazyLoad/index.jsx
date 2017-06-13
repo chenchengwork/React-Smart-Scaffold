@@ -6,4 +6,4 @@
 import React from 'react';
 import LazyLoad from './lazyLoad';
 
-export default lazyLoader => props => <LazyLoad {...props} lazyLoader={lazyLoader} />;
+export default (lazyLoader,store) => props => <LazyLoad {...props} store={store} lazyLoader={lazyLoader} />;

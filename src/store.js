@@ -4,10 +4,8 @@
  * @license www.tianjishuju.com/license
  */
 
-import { createStore, compose } from 'redux';
-
-// import { get as objectGet } from './utils/core/helper';
-
+import { createStore, compose,applyMiddleware } from 'redux';
+import thunk from 'redux-thunk'
 import reducers from './reducers';
 
 
@@ -18,9 +16,6 @@ const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 
 
 // 创建store
-const store = createStore(reducers, {}, composeEnhancers());
-
-export const getState = store.getState;
-
+const store = createStore(reducers, {}, composeEnhancers(applyMiddleware(...[thunk])));
 
 export default store;

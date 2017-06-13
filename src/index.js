@@ -20,14 +20,11 @@ import Routes from './routes/index';
  * 渲染程序
  */
 const renderApp = () => render(
-	<Provider store={store}>
 
-    	<Routes />
-
-	</Provider>,
+    	<Routes store={store} />,
 	document.getElementById('wrapper')
 );
 
 renderApp();
 
-store.subscribe(renderApp);
+// store.subscribe(renderApp);
