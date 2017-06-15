@@ -8,33 +8,44 @@ import { Component } from 'react';
 import PropTypes from 'prop-types'
 import { Table } from 'antd';
 
-export default class Login extends Component {
+
+import {
+	fetchUserListAction
+} from '../../actions/user/userList'
+
+
+export default class UserList extends Component {
+
 	static contextTypes = {
 		store:PropTypes.object.isRequired
 	}
+
+
 
     constructor(props) {
         super(props);
     }
 
+    componentDidMount(){
+		this.context.store.dispatch(fetchUserListAction());
+	}
+
     render() {
-		console.log(this.context.store.dispatch)
-		const dataSource = [
-			{
-				key: '1',
-				name: '胡彦斌',
-				age: 32,
-				address: '西湖区湖底公园1号',
-				action:<a>delete</a>
-			},
-			{
-				key: '2',
-				name: '胡彦祖',
-				age: 42,
-				address: '西湖区湖底公园1号',
-				action:<a>delete</a>
+
+		const {list} = this.props.userListReducer;
+
+		const dataSource = list.map((val)=>{
+			return {
+				key: val.userId,
+				name: val.name,
+				age: val.age,
+				address: val.address,
+				action:(<div>
+					<a>edit</a>,
+					<a>delete</a>
+				</div>)
 			}
-		];
+		})
 
 		const columns = [
 			{

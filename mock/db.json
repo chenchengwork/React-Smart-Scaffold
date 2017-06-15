@@ -1,9 +1,26 @@
 {
-    "posts": [
-        { "id": 1, "title": "json-server", "author": "typicode" }
-    ],
-    "comments": [
-        { "id": 1, "body": "some comment", "postId": 1 }
-    ],
+    "userList": {
+        "code":"success",
+        "msg":"success",
+        "data":[
+            {
+                "userId": "1",
+                "name": "胡彦斌",
+                "age": 32,
+                "address": "西湖区湖底公园1号"
+            },
+            {
+                "userId": "2",
+                "name": "胡彦祖",
+                "age": 42,
+                "address": "西湖区湖底公园1号"
+            }
+        ]
+    },
+    "comments": {
+        "code":"success",
+        "msg":"success",
+        "data":[]
+    },
     "profile": { "name": "typicode" }
 }

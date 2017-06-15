@@ -1,10 +1,11 @@
 /**
  * Created by chencheng on 2017/6/12.
  */
-
 import lazyLoad from '../templates/LazyLoad';
+import MainLayout from '../templates/MainLayout/MainLayout'
 
-import User from './user';
+
+import UserList from './userList';
 import Home from './home';
 
 
@@ -15,17 +16,25 @@ import {
 } from 'react-router-dom'
 
 
-const Routes = ({store}) => (
+const Routes = () => (
 	<BrowserRouter
 		forceRefresh={!('pushState' in window.history)}
 		keyLength={12}
 	>
 		<Switch>
-			<Route exact path="/" component={lazyLoad(Home,store)} />
 
-			<Route path="/home" component={lazyLoad(Home,store)} />
-			<Route path="/user" component={lazyLoad(User,store)} />
+			{/*主要布局*/}
+			<MainLayout>
+				<Route exact path="/" component={lazyLoad(Home)} />
+
+				<Route path="/home" component={lazyLoad(Home)} />
+				<Route path="/user" component={lazyLoad(UserList)} />
+			</MainLayout>
+
+
+
 			<Route component={NoMatch} />
+
 		</Switch>
 
 	</BrowserRouter>

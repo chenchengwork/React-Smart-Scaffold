@@ -4,7 +4,6 @@
  * @license www.tianjishuju.com/license
  */
 import  {Component} from 'react';
-import {Provider} from 'react-redux'
 import PropTypes from 'prop-types';
 
 export default class LazyLoadTpl extends Component {
@@ -32,18 +31,11 @@ export default class LazyLoadTpl extends Component {
     }
 
     render() {
-        console.log(this.props)
         const Component = this.state.Component;
 
         if (Component) {
 
-            const A = () => {
-                return <Provider store={this.props.store}><Component.default {...this.props} /></Provider>;
-            }
-
-			this.props.store.subscribe(A)
-
-            return <A />;
+            return <Component.default {...this.props} />;
 
         }
 

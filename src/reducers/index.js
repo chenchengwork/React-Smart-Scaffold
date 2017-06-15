@@ -1,8 +1,8 @@
 import { combineReducers } from 'redux';
 
-import userReducer from './user/userReducer';
+import userListReducer from './user/userListReducer';
 
 // 创建reducers
 export default combineReducers({
-	userReducer
+	userListReducer
 });

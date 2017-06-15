@@ -3,5 +3,5 @@
  */
 
 var ENV = {
-    apiDomain:"http://10.0.1.121"
+    apiDomain:"http://localhost:8181",      //api请求接口
 }

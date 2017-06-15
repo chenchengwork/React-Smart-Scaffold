@@ -9,14 +9,17 @@
         "antd":"2.11.0",
         "axios": "^0.16.0",
         "lodash": "^4.17.4",
+        "js-cookie": "^2.1.4",
 
-        "react": "15.5.4",
-        "react-dom": "15.5.4",
+
+        "react": "15.6.0",
+        "react-dom": "15.6.0",
         "prop-types":"15.5.10",
         "react-redux": "^4.4.6",
         "react-router-dom":"^4.1.1",
         "redux": "^3.6.0",
-        "redux-thunk": "^2.2.0"
+        "redux-thunk": "^2.2.0",
+        "immutability-helper":"^2.2.2"
     },
 
     "devDependencies": {
@@ -58,7 +61,7 @@
 
     "scripts": {
         "dev": "BUILD_DEV=1 node server.js",
-        "mock":"./node_modules/.bin/json-server --watch db.json ./mock/db.json ",
+        "mock":"./node_modules/.bin/json-server --watch ./mock/db.json --routes ./mock/routes.json",
         "build": "BUILD_DEV=0 webpack --progress --optimize-minimize --config ./build/webpack.config.js"
     },
 

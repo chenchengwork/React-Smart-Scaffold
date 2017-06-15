@@ -15,7 +15,7 @@ const server = new WebpackDevServer(webpack(config), {
 	publicPath: config.output.publicPath,
 	contentBase: config.output.path,
 
-  watchContentBase:true,
+  	watchContentBase:true,
 
   // 开启服务器的模块热替换(HMR)
 	hot: false,
@@ -28,6 +28,13 @@ const server = new WebpackDevServer(webpack(config), {
 
 	stats: {
 		colors: true,
+	},
+	proxy: {
+		'/mockAPI/*': {
+			target: 'http://localhost:3000',
+			changeOrigin: true,
+			secure: false
+		}
 	}
 });
 

@@ -4,7 +4,10 @@
  * @license www.tianjishuju.com/license
  */
 
-import { isNone, each, eachRight, now } from './helper';
+import { isNull, isUndefined,each, eachRight, now } from 'lodash';
+
+const isNone = value => (isNull(value) || isUndefined(value));
+
 
 // 本地存储的key
 const STORAGE_KEY = '__storage__';

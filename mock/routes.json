@@ -1,0 +1,4 @@
+{
+    "/mockAPI/userList": "/userList",
+    "/mockAPI/comments": "/comments"
+}
