@@ -19,6 +19,7 @@
         "react-router-dom":"^4.1.1",
         "redux": "^3.6.0",
         "redux-thunk": "^2.2.0",
+        "react-intl": "^2.3.0",
         "immutability-helper":"^2.2.2"
     },
 
@@ -29,6 +30,7 @@
         "babel-eslint": "^7.2.3",
         "babel-loader": "^6.2.4",
         "babel-polyfill": "^6.13.0",
+        "babel-plugin-react-intl":"^2.3.1",
         "babel-plugin-import":"1.2.1",
         "babel-preset-es2015": "^6.9.0",
         "babel-preset-react": "^6.11.1",
@@ -60,10 +62,18 @@
         "postcss-flexbugs-fixes": "3.0.0",
         "less":"2.7.2",
 
+        "glob":"^7.1.2",
+        "mkdirp":"^0.5.1",
+        "rimraf": "^2.6.1",
+        "urllib-sync":"^1.1.4",
+        "crypto":"^0.0.3",
+        "urlencode":"^1.1.0",
+
         "json-server":"^0.10.1",
         "webpack": "^2.5.1",
         "webpack-dev-server": "^2.4.5"
     },
+
     "jest": {
         "moduleFileExtensions": [
             "js",
@@ -80,12 +90,14 @@
             "<rootDir>/__mocks__/setup.js"
         ]
     },
+
     "scripts": {
         "dev": "BUILD_DEV=1 node server.js",
         "mock":"./node_modules/.bin/json-server --watch ./mock/db.json --routes ./mock/routes.json",
-        "test": "jest --colors",
-        "coverage": "jest --colors --coverage",
-        "build": "BUILD_DEV=0 webpack --progress --optimize-minimize --config ./build/webpack.config.js"
+        "test": "BABEL_ENV=test jest --colors",
+        "coverage": "BABEL_ENV=test jest --colors --coverage",
+        "build": "BUILD_DEV=0 webpack --progress --optimize-minimize --config ./build/webpack.config.js",
+        "intl": "rimraf ./i18n-messages && BABEL_ENV=i18n babel --quiet ./src > /dev/null && babel-node --presets es2015 ./scripts/translateIntl.js && rimraf ./i18n-messages"
     },
 
     "repository": {

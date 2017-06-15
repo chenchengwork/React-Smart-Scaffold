@@ -1,13 +1,33 @@
 {
-    "presets": [
-        [
-            "es2015",
-            {
-                "module": false
-            }
-        ],
-        "babel-polyfill",
-        "react",
-        "stage-0"
-    ]
+    "env": {
+        "test":{
+            "presets": [
+                [
+                    "es2015",
+                    {
+                        "module": false
+                    }
+                ],
+                "babel-polyfill",
+                "react",
+                "stage-0"
+            ]
+        },
+        "i18n": {
+            "presets": [
+                "es2015",
+                "stage-0",
+                "react"
+            ],
+            "plugins": [
+                [
+                    "react-intl",
+                    {
+                        "messagesDir": "./i18n-messages",
+                        "enforceDescriptions": false
+                    }
+                ]
+            ]
+        }
+    }
 }
