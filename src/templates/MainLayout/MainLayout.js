@@ -1,3 +1,5 @@
+import "./MainLayout.scss"
+
 import {Component} from 'react'
 import {Link} from 'react-router-dom'
 import { Layout, Menu, Breadcrumb, Icon } from 'antd';
@@ -22,13 +24,14 @@ export default class MainLayout extends Component {
 
 	render() {
 		return (
-            <Layout>
+            <Layout  style={{ height: '100vh' }}>
                 <Sider
                     collapsible
                     collapsed={this.state.collapsed}
                     defaultCollapsed={false}
                     collapsedWidth={100}
                     onCollapse={this.onCollapse}
+					style={{ overflow: 'auto' }}
                 >
                     <div className="logo" />
 

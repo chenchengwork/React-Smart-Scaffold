@@ -1,0 +1,13 @@
+{
+    "presets": [
+        [
+            "es2015",
+            {
+                "module": false
+            }
+        ],
+        "babel-polyfill",
+        "react",
+        "stage-0"
+    ]
+}

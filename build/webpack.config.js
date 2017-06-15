@@ -195,7 +195,8 @@ module.exports = {
 						'stage-0'
 					],
 					"plugins": [
-						["import", { libraryName: "antd", style: true }] // `style: true` for less
+						["import", { libraryName: "antd", style: true }], // `style: true` for less
+						['transform-decorators-legacy','transform-decorators'],	//支持es7的装饰器
 					]
                 }
             },

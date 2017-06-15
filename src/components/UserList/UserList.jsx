@@ -3,6 +3,7 @@
  * @author vision <vision.shi@tianjishuju.com>
  * @license www.tianjishuju.com/license
  */
+import './UserList.scss';
 
 import { Component } from 'react';
 import PropTypes from 'prop-types'

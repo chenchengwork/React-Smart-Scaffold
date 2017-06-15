@@ -7,11 +7,7 @@
 import { render } from 'react-dom';
 import { Provider } from 'react-redux';
 
-// 加载启动程序
-// import './bootstrap';
-
 import store from './store';
-
 
 //加载路由
 import Routes from './routes/index';
@@ -23,11 +19,8 @@ const renderApp = () => render(
 	<Provider store={store}>
     	<Routes />
 	</Provider>,
-	document.getElementById('wrapper')
+	document.querySelector('#wrapper')
 );
 
 renderApp();
 
-/*store.subscribe(()=>{
-	console.log(arguments)
-});*/

@@ -1,8 +1,4 @@
-/**
- * @description 登录页面
- * @author vision <vision.shi@tianjishuju.com>
- * @license www.tianjishuju.com/license
- */
+import './Home.scss'
 
 import { Component } from 'react';
 import { DatePicker } from 'antd';
