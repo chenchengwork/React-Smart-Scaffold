@@ -4,16 +4,19 @@
 
 const _processAPI = (api) => {
 
+	if(ENV.mock.isStart){
+		return "/mockAPI"+api;
+	}
 
 	return api;
 }
 
 /**
- * 枚举使用的路由
- * @type {{home, user}}
+ *
+ * @type {{getUserList}}
  */
 const EnumAPI = {
-	getUserList:_processAPI('/userList'),
+	getUserList:_processAPI('/userList'),		//获取用户列表
 
 }
 

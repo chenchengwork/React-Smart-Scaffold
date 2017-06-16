@@ -158,7 +158,7 @@ module.exports = {
 								options: {
 									sourceMap: true,
 			 						modifyVars: {
-										"@primary-color": "#1DA57A",		//antd的主题颜色
+										//"@primary-color": "#1DA57A",		//antd的主题颜色
 									}
 								}
 							}
@@ -226,7 +226,9 @@ module.exports = {
             'process.env': {
                 // 控制如react、react-dom等第三方包的warnning输出,设置为production将不输出warnning
                 NODE_ENV: process.env.BUILD_DEV == 1 ? '"dev"' : '"production"'
-            }
+            },
+			//__DEV__是可在业务代码中使用变量，用于做些只在开发环境
+			__DEV__: JSON.stringify(JSON.parse(process.env.BUILD_DEV)),
         })
     ]
 };

@@ -21,6 +21,7 @@ export default class UserList extends Component {
 
 	static propTypes = {
 		userListReducer:PropTypes.shape({
+			fetchStatus:PropTypes.bool.isRequired,
 			list:PropTypes.array.isRequired
 		}).isRequired
 
@@ -36,7 +37,7 @@ export default class UserList extends Component {
 
     render() {
 
-		const {list} = this.props.userListReducer;
+		const {fetchStatus,list} = this.props.userListReducer;
 
 		const dataSource = list.map((val)=>{
 			return {
@@ -75,13 +76,10 @@ export default class UserList extends Component {
 		];
 
         return (
-			<div>
-				<FormattedMessage
-					id="screen.createScreen"
-					defaultMessage="创建大屏"
-				/>
-						<Table dataSource={dataSource} columns={columns} />
-			</div>
+			<Table
+				loading={fetchStatus}
+				dataSource={dataSource}
+				columns={columns} />
         );
     }
 }

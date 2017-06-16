@@ -8,30 +8,38 @@ import {
 	getUserList
 } from '../../utils/webAPI/user'
 
-export function fetchUserListAction() {
+/**
+ * 开启fetch状态
+ * @private
+ */
+const _openFetchUserList = () => ({type:actionTypes.OPEN_FETCH_USER_LIST});
 
-	getUserList().then((resp)=>{
-		console.log("success",resp)
-	},(resp)=>{
-		console.log("error",resp)
-	})
-
+/**
+ * 设置用户列表
+ * @param list
+ * @returns {{type: string, list: *}}
+ * @private
+ */
+const _setUserListAction = (list) => {
 	return {
 		type:actionTypes.SET_USER_LIST,
-
-		list:[
-			{
-				userId: '1',
-				name: '胡彦斌',
-				age: 32,
-				address: '西湖区湖底公园1号',
-			},
-			{
-				userId: '2',
-				name: '胡彦祖',
-				age: 42,
-				address: '西湖区湖底公园1号',
-			}
-		]
+		list:list
 	}
+}
+
+export function fetchUserListAction() {
+
+	return (dispatch) => {
+
+		dispatch(_openFetchUserList())
+
+		getUserList().then((resp)=>{
+
+			dispatch(_setUserListAction(resp.data));
+
+		},(resp)=>{
+			console.log("error",resp)
+		})
+	}
+
 }

@@ -17,7 +17,7 @@ const Singleton = (function () {
 	function init() {
 
 		return axios.create({
-			baseURL:ENV.apiDomain,
+			baseURL:ENV.mock.isStart ? ENV.mock.apiDomain : ENV.apiDomain,
 
 			// `withCredentials`指示是否跨站点访问控制请求
 			withCredentials: true,

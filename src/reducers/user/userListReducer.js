@@ -2,6 +2,7 @@ import * as actionTypes from '../../constants/actionTypes/userList'
 import update from 'immutability-helper';
 
 const initState = {
+    fetchStatus:false,
     list:[]
 };
 
@@ -14,9 +15,16 @@ const initState = {
 export default (state = initState, action) => {
 
     switch (action.type) {
+        //开启fetch状态
+        case actionTypes.OPEN_FETCH_USER_LIST:
+            return update(state,{fetchStatus:{$set:true}})
+
         //设置用户列表
         case actionTypes.SET_USER_LIST:
-			return update(state,{list:{$set:action.list}})
+			return update(state,{
+				fetchStatus:{$set:false},
+			    list:{$set:action.list}
+			})
 
         default:
             break;
