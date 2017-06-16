@@ -6,6 +6,7 @@
 //加载基础样式
 import "./base.scss";
 
+import {LocaleProvider} from 'antd';
 import { render } from 'react-dom';
 import { Provider } from 'react-redux';
 import {IntlProvider, injectIntl} from 'react-intl';
@@ -26,9 +27,13 @@ const IntlRoutes = injectIntl(Routes);
  */
 const renderApp = () => render(
 	<Provider store={store}>
-		<IntlProvider locale={localeData.locale} messages={localeData.messages}>
-    		<IntlRoutes />
-		</IntlProvider>
+		<LocaleProvider locale={localeData.antIntlMsg}>
+
+			<IntlProvider locale={localeData.locale} messages={localeData.messages}>
+				<IntlRoutes />
+			</IntlProvider>
+
+		</LocaleProvider>
 	</Provider>,
 	document.querySelector('#wrapper')
 );
