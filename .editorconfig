@@ -2,7 +2,7 @@
 root = true
 
 [*]
-indent_style = space                #缩紧格式为空格
+indent_style = tab                #缩紧格式为空格
 indent_size = 4                     #缩紧4格
 end_of_line = lf
 charset = utf-8

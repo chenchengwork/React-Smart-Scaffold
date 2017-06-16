@@ -6,6 +6,7 @@ const WebpackDevServer = require('webpack-dev-server');
 const config = require('./build/webpack.config');
 const host = "0.0.0.0";   //主机
 const port = 8181;        //端口号
+const mockHost = "http://localhost:3000";	//mock服务主机+端口
 
 //webpack 自动重新加载，采用inline
 config.entry.app.push('webpack-dev-server/client?http://'+host+':'+port+'/')
@@ -13,11 +14,12 @@ config.entry.app.push('webpack-dev-server/client?http://'+host+':'+port+'/')
 // 启动服务
 const server = new WebpackDevServer(webpack(config), {
 	publicPath: config.output.publicPath,
+	//指定服务器内容指定目录
 	contentBase: config.output.path,
 
   	watchContentBase:true,
 
-  // 开启服务器的模块热替换(HMR)
+  	// 开启服务器的模块热替换(HMR)
 	hot: false,
 
 	// 当请求不存在的路由时，直接返回首页
@@ -31,7 +33,7 @@ const server = new WebpackDevServer(webpack(config), {
 	},
 	proxy: {
 		'/mockAPI/*': {
-			target: 'http://localhost:3000',
+			target: mockHost,
 			changeOrigin: true,
 			secure: false
 		}
@@ -46,9 +48,9 @@ server.app.get('*', (req, res) => {
 });
 
 
-server.app.route('/config/ENV.js').get( (req, res) => {
+/*server.app.route('/config/ENV.js').get( (req, res) => {
 	res.sendFile(`${__dirname}/public/config/ENV.js`);
-});
+});*/
 
 
 server.listen(port,host);

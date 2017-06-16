@@ -3,18 +3,15 @@
  * @author vision <vision.shi@tianjishuju.com>
  * @license www.tianjishuju.com/license
  */
-import './UserList.scss';
-
 import { Component } from 'react';
-import PropTypes from 'prop-types'
+import PropTypes from 'prop-types';
+import { FormattedMessage } from 'react-intl';
+
 import { Table } from 'antd';
 
-import {FormattedMessage} from 'react-intl'
+import { fetchUserListAction } from '../../actions/user/userList';
 
-import {
-	fetchUserListAction
-} from '../../actions/user/userList'
-
+import './UserList.scss';
 
 export default class UserList extends Component {
 
@@ -22,10 +19,15 @@ export default class UserList extends Component {
 		store:PropTypes.object.isRequired
 	}
 
+	static propTypes = {
+		userListReducer:PropTypes.shape({
+			list:PropTypes.array.isRequired
+		}).isRequired
 
+	}
 
     constructor(props) {
-        super(props);
+		super(props);
     }
 
     componentDidMount(){
@@ -73,12 +75,13 @@ export default class UserList extends Component {
 		];
 
         return (
-<div>
-	<FormattedMessage
-		id="screen.createScreen"
-		defaultMessage="创建大屏"/>
-			<Table dataSource={dataSource} columns={columns} />
-</div>
+			<div>
+				<FormattedMessage
+					id="screen.createScreen"
+					defaultMessage="创建大屏"
+				/>
+						<Table dataSource={dataSource} columns={columns} />
+			</div>
         );
     }
 }

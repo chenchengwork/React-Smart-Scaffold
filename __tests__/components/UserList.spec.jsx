@@ -1,10 +1,9 @@
-import React from 'react'
-import UserList from '../../src/routes/userList/index'
-import {shallow} from 'enzyme'
+import React from 'react';
+import UserList from '../../src/routes/userList/index';
+import { shallow } from 'enzyme';
 
 
-
-describe('UserList',()=>{
+describe( 'UserList', () => {
 
 	it('UserList Component should render', () => {
 
@@ -17,5 +16,6 @@ describe('UserList',()=>{
 		const wrapper = shallow(<UserList  {...props} />)
 
 		expect(wrapper.find('div').exists());
+
 	})
 })

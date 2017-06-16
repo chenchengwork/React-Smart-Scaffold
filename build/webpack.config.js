@@ -225,7 +225,7 @@ module.exports = {
         new webpack.DefinePlugin({
             'process.env': {
                 // 控制如react、react-dom等第三方包的warnning输出,设置为production将不输出warnning
-                NODE_ENV: process.env.BUILD_DEV === '1' ? '"dev"' : '"production"'
+                NODE_ENV: process.env.BUILD_DEV == 1 ? '"dev"' : '"production"'
             }
         })
     ]

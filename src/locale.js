@@ -1,52 +1,42 @@
 /**
  * Created by chencheng on 16-7-12.
  */
-
-import {addLocaleData} from 'react-intl'
-
 import T from './utils/T'
+import { addLocaleData } from 'react-intl'
 
-function getLocale(){
-    var messages = {},
+/**
+ * 获取国际化信息
+ * @returns {{locale: string, messages: {}}}
+ */
+export function getLocale(){
+    let messages = {},
         locale = 'zh',
         langType = 'zh-CN';
 
-    var lang = T.cookies.get('tj_langKey');
+    let lang = T.cookies.get('tj_langKey');
     if(lang){
         langType = lang == 'zh' ? 'zh-CN' : 'en';
     }
 
-
-    //switch (navigator.language.split('_')[0]){
     switch (langType){
-
         case 'zh-CN':
             messages = require('./lang/zh');
             locale = 'zh';
-            var zh = require('react-intl/locale-data/zh');
-            addLocaleData(zh);
+            addLocaleData(require('react-intl/locale-data/zh'));
             break;
 
         case 'en':
             messages = require('./lang/en');
             locale = 'en';
-            var en = require('react-intl/locale-data/en');
-            addLocaleData(en);
+            addLocaleData(require('react-intl/locale-data/en'));
             break;
 
         default:
             messages = require('./lang/en');
             locale = 'en';
-            var en = require('react-intl/locale-data/en');
-            addLocaleData(en);
+            addLocaleData(require('react-intl/locale-data/en'));
     }
 
-    return {
-        locale:locale,
-        messages:messages,
-    }
+    return { locale, messages }
 }
 
-module.exports = {
-    getLocale:getLocale
-};

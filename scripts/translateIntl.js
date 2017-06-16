@@ -1,22 +1,27 @@
 /**
  * Created by chencheng on 16-7-12.
  */
-import * as fs from 'fs';
-import {sync as globSync} from 'glob';
-import {sync as mkdirpSync} from 'mkdirp';
-
 import crypto from 'crypto'
 import reqSyc from 'urllib-sync'
 import urlencode from 'urlencode'
 
+import * as fs from 'fs';
+import {sync as globSync} from 'glob';
+import {sync as mkdirpSync} from 'mkdirp';
 
-const MESSAGES_PATTERN = './i18n-messages/**/*.json';
-const LANG_PATTERN = './src/lang/*.js';
-const LANG_DIR = './src/lang/';
 
+const MESSAGES_PATTERN = './i18n-messages/**/*.json';	//语言文件的位置
+const LANG_DIR = './src/lang/';							//生成语言包的位置
+const LANG_PATTERN = LANG_DIR + '*.js';
+
+
+/**
+ * 定义语言包中的文件名
+ * @type {{zh: string, en: string}}
+ */
 const lang = {
-	"zh":"zh",
-	"en":"en",
+	zh:"zh",		//
+	en:"en",
 }
 
 /**
@@ -24,8 +29,8 @@ const lang = {
  * @type {{zh: {}, en: {}}}
  */
 const originLangs = {
-	zh: {},
-	en: {},
+	[lang.zh]: {},
+	[lang.en]: {},
 };
 
 
@@ -121,10 +126,18 @@ function baiduTranslateZhToEn(word){
 	return result;
 }
 
-
-/**
- * 1.提取待处理的国际化语言
+/*
+ |--------------------------------------------------------------------
+ | 以下流程为：提取国际化语言，并将其自动翻译的过程
+ |--------------------------------------------------------------------
  */
+
+
+//1.创建国际化目录
+mkdirpSync(LANG_DIR);
+
+
+//2.提取待处理的国际化语言
 const defaultMessages = globSync(MESSAGES_PATTERN)
     .map((filename) => {
         return fs.readFileSync(filename, 'utf8')
@@ -146,9 +159,7 @@ const defaultMessages = globSync(MESSAGES_PATTERN)
     }, {});
 
 
-/**
- * 2.将原始的国际化数据放入到变量中
- */
+//3.将原始的国际化数据放入到变量中
 globSync(LANG_PATTERN)
     .map((filename) => {
         const key = filename.split('/').pop().split('.').shift();
@@ -156,15 +167,14 @@ globSync(LANG_PATTERN)
     });
 
 
-// 更新语言包
-// 以编译出来的 key 为准，以默认语言为中文语言包
+//4.更新语言包,以编译出来的 key 为准，以默认语言为中文语言包
 const defaultMessagesArr = Object.keys(defaultMessages).map((id) => [id, defaultMessages[id]]);
 const newLangs = {};
 let translateFail = {};
-newLangs.zh = defaultMessages;
-newLangs.en = defaultMessagesArr.reduce((collection, [id,msg]) => {
+newLangs[lang.zh] = defaultMessages;
+newLangs[lang.en] = defaultMessagesArr.reduce((collection, [ id, msg ]) => {
 
-    collection[id] = originLangs.en[id] || '';
+    collection[id] = originLangs[lang.en][id] || '';
 
     if(collection[id] == ''){
 
@@ -181,27 +191,24 @@ newLangs.en = defaultMessagesArr.reduce((collection, [id,msg]) => {
 
 }, {});
 
-/**
- * 创建国际化目录
- */
-mkdirpSync(LANG_DIR);
 
-fs.writeFileSync(LANG_DIR + 'en.js',
+fs.writeFileSync(LANG_DIR + lang.en+'.js',
     `module.exports = ` +
-    JSON.stringify(newLangs.en, null, 2)
+    JSON.stringify(newLangs[lang.en], null, 4)
 );
 
-fs.writeFileSync(LANG_DIR + 'zh.js',
+fs.writeFileSync(LANG_DIR + lang.zh + '.js',
     `// 该文件由脚本自动生成，请勿修改\n
 module.exports = ` +
-    JSON.stringify(newLangs.zh, null, 2)
+    JSON.stringify(newLangs[lang.zh], null, 4)
 );
 
-//自动翻译存在错误，将其记录到错误文件中
+
+//5.自动翻译存在错误，将其记录到错误文件中
 if(Object.keys(translateFail).length > 0){
     fs.writeFileSync(LANG_DIR + 'translateFail.js',
         `// 该文件由脚本自动生成，记录自动翻译过程中翻译失败的id\n
 module.exports = ` +
-        JSON.stringify(translateFail, null, 2)
+        JSON.stringify(translateFail, null, 4)
     );
 }
