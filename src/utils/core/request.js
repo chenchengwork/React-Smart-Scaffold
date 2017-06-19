@@ -28,7 +28,7 @@ const Singleton = (function () {
 
 			//headers`是要发送的自定义 headers
 			headers: {
-				'X-Requested-With': 'XMLHttpRequest'
+				// 'X-Requested-With': 'XMLHttpRequest'
 			},
 
 		});
@@ -72,9 +72,17 @@ const _request = (method,url,params)=>{
 			break;
 
 		case requestMethod.post:
+			let requestParams = new URLSearchParams();
+			for(let [k,v] of Object.entries(params)) {
+				requestParams.append(k, v);
+			}
+
 			Object.assign(options,{
 				method:'post',
-				data:params,
+				data:requestParams,
+				headers:{
+					"Content-Type":'application/x-www-form-urlencoded'
+				}
 			})
 
 			break;
@@ -82,8 +90,9 @@ const _request = (method,url,params)=>{
 		case requestMethod.postJSON:
 			Object.assign(options,{
 				method:'post',
+				data:JSON.stringify(params),
 				headers:{
-					contentType: 'application/json, text/javascript'
+					"content-type": 'application/json, text/plain'
 				}
 			})
 			break;
@@ -91,8 +100,10 @@ const _request = (method,url,params)=>{
 		case requestMethod.upload:
 
 			Object.assign(options,{
+				data:params,
+
 				headers:{
-					contentType:'multipart/form-data'
+					"content-type":'multipart/form-data'
 				},
 
 				// `onUploadProgress`允许处理上传的进度事件

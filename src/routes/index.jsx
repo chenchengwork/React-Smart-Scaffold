@@ -4,6 +4,7 @@
 import lazyLoad from '../templates/LazyLoad';
 import MainLayout from '../templates/MainLayout/MainLayout'
 
+import EnumRouter from '../constants/EnumRouter';
 
 import UserList from './userList';
 import Home from './home';
@@ -27,8 +28,8 @@ const Routes = () => (
 			<MainLayout>
 				<Route exact path="/" component={lazyLoad(Home)} />
 
-				<Route path="/home" component={lazyLoad(Home)} />
-				<Route path="/user" component={lazyLoad(UserList)} />
+				<Route path={EnumRouter.home} component={lazyLoad(Home)} />
+				<Route path={EnumRouter.user} component={lazyLoad(UserList)} />
 			</MainLayout>
 
 

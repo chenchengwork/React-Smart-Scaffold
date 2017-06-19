@@ -2,8 +2,18 @@
  * Created by chencheng on 2017/6/13.
  */
 
+
+const _rootRoute = ENV.rootPath;
+
+/**
+ * 格式化路由
+ * @param route
+ * @returns {*}
+ * @private
+ */
 const _processRoute = (route) => {
-	return route;
+
+	return _rootRoute + route;
 }
 
 /**
@@ -11,9 +21,11 @@ const _processRoute = (route) => {
  * @type {{home, user}}
  */
 const EnumRouter = {
-	home:_processRoute('/home'),
+	rootPath:_rootRoute,
 
-	user:_processRoute('/user')
+	home:_processRoute('home'),
+
+	user:_processRoute('user')
 }
 
 
