@@ -1,4 +1,5 @@
 {
-    "/mockAPI/userList": "/userList",
-    "/mockAPI/comments": "/comments"
+    "/mockAPI/v1/assemble/appList": "/v1AssembleAppList",
+    "/mockAPI/v1/assemble/describeOperator": "/v1AssembleDescribeOperator",
+    "/mockAPI/v1/assemble/getOperators": "/v1AssembleGetOperators"
 }

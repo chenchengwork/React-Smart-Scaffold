@@ -2,7 +2,6 @@
  * Created by chencheng on 2017/6/13.
  */
 
-
 const _rootRoute = ENV.rootPath;
 
 /**
@@ -13,21 +12,29 @@ const _rootRoute = ENV.rootPath;
  */
 const _processRoute = (route) => {
 
-	return _rootRoute + route;
-}
+    return _rootRoute + route;
+};
 
 /**
- * 枚举使用的路由
- * @type {{home, user}}
+ *
+ * @type {{rootRoute: string, login: *, dHub_pluginManage: *, dHub_hostMonitor: *, dHub_pluginMonitor: *, dMart_dataSource: *, etlTaskList: *, etlCreate: *, etlMonitorOverview: *, dAnalysis_advanceModel: *, dVisual_bigScreen: *, dMonitor_kafka: *}}
  */
 const EnumRouter = {
-	rootPath:_rootRoute,
 
-	home:_processRoute('home'),
+    rootRoute: _rootRoute,		//根路由
 
-	user:_processRoute('user')
-}
+    login: _processRoute('login'),		//登陆
+
+    /*
+     |-----------------------------------------------
+     | 数据采集-相关的路由
+     |-----------------------------------------------
+     */
+    dHub_pluginManage:_processRoute('dataHub/pluginManage'),
+    dHub_hostMonitor:_processRoute('dataHub/resourceMonitor/host'),
+    dHub_pluginMonitor:_processRoute('dataHub/resourceMonitor/plugin'),
+
+};
 
 
 export default EnumRouter;
-

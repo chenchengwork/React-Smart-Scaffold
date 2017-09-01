@@ -1,3 +1,3 @@
 module.exports = {
-    "screen.createScreen": "Create large screen"
+    "screen.listTitle": "Large screen list"
 }

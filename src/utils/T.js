@@ -3,20 +3,24 @@
  */
 import lodash from 'lodash';
 import cookies from 'js-cookie';
+import queryString from 'query-string';
 import helper from './core/helper';
+import prompt from './core/prompt';
 
-import { get, post, postJSON, upload, all } from './core/request';
+import { get, post, postJSON, upload, all,withAppId } from './core/request';
 import { setStorage, getStorage, clearStorage, keepStorage, removeStorage } from './core/storage';
 
 
 /**
  *
- * @type {{request: {get: get, post: post, postJSON: postJSON, upload: upload, all: all}, storage: {setStorage: setStorage, getStorage: getStorage, clearStorage: clearStorage, keepStorage: keepStorage, removeStorage: removeStorage}, lodash, cookies: *}}
+ * @type {{prompt: Prompt, helper: Helper, request: {get: get, post: post, postJSON: postJSON, upload: upload, all: all, withAppId: withAppId}, storage: {setStorage: setStorage, getStorage: getStorage, clearStorage: clearStorage, keepStorage: keepStorage, removeStorage: removeStorage}, lodash, cookies: *, queryString}}
  */
 const T = {
-	helper:helper,
+	prompt,
 
-	request: { get, post, postJSON, upload, all },
+	helper,
+
+	request: { get, post, postJSON, upload, all,withAppId },
 
 	storage: { setStorage, getStorage, clearStorage, keepStorage, removeStorage },
 
@@ -25,6 +29,10 @@ const T = {
 
 	//说明文档:https://github.com/js-cookie/js-cookie
 	cookies:cookies,
+
+	//说明文档:https://github.com/sindresorhus/query-string
+    queryString:queryString,
+
 }
 
 export default T;

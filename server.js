@@ -4,8 +4,9 @@
 const webpack = require('webpack');
 const WebpackDevServer = require('webpack-dev-server');
 const config = require('./build/webpack.config');
-const host = "0.0.0.0";   //主机
-const port = 8181;        //端口号
+//const host = "10.0.5.153";   //主机
+const host = "0.0.0.0"
+const port = 8180;        //端口号
 const mockHost = "http://localhost:3000";	//mock服务主机+端口
 
 //webpack 自动重新加载，采用inline
@@ -36,22 +37,20 @@ const server = new WebpackDevServer(webpack(config), {
 			target: mockHost,
 			changeOrigin: true,
 			secure: false
+		},
+		'/apexAPI':{
+			target:"http://10.0.3.179:9090",
+            pathRewrite: {"^/apexAPI" : ""}
 		}
 	}
 });
-
-
 
 //将其他路由，全部返回index.html
 server.app.get('*', (req, res) => {
     res.sendFile(`${__dirname}/public/index.html`);
 });
 
-
-/*server.app.route('/config/ENV.js').get( (req, res) => {
-	res.sendFile(`${__dirname}/public/config/ENV.js`);
-});*/
-
+console.log("http://" + host + ":" + port);
 
 server.listen(port,host);
 

@@ -1,8 +1,168 @@
-html,body,#root{
-    width: 100%;
-    height: 100%;
-}
-.ant-layout{
-    height: 100%;
-}
+$main-menu-background-color: rgba(0, 51, 102, 1);
+$main-layout-header-height:50px;
 
+.main-layout {
+
+	//头部菜单样式
+	div.menu-header {
+		position: fixed;
+		z-index: 1;
+		width: 100%;
+		height: $main-layout-header-height;
+		padding: 0 20px;
+		background-color: $main-menu-background-color;
+		.logo {
+			float: left;
+			width: 148px;
+			height: 36px;
+			margin-top: 7px;
+			line-height: 36px;
+			color: #fff;
+		}
+		.ant-menu-left {
+			border-bottom-color: $main-menu-background-color;
+			background-color: $main-menu-background-color;
+			font-size: 16px;
+			.ant-menu-item {
+				//color: #6997BF;
+				margin: -3px 39px 0 39px;
+				padding: 0;
+
+			  	&.active{
+				  border-bottom: 2px solid #1A96FF;
+				  background-color: rgba(0, 51, 102, 0);
+				  /*& > a {
+					color: #1996FF;
+				  }*/
+				}
+			}
+			.ant-menu-item-selected {
+				border-bottom: 2px solid #1A96FF;
+				background-color: rgba(0, 51, 102, 0);
+				& > a {
+					color: #1996FF;
+				}
+			}
+		}
+
+		.menu-split {
+			display: inline-block;
+			width: 1px;
+			height: 30px;
+
+			background-color: #6997BF;
+
+		   &.left{
+			 float: left;
+			 margin:10px 10px;
+		   }
+
+		   &.right{
+			 float: right;
+			 margin: 10px 0;
+		   }
+		}
+
+		.ant-menu-right {
+			background-color: $main-menu-background-color;
+			.ant-menu-item {
+				padding: 0;
+				margin-left: 20px;
+				font-size: 14px;
+				.menu-icon {
+					display: inline-block;
+					margin-right: 10px;
+					vertical-align: middle;
+				}
+			}
+		}
+	}
+
+
+	//左侧菜单样式
+	div.main-content {
+		margin-top:50px;
+		background-color: #fff;
+
+		//左侧菜单样式
+		.menu-left {
+			position: fixed;
+			overflow: auto;
+			height: 100vh;
+			left: 0px;
+			background-color: $main-menu-background-color;
+
+			.ant-layout-sider-children {
+				.ant-menu {
+					background-color: #002F5E;
+					.ant-menu-item {
+						& > a {
+							color: #ffffff;
+						  &:hover{
+							color:#4387BF;
+						  }
+						}
+
+					}
+					.ant-menu-item-selected {
+						background-color: #1A96FF;
+						& > a {
+							color: #E6F3FF;
+						}
+					}
+					.ant-menu-submenu-title{
+						color:#fff;
+						&:hover{
+							color:#4387BF;
+						}
+					}
+
+				}
+			}
+
+			.ant-layout-sider-trigger{
+				background-color: $main-menu-background-color;
+			}
+		}
+
+
+
+		.app-content{
+			background-color: #fff;
+
+			//应用区中的header
+			.app-header {
+				display: flex;
+				flex-direction: row;
+				align-items: center;
+				background: #fff;
+				padding: 0 24px;
+				height: 45px;
+				margin-bottom: 1px;
+				position: relative;
+
+				.vertical-bar {
+					width: 2px;
+					height: 18px;
+					margin-right: 10px;
+					background-color: #20a1e0;
+				}
+
+				.title {
+					font-size: 18px;
+					text-align: left;
+					color: #333;
+				}
+
+				> .ant-form {
+					position: absolute;
+					right: 16px;
+				}
+			}
+
+		}
+
+	}
+
+
+}

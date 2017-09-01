@@ -1,52 +1,52 @@
 /**
  * Created by chencheng on 2017/6/12.
  */
-import lazyLoad from '../templates/LazyLoad';
-import MainLayout from '../templates/MainLayout/MainLayout'
-
 import EnumRouter from '../constants/EnumRouter';
 
-import UserList from './userList';
-import Home from './home';
-
-
 import {
-	BrowserRouter,
-	Route,
-	Switch
-} from 'react-router-dom'
+    BrowserRouter,
+    Route,
+    Switch,
+    Redirect
+} from 'react-router-dom';
+
+import { NoMatch } from './routeTool';
+
+import CommonRoutes from './common';                    //公共模块--相关路由,如:登录,注册...
+import DataHubRoutes from './dataHub';                  //数据采集--相关路由
 
 
+/**
+ * 路由配置
+ * @constructor
+ */
 const Routes = () => (
-	<BrowserRouter
-		forceRefresh={!('pushState' in window.history)}
-		keyLength={12}
-	>
-		<Switch>
+    <BrowserRouter
+        forceRefresh={!('pushState' in window.history)}
+        keyLength={12}
+    >
+        <Switch>
+            <Route exact path="/" render={() => (
+                false ? (
+                    <Redirect push to={EnumRouter.login}/>
+                ) : (
+                    <Redirect to={EnumRouter.etlTaskList}/>
+                )
+            )}/>
 
-			{/*主要布局*/}
-			<MainLayout>
-				<Route exact path="/" component={lazyLoad(Home)} />
+            {/* 公共--路由*/}
+            {CommonRoutes()}
 
-				<Route path={EnumRouter.home} component={lazyLoad(Home)} />
-				<Route path={EnumRouter.user} component={lazyLoad(UserList)} />
-			</MainLayout>
-
-
-
-			<Route component={NoMatch} />
-
-		</Switch>
-
-	</BrowserRouter>
-)
-
-const NoMatch = ({ location }) => (
-	<div>
-		<h3>No match for <code>{location.pathname}</code></h3>
-	</div>
-)
-
-export default Routes
+            {/* 数据采集--路由*/}
+            {DataHubRoutes()}
 
 
+            {/*404 NOT found*/}
+            <Route component={NoMatch} />
+
+        </Switch>
+
+    </BrowserRouter>
+);
+
+export default Routes;

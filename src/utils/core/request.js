@@ -3,6 +3,10 @@
  */
 
 import axios from 'axios'
+import EnumRouter from '../../constants/EnumRouter';
+
+//解决IE报warning Unhandled Rejections Error 参数书不正确的问题
+Promise._unhandledRejectionFn = function (rejectError) {}
 
 const requestMethod = {
 	get:'get',
@@ -55,13 +59,13 @@ const Singleton = (function () {
  * @returns {Promise}
  * @private
  */
-const _request = (method,url,params)=>{
+const _request = (method,url,params,options ={})=>{
 	const successCode = 'success';
+	const noLoginCode = 'uupm.user.not.login';
 
-	let options = {
-		url:url,
-	};
-
+	Object.assign(options,{
+        url:url,
+	});
 	switch (method){
 		case requestMethod.get:
 			Object.assign(options,{
@@ -92,7 +96,7 @@ const _request = (method,url,params)=>{
 				method:'post',
 				data:JSON.stringify(params),
 				headers:{
-					"content-type": 'application/json, text/plain'
+					"Content-Type": 'application/json, text/plain'
 				}
 			})
 			break;
@@ -100,10 +104,10 @@ const _request = (method,url,params)=>{
 		case requestMethod.upload:
 
 			Object.assign(options,{
+				method:'post',
 				data:params,
-
 				headers:{
-					"content-type":'multipart/form-data'
+					"Content-Type":'multipart/form-data'
 				},
 
 				// `onUploadProgress`允许处理上传的进度事件
@@ -125,6 +129,11 @@ const _request = (method,url,params)=>{
 
 			if(successCode === code){
 				resolve({code,data,msg})
+			}
+			//判断是否登录
+			else if(noLoginCode == code){
+				location.href = EnumRouter.login;
+
 			}else{
 				reject({code,data,msg})
 			}
@@ -146,21 +155,23 @@ const _request = (method,url,params)=>{
  * get请求
  * @param {string} url
  * @param {object} params
+ * @param {object} options
  * @returns {Promise}
  */
-export function get(url,params){
+export function get(url,params,options){
 
-	return _request(requestMethod.get,url,params);
+	return _request(requestMethod.get,url,params,options);
 }
 
 /**
  * post请求
  * @param {string} url
  * @param {object} params
+ * @param {object} options
  * @returns {Promise}
  */
-export function post(url,params){
-	return _request(requestMethod.post,url,params);
+export function post(url,params,options){
+	return _request(requestMethod.post,url,params,options);
 }
 
 
@@ -168,10 +179,11 @@ export function post(url,params){
  * post json请求
  * @param {string} url
  * @param {object} params
+ * @param {object} options
  * @returns {Promise}
  */
-export function postJSON(url,params){
-	return _request(requestMethod.postJSON,url,params);
+export function postJSON(url,params,options){
+	return _request(requestMethod.postJSON,url,params,options);
 }
 
 
@@ -179,10 +191,10 @@ export function postJSON(url,params){
  * 请求上传文件
  * @param {string} url
  * @param {object} params
+ * @param {object} options
  * @returns {Promise}
  */
-export function upload(url,params){
-
+export function upload(url,params,options){
 	if(!(params instanceof FormData)){
 		let formData = new FormData();
 		for(let [k,v] of Object.entries(params)){
@@ -192,7 +204,7 @@ export function upload(url,params){
 		params = formData
 	}
 
-	return _request(requestMethod.upload,url,params);
+	return _request(requestMethod.upload,url,params,options);
 }
 
 
@@ -202,6 +214,21 @@ export function upload(url,params){
  */
 export function all() {
 	return Promise.all([...arguments]);
+}
+
+
+/**
+ * 给数据附带上appId
+ * @param data
+ * @returns {*|{}}
+ */
+export function withAppId(data) {
+	data = data || {};
+
+	//TODO 注意应为app的概念在平台中没有启用，所以暂时将appId先取固定值
+	//data.appId = 1;
+
+	return data;
 }
 
 
