@@ -136,7 +136,7 @@ export default class MainLayout extends Component {
 
 		return (
 			<Header className="menu-header">
-				<h2 className="logo">天机数据</h2>
+				<h3 className="logo">React-Smart-Scaffold</h3>
 
                 <Dropdown overlay={menu}>
                     <a className="ant-dropdown-link" style={{
