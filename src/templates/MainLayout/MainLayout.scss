@@ -125,8 +125,6 @@ $main-layout-header-height:50px;
 			}
 		}
 
-
-
 		.app-content{
 			background-color: #fff;
 
@@ -135,11 +133,17 @@ $main-layout-header-height:50px;
 				display: flex;
 				flex-direction: row;
 				align-items: center;
-				background: #fff;
+				justify-content:space-between;
+				background: #ececec;
 				padding: 0 24px;
 				height: 45px;
 				margin-bottom: 1px;
-				position: relative;
+
+				.flex-box{
+					display: flex;
+					flex-direction: row;
+					align-items: center;
+				}
 
 				.vertical-bar {
 					width: 2px;

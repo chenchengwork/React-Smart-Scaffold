@@ -4,13 +4,12 @@
 const webpack = require('webpack');
 const WebpackDevServer = require('webpack-dev-server');
 const config = require('./build/webpack.config');
-//const host = "10.0.5.153";   //主机
-const host = "0.0.0.0"
-const port = 8180;        //端口号
+const host = "0.0.0.0";
+const port = 8000;        //端口号
 const mockHost = "http://localhost:3000";	//mock服务主机+端口
 
 //webpack 自动重新加载，采用inline
-config.entry.app.push('webpack-dev-server/client?http://'+host+':'+port+'/')
+config.entry.app.push('webpack-dev-server/client?http://'+host+':'+port+'/');
 
 // 启动服务
 const server = new WebpackDevServer(webpack(config), {

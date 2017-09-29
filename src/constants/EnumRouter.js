@@ -10,14 +10,11 @@ const _rootRoute = ENV.rootPath;
  * @returns {*}
  * @private
  */
-const _processRoute = (route) => {
-
-    return _rootRoute + route;
-};
+const _processRoute = (route) => (_rootRoute + route);
 
 /**
  *
- * @type {{rootRoute: string, login: *, dHub_pluginManage: *, dHub_hostMonitor: *, dHub_pluginMonitor: *, dMart_dataSource: *, etlTaskList: *, etlCreate: *, etlMonitorOverview: *, dAnalysis_advanceModel: *, dVisual_bigScreen: *, dMonitor_kafka: *}}
+ * @type {{rootRoute: string, login: *, dHub_pluginManage: *, dHub_hostMonitor: *, dHub_pluginMonitor: *, dMart_dataSource: *, dVisual_bigScreen: *}}
  */
 const EnumRouter = {
 
@@ -34,6 +31,12 @@ const EnumRouter = {
     dHub_hostMonitor:_processRoute('dataHub/resourceMonitor/host'),
     dHub_pluginMonitor:_processRoute('dataHub/resourceMonitor/plugin'),
 
+    /*
+     |-----------------------------------------------
+     | 数据可视化-相关的路由
+     |-----------------------------------------------
+     */
+    dVisual_bigScreen:_processRoute('dataVisual/bigScreen'),
 };
 
 

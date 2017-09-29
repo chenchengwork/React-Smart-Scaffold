@@ -1,3 +1,8 @@
+/**
+ * @description store
+ * @author vision <vision.shi@tianjishuju.com>
+ * @license www.tianjishuju.com/license
+ */
 import T from 'utils/T';
 import thunk from 'redux-thunk';
 import createLogger from 'redux-logger';
@@ -57,7 +62,7 @@ export default function createStore(initialState = {}) {
 		}
 	);
 
-	let finalCreateStore = applyMiddleware(...[registryMiddleware(registry),createLogger,thunk]);
+	let finalCreateStore = applyMiddleware(...[registryMiddleware(registry),thunk]);
 
 	// if we have redux devtools installed hook into it.
 	if (window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__) {

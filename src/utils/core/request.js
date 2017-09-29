@@ -8,13 +8,6 @@ import EnumRouter from '../../constants/EnumRouter';
 //解决IE报warning Unhandled Rejections Error 参数书不正确的问题
 Promise._unhandledRejectionFn = function (rejectError) {}
 
-const requestMethod = {
-	get:'get',
-	post:'post',
-	postJSON:'postJSON',
-	upload:'upload'
-}
-
 const Singleton = (function () {
 	let instantiated;
 
@@ -53,73 +46,13 @@ const Singleton = (function () {
 
 /**
  *
- * @param method
- * @param url
- * @param params
- * @returns {Promise}
+ * @param options
+ * @return {Promise}
  * @private
  */
-const _request = (method,url,params,options ={})=>{
-	const successCode = 'success';
+const _request = (options = {})=>{
+	const successCode = '0';
 	const noLoginCode = 'uupm.user.not.login';
-
-	Object.assign(options,{
-        url:url,
-	});
-	switch (method){
-		case requestMethod.get:
-			Object.assign(options,{
-				method:'get',
-				params:params,
-			})
-
-			break;
-
-		case requestMethod.post:
-			let requestParams = new URLSearchParams();
-			for(let [k,v] of Object.entries(params)) {
-				requestParams.append(k, v);
-			}
-
-			Object.assign(options,{
-				method:'post',
-				data:requestParams,
-				headers:{
-					"Content-Type":'application/x-www-form-urlencoded'
-				}
-			})
-
-			break;
-
-		case requestMethod.postJSON:
-			Object.assign(options,{
-				method:'post',
-				data:JSON.stringify(params),
-				headers:{
-					"Content-Type": 'application/json, text/plain'
-				}
-			})
-			break;
-
-		case requestMethod.upload:
-
-			Object.assign(options,{
-				method:'post',
-				data:params,
-				headers:{
-					"Content-Type":'multipart/form-data'
-				},
-
-				// `onUploadProgress`允许处理上传的进度事件
-				onUploadProgress:  (progressEvent) => {
-					console.log(progressEvent)
-				},
-
-			})
-
-		default:
-			break;
-	}
 
 	return new Promise((resolve,reject)=>{
 
@@ -127,7 +60,7 @@ const _request = (method,url,params,options ={})=>{
 
 			const {data,code,msg} = resp.data;
 
-			if(successCode === code){
+			if(successCode == code){
 				resolve({code,data,msg})
 			}
 			//判断是否登录
@@ -158,9 +91,14 @@ const _request = (method,url,params,options ={})=>{
  * @param {object} options
  * @returns {Promise}
  */
-export function get(url,params,options){
+export function get(url,params = {},options = {}){
+    Object.assign(options,{
+        url,
+        method:'get',
+        params:params,
+    });
 
-	return _request(requestMethod.get,url,params,options);
+	return _request(options);
 }
 
 /**
@@ -170,8 +108,22 @@ export function get(url,params,options){
  * @param {object} options
  * @returns {Promise}
  */
-export function post(url,params,options){
-	return _request(requestMethod.post,url,params,options);
+export function post(url,params = {},options = {}){
+    let requestParams = new URLSearchParams();
+    for(let [k,v] of Object.entries(params)) {
+        requestParams.append(k, v);
+    }
+
+    options = Object.assign({
+        url,
+        method:'post',
+        data:requestParams,
+        headers:{
+            "Content-Type":'application/x-www-form-urlencoded'
+        }
+	},options)
+
+	return _request(options);
 }
 
 
@@ -182,29 +134,94 @@ export function post(url,params,options){
  * @param {object} options
  * @returns {Promise}
  */
-export function postJSON(url,params,options){
-	return _request(requestMethod.postJSON,url,params,options);
+export function postJSON(url,params = {},options = {}){
+    options = Object.assign({
+		url,
+        method:'post',
+        // data:JSON.stringify(params),
+        data:params,
+        headers:{
+            "Content-Type": 'application/json'
+        }
+    },options);
+
+	return _request(options);
 }
 
 
 /**
  * 请求上传文件
- * @param {string} url
- * @param {object} params
- * @param {object} options
+ * @param {String} url
+ * @param {Object} params
+ * @param {Function} onUploadProgress
+ * @param {Object} options
  * @returns {Promise}
  */
-export function upload(url,params,options){
+export function upload(url,params = {},onUploadProgress = (progressEvent) =>{},options = {}){
+
 	if(!(params instanceof FormData)){
 		let formData = new FormData();
 		for(let [k,v] of Object.entries(params)){
 			formData.append(k,v);
 		}
-
 		params = formData
 	}
 
-	return _request(requestMethod.upload,url,params,options);
+    options = Object.assign({
+        url,
+        method:'post',
+        data:params,
+        // `onUploadProgress`允许处理上传的进度事件
+        onUploadProgress:  onUploadProgress,
+
+        headers:{
+            "Content-Type":'multipart/form-data'
+        }
+    },options)
+
+
+	return _request(options);
+}
+
+/**
+ * restful delete
+ * @param {String} url
+ * @param {Object} params
+ * @param {Object} options
+ * @returns {Promise}
+ */
+export function del(url,params = {},options = {}) {
+    options = Object.assign({
+        url,
+        method:'delete',
+        data:params,
+        headers:{
+            "Content-Type":'application/json'
+        }
+    },options)
+
+    return _request(options);
+}
+
+
+/**
+ * restful put
+ * @param {String} url
+ * @param {Object} params
+ * @param {Object} options
+ * @returns {Promise}
+ */
+export function put(url,params = {},options = {}) {
+    options = Object.assign({
+        url,
+        method:'put',
+        data:params,
+        headers:{
+            "Content-Type":'application/json'
+        }
+    },options)
+
+    return _request(options);
 }
 
 
@@ -212,10 +229,28 @@ export function upload(url,params,options){
  * 并发执行多个请求
  * @returns {Promise.<*>}
  */
-export function all() {
-	return Promise.all([...arguments]);
+export function all(args = null) {
+
+	return Array.isArray(args) ? Promise.all(args) :Promise.all([...arguments]);
 }
 
+/**
+ * 格式化URL参数
+ * @param url
+ * @param params
+ * @returns {*}
+ */
+export function formatUrlParams(url,params = {}){
+	Object.keys(params).forEach((key,index) => {
+		if(index == 0){
+			url += "?"+ key + "=" + params[key];
+		}else{
+			url += "&" + key + "=" + params[key];
+		}
+	})
+
+	return url;
+}
 
 /**
  * 给数据附带上appId

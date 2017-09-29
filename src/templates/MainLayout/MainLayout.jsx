@@ -7,35 +7,43 @@ import {Component} from 'react';
 import { Link } from 'react-router-dom';
 
 import { Layout, Menu, Icon,Dropdown } from 'antd';
-import {UrlToCategoryMap,EnumFragmentMenu, getLeftMenu,getMenusByCategory, getMenuCategory,getMenuCategoryLabel} from './menuUtil';
+import {UrlToExtraInfoMap,EnumFragmentMenu, getLeftMenu,getMenusByCategory, getMenuCategory,getMenuCategoryLabel} from './menuUtil';
 
 const { Header, Content, Sider } = Layout;
-
 
 /**
  * 头部组件
  * @param {String} className
  * @param {String} title
  * @param {Object} style
- * @param {Array} children
+ * @param {Function} leftRender
+ * @param {Function} rightRender
  * @returns {XML}
  * @constructor
  */
-export const MainHeader = ({className = "",title = "",style = {},children}) => {
+export const MainHeader = ({className = "",title = "",style = {},leftRender = null, rightRender = null}) => {
     let customClassName = 'app-header';
     if(className){
         customClassName = className + ' ' + customClassName;
     }
     let defaultStyle = {
-        backgroundColor:"#ececec",
 		marginBottom:10
     };
 
-    return  (
-		<Header className={customClassName} style={Object.assign(defaultStyle,style)}>
+    const headerContent = [
+    	<div key="1" className="flex-box">
 			<div className="vertical-bar" />
 			<div className="title">{title}</div>
-            {children}
+			{leftRender}
+		</div>,
+		<div key="2" className="flex-box">
+            {rightRender}
+		</div>
+	];
+
+    return  (
+		<Header className={customClassName} style={Object.assign(defaultStyle,style)}>
+			{headerContent}
 		</Header>
     )
 };
@@ -43,7 +51,9 @@ export const MainHeader = ({className = "",title = "",style = {},children}) => {
 MainHeader.propTypes = {
     className:PropTypes.string,
     style:PropTypes.object,
-    children:PropTypes.node
+    children:PropTypes.node,
+    leftRender:PropTypes.node,
+    rightRender:PropTypes.node,
 };
 
 
@@ -55,9 +65,9 @@ MainHeader.propTypes = {
  * @returns {XML}
  * @constructor
  */
-export const MainContent = ({className = "",style = {},children}) => {
+export const MainContent = ({className = "",style = {},children = null}) => {
     let defaultStyle = {
-    	margin: '0px 0px 0px 10px' ,
+    	margin: '0px 10px 0px 10px' ,
 		minHeight:640,
 		backgroundColor:'#fff',
     };
@@ -71,15 +81,11 @@ export const MainContent = ({className = "",style = {},children}) => {
 MainContent.propTypes = {
     className:PropTypes.string,
     style:PropTypes.object,
-    children:PropTypes.node.isRequired
+    children:PropTypes.node
 };
 
-
+@T.decorator.contextTypes('router')
 export default class MainLayout extends Component {
-	static contextTypes = {
-		router:PropTypes.object.isRequired
-	}
-
 	constructor(){
 		super();
 		this.shouldComponentUpdate = PureRenderMixin.shouldComponentUpdate.bind(this);
@@ -91,13 +97,24 @@ export default class MainLayout extends Component {
 	}
 
 	componentDidMount(){
-
-	    if(UrlToCategoryMap[this.context.router.route.match.path] != this.state.menuCategory) {
+        const { category, isCollapsedLeftMenu } = UrlToExtraInfoMap[this.context.router.route.match.path]
+	    if(UrlToExtraInfoMap != this.state.menuCategory) {
             this.setState({
-                menuCategory: UrlToCategoryMap[this.context.router.route.match.path]
+                menuCategory: category,
+                collapsed: isCollapsedLeftMenu,
+                appMenuLeftWidth:this.getAppMenuLeftWidth(isCollapsedLeftMenu)
             })
         }
     }
+
+    /**
+	 * 获取左侧菜单宽度
+     * @param {bool} collapsed
+     * @return {number}
+     */
+    getAppMenuLeftWidth(collapsed){
+		return collapsed ? 64 : 180;
+	}
 
     /**
 	 * 左侧菜单的收起和关闭
@@ -106,7 +123,7 @@ export default class MainLayout extends Component {
 	onLeftMenuCollapse = (collapsed) => {
 		this.setState({
 			collapsed ,
-			appMenuLeftWidth:collapsed ? 64 : 180
+			appMenuLeftWidth:this.getAppMenuLeftWidth(collapsed)
 		});
 	}
 
@@ -136,7 +153,7 @@ export default class MainLayout extends Component {
 
 		return (
 			<Header className="menu-header">
-				<h3 className="logo">React-Smart-Scaffold</h3>
+				<h2 className="logo">Demo</h2>
 
                 <Dropdown overlay={menu}>
                     <a className="ant-dropdown-link" style={{
@@ -210,7 +227,28 @@ export default class MainLayout extends Component {
 					return T.lodash.isArray(leftMenu[i].url) ? leftMenu[i].url.join('-') : leftMenu[i].url;
 				}
 			}
-		})()
+		})();
+
+		//获取实际URL
+		const getRealUrl = (url) => {
+            let realUrl = null;
+			let firstUrl = null;
+
+            if(Array.isArray(url)){
+                if(url.indexOf(currentUrl) !== -1){
+                    realUrl = currentUrl;
+                }else{
+                    realUrl = url[0];
+				}
+
+                firstUrl = url[0];
+            }else{
+                realUrl = url;
+                firstUrl = url;
+            }
+
+            return {realUrl,firstUrl};
+		};
 
 		return (
 			<Sider
@@ -237,9 +275,12 @@ export default class MainLayout extends Component {
 										title={<span><Icon type={val.icon} /><span>{val.label}</span></span>}
 									>
 										{val.children.map((item)=>{
+
+                                            let { realUrl, firstUrl } = getRealUrl(item.url);
+
 											return (
-												<Menu.Item key={item.url}>
-													<Link to={item.url}>
+												<Menu.Item key={realUrl}>
+													<Link to={firstUrl}>
 														{item.icon ? <Icon type={item.icon} /> : null}
 														<span>{item.label}</span>
 													</Link>
@@ -249,10 +290,11 @@ export default class MainLayout extends Component {
 									</Menu.SubMenu>
 								)
 							}else{
-                                const url = T.lodash.isArray(val.url) ? val.url[0] : val.url;
+                                let { realUrl, firstUrl } = getRealUrl(val.url);
+
                                 return (
-									<Menu.Item key={url}>
-										<Link to={url}>
+									<Menu.Item key={realUrl}>
+										<Link to={firstUrl}>
                                             {val.icon ? <Icon type={val.icon} /> : null}
 											<span>{val.label}</span>
 										</Link>

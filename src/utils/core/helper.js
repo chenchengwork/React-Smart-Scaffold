@@ -3,8 +3,29 @@
  */
 import moment from 'moment';
 import _ from 'lodash';
+import {render as reactDomRender,unmountComponentAtNode} from 'react-dom';
 
 class Helper {
+
+    /**
+	 * 渲染弹出窗Modal
+     * @param component //reactElement react组件
+     */
+	renderModal(component){
+		const domId = 'tj-render-dom';
+		if($("#"+domId).length < 1) {
+            $('<div />', {
+                id: domId,
+            }).appendTo("body");
+        }
+
+        const domObject = document.querySelector("#"+domId);
+
+		unmountComponentAtNode(domObject);
+
+        reactDomRender(component,domObject);
+	}
+
 	/**
 	 * 跳转页面
 	 * @param url
@@ -21,6 +42,17 @@ class Helper {
 		}, timeout || 0);
 	}
 
+    /**
+	 * 浮点型保留小数
+     * @param {Number} num
+     * @param {Number} fixNum
+     * @param {Mixed} defaultVal 格式化错误的默认值
+     * @return {string}
+     */
+	toFixed(num,fixNum = 2, defaultVal = '-'){
+		let result =  Number(num).toFixed(fixNum);
+		return _.isNaN(result) || result == 'NaN' ? defaultVal : result;
+	}
 
     /**
      * 是否是一个真实的数值字符串
@@ -29,6 +61,34 @@ class Helper {
     isRealNumeric(value) {
     	return /^(\d+\.)?\d+$/.test(value);
 	}
+
+    /**
+	 * Mb转换成Gb
+     * @param {Number} value
+     * @param {Number} fixNum	保留小数的位数
+     * @param {Mixed} defaultVal	格式化错误的默认值
+     * @return {*}
+     * @constructor
+     */
+	MbToGb(value, fixNum = 2, defaultVal = '-'){
+		let result = value /1024;
+		return fixNum ?( _.isNaN(result) || result == 'NaN' ? defaultVal : result ): this.toFixed(result,fixNum,defaultVal);
+	}
+
+
+    /**
+     * 时间格式化
+     * @param {Date|number|Moment} date
+     * @param {string} template
+     * @return {string}
+     */
+    dateFormat(date = _.now(), template = 'YYYY-MM-DD HH:mm:ss'){
+        if(this.isRealNumeric(date)){
+            date = parseInt(date);
+        }
+
+        return moment(date).format(template);
+    }
 
     /**
      * 回调一个函数,并应用context和一个参数数组
@@ -54,20 +114,6 @@ class Helper {
      */
     call (func, context, ...args){
     	return this.apply(func, context, args);
-    }
-
-    /**
-     * 时间格式化
-     * @param {Date|number|Moment} date
-     * @param {string} template
-     * @return {string}
-     */
-    dateFormat(date = _.now(), template = 'YYYY-MM-DD HH:mm:ss'){
-    	if(this.isRealNumeric(date)){
-    		date = parseInt(date);
-		}
-
-    	return moment(date).format(template);
     }
 
 

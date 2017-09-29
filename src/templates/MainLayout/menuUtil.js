@@ -2,7 +2,7 @@
  * Created by chencheng on 2017/8/28.
  */
 import T from 'utils/T';
-import EnumRouter from 'constants/EnumRouter';
+import { EnumDefaultMenus,EnumCollapsedLeftMenuUrls } from 'constants/EnumDefaultMenus';
 
 //--图片资源--
 import AdminIcon from './img/admin.svg';
@@ -13,75 +13,56 @@ import LogoutIcon from './img/logout.svg';
  * url和分类值的对应关系
  * @type {{}}
  */
-export const UrlToCategoryMap = {};
+export const UrlToExtraInfoMap = {};
 
 /**
  * 配置菜单文件
  */
 const EnumMenus = (()=>{
-    const defaultMenus = [
-        {
-            label:"数据平台",
-            value:"dataPlatform",
-            childrenMenu:[
-                {
-                    label:"数据采集",
-                    children:[
-                        {
-                            label:"插件管理",
-                            icon:"switcher",
-                            url:EnumRouter.dHub_pluginManage,
-                            children:[]
-                        },
-                        {
-                            label:"资源监控",
-                            icon:"hdd",
-                            children:[
-                                {
-                                    label:"主机监控",
-                                    url:EnumRouter.dHub_hostMonitor,
-                                    children:[]
-                                },
-                                {
-                                    label:"插件监控",
-                                    url:EnumRouter.dHub_pluginMonitor,
-                                    children:[]
-                                }
-                            ]
-                        }
-                    ]
-                },
 
-            ]
-        }
-    ];
-
+    /**
+     * 获取url对应额外信息的Item
+     * @param category
+     * @param url
+     */
+    const getUrlToExtraInfoMapItem = (category,url) => ({category,isCollapsedLeftMenu:EnumCollapsedLeftMenuUrls.indexOf(url) !== -1})
 
     //加工默认菜单配置
-    defaultMenus.forEach((appMenus) => {
+    EnumDefaultMenus.forEach((appMenus) => {
         appMenus.childrenMenu.forEach((menus) => {
-            menus.url =[];
+
+            menus.url = Array.isArray(menus.url) || [];
             if(menus.children.length > 0){
                 menus.children.forEach((itemMenu) => {
 
                     if(itemMenu.children.length > 0){
-                        itemMenu.url = [];
+                        itemMenu.url = Array.isArray(itemMenu.url) || [];
+
                         itemMenu.children.forEach((menu) => {
                             menus.url.push(menu.url);
                             itemMenu.url.push(menu.url);
-                            UrlToCategoryMap[menu.url] = appMenus.value;
+                            UrlToExtraInfoMap[menu.url] = getUrlToExtraInfoMapItem(appMenus.value,menu.url);
                         })
-                    }else{
-                        menus.url.push(itemMenu.url);
 
-                        UrlToCategoryMap[itemMenu.url] = appMenus.value;
+                    }else{
+                        if(Array.isArray(itemMenu.url)){
+                            menus.url = menus.url.concat(itemMenu.url);
+                            itemMenu.url.forEach((url) => {
+                                UrlToExtraInfoMap[url] = getUrlToExtraInfoMapItem(appMenus.value,url);
+                            })
+                        }else{
+                            menus.url.push(itemMenu.url);
+                            UrlToExtraInfoMap[itemMenu.url] = getUrlToExtraInfoMapItem(appMenus.value,itemMenu.url);
+                        }
+
                     }
                 })
             }
+
         })
     });
 
-    return defaultMenus;
+    return EnumDefaultMenus;
 
 })();
 
