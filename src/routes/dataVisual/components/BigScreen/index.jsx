@@ -6,9 +6,9 @@ import { Component } from 'react';
 
 import { MainHeader, MainContent } from 'templates/MainLayout/MainLayout';
 
-export default class BigScreen extends Component{
+export default class BigScreen extends Component {
 
-    render(){
+    render() {
         return (
             <div>
                 <MainHeader title="作品集" />
@@ -17,6 +17,6 @@ export default class BigScreen extends Component{
                     作品集
                 </MainContent>
             </div>
-        )
+        );
     }
 }

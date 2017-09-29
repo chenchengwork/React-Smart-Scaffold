@@ -10,7 +10,7 @@ import { Component as ReactComponent } from 'react';
 import { STORE_INJECT } from 'store.js';
 
 function injectReducers(reducers) {
-	return { [STORE_INJECT]: { reducers } }
+	return { [STORE_INJECT]: { reducers }};
 }
 
 export default class LazyLoadTpl extends ReactComponent {
@@ -48,7 +48,7 @@ export default class LazyLoadTpl extends ReactComponent {
         const Component = this.state.Component;
 
         if (Component) {
-            if(!T.lodash.isUndefined(this.props.reducers)) {
+            if (!T.lodash.isUndefined(this.props.reducers)) {
                 this.context.store.dispatch(injectReducers(
                     T.lodash.isArray(this.props.reducers) ? this.props.reducers : [this.props.reducers]
                 ));

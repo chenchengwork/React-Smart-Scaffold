@@ -2,7 +2,7 @@
  * Created by chencheng on 2017/6/13.
  */
 
-const _rootRoute = ENV.rootPath;
+const _rootRoute = window.ENV.rootPath;
 
 /**
  * 格式化路由
@@ -18,25 +18,25 @@ const _processRoute = (route) => (_rootRoute + route);
  */
 const EnumRouter = {
 
-    rootRoute: _rootRoute,		//根路由
+    rootRoute: _rootRoute,		// 根路由
 
-    login: _processRoute('login'),		//登陆
+    login: _processRoute('login'),		// 登陆
 
     /*
      |-----------------------------------------------
      | 数据采集-相关的路由
      |-----------------------------------------------
      */
-    dHub_pluginManage:_processRoute('dataHub/pluginManage'),
-    dHub_hostMonitor:_processRoute('dataHub/resourceMonitor/host'),
-    dHub_pluginMonitor:_processRoute('dataHub/resourceMonitor/plugin'),
+    dHub_pluginManage: _processRoute('dataHub/pluginManage'),
+    dHub_hostMonitor: _processRoute('dataHub/resourceMonitor/host'),
+    dHub_pluginMonitor: _processRoute('dataHub/resourceMonitor/plugin'),
 
     /*
      |-----------------------------------------------
      | 数据可视化-相关的路由
      |-----------------------------------------------
      */
-    dVisual_bigScreen:_processRoute('dataVisual/bigScreen'),
+    dVisual_bigScreen: _processRoute('dataVisual/bigScreen'),
 };
 
 

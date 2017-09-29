@@ -11,16 +11,16 @@ import PluginMonitor from './routes/resourceMonitor/plugin';
 
 export default AssembleRoute([
     {
-        path:EnumRouter.dHub_pluginManage,
-        component:PluginManage,
+        path: EnumRouter.dHub_pluginManage,
+        component: PluginManage,
     },
     {
-        path:EnumRouter.dHub_hostMonitor,
-        component:HostMonitor,
+        path: EnumRouter.dHub_hostMonitor,
+        component: HostMonitor,
     },
     {
-        path:EnumRouter.dHub_pluginMonitor,
-        component:PluginMonitor,
+        path: EnumRouter.dHub_pluginMonitor,
+        component: PluginMonitor,
     },
-])
+]);
 

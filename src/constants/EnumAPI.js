@@ -3,12 +3,12 @@
  */
 
 const _processAPI = (api) => {
-	if(ENV.mock.isStart){
-		return "/mockAPI"+api;
+	if (window.ENV.mock.isStart) {
+		return '/mockAPI' + api;
 	}
 
 	return api;
-}
+};
 
 
 /**
@@ -17,7 +17,7 @@ const _processAPI = (api) => {
  */
 const EnumAPI = {
 
-	login:_processAPI('/p/login'),
-}
+	login: _processAPI('/p/login'),
+};
 
 export default EnumAPI;

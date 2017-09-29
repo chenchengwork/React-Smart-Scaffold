@@ -20,22 +20,22 @@ const T = {
 
 	helper,
 
-	decorator:{ contextTypes, propTypes },
+	decorator: { contextTypes, propTypes },
 
 	request: { get, post, postJSON, upload, all, del, put, formatUrlParams },
 
 	storage: { setStorage, getStorage, clearStorage, keepStorage, removeStorage },
 
-	//说明文档:http://www.css88.com/doc/lodash/
-	lodash:lodash,
+	// 说明文档:http://www.css88.com/doc/lodash/
+	lodash: lodash,
 
-	//说明文档:https://github.com/js-cookie/js-cookie
-	cookies:cookies,
+	// 说明文档:https://github.com/js-cookie/js-cookie
+	cookies: cookies,
 
-	//说明文档:https://github.com/sindresorhus/query-string
-    queryString:queryString,
+	// 说明文档:https://github.com/sindresorhus/query-string
+    queryString: queryString,
 
-}
+};
 
 export default T;
 

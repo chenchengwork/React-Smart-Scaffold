@@ -6,9 +6,9 @@ import { Component } from 'react';
 
 import { MainHeader, MainContent } from 'templates/MainLayout/MainLayout';
 
-export default class Host extends Component{
+export default class Host extends Component {
 
-    render(){
+    render() {
         return (
             <div>
                 <MainHeader title="主机监控" />
@@ -17,6 +17,6 @@ export default class Host extends Component{
                     主机监控
                 </MainContent>
             </div>
-        )
+        );
     }
 }

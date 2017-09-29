@@ -30,31 +30,31 @@ export const EnumCollapsedLeftMenuUrls = [];
  */
 export const EnumDefaultMenus = [
     {
-        label:"数据平台",
-        value:"dataPlatform",
-        childrenMenu:[
+        label: '数据平台',
+        value: 'dataPlatform',
+        childrenMenu: [
             {
-                label:"数据采集",
-                children:[
+                label: '数据采集',
+                children: [
                     {
-                        label:"插件管理",
-                        icon:"switcher",
-                        url:EnumRouter.dHub_pluginManage,
-                        children:[]
+                        label: '插件管理',
+                        icon: 'switcher',
+                        url: EnumRouter.dHub_pluginManage,
+                        children: []
                     },
                     {
-                        label:"资源监控",
-                        icon:"hdd",
-                        children:[
+                        label: '资源监控',
+                        icon: 'hdd',
+                        children: [
                             {
-                                label:"主机监控",
-                                url:EnumRouter.dHub_hostMonitor,
-                                children:[]
+                                label: '主机监控',
+                                url: EnumRouter.dHub_hostMonitor,
+                                children: []
                             },
                             {
-                                label:"插件监控",
-                                url:EnumRouter.dHub_pluginMonitor,
-                                children:[]
+                                label: '插件监控',
+                                url: EnumRouter.dHub_pluginMonitor,
+                                children: []
                             }
                         ]
                     }
@@ -63,17 +63,17 @@ export const EnumDefaultMenus = [
         ]
     },
     {
-        label:"数据应用",
-        value:"dataApp",
-        childrenMenu:[
+        label: '数据应用',
+        value: 'dataApp',
+        childrenMenu: [
             {
-                label:"数据可视化",
-                children:[
+                label: '数据可视化',
+                children: [
                     {
-                        label:"作品集",
-                        icon:"pie-chart",
-                        url:EnumRouter.dVisual_bigScreen,
-                        children:[]
+                        label: '作品集',
+                        icon: 'pie-chart',
+                        url: EnumRouter.dVisual_bigScreen,
+                        children: []
                     }
                 ]
             },

@@ -12,9 +12,9 @@ import {
 
 import { NoMatch } from './routeTool';
 
-import CommonRoutes from './common';                    //公共模块--相关路由,如:登录,注册...
-import DataHubRoutes from './dataHub';                  //数据采集--相关路由
-import DataVisualRoutes from './dataVisual';            //数据可视化--相关路由
+import CommonRoutes from './common';                    // 公共模块--相关路由,如:登录,注册...
+import DataHubRoutes from './dataHub';                  // 数据采集--相关路由
+import DataVisualRoutes from './dataVisual';            // 数据可视化--相关路由
 
 /**
  * 路由配置
@@ -28,22 +28,23 @@ const Routes = () => (
         <Switch>
             <Route exact path="/" render={() => (
                 false ? (
-                    <Redirect push to={EnumRouter.login}/>
+                    <Redirect push to={EnumRouter.login} />
                 ) : (
-                    <Redirect to={EnumRouter.dHub_pluginManage}/>
+                    <Redirect to={EnumRouter.dHub_pluginManage} />
                 )
-            )}/>
+            )}
+            />
 
-            {/* 公共--路由*/}
+            {/* 公共--路由 */}
             {CommonRoutes()}
 
-            {/* 数据采集--路由*/}
+            {/* 数据采集--路由 */}
             {DataHubRoutes()}
 
             {/* 数据可视化--路由 */}
             {DataVisualRoutes()}
 
-            {/*404 NOT found*/}
+            {/* 404 NOT found */}
             <Route component={NoMatch} />
 
         </Switch>

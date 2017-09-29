@@ -13,8 +13,8 @@ export const contextTypes = (...params) => {
 
     return (targetClass) => {
         params.forEach((type) => {
-            targetClass.contextTypes  = targetClass.contextTypes || {};
-            if(!targetClass.contextTypes.hasOwnProperty(type)){
+            targetClass.contextTypes = targetClass.contextTypes || {};
+            if (!targetClass.contextTypes.hasOwnProperty(type)) {
                 switch (type) {
                     case 'store':
                     case 'router':
@@ -23,19 +23,19 @@ export const contextTypes = (...params) => {
 
                 }
             }
-        })
-    }
-}
+        });
+    };
+};
 
 /**
  * 验证propTypes的装饰器
  * @param propTypesChecker
  * @returns {function(*)}
  */
-export const propTypes = (propTypesChecker = {}) =>{
+export const propTypes = (propTypesChecker = {}) => {
 
     return (targetClass) => {
         targetClass.propTypes = propTypesChecker;
-    }
-}
+    };
+};
 

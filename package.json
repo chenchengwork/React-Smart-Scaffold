@@ -4,6 +4,16 @@
   "author": "chencheng <cheng.chen@tianjishuju.com>",
   "description": "React smart scaffold",
   "main": "src/index",
+  "scripts": {
+    "dev": "BUILD_DEV=1 node server.js",
+    "check-code":"eslint ./src",
+    "mock": "./node_modules/.bin/json-server --watch ./mock/db.json --routes ./mock/routes.json",
+    "test": "BABEL_ENV=test jest --colors",
+    "coverage": "BABEL_ENV=test jest --colors --coverage",
+    "intl": "rimraf ./i18n-messages && BABEL_ENV=i18n babel --quiet ./src > /dev/null && babel-node --presets es2015 ./scripts/translateIntl.js && rimraf ./i18n-messages",
+    "publish-alone": "BUILD_DEV=0 node ./scripts/publish.js ~/Desktop/webapp /static/",
+    "publish": "BUILD_DEV=0 node ./scripts/publish.js ~/Desktop/webapp /"
+  },
   "dependencies": {
     "antd": "^2.13.3",
     "axios": "^0.16.0",
@@ -48,11 +58,12 @@
     "css-loader": "^0.26.1",
     "css-to-string-loader": "^0.1.2",
     "enzyme": "^2.8.2",
-    "eslint": "^3.19.0",
+    "eslint": "^4.7.2",
     "eslint-config-airbnb": "^14.1.0",
+    "eslint-config-alloy": "^1.2.1",
     "eslint-plugin-import": "^2.2.0",
     "eslint-plugin-jsx-a11y": "^4.0.0",
-    "eslint-plugin-react": "^6.10.3",
+    "eslint-plugin-react": "^7.4.0",
     "extract-text-webpack-plugin": "^2.1.0",
     "file-loader": "0.8.4",
     "glob": "^7.1.2",
@@ -91,15 +102,6 @@
     "setupFiles": [
       "<rootDir>/__mocks__/setup.js"
     ]
-  },
-  "scripts": {
-    "dev": "BUILD_DEV=1 node server.js",
-    "mock": "./node_modules/.bin/json-server --watch ./mock/db.json --routes ./mock/routes.json",
-    "test": "BABEL_ENV=test jest --colors",
-    "coverage": "BABEL_ENV=test jest --colors --coverage",
-    "intl": "rimraf ./i18n-messages && BABEL_ENV=i18n babel --quiet ./src > /dev/null && babel-node --presets es2015 ./scripts/translateIntl.js && rimraf ./i18n-messages",
-    "publish-alone": "BUILD_DEV=0 node ./scripts/publish.js ~/Desktop/webapp /static/",
-    "publish": "BUILD_DEV=0 node ./scripts/publish.js ~/Desktop/webapp /"
   },
   "repository": {
     "type": "git",

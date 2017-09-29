@@ -6,9 +6,9 @@ import { Component } from 'react';
 
 import { MainHeader, MainContent } from 'templates/MainLayout/MainLayout';
 
-export default class PluginManage extends Component{
+export default class PluginManage extends Component {
 
-    render(){
+    render() {
         return (
             <div>
                 <MainHeader title="插件管理" />
@@ -17,6 +17,6 @@ export default class PluginManage extends Component{
                     插件管理
                 </MainContent>
             </div>
-        )
+        );
     }
 }

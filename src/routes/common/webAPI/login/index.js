@@ -3,10 +3,10 @@
  */
 
 import T from 'utils/T';
-import EnumAPI from 'constants/EnumAPI'
+import EnumAPI from 'constants/EnumAPI';
 
-export function login(email,password) {
+export function login(email, password) {
 
-	let username=email
-	return T.request.post(EnumAPI.login,{username,password});
+	let username = email;
+	return T.request.post(EnumAPI.login, { username, password });
 }

@@ -8,8 +8,8 @@ import BigScreen from './routes/bigScreen';
 
 export default AssembleRoute([
     {
-        path:EnumRouter.dVisual_bigScreen,
-        component:BigScreen,
+        path: EnumRouter.dVisual_bigScreen,
+        component: BigScreen,
     }
-])
+]);
 

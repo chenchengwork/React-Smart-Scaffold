@@ -4,7 +4,7 @@
  * @license www.tianjishuju.com/license
  */
 
-import { isNull, isUndefined,each, eachRight, now } from 'lodash';
+import { isNull, isUndefined, each, eachRight, now } from 'lodash';
 
 const isNone = value => (isNull(value) || isUndefined(value));
 

@@ -15,12 +15,12 @@ import MainLayoutComponent from 'templates/MainLayout/MainLayout';
  * @returns {XML}
  * @constructor
  */
-export const DefaultLayout = ({ component: Component, reducers,...rest }) => {
-    const LazyComponent = lazyLoad(Component,reducers);
+export const DefaultLayout = ({ component: Component, reducers, ...rest }) => {
+    const LazyComponent = lazyLoad(Component, reducers);
     return (
         <Route
             {...rest} render={matchProps => (
-            <LazyComponent {...matchProps} />
+                <LazyComponent {...matchProps} />
         )}
         />
     );
@@ -33,15 +33,15 @@ export const DefaultLayout = ({ component: Component, reducers,...rest }) => {
  * @returns {XML}
  * @constructor
  */
-export const MainLayout = ({ component: Component,reducers, ...rest }) => {
+export const MainLayout = ({ component: Component, reducers, ...rest }) => {
     const LazyComponent = lazyLoad(Component);
 
     return (
         <Route
             {...rest} render={matchProps => (
-            <MainLayoutComponent>
-                <LazyComponent {...matchProps} reducers={reducers}/>
-            </MainLayoutComponent>
+                <MainLayoutComponent>
+                    <LazyComponent {...matchProps} reducers={reducers} />
+                </MainLayoutComponent>
         )}
         />
     );
@@ -58,8 +58,8 @@ export const AssembleRoute = (routes) => {
     return () => routes.map((val) => {
         const { Layout } = val;
         delete val.Layout;
-        return Layout ? <Layout {...val} key={val.path} /> : <MainLayout {...val} key={val.path} />
-    })
+        return Layout ? <Layout {...val} key={val.path} /> : <MainLayout {...val} key={val.path} />;
+    });
 };
 
 /**

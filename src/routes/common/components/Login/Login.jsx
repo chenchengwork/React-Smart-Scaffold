@@ -13,7 +13,7 @@ const rightLoginImg = require('./img/right_login.png');
 export default class Login extends Component {
     static contextTypes = {
         store: PropTypes.object.isRequired,
-        router:PropTypes.object.isRequired
+        router: PropTypes.object.isRequired
     };
 
     constructor() {
@@ -29,7 +29,7 @@ export default class Login extends Component {
 
         };
     }
-    componentDidMount(){
+    componentDidMount() {
 
     }
     onEmailChange(e) {
@@ -77,8 +77,8 @@ export default class Login extends Component {
                         className="login_acount"
                         onChange={this.onEmailChange}
                         placeholder="邮箱"
-                        onKeyDown={(e)=>{
-                           if(e.keyCode === 13){
+                        onKeyDown={(e) => {
+                           if (e.keyCode === 13) {
                                this.onSubmit();
                            }
                        }}
@@ -89,8 +89,8 @@ export default class Login extends Component {
                         className="login_password"
                         onChange={this.onPasswordChange}
                         placeholder="密码"
-                        onKeyDown={(e)=>{
-                            if(e.keyCode === 13){
+                        onKeyDown={(e) => {
+                            if (e.keyCode === 13) {
                                 this.onSubmit();
                             }
                         }}

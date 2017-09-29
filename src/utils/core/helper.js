@@ -3,7 +3,7 @@
  */
 import moment from 'moment';
 import _ from 'lodash';
-import {render as reactDomRender,unmountComponentAtNode} from 'react-dom';
+import { render as reactDomRender, unmountComponentAtNode } from 'react-dom';
 
 class Helper {
 
@@ -11,20 +11,20 @@ class Helper {
 	 * 渲染弹出窗Modal
      * @param component //reactElement react组件
      */
-	renderModal(component){
+	renderModal(component) {
 		const domId = 'tj-render-dom';
 
-		if($("#"+domId).length < 1) {
+		if ($('#' + domId).length < 1) {
             $('<div />', {
                 id: domId,
-            }).appendTo("body");
+            }).appendTo('body');
         }
 
-        const domObject = document.querySelector("#"+domId);
+        const domObject = document.querySelector('#' + domId);
 
 		unmountComponentAtNode(domObject);
 
-        reactDomRender(component,domObject);
+        reactDomRender(component, domObject);
 	}
 
 	/**
@@ -32,8 +32,8 @@ class Helper {
 	 * @param url
 	 * @param timeout
 	 */
-	redirect (url, timeout) {
-		if (_.isNumber(url) && typeof timeout == "undefined") {
+	redirect(url, timeout) {
+		if (_.isNumber(url) && typeof timeout === 'undefined') {
 			timeout = url;
 			url = null;
 		}
@@ -50,9 +50,9 @@ class Helper {
      * @param {Mixed} defaultVal 格式化错误的默认值
      * @return {string}
      */
-	toFixed(num,fixNum = 2, defaultVal = '-'){
+	toFixed(num, fixNum = 2, defaultVal = '-') {
 		let result =  Number(num).toFixed(fixNum);
-		return _.isNaN(result) || result == 'NaN' ? defaultVal : result;
+		return _.isNaN(result) || result === 'NaN' ? defaultVal : result;
 	}
 
     /**
@@ -71,9 +71,9 @@ class Helper {
      * @return {*}
      * @constructor
      */
-	MbToGb(value, fixNum = 2, defaultVal = '-'){
-		let result = value /1024;
-		return fixNum ?( _.isNaN(result) || result == 'NaN' ? defaultVal : result ): this.toFixed(result,fixNum,defaultVal);
+	MbToGb(value, fixNum = 2, defaultVal = '-') {
+		let result = value / 1024;
+		return fixNum ? (_.isNaN(result) || result === 'NaN' ? defaultVal : result) : this.toFixed(result, fixNum, defaultVal);
 	}
 
 
@@ -83,8 +83,8 @@ class Helper {
      * @param {string} template
      * @return {string}
      */
-    dateFormat(date = _.now(), template = 'YYYY-MM-DD HH:mm:ss'){
-        if(this.isRealNumeric(date)){
+    dateFormat(date = _.now(), template = 'YYYY-MM-DD HH:mm:ss') {
+        if (this.isRealNumeric(date)) {
             date = parseInt(date);
         }
 
@@ -113,7 +113,7 @@ class Helper {
      * @param {...*} args
      * @return {*}
      */
-    call (func, context, ...args){
+    call(func, context, ...args) {
     	return this.apply(func, context, args);
     }
 
@@ -123,7 +123,7 @@ class Helper {
      *
      * @returns {Object}
      */
-    getUrlParams () {
+    getUrlParams() {
 		let urlParams = {};
 		const queryString = decodeURIComponent(window.location.search.substr(1));
 		if (queryString) {
@@ -134,7 +134,7 @@ class Helper {
 		}
 
 		return urlParams;
-	};
+	}
 
     /**
      * 获取URL参数
@@ -142,7 +142,7 @@ class Helper {
      * @param {string} name
      * @returns {string}
      */
-    getUrlParam (name) {
+    getUrlParam(name) {
     	return this.getUrlParams()[name];
     }
 
@@ -150,7 +150,7 @@ class Helper {
      * 生成class
      * @param {...*=} args
      */
-    classNames(...args){
+    classNames(...args) {
 
 		const classList = [];
 
@@ -182,7 +182,7 @@ class Helper {
      * @param {string=} thousandsSep
      * @return {string}
      */
-    numberFormat (number, decimals = 0, decimalPoint = '.', thousandsSep = ','){
+    numberFormat(number, decimals = 0, decimalPoint = '.', thousandsSep = ',') {
 
 		/* eslint-disable no-param-reassign */
 
@@ -234,5 +234,4 @@ class Helper {
 }
 
 export default new Helper();
-
 
