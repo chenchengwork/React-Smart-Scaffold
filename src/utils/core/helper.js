@@ -13,6 +13,7 @@ class Helper {
      */
 	renderModal(component){
 		const domId = 'tj-render-dom';
+
 		if($("#"+domId).length < 1) {
             $('<div />', {
                 id: domId,
@@ -232,8 +233,6 @@ class Helper {
 
 }
 
-const helper = new Helper();
-
-export default helper;
+export default new Helper();
 
 

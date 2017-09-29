@@ -1,7 +1,6 @@
 /**
  * Created by chencheng on 2017/6/14.
  */
-
 import axios from 'axios'
 import EnumRouter from '../../constants/EnumRouter';
 
@@ -138,7 +137,6 @@ export function postJSON(url,params = {},options = {}){
     options = Object.assign({
 		url,
         method:'post',
-        // data:JSON.stringify(params),
         data:params,
         headers:{
             "Content-Type": 'application/json'
@@ -171,8 +169,7 @@ export function upload(url,params = {},onUploadProgress = (progressEvent) =>{},o
         url,
         method:'post',
         data:params,
-        // `onUploadProgress`允许处理上传的进度事件
-        onUploadProgress:  onUploadProgress,
+        onUploadProgress:  onUploadProgress,	//允许处理上传的进度事件
 
         headers:{
             "Content-Type":'multipart/form-data'
@@ -251,20 +248,4 @@ export function formatUrlParams(url,params = {}){
 
 	return url;
 }
-
-/**
- * 给数据附带上appId
- * @param data
- * @returns {*|{}}
- */
-export function withAppId(data) {
-	data = data || {};
-
-	//TODO 注意应为app的概念在平台中没有启用，所以暂时将appId先取固定值
-	//data.appId = 1;
-
-	return data;
-}
-
-
 
