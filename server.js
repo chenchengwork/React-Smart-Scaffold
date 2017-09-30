@@ -4,20 +4,26 @@
 const webpack = require('webpack');
 const WebpackDevServer = require('webpack-dev-server');
 const config = require('./build/webpack.config');
-const host = "0.0.0.0";
-const port = 8000;        //端口号
-const mockHost = "http://localhost:3000";	//mock服务主机+端口
+const host = '0.0.0.0';
+const port = 8000;        // 端口号
+const mockHost = 'http://localhost:3000';	// mock服务主机+端口
 
-//webpack 自动重新加载，采用inline
-config.entry.app.push('webpack-dev-server/client?http://'+host+':'+port+'/');
+// webpack 自动重新加载，采用inline
+config.entry.app.push('webpack-dev-server/client?http://' + host + ':' + port + '/');
 
 // 启动服务
 const server = new WebpackDevServer(webpack(config), {
 	publicPath: config.output.publicPath,
-	//指定服务器内容指定目录
+
+	// 指定服务器内容指定目录
 	contentBase: config.output.path,
 
-  	watchContentBase:true,
+  	watchContentBase: true,
+
+    // 对于某些系统，监听大量文件系统会导致大量的 CPU 或内存占用,这个选项可以排除一些巨大的文件夹
+    watchOptions: {
+        ignored: /node_modules/
+    },
 
   	// 开启服务器的模块热替换(HMR)
 	hot: false,
@@ -37,20 +43,19 @@ const server = new WebpackDevServer(webpack(config), {
 			changeOrigin: true,
 			secure: false
 		},
-		'/apexAPI':{
-			target:"http://10.0.3.179:9090",
-            pathRewrite: {"^/apexAPI" : ""}
+		'/apexAPI': {
+			target: 'http://10.0.3.179:9090',
+            pathRewrite: { '^/apexAPI': '' }
 		}
 	}
 });
 
-//将其他路由，全部返回index.html
+// 将其他路由，全部返回index.html
 server.app.get('*', (req, res) => {
     res.sendFile(`${__dirname}/public/index.html`);
 });
 
-console.log("http://" + host + ":" + port);
+console.log('http://' + host + ':' + port);
 
-server.listen(port,host);
-
+server.listen(port, host);
 

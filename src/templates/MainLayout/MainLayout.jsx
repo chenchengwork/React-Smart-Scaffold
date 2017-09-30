@@ -7,7 +7,14 @@ import { Component } from 'react';
 import { Link } from 'react-router-dom';
 
 import { Layout, Menu, Icon, Dropdown } from 'antd';
-import { UrlToExtraInfoMap, EnumFragmentMenu, getLeftMenu, getMenusByCategory, getMenuCategory, getMenuCategoryLabel } from './menuUtil';
+import {
+    UrlToExtraInfoMap,
+    EnumFragmentMenu,
+    getLeftMenu,
+    getMenusByCategory,
+    getMenuCategory,
+    getMenuCategoryLabel
+} from './menuUtil';
 
 const { Header, Content, Sider } = Layout;
 
@@ -27,7 +34,7 @@ export const MainHeader = ({ className = '', title = '', style = {}, leftRender 
         customClassName = className + ' ' + customClassName;
     }
     let defaultStyle = {
-		marginBottom: 10
+        marginBottom: 10
     };
 
     const headerContent = [
@@ -39,7 +46,7 @@ export const MainHeader = ({ className = '', title = '', style = {}, leftRender 
         <div key="2" className="flex-box">
             {rightRender}
         </div>
-	];
+    ];
 
     return (
         <Header className={customClassName} style={Object.assign(defaultStyle, style)}>
@@ -67,9 +74,9 @@ MainHeader.propTypes = {
  */
 export const MainContent = ({ className = '', style = {}, children = null }) => {
     let defaultStyle = {
-    	margin: '0px 10px 0px 10px',
-		minHeight: 640,
-		backgroundColor: '#fff',
+        margin: '0px 10px 0px 10px',
+        minHeight: 640,
+        backgroundColor: '#fff',
     };
     return (
         <Content className={className} style={Object.assign(defaultStyle, style)}>
@@ -86,19 +93,19 @@ MainContent.propTypes = {
 
 @T.decorator.contextTypes('router')
 export default class MainLayout extends Component {
-	constructor() {
-		super();
-		this.shouldComponentUpdate = PureRenderMixin.shouldComponentUpdate.bind(this);
-		this.state = {
-			collapsed: false,
+    constructor() {
+        super();
+        this.shouldComponentUpdate = PureRenderMixin.shouldComponentUpdate.bind(this);
+        this.state = {
+            collapsed: false,
             menuCategory: '',
-			appMenuLeftWidth: 180,		// 左侧菜单的宽度
-		};
-	}
+            appMenuLeftWidth: 180,		// 左侧菜单的宽度
+        };
+    }
 
-	componentDidMount() {
+    componentDidMount() {
         const { category, isCollapsedLeftMenu } = UrlToExtraInfoMap[this.context.router.route.match.path];
-	    if (UrlToExtraInfoMap != this.state.menuCategory) {
+        if (UrlToExtraInfoMap !== this.state.menuCategory) {
             this.setState({
                 menuCategory: category,
                 collapsed: isCollapsedLeftMenu,
@@ -108,30 +115,30 @@ export default class MainLayout extends Component {
     }
 
     /**
-	 * 获取左侧菜单宽度
+     * 获取左侧菜单宽度
      * @param {bool} collapsed
      * @return {number}
      */
     getAppMenuLeftWidth(collapsed) {
-		return collapsed ? 64 : 180;
-	}
+        return collapsed ? 64 : 180;
+    }
 
     /**
-	 * 左侧菜单的收起和关闭
+     * 左侧菜单的收起和关闭
      * @param collapsed
      */
-	onLeftMenuCollapse = (collapsed) => {
-		this.setState({
-			collapsed,
-			appMenuLeftWidth: this.getAppMenuLeftWidth(collapsed)
-		});
-	}
+    onLeftMenuCollapse = (collapsed) => {
+        this.setState({
+            collapsed,
+            appMenuLeftWidth: this.getAppMenuLeftWidth(collapsed)
+        });
+    }
 
-	/**
-	 * 获取头部菜单
-	 * @param currentUrl
-	 * @returns {XML}
-	 */
+    /**
+     * 获取头部菜单
+     * @param currentUrl
+     * @returns {XML}
+     */
     getHeaderMenu = (currentUrl) => {
         const menu = (
             <Menu onClick={({ item, key, keyPath }) => {
@@ -151,12 +158,12 @@ export default class MainLayout extends Component {
             </Menu>
         );
 
-		return (
-    <Header className="menu-header">
-        <h2 className="logo">Demo</h2>
+        return (
+            <Header className="menu-header">
+                <h2 className="logo">Demo</h2>
 
-        <Dropdown overlay={menu}>
-            <a className="ant-dropdown-link" style={{
+                <Dropdown overlay={menu}>
+                    <a className="ant-dropdown-link" style={{
                         float: 'left',
                         height: 47,
                         fontSize: 16,
@@ -164,82 +171,84 @@ export default class MainLayout extends Component {
                         color: '#fff',
                         marginLeft: 20
                     }} href="">
-                <span>{getMenuCategoryLabel(this.state.menuCategory)}</span> <Icon type="down" />
-            </a>
-        </Dropdown>
+                        <span>{getMenuCategoryLabel(this.state.menuCategory)}</span> <Icon type="down" />
+                    </a>
+                </Dropdown>
 
-        <span className="menu-split left" />
+                <span className="menu-split left" />
 
-        <Menu
-            className="ant-menu-left"
-            theme="dark"
-            mode="horizontal"
-            style={{ lineHeight: '50px', float: 'left', marginLeft: 10, border: 0 }}
-				>
-            {
+                <Menu
+                    className="ant-menu-left"
+                    theme="dark"
+                    mode="horizontal"
+                    style={{ lineHeight: '50px', float: 'left', marginLeft: 10, border: 0 }}
+                >
+                    {
                         getMenusByCategory(this.state.menuCategory).map((val, key) => {
-							const url = T.lodash.isArray(val.url) ? val.url[0] : val.url;
+                            const url = T.lodash.isArray(val.url) ? val.url[0] : val.url;
 
-							return <Menu.Item key={url + key} className={val.url.indexOf(currentUrl) !== -1 ? 'active' : ''}><Link to={url}>{val.label}</Link></Menu.Item>;
-						})
-					}
-        </Menu>
+                            return <Menu.Item key={url + key}
+                                className={val.url.indexOf(currentUrl) !== -1 ? 'active' : ''}><Link
+                                    to={url}>{val.label}</Link></Menu.Item>;
+                        })
+                    }
+                </Menu>
 
-        <Menu
-            className="ant-menu-right"
-            theme="dark"
-            mode="horizontal"
-            style={{ lineHeight: '50px', float: 'right', marginLeft: 0 }}
-				>
-            {
-						EnumFragmentMenu.map((val, key) => {
-							const url = val.url;
-							return <Menu.Item key={url + key}>
-    <Link to={url}>
-        <img className="menu-icon" src={val.icon} />
-        {val.label}
-    </Link>
-							</Menu.Item>;
-						})
-					}
-        </Menu>
+                <Menu
+                    className="ant-menu-right"
+                    theme="dark"
+                    mode="horizontal"
+                    style={{ lineHeight: '50px', float: 'right', marginLeft: 0 }}
+                >
+                    {
+                        EnumFragmentMenu.map((val, key) => {
+                            const url = val.url;
+                            return <Menu.Item key={url + key}>
+                                <Link to={url}>
+                                    <img className="menu-icon" src={val.icon} />
+                                    {val.label}
+                                </Link>
+                            </Menu.Item>;
+                        })
+                    }
+                </Menu>
 
-        <span className="menu-split right" />
-    </Header>
-		);
-	}
+                <span className="menu-split right" />
+            </Header>
+        );
+    }
 
-	/**
-	 * 获取左侧菜单
-	 * @param currentUrl
-	 * @returns {*}
-	 */
-	getLeftMenu(currentUrl) {
-		const leftMenu = getLeftMenu(currentUrl, this.state.menuCategory);
+    /**
+     * 获取左侧菜单
+     * @param currentUrl
+     * @returns {*}
+     */
+    getLeftMenu(currentUrl) {
+        const leftMenu = getLeftMenu(currentUrl, this.state.menuCategory);
 
-		if (leftMenu.length < 1) {
-			return null;
-		}
+        if (leftMenu.length < 1) {
+            return null;
+        }
 
-		const defaultOpenKeys = (() => {
-			for (let i = 0; i < leftMenu.length; i++) {
-				if (leftMenu[i].url.indexOf(currentUrl) !== -1) {
-					return T.lodash.isArray(leftMenu[i].url) ? leftMenu[i].url.join('-') : leftMenu[i].url;
-				}
-			}
-		})();
+        const defaultOpenKeys = (() => {
+            for (let i = 0; i < leftMenu.length; i++) {
+                if (leftMenu[i].url.indexOf(currentUrl) !== -1) {
+                    return T.lodash.isArray(leftMenu[i].url) ? leftMenu[i].url.join('-') : leftMenu[i].url;
+                }
+            }
+        })();
 
-		// 获取实际URL
-		const getRealUrl = (url) => {
+        // 获取实际URL
+        const getRealUrl = (url) => {
             let realUrl = null;
-			let firstUrl = null;
+            let firstUrl = null;
 
             if (Array.isArray(url)) {
                 if (url.indexOf(currentUrl) !== -1) {
                     realUrl = currentUrl;
                 } else {
                     realUrl = url[0];
-				}
+                }
 
                 firstUrl = url[0];
             } else {
@@ -248,48 +257,48 @@ export default class MainLayout extends Component {
             }
 
             return { realUrl, firstUrl };
-		};
+        };
 
-		return (
-    <Sider
-        className="menu-left"
-        width={this.state.appMenuLeftWidth}
-        collapsible
-        collapsed={this.state.collapsed}
-        onCollapse={this.onLeftMenuCollapse}
-			>
-        <Menu
-            mode="inline"
-            selectedKeys={[currentUrl]}
-            defaultOpenKeys={[defaultOpenKeys]}
-            style={{ height: '100%', borderRight: 0 }}
-				>
-            {
+        return (
+            <Sider
+                className="menu-left"
+                width={this.state.appMenuLeftWidth}
+                collapsible
+                collapsed={this.state.collapsed}
+                onCollapse={this.onLeftMenuCollapse}
+            >
+                <Menu
+                    mode="inline"
+                    selectedKeys={[currentUrl]}
+                    defaultOpenKeys={[defaultOpenKeys]}
+                    style={{ height: '100%', borderRight: 0 }}
+                >
+                    {
                         leftMenu.map((val) => {
 
                             if (val.children.length > 0) {
 
-								return (
-    <Menu.SubMenu
-        key={val.url.join('-')}
-        title={<span><Icon type={val.icon} /><span>{val.label}</span></span>}
-									>
-        {val.children.map((item) => {
+                                return (
+                                    <Menu.SubMenu
+                                        key={val.url.join('-')}
+                                        title={<span><Icon type={val.icon} /><span>{val.label}</span></span>}
+                                    >
+                                        {val.children.map((item) => {
 
                                             let { realUrl, firstUrl } = getRealUrl(item.url);
 
-											return (
-    <Menu.Item key={realUrl}>
-        <Link to={firstUrl}>
-            {item.icon ? <Icon type={item.icon} /> : null}
-            <span>{item.label}</span>
-        </Link>
-    </Menu.Item>
-											);
-										})}
-    </Menu.SubMenu>
-								);
-							} else {
+                                            return (
+                                                <Menu.Item key={realUrl}>
+                                                    <Link to={firstUrl}>
+                                                        {item.icon ? <Icon type={item.icon} /> : null}
+                                                        <span>{item.label}</span>
+                                                    </Link>
+                                                </Menu.Item>
+                                            );
+                                        })}
+                                    </Menu.SubMenu>
+                                );
+                            } else {
                                 let { realUrl, firstUrl } = getRealUrl(val.url);
 
                                 return (
@@ -300,37 +309,37 @@ export default class MainLayout extends Component {
                                         </Link>
                                     </Menu.Item>
                                 );
-							}
+                            }
 
-						})
-					}
+                        })
+                    }
 
 
-        </Menu>
-    </Sider>
-		);
-	}
+                </Menu>
+            </Sider>
+        );
+    }
 
     render() {
         const currentUrl = this.context.router.route.match.path;
 
-		return (
-    <Layout className="main-layout">
+        return (
+            <Layout className="main-layout">
 
-        {this.getHeaderMenu(currentUrl)}
+                {this.getHeaderMenu(currentUrl)}
 
-        <Layout className="main-content">
+                <Layout className="main-content">
 
-            {this.getLeftMenu(currentUrl)}
+                    {this.getLeftMenu(currentUrl)}
 
-            <Layout className="app-content" style={{ marginLeft: this.state.appMenuLeftWidth }}>
-                {this.props.children}
+                    <Layout className="app-content" style={{ marginLeft: this.state.appMenuLeftWidth }}>
+                        {this.props.children}
+                    </Layout>
+
+                </Layout>
+
             </Layout>
-
-        </Layout>
-
-    </Layout>
-		);
+        );
 
     }
 }
