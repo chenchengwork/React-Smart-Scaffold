@@ -3,37 +3,34 @@
  */
 
 let conf = {
-    appEntry:'./src/index.js',                          //入口文件
-    entryFileName:'./publish-index.html',               //入口文件名称
-    appName:'platform',                                 //项目名称
-	proxyPath:process.argv[3] ? process.argv[3] : '/',  //代理的前缀 注意：后面必须带斜线
-    workerSensePath:'./web_modules/tj-sense/worker/worker-sense.js',
-    webPath:process.argv[2],    //web目录
+    appEntry: './src/index.js',                          // 入口文件
+    entryFileName: './publish-index.html',               // 入口文件名称
+    appName: 'platform',                                 // 项目名称
+	proxyPath: process.argv[3] ? process.argv[3] : '/',  // 代理的前缀 注意：后面必须带斜线
+    workerSensePath: './web_modules/tj-sense/worker/worker-sense.js',
+    webPath: process.argv[2],    // web目录
 
 };
 
-//清除字符串左右两侧的斜线
+// 清除字符串左右两侧的斜线
 String.prototype.trimSlash = function () {
     return this.replace(/^\/|\/$/g, '');
 };
 
-//清除字符串左两侧的斜线
+// 清除字符串左两侧的斜线
 String.prototype.ltrimSlash = function () {
 	return this.replace(/\/$/g, '');
 };
 
-//清除字符串右两侧的斜线
+// 清除字符串右两侧的斜线
 String.prototype.rtrimSlash = function () {
 	return this.replace(/^\//g, '');
 };
 
-
-const exec = require('child_process').exec;
-const path = require('path');
-const fs = require("fs");
+const fs = require('fs');
 const clc = require('cli-color');
 
-const webpack = require("webpack");
+const webpack = require('webpack');
 const webpackConf = require('../build/webpack.config');
 const indexTplStr = require('./publishUtils/indexTpl');
 const Tool = require('./publishUtils/tool');
@@ -44,11 +41,11 @@ console.log(clc.green('开始编译'));
  * 错误处理方法
  * @param errorMsg
  */
-function handleError(errorMsg){
-    //1.删除编译目录
+function handleError(errorMsg) {
+    // 1.删除编译目录
     Tool.delDir(webpackConf.output.path);
 
-    //2.删除入口文件
+    // 2.删除入口文件
     fs.unlinkSync(conf.entryFileName);
 
 
@@ -67,13 +64,13 @@ function handleWarn(warnMsg) {
     console.log(clc.yellow(warnMsg));
 }
 
-//1.修改webpack的配置
+// 1.修改webpack的配置
 webpackConf.entry.app = conf.appEntry;
-webpackConf.output.publicPath = conf.proxyPath+conf.appName+'/';
-webpackConf.output.path = conf.webPath.ltrimSlash()+'/'+conf.appName;
+webpackConf.output.publicPath = conf.proxyPath + conf.appName + '/';
+webpackConf.output.path = conf.webPath.ltrimSlash() + '/' + conf.appName;
 webpackConf.devtool = '';
 
-//编译代码优化压缩
+// 编译代码优化压缩
 webpackConf.plugins.push(new webpack.optimize.UglifyJsPlugin({
     compress: {
         warnings: false
@@ -86,31 +83,31 @@ webpackConf.plugins.push(new webpack.LoaderOptionsPlugin({
 }));
 
 
-//2.配置和生成入口文件index.html
-let realIndexTpl = indexTplStr.replace("{$publicVendorCSS}",webpackConf.output.publicPath+'vendor.css')
-    .replace("{$EnvConfJS}",conf.proxyPath+'config/ENV.js')
-    .replace("{$publicVendorJS}",webpackConf.output.publicPath+'vendor.js')
-    .replace("{$publicAppJS}",webpackConf.output.publicPath+'app.js');
+// 2.配置和生成入口文件index.html
+let realIndexTpl = indexTplStr.replace('{$publicVendorCSS}', webpackConf.output.publicPath + 'vendor.css')
+    .replace('{$EnvConfJS}', conf.proxyPath + 'config/ENV.js')
+    .replace('{$publicVendorJS}', webpackConf.output.publicPath + 'vendor.js')
+    .replace('{$publicAppJS}', webpackConf.output.publicPath + 'app.js');
 
 
-//验证发布目录是否存在
-fs.stat(conf.webPath,function (err,stat) {
+// 验证发布目录是否存在
+fs.stat(conf.webPath, function (err, stat) {
 
-    if(err != null) {
-        //创建发布目录
+    if (err != null) {
+        // 创建发布目录
         fs.mkdirSync(conf.webPath);
     }
 
-    //生成入口文件index.html
-    fs.open(conf.entryFileName,"w",function(err,fd){
+    // 生成入口文件index.html
+    fs.open(conf.entryFileName, 'w', function(err, fd) {
         let buf = new Buffer(realIndexTpl);
 
-        fs.write(fd,buf,0,buf.length,0,function(err,written,buffer){
-            if(err){
-                handleError('生成入口文件index.html失败：'+err);
-            }else{
+        fs.write(fd, buf, 0, buf.length, 0, function(err, written, buffer) {
+            if (err) {
+                handleError('生成入口文件index.html失败：' + err);
+            } else {
 
-                //打包编译platform
+                // 打包编译platform
                 doCompilerPlatform();
             }
         });
@@ -122,40 +119,40 @@ fs.stat(conf.webPath,function (err,stat) {
 
 function doCompilerPlatform() {
 
-    webpack(webpackConf, function(err, stats) {
+    webpack(webpackConf, (err, stats) => {
 
         let jsonStats = stats.toJson();
-        if(jsonStats.errors.length > 0){
+        if (jsonStats.errors.length > 0) {
             handleError(jsonStats.errors);
         }
 
-        if(jsonStats.warnings.length > 0){
+        if (jsonStats.warnings.length > 0) {
             handleWarn(jsonStats.warnings);
         }
 
         let stepCount = 2;
 
-        function isDone(){
+        function isDone() {
             stepCount--;
 
-            if(stepCount == 0){
+            if (stepCount === 0) {
                 console.log(clc.green('编译完成'));
             }
         }
 
-        //1. copy worker-sense.js文件到编译目录下
-        Tool.copyFileToDir(conf.workerSensePath,webpackConf.output.path,'worker-sense.js',function () {
+        // 1. copy worker-sense.js文件到编译目录下
+        Tool.copyFileToDir(conf.workerSensePath, webpackConf.output.path, 'worker-sense.js', function () {
             isDone();
         });
 
-        //2. 将编译后的项目移动到发布目录
+        // 2. 将编译后的项目移动到发布目录
 
-        //(1). move入口文件到发布目录
-        fs.stat(conf.entryFileName,function (err,stat) {
+        // (1). move入口文件到发布目录
+        fs.stat(conf.entryFileName, function (err, stat) {
 
-            if(err == null) {
-                if(stat.isFile()) {
-                    fs.renameSync(conf.entryFileName,conf.webPath+'/index.html');
+            if (err == null) {
+                if (stat.isFile()) {
+                    fs.renameSync(conf.entryFileName, conf.webPath + '/index.html');
                     isDone();
                 }
             }
@@ -164,8 +161,4 @@ function doCompilerPlatform() {
 
     });
 }
-
-
-
-
 
