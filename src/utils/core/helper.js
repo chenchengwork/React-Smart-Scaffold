@@ -44,6 +44,44 @@ class Helper {
 	}
 
     /**
+     * 获取包“immutability-helper”中的update内容
+     * @param {String | Array}  keyPath "str1.str2..." //依点分割key 或 [key1,key2]
+     * @param {Mixed} value
+     * @param {String} updateType //可填写类型：$set,$push,$unshift,$splice,$unset,$merge,$apply
+     * @return {{}}
+     */
+    getImmutabilityHelperContent(keyPath, value, updateType = '$set') {
+        let keyArr = Array.isArray(keyPath) ? keyPath : keyPath.split('.');
+        let keyLen = keyArr.length;
+        let result = {};
+
+        /* eslint no-eval:0 */
+        /* eslint no-return-assign:0 */
+        const getTmpRes = (keys, val = null) => {
+            let res = 'result';
+            keys.forEach(key => res += "['" + key + "']");
+            res += '={}';
+            eval(res);
+            return eval(res.replace('={}', ''));
+        };
+
+
+        let usedKeys = [];
+        keyArr.forEach((key, index) => {
+            const currentLen = index + 1;
+            usedKeys.push(key);
+
+            if (currentLen === keyLen) {
+                getTmpRes(usedKeys)[updateType] = value;
+            } else {
+                getTmpRes(usedKeys);
+            }
+        });
+
+        return result;
+    }
+
+    /**
 	 * 浮点型保留小数
      * @param {Number} num
      * @param {Number} fixNum

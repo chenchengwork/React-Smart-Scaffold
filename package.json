@@ -6,7 +6,7 @@
   "main": "src/index",
   "scripts": {
     "dev": "BUILD_DEV=1 node server.js",
-    "check-code":"eslint ./src",
+    "check-code": "eslint ./src",
     "mock": "./node_modules/.bin/json-server --watch ./mock/db.json --routes ./mock/routes.json",
     "test": "BABEL_ENV=test jest --colors",
     "coverage": "BABEL_ENV=test jest --colors --coverage",
@@ -22,6 +22,7 @@
     "jquery": "^3.2.1",
     "js-cookie": "^2.1.4",
     "lodash": "^4.17.4",
+    "onfire.js": "^1.0.6",
     "promise-polyfill": "^6.0.2",
     "prop-types": "^15.5.10",
     "query-string": "^4.3.4",
