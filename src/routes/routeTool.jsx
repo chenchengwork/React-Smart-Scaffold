@@ -53,7 +53,10 @@ export const MainLayout = ({ component: Component, reducers, ...rest }) => {
  * @returns {function()}
  * @constructor
  */
-export const AssembleRoute = (routes) => {
+export const AssembleRoute = (...routes) => {
+    let allRoutes = [];
+    /* eslint no-return-assign:0 */
+    routes.forEach(route => allRoutes = allRoutes.concat(route));
 
     return () => routes.map((val) => {
         const { Layout } = val;
