@@ -58,7 +58,7 @@ export const AssembleRoute = (...routes) => {
     /* eslint no-return-assign:0 */
     routes.forEach(route => allRoutes = allRoutes.concat(route));
 
-    return () => routes.map((val) => {
+    return () => allRoutes.map((val) => {
         const { Layout } = val;
         delete val.Layout;
         return Layout ? <Layout {...val} key={val.path} /> : <MainLayout {...val} key={val.path} />;
