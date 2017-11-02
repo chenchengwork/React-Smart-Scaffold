@@ -15,7 +15,7 @@
     "publish": "BUILD_DEV=0 node ./scripts/publish.js ~/Desktop/webapp /"
   },
   "dependencies": {
-    "antd": "^2.13.3",
+    "antd": "^2.13.8",
     "axios": "^0.16.0",
     "flex.css": "^1.1.7",
     "immutability-helper": "^2.2.2",

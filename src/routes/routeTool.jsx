@@ -12,6 +12,7 @@ import MainLayoutComponent from 'templates/MainLayout/MainLayout';
  * 默认布局方式
  * @param Component
  * @param rest
+ * @param reducers
  * @returns {XML}
  * @constructor
  */
@@ -30,6 +31,7 @@ export const DefaultLayout = ({ component: Component, reducers, ...rest }) => {
  * 主要页面布局
  * @param Component
  * @param rest
+ * @param reducers
  * @returns {XML}
  * @constructor
  */
