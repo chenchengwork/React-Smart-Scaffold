@@ -226,10 +226,9 @@ export default class MainLayout extends Component {
     getLeftMenu(currentUrl) {
         const leftMenu = getLeftMenu(currentUrl, this.state.menuCategory);
 
-        if (leftMenu.length < 1) {
-            return null;
-        }
+        if (leftMenu.length < 1) return null;
 
+        // 获取默认展开的菜单keys
         const defaultOpenKeys = (() => {
             for (let i = 0; i < leftMenu.length; i++) {
                 if (leftMenu[i].url.indexOf(currentUrl) !== -1) {
@@ -238,26 +237,30 @@ export default class MainLayout extends Component {
             }
         })();
 
-        // 获取实际URL
-        const getRealUrl = (url) => {
-            let realUrl = null;
-            let firstUrl = null;
+        // 递归获取菜单
+        const formatLeftMenu = (menus) => menus.map((val) => {
+            if (val.children.length > 0) {
+                return (
+                    <Menu.SubMenu
+                        key={val.url.join('-')}
+                        title={<span><Icon type={val.icon} /><span>{val.label}</span></span>}
+                    >
+                        {formatLeftMenu(val.children)}
 
-            if (Array.isArray(url)) {
-                if (url.indexOf(currentUrl) !== -1) {
-                    realUrl = currentUrl;
-                } else {
-                    realUrl = url[0];
-                }
-
-                firstUrl = url[0];
+                    </Menu.SubMenu>
+                );
             } else {
-                realUrl = url;
-                firstUrl = url;
+                let realUrl = Array.isArray(val.url) ? val.url[0] : val.url;
+                return (
+                    <Menu.Item key={realUrl}>
+                        <Link to={realUrl}>
+                            {val.icon ? <Icon type={val.icon} /> : null}
+                            <span>{val.label}</span>
+                        </Link>
+                    </Menu.Item>
+                );
             }
-
-            return { realUrl, firstUrl };
-        };
+        });
 
         return (
             <Sider
@@ -273,48 +276,7 @@ export default class MainLayout extends Component {
                     defaultOpenKeys={[defaultOpenKeys]}
                     style={{ height: '100%', borderRight: 0 }}
                 >
-                    {
-                        leftMenu.map((val) => {
-
-                            if (val.children.length > 0) {
-
-                                return (
-                                    <Menu.SubMenu
-                                        key={val.url.join('-')}
-                                        title={<span><Icon type={val.icon} /><span>{val.label}</span></span>}
-                                    >
-                                        {val.children.map((item) => {
-
-                                            let { realUrl, firstUrl } = getRealUrl(item.url);
-
-                                            return (
-                                                <Menu.Item key={realUrl}>
-                                                    <Link to={firstUrl}>
-                                                        {item.icon ? <Icon type={item.icon} /> : null}
-                                                        <span>{item.label}</span>
-                                                    </Link>
-                                                </Menu.Item>
-                                            );
-                                        })}
-                                    </Menu.SubMenu>
-                                );
-                            } else {
-                                let { realUrl, firstUrl } = getRealUrl(val.url);
-
-                                return (
-                                    <Menu.Item key={realUrl}>
-                                        <Link to={firstUrl}>
-                                            {val.icon ? <Icon type={val.icon} /> : null}
-                                            <span>{val.label}</span>
-                                        </Link>
-                                    </Menu.Item>
-                                );
-                            }
-
-                        })
-                    }
-
-
+                    {formatLeftMenu(leftMenu)}
                 </Menu>
             </Sider>
         );

@@ -25,45 +25,46 @@ const EnumMenus = (() => {
      * @param category
      * @param url
      */
-    const getUrlToExtraInfoMapItem = (category, url) => ({ category, isCollapsedLeftMenu: EnumCollapsedLeftMenuUrls.indexOf(url) !== -1 });
-
-    // 加工默认菜单配置
-    EnumDefaultMenus.forEach((appMenus) => {
-        appMenus.childrenMenu.forEach((menus) => {
-
-            menus.url = Array.isArray(menus.url) || [];
-            if (menus.children.length > 0) {
-                menus.children.forEach((itemMenu) => {
-
-                    if (itemMenu.children.length > 0) {
-                        itemMenu.url = Array.isArray(itemMenu.url) || [];
-
-                        itemMenu.children.forEach((menu) => {
-                            menus.url.push(menu.url);
-                            itemMenu.url.push(menu.url);
-                            UrlToExtraInfoMap[menu.url] = getUrlToExtraInfoMapItem(appMenus.value, menu.url);
-                        });
-
-                    } else {
-                        if (Array.isArray(itemMenu.url)) {
-                            menus.url = menus.url.concat(itemMenu.url);
-                            itemMenu.url.forEach((url) => {
-                                UrlToExtraInfoMap[url] = getUrlToExtraInfoMapItem(appMenus.value, url);
-                            });
-                        } else {
-                            menus.url.push(itemMenu.url);
-                            UrlToExtraInfoMap[itemMenu.url] = getUrlToExtraInfoMapItem(appMenus.value, itemMenu.url);
-                        }
-
-                    }
-                });
-            }
-
-        });
+    const getUrlToExtraInfoMapItem = (category, url) => ({
+        category,
+        isCollapsedLeftMenu: EnumCollapsedLeftMenuUrls.indexOf(url) !== -1
     });
 
-    return EnumDefaultMenus;
+    /**
+     * 格式化菜单
+     * @param category
+     * @param menus
+     * @param urls
+     * @returns {{menus: *, urls: Array}}
+     */
+    const formatMenus = (category, menus, urls = []) => {
+        menus.forEach(menu => {
+            if (T.lodash.isUndefined(menu.children)) menu.children = [];
 
+            if (Array.isArray(menu.url)) {
+                urls = urls.concat(menu.url);
+            } else if (T.lodash.isString(menu.url)) {
+                urls.push(menu.url);
+            }
+
+            if (Array.isArray(menu.children) && menu.children.length > 0) {
+                menu.url = Array.isArray(menu.url) || [];
+                const result = formatMenus(category, menu.children);
+
+                menu.url = T.lodash.uniq(menu.url.concat(result.urls));
+                urls = T.lodash.uniq(urls.concat(menu.url));
+            }
+        });
+
+        urls.forEach(url => UrlToExtraInfoMap[url] = getUrlToExtraInfoMapItem(category, url));
+
+        return { menus, urls };
+    }
+
+    // 加工默认菜单配置
+    EnumDefaultMenus.forEach((appMenus) => appMenus.childrenMenu = formatMenus(appMenus.value, appMenus.childrenMenu).menus);
+
+    return EnumDefaultMenus;
 })();
 
 
