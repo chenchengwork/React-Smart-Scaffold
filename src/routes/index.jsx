@@ -2,7 +2,7 @@
  * Created by chencheng on 2017/6/12.
  */
 import EnumRouter from 'constants/EnumRouter';
-
+import T from 'utils/T';
 import {
     BrowserRouter,
     Route,
@@ -26,14 +26,7 @@ const Routes = () => (
         keyLength={12}
     >
         <Switch>
-            <Route exact path="/" render={() => (
-                false ? (
-                    <Redirect push to={EnumRouter.login} />
-                ) : (
-                    <Redirect to={EnumRouter.dHub_pluginManage} />
-                )
-            )}
-            />
+            <Route exact path="/" render={() => <Redirect to={T.auth.isLogin() ? window.ENV.login.defaultRedirectUrl : window.ENV.login.loginUrl} />} />
 
             {/* 公共--路由 */}
             {CommonRoutes()}

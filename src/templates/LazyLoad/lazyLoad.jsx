@@ -1,41 +1,40 @@
-/**
- * @description 页面的加载动画
- * @author vision <vision.shi@tianjishuju.com>
- * @license www.tianjishuju.com/license
- */
 import PropTypes from 'prop-types';
 import T from 'utils/T';
+
 import { Spin } from 'antd';
 import { Component as ReactComponent } from 'react';
 import { STORE_INJECT } from 'store.js';
 
-function injectReducers(reducers) {
-	return { [STORE_INJECT]: { reducers }};
-}
+const injectReducers = (reducers) => ({ [STORE_INJECT]: { reducers }});
 
+@T.decorator.contextTypes('store')
+@T.decorator.contextTypes('router')
+@T.decorator.propTypes({
+    // 延迟加载函数
+    lazyLoader: PropTypes.func.isRequired,
+    reducers: PropTypes.oneOfType([
+        PropTypes.func.isRequired,
+        PropTypes.arrayOf(
+            PropTypes.func.isRequired
+        ).isRequired,
+    ]),
+})
 export default class LazyLoadTpl extends ReactComponent {
-	static contextTypes = {
-		store: PropTypes.shape({
-			dispatch: PropTypes.func.isRequired
-		})
-	};
-
-    static propTypes = {
-        // 延迟加载函数
-        lazyLoader: PropTypes.func.isRequired,
-        reducers: PropTypes.oneOfType([
-            PropTypes.func.isRequired,
-            PropTypes.arrayOf(
-                PropTypes.func.isRequired
-            ).isRequired,
-        ]),
-    };
 
     state = {
         Component: null
     };
 
     componentDidMount() {
+        // --验证是否登录--
+        const loginConf = window.ENV.login;
+        const currentUri = this.context.router.history.location.pathname;
+        if (loginConf.noCheckIsLoginRoutes.indexOf(currentUri) === -1 && !T.auth.isLogin()){
+            this.context.router.history.push(loginConf.loginUrl + '?redirect_uri=' + encodeURIComponent(currentUri));
+            return false;
+        }
+
+
         if (!this.state.Component) {
             // 挂载完成后,开始加载远程组件
             this.props.lazyLoader(Component => this.setState({

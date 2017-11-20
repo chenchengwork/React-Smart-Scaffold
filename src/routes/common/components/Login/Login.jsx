@@ -18,50 +18,27 @@ export default class Login extends Component {
 
     constructor() {
         super();
-        this.onEmailChange = this.onEmailChange.bind(this);
-        this.onPasswordChange = this.onPasswordChange.bind(this);
-        this.onSubmit = this.onSubmit.bind(this);
-
         this.state = {
-            email: '',
-            password: '',
+            user_email: '',
+            user_password: '',
             loading: false
-
         };
     }
-    componentDidMount() {
 
-    }
-    onEmailChange(e) {
-        this.setState({
-            email: e.target.value.trim()
-        });
-    }
+    onEnterDown = (e) => e.keyCode === 13 ? this.onSubmit() : null;
 
-    onPasswordChange(e) {
-        this.setState({
-            password: e.target.value.trim()
-        });
-    }
+    onSubmit = () => {
+        const { user_email, user_password } = this.state;
 
-    onSubmit() {
-        const { email, password } = this.state;
-
-        this.setState({ loading: true });
-
-        doLoginAction(email, password).then((resp) => {
-
-            this.setState({ loading: false });
-
-            const respLoginData = resp.data;
-
-            T.storage.setStorage('respLoginData', respLoginData);
-
-            // T.helper.redirect(EnumRouter.screenList);
-            this.context.router.history.push(EnumRouter.screenList);
-        }, (resp) => {
-            this.setState({ loading: false });
-            T.message.error(resp.msg);
+        this.setState({ loading: true }, () => {
+            doLoginAction(user_email, user_password).then((resp) => {
+                this.setState({ loading: false }, () => {
+                    T.auth.loginSuccessRedirect(this.context.router.history);
+                });
+            }, (resp) => {
+                this.setState({ loading: false });
+                T.prompt.error(resp.msg);
+            });
         });
     }
 
@@ -70,30 +47,22 @@ export default class Login extends Component {
             <img src={logo} className="img-top" alt="login-top" />
             <div className="login_box">
                 <div className="login_box_left">
-                    <div className="login_top">用户登录</div>
+                    <div className="login_top">后台登录</div>
                     <input
                         type="text"
-                        value={this.state.email}
-                        className="login_acount"
-                        onChange={this.onEmailChange}
+                        value={this.state.user_email}
+                        className="login_email"
+                        onChange={(e) => this.setState({user_email: e.target.value.trim()})}
                         placeholder="邮箱"
-                        onKeyDown={(e) => {
-                           if (e.keyCode === 13) {
-                               this.onSubmit();
-                           }
-                       }}
+                        onKeyDown={this.onEnterDown}
                     />
                     <input
                         type="password"
-                        value={this.state.password}
+                        value={this.state.user_password}
                         className="login_password"
-                        onChange={this.onPasswordChange}
+                        onChange={(e) => this.setState({user_password: e.target.value.trim()})}
                         placeholder="密码"
-                        onKeyDown={(e) => {
-                            if (e.keyCode === 13) {
-                                this.onSubmit();
-                            }
-                        }}
+                        onKeyDown={this.onEnterDown}
                     />
 
                     <Button
@@ -105,28 +74,6 @@ export default class Login extends Component {
                 </div>
                 <img src={rightLoginImg} className="img_right" alt="login-right" />
             </div>
-            <ul className="footer_nav">
-                <li>
-                    <a href="http://www.tianjishuju.com/index.html" target="_blank">首&emsp;&nbsp;页</a>
-                    |
-                </li>
-                <li>
-                    <a href="http://www.tianjishuju.com/product.html" target="_blank">产品技术</a>
-                    |
-                </li>
-                <li>
-                    <a href="http://www.tianjishuju.com/solution.html" target="_blank">解决方案</a>
-                    |
-                </li>
-                <li>
-                    <a href="http://www.tianjishuju.com/case_aviation.html" target="_blank">实施案例</a>
-                    |
-                </li>
-                <li>
-                    <a href="http://www.tianjishuju.com/about.html" target="_blank">关于我们</a>
-
-                </li>
-            </ul>
             <div className="bottom_">Copyright @ 2016-2017 天机数据 京ICP备09083760号-9 | 京公网安备11010502032535</div>
         </div>);
     }
