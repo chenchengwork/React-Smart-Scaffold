@@ -13,7 +13,7 @@ class Auth {
      * @returns {boolean}
      */
     isLogin() {
-        return cookiesUtil.get(this.loginSuccessCookieKey);
+        return window.ENV.login.isCheckLogin ? cookiesUtil.get(this.loginSuccessCookieKey) : true;
     }
 
     /**

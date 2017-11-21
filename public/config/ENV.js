@@ -10,6 +10,8 @@ window.ENV = (function () {
         rootPath: rootPath,                       	// 路由的根路径
 
         login: {
+            errorCode: 900,                                 // 未登录的error code
+            isCheckLogin: false,                            // web端是否验证登录
             cookieKey: '__login_user_info__',               // 登录成功的cookie key, 用于验证当前页面是否登录
             defaultRedirectUrl: rootPath + 'dataHub/resourceMonitor/host',  // 登录成功默认重定向的url
             loginUrl: rootPath + 'login',                   // 登录页面url
