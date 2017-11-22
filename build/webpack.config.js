@@ -201,7 +201,16 @@ module.exports = {
                 options: {
                     presets: [
                         'babel-polyfill',
-                        'es2015',
+                        ['env', {
+                            // 根据browserslist来分析支持情况， 具体的配置参照： https://github.com/ai/browserslist
+                            browsers: [
+                                "last 2 versions",
+                                "ie >= 8",
+                            ],
+                            modules: false,
+                            useBuiltIns: true,
+                            debug: true
+                        }],
                         'react',
                         'stage-0'
                     ],
