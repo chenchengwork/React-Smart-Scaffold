@@ -250,10 +250,21 @@ export default class MainLayout extends Component {
                     </Menu.SubMenu>
                 );
             } else {
-                let realUrl = Array.isArray(val.url) ? val.url[0] : val.url;
+                let realUrl = (() => {
+                    if (Array.isArray(val.url)){
+                        if (val.url.indexOf(currentUrl) !== -1){
+                            return currentUrl;
+                        }
+
+                        return val.url[0];
+                    }
+
+                    return val.url;
+                })();
+
                 return (
                     <Menu.Item key={realUrl}>
-                        <Link to={realUrl}>
+                        <Link to={Array.isArray(val.url) ? val.url[0] : val.url}>
                             {val.icon ? <Icon type={val.icon} /> : null}
                             <span>{val.label}</span>
                         </Link>
