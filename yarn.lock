@@ -7898,7 +7898,7 @@ webpack-dev-middleware@^1.11.0:
     range-parser "^1.0.3"
     time-stamp "^2.0.0"
 
-webpack-dev-server@^2.9.4:
+webpack-dev-server@^2.9.6:
   version "2.9.6"
   resolved "http://registry.npm.taobao.org/webpack-dev-server/download/webpack-dev-server-2.9.6.tgz#3e3b56c4222694d2b900c3e8e19dd2e990a817f3"
   dependencies:
