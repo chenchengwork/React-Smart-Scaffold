@@ -2,11 +2,13 @@
  * Created by chencheng on 17-8-30.
  */
 import {
-    Route
+    Route,
+    Link
 } from 'react-router-dom';
 
 import lazyLoad from 'templates/LazyLoad';
 import MainLayoutComponent from 'templates/MainLayout/MainLayout';
+import Exception from 'templates/ToolComponents/Exception';
 
 /**
  * 默认布局方式
@@ -69,13 +71,6 @@ export const AssembleRoute = (...routes) => {
 
 /**
  * 未匹配到的页面
- * @param {Object} location
  * @constructor
  */
-export const NoMatch = ({ location }) => (
-    <div>
-        <h3>No match for
-            <code>{location.pathname}</code>
-        </h3>
-    </div>
-);
+export const NoMatch = () => <Exception type="404" style={{ minHeight: 500, height: '100%' }} linkElement={Link} />;
