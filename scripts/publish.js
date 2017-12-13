@@ -7,7 +7,6 @@ let conf = {
     entryFileName: './publish-index.html',               // 入口文件名称
     appName: 'platform',                                 // 项目名称
 	proxyPath: process.argv[3] ? process.argv[3] : '/',  // 代理的前缀 注意：后面必须带斜线
-    workerSensePath: './web_modules/tj-sense/worker/worker-sense.js',
     webPath: process.argv[2],    // web目录
 
 };
@@ -130,7 +129,7 @@ function doCompilerPlatform() {
             handleWarn(jsonStats.warnings);
         }
 
-        let stepCount = 2;
+        let stepCount = 1;
 
         function isDone() {
             stepCount--;
@@ -140,12 +139,7 @@ function doCompilerPlatform() {
             }
         }
 
-        // 1. copy worker-sense.js文件到编译目录下
-        Tool.copyFileToDir(conf.workerSensePath, webpackConf.output.path, 'worker-sense.js', function () {
-            isDone();
-        });
-
-        // 2. 将编译后的项目移动到发布目录
+        // 1. 将编译后的项目移动到发布目录
 
         // (1). move入口文件到发布目录
         fs.stat(conf.entryFileName, function (err, stat) {
