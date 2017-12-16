@@ -120,7 +120,7 @@ export default class MainLayout extends Component {
      * @return {number}
      */
     getAppMenuLeftWidth(collapsed) {
-        return collapsed ? 64 : 180;
+        return collapsed ? 80 : 180;
     }
 
     /**
