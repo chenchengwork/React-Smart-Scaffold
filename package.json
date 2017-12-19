@@ -15,7 +15,7 @@
     "publish": "BUILD_DEV=0 node ./scripts/publish.js ~/Desktop/webapp /"
   },
   "dependencies": {
-    "antd": "^3.0.0",
+    "antd": "^3.0.2",
     "axios": "^0.17.1",
     "flex.css": "^1.1.7",
     "immutability-helper": "^2.5.0",
@@ -85,8 +85,8 @@
     "url-loader": "^0.6.2",
     "urlencode": "^1.1.0",
     "urllib-sync": "^1.1.4",
-    "webpack": "^3.8.1",
-    "webpack-dev-server": "^2.9.6"
+    "webpack": "^3.10.0",
+    "webpack-dev-server": "^2.9.7"
   },
   "jest": {
     "moduleFileExtensions": [

@@ -6,7 +6,7 @@ import T from 'utils/T';
 import { Component } from 'react';
 import { Link } from 'react-router-dom';
 
-import { Layout, Menu, Icon, Dropdown } from 'antd';
+import { Layout, Menu, Icon, Dropdown, BackTop } from 'antd';
 import {
     UrlToExtraInfoMap,
     EnumFragmentMenu,
@@ -80,6 +80,7 @@ export const MainContent = ({ className = '', style = {}, children = null }) => 
     };
     return (
         <Content className={className} style={Object.assign(defaultStyle, style)}>
+
             {children}
         </Content>
     );
@@ -103,8 +104,9 @@ export default class MainLayout extends Component {
         };
     }
 
-    componentDidMount() {
+    componentWillMount() {
         const { category, isCollapsedLeftMenu } = UrlToExtraInfoMap[this.context.router.route.match.path];
+
         if (UrlToExtraInfoMap !== this.state.menuCategory) {
             this.setState({
                 menuCategory: category,
@@ -141,11 +143,7 @@ export default class MainLayout extends Component {
      */
     getHeaderMenu = (currentUrl) => {
         const menu = (
-            <Menu onClick={({ item, key, keyPath }) => {
-                this.setState({ menuCategory: key }, () => {
-                    this.context.router.history.push(item.props.url);
-                });
-            }}>
+            <Menu onClick={({ item }) => this.context.router.history.push(item.props.url)}>
                 {
                     getMenuCategory().map((val) => {
                         return (
@@ -162,7 +160,10 @@ export default class MainLayout extends Component {
             <Header className="menu-header">
                 <h2 className="logo">Demo</h2>
 
-                <Dropdown overlay={menu}>
+                <Dropdown
+                    overlay={menu}
+                    trigger={['click']}
+                >
                     <a className="ant-dropdown-link" style={{
                         float: 'left',
                         height: 47,
@@ -306,6 +307,7 @@ export default class MainLayout extends Component {
                     {this.getLeftMenu(currentUrl)}
 
                     <Layout className="app-content" style={{ marginLeft: this.state.appMenuLeftWidth }}>
+                        <BackTop style={{right: 100}}/>
                         {this.props.children}
                     </Layout>
 
