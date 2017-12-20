@@ -52,6 +52,8 @@ class Prompt {
             title: '确定删除吗？',
             // content: <h1>When clicked the OK button, this dialog will be closed after 1 second</h1>,
             content: '',    // content可以是react节点实例
+            okText: '确定',
+            cancelText: '取消',
             onOk() {
                 return cbForOk();
             },
