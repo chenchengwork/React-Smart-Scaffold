@@ -24,16 +24,12 @@ $main-layout-header-height:50px;
 			background-color: $main-menu-background-color;
 			font-size: 16px;
 			.ant-menu-item {
-				//color: #6997BF;
 				margin: -3px 39px 0 39px;
 				padding: 0;
 
 			  	&.active{
 				  border-bottom: 2px solid #1A96FF;
 				  background-color: rgba(0, 51, 102, 0);
-				  /*& > a {
-					color: #1996FF;
-				  }*/
 				}
 			}
 			.ant-menu-item-selected {
@@ -82,7 +78,6 @@ $main-layout-header-height:50px;
 	//左侧菜单样式
 	div.main-content {
 		margin-top:50px;
-		background-color: #fff;
 
 		//左侧菜单样式
 		.menu-left {
@@ -116,7 +111,6 @@ $main-layout-header-height:50px;
 							color:#4387BF;
 						}
 					}
-
 				}
 			}
 
@@ -126,7 +120,6 @@ $main-layout-header-height:50px;
 		}
 
 		.app-content{
-			background-color: #fff;
 
 			//应用区中的header
 			.app-header {
@@ -163,10 +156,6 @@ $main-layout-header-height:50px;
 					right: 16px;
 				}
 			}
-
 		}
-
 	}
-
-
 }

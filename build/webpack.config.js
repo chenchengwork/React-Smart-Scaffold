@@ -164,10 +164,11 @@ module.exports = {
                                 options: {
                                     sourceMap: true,
                                     modifyVars: {
-                                        // "@primary-color": "#1DA57A",		            //更改antd的主题颜色;
                                         "@primary-color": "#108ee9",		            //更改antd的主题颜色;
                                         "@icon-url":"'/asserts/ant_font/iconfont'",     //更改字体地址; 注意:必须再加额外的“'”,将icon字体部署到本地
                                         '@font-size-base': '12px',                      // 修改基础字体大小
+                                        '@body-background': '#fff',                     // 修改body的背景颜色
+                                        '@layout-body-background': '#fff',              // 修改layout布局的body背景颜色
                                     }
                                 }
                             }

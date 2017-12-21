@@ -75,9 +75,8 @@ MainHeader.propTypes = {
 export const MainContent = ({ className = '', style = {}, children = null }) => {
     let defaultStyle = {
         margin: '0px 10px 0px 10px',
-        minHeight: 640,
-        backgroundColor: '#fff',
     };
+
     return (
         <Content className={className} style={Object.assign(defaultStyle, style)}>
 
