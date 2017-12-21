@@ -7,16 +7,61 @@ const CommonsChunkPlugin = webpack.optimize.CommonsChunkPlugin;   // 提取公�
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
 const autoprefixer = require('autoprefixer');
 
-
 // 页面入口文件,使用异步加载方式
-// const routesComponentsRegex = /src\/routes\/([\w-])+?\/((.*)\/)?index.js(x)?$/g;
 const routesComponentsRegex = /src\/routes\/([\w-])+?\/((.*)\/)?routes\/((.*)\/)?index.js(x)?$/g;
-
 // 编译排除的文件
 const excludeRegex = /(node_modules|bower_modules)/;
 
-module.exports = {
+// 自定义antd的样式
+const customAntdStyle = {
+    '@primary-color': '#108ee9',		            // 更改antd的主题颜色;
+    // "@icon-url":"'/asserts/ant_font/iconfont'",  //更改字体地址; 注意:必须再加额外的“'”,将icon字体部署到本地
+    '@font-size-base': '12px',                      // 修改基础字体大小
+    '@body-background': '#fff',                     // 修改body的背景颜色
+    '@layout-body-background': '#fff',              // 修改layout布局的body背景颜色
+}
 
+// 格式化不同的样式loader
+const formatStyleLoader = (otherLoader = null) => {
+    const baseLoaders = [
+        {
+            loader: 'css-loader',
+            options: {
+                sourceMap: true
+            }
+        },
+        {
+            loader: 'postcss-loader',
+            options: {
+                sourceMap: true,
+                ident: 'postcss', 	// https://webpack.js.org/guides/migrating/#complex-options
+                plugins: () => [
+                    require('postcss-flexbugs-fixes'),
+                    autoprefixer({
+                        browsers: [
+                            '>1%',
+                            'last 4 versions',
+                            'Firefox ESR',
+                            'not ie < 9' // React doesn't support IE8 anyway
+                        ],
+                        flexbox: 'no-2009'
+                    })
+                ]
+            }
+        }
+    ];
+
+    if(otherLoader) baseLoaders.push(otherLoader);
+
+    return ExtractTextPlugin.extract(
+        {
+            fallback: 'style-loader',
+            use: baseLoaders
+        }
+    )
+};
+
+module.exports = {
     // 用于生成源代码的mapping
     devtool: 'cheap-module-source-map',	// cheap-module-source-map,cheap-source-map
 
@@ -26,18 +71,19 @@ module.exports = {
         vendor: [
             'babel-polyfill',
             'url-search-params-polyfill',
+            'lodash',
             'react',
             'react-dom',
             './src/utils/T'
-
         ]
     },
 
     // 指定模块目录名称
     resolve: {
         extensions: ['.js', '.jsx'],
-        modules: ['node_modules','web_modules','./src']
+        modules: ['node_modules', 'web_modules', './src']
     },
+
     output: {
         // 公网发布的目录
         publicPath: '/public/',
@@ -45,6 +91,7 @@ module.exports = {
         path: `${__dirname}/../public/`,
         filename: '[name].js'
     },
+
     module: {
         rules: [
             {
@@ -77,104 +124,28 @@ module.exports = {
             },
             {
                 test: /\.css$/,
-                use: ExtractTextPlugin.extract(
-                    {
-                        fallback: 'style-loader',
-                        use: [
-                            {
-                                loader: 'css-loader',
-                                options: {
-                                    sourceMap: true
-                                }
-                            },
-                            {
-                                loader: 'postcss-loader',
-                                options: {
-                                    sourceMap: true
-                                }
-                            }
-                        ]
-                    }
-                )
+                use: formatStyleLoader()
             },
             {
                 test: /\.scss/,
                 exclude: excludeRegex,
-                use: ExtractTextPlugin.extract(
-                    {
-                        fallback: 'style-loader',
-                        use: [
-                            {
-                                loader: 'css-loader',
-                                options: {
-                                    sourceMap: true
-                                }
-                            },
-                            {
-                                loader: 'postcss-loader',
-                                options: {
-                                    sourceMap: true
-                                }
-                            },
-                            {
-                                loader: 'sass-loader',
-                                options: {
-                                    sourceMap: true
-                                }
-                            }
-                        ]
+                use: formatStyleLoader({
+                    loader: 'sass-loader',
+                    options: {
+                        sourceMap: true
                     }
-                )
+                })
             },
 
             {
                 test: /\.less/,
-                // exclude: excludeRegex,
-                use: ExtractTextPlugin.extract(
-                    {
-                        fallback: 'style-loader',
-                        use: [
-                            {
-                                loader: 'css-loader',
-                                options: {
-                                    sourceMap: true
-                                }
-                            },
-                            {
-                                loader: 'postcss-loader',
-                                options: {
-                                    sourceMap: true,
-                                    ident: 'postcss', 	// https://webpack.js.org/guides/migrating/#complex-options
-                                    plugins: () => [
-                                        require('postcss-flexbugs-fixes'),
-                                        autoprefixer({
-                                            browsers: [
-                                                '>1%',
-                                                'last 4 versions',
-                                                'Firefox ESR',
-                                                'not ie < 9' // React doesn't support IE8 anyway
-                                            ],
-                                            flexbox: 'no-2009'
-                                        })
-                                    ]
-                                }
-                            },
-                            {
-                                loader: 'less-loader',
-                                options: {
-                                    sourceMap: true,
-                                    modifyVars: {
-                                        "@primary-color": "#108ee9",		            //更改antd的主题颜色;
-                                        "@icon-url":"'/asserts/ant_font/iconfont'",     //更改字体地址; 注意:必须再加额外的“'”,将icon字体部署到本地
-                                        '@font-size-base': '12px',                      // 修改基础字体大小
-                                        '@body-background': '#fff',                     // 修改body的背景颜色
-                                        '@layout-body-background': '#fff',              // 修改layout布局的body背景颜色
-                                    }
-                                }
-                            }
-                        ]
+                use: formatStyleLoader({
+                    loader: 'less-loader',
+                    options: {
+                        sourceMap: true,
+                        modifyVars: customAntdStyle
                     }
-                )
+                })
             },
 
             {
@@ -188,10 +159,6 @@ module.exports = {
                         }
                     }
                 ]
-            },
-            {
-                test: /web_modules\/tj-sense\/worker\/worker-.*?\.js$/,
-                use: 'url-loader?minetype=text/javascript'
             },
             {
                 loader: 'babel-loader',
@@ -217,17 +184,18 @@ module.exports = {
                         'stage-0'
                     ],
                     plugins: [
-                        //babel-plugin-import
-                        ['import', { libraryName: 'antd',"libraryDirectory":"es", style: true}], // `style: true` for less
+                        // babel-plugin-import
+                        ['import', {libraryName: 'antd', 'libraryDirectory': 'es', style: true}], // `style: true` for less
                         ['transform-decorators-legacy', 'transform-decorators']	// 支持es7的装饰器
                     ]
                 }
             }
         ]
     },
+
     plugins: [
-        // 第一个参数vendor和entry中verdor名称对应，第二个参数是输出的文件名称
-        new CommonsChunkPlugin({ name: 'vendor', filename: '[name].js' }),
+        // 第一个参数vendor和entry中verdor名称对应，第二个参数是输出的文件名
+        new CommonsChunkPlugin({name: 'vendor', filename: '[name].js'}),
 
         // 自动加载赋值模块
         new webpack.ProvidePlugin({
@@ -246,6 +214,7 @@ module.exports = {
         // 开发环境和生产环境配置
         new webpack.DefinePlugin({
             'process.env': {
+                /* eslint eqeqeq: 0 */
                 // 控制如react、react-dom等第三方包的warnning输出,设置为production将不输出warnning
                 NODE_ENV: process.env.BUILD_DEV == 1 ? '"dev"' : '"production"'
             },
