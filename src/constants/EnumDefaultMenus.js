@@ -9,6 +9,14 @@ import EnumRouter from 'constants/EnumRouter';
  */
 export const EnumCollapsedLeftMenuUrls = [];
 
+/**
+ * icon 类型
+ * @type {{antd: string, custom: string}}
+ */
+export const EnumIconTypes = {
+    antd: 'antd',
+    custom: 'custom'
+};
 
 /**
  * 菜单配置
@@ -35,16 +43,26 @@ export const EnumDefaultMenus = [
         childrenMenu: [
             {
                 label: '数据采集',
+                icon: {
+                    appType: EnumIconTypes.custom,
+                    iconType:'caiji'
+                },
                 children: [
                     {
                         label: '插件管理',
-                        icon: 'switcher',
+                        icon: {
+                            appType: EnumIconTypes.antd,
+                            iconType:'switcher'
+                        },
                         url: EnumRouter.dHub_pluginManage,
                         children: []
                     },
                     {
                         label: '资源监控',
-                        icon: 'hdd',
+                        icon: {
+                            appType: EnumIconTypes.antd,
+                            iconType:'hdd'
+                        },
                         children: [
                             {
                                 label: '主机监控',

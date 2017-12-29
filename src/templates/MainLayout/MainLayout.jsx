@@ -2,11 +2,13 @@ import './MainLayout.scss';
 import PropTypes from 'prop-types';
 import PureRenderMixin from 'react-addons-pure-render-mixin';
 import T from 'utils/T';
+import CustomIcon from 'templates/ToolComponents/CustomIcon';
 
 import { Component } from 'react';
 import { Link } from 'react-router-dom';
 
 import { Layout, Menu, Icon, Dropdown, BackTop } from 'antd';
+import { EnumIconTypes } from 'constants/EnumDefaultMenus';
 import {
     UrlToExtraInfoMap,
     EnumFragmentMenu,
@@ -17,6 +19,25 @@ import {
 } from './menuUtil';
 
 const { Header, Content, Sider } = Layout;
+
+
+/**
+ * 应用icon
+ * @param appType
+ * @param iconType
+ * @return {*}
+ * @constructor
+ */
+const AppIcon = ({appType, iconType, spin=false, style= {}}) => {
+    if ( appType == EnumIconTypes.antd) {
+        return <Icon type={iconType} spin={spin} style={style}/>
+    }else if(appType == EnumIconTypes.custom) {
+        return <CustomIcon type={iconType} spin={spin} style={style} />
+    }
+
+    return null;
+};
+
 
 /**
  * 头部组件
@@ -187,9 +208,14 @@ export default class MainLayout extends Component {
                         getMenusByCategory(this.state.menuCategory).map((val, key) => {
                             const url = T.lodash.isArray(val.url) ? val.url[0] : val.url;
 
-                            return <Menu.Item key={url + key}
-                                className={val.url.indexOf(currentUrl) !== -1 ? 'active' : ''}><Link
-                                    to={url}>{val.label}</Link></Menu.Item>;
+                            return (
+                                <Menu.Item key={url + key} className={val.url.indexOf(currentUrl) !== -1 ? 'active' : ''}>
+                                    <Link to={url}>
+                                        <AppIcon {...val.icon} style={{marginRight: 5}}/>
+                                        {val.label}
+                                    </Link>
+                                </Menu.Item>
+                            );
                         })
                     }
                 </Menu>
@@ -243,7 +269,7 @@ export default class MainLayout extends Component {
                 return (
                     <Menu.SubMenu
                         key={val.url.join('-')}
-                        title={<span><Icon type={val.icon} /><span>{val.label}</span></span>}
+                        title={<span><AppIcon {...val.icon} /><span>{val.label}</span></span>}
                     >
                         {formatLeftMenu(val.children)}
 
@@ -265,7 +291,7 @@ export default class MainLayout extends Component {
                 return (
                     <Menu.Item key={realUrl}>
                         <Link to={Array.isArray(val.url) ? val.url[0] : val.url}>
-                            {val.icon ? <Icon type={val.icon} /> : null}
+                            {val.icon ? <AppIcon {...val.icon} /> : null}
                             <span>{val.label}</span>
                         </Link>
                     </Menu.Item>
