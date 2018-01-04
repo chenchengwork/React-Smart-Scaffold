@@ -162,54 +162,31 @@ export default class MainLayout extends Component {
      * @returns {XML}
      */
     getHeaderMenu = (currentUrl) => {
-        const menu = (
-            <Menu onClick={({ item }) => this.context.router.history.push(item.props.url)}>
-                {
-                    getMenuCategory().map((val) => {
-                        return (
-                            <Menu.Item key={val.value} url={val.url}>
-                                <a>{val.label}</a>
-                            </Menu.Item>
-                        );
-                    })
+        const childrenMenu = getMenusByCategory(this.state.menuCategory);
+        const selectedKeys = (() => {
+			for(let i = 0; i < childrenMenu.length; i++){
+			    if(childrenMenu[i].url.indexOf(currentUrl) !== -1){
+			        return [ Array.isArray(childrenMenu[i].url) ? childrenMenu[i].url[0] : childrenMenu[i].url ];
                 }
-            </Menu>
-        );
+            }
+        })();
 
         return (
             <Header className="menu-header">
                 <h2 className="logo">Demo</h2>
-
-                <Dropdown
-                    overlay={menu}
-                    trigger={['click']}
-                >
-                    <a className="ant-dropdown-link" style={{
-                        float: 'left',
-                        height: 47,
-                        fontSize: 16,
-                        lineHeight: '47px',
-                        color: '#fff',
-                        marginLeft: 20
-                    }} href="">
-                        <span>{getMenuCategoryLabel(this.state.menuCategory)}</span> <Icon type="down" />
-                    </a>
-                </Dropdown>
-
-                <span className="menu-split left" />
-
                 <Menu
                     className="ant-menu-left"
                     theme="dark"
                     mode="horizontal"
+					selectedKeys={selectedKeys}
                     style={{ lineHeight: '50px', float: 'left', marginLeft: 10, border: 0 }}
                 >
                     {
-                        getMenusByCategory(this.state.menuCategory).map((val, key) => {
-                            const url = T.lodash.isArray(val.url) ? val.url[0] : val.url;
+                        childrenMenu.map((val) => {
+                            const url = Array.isArray(val.url) ? val.url[0] : val.url;
 
                             return (
-                                <Menu.Item key={url + key} className={val.url.indexOf(currentUrl) !== -1 ? 'active' : ''}>
+                                <Menu.Item key={url} className={val.url.indexOf(currentUrl) !== -1 ? 'active' : ''}>
                                     <Link to={url}>
                                         <AppIcon {...val.icon} style={{marginRight: 5}}/>
                                         {val.label}
@@ -255,13 +232,21 @@ export default class MainLayout extends Component {
         if (leftMenu.length < 1) return null;
 
         // 获取默认展开的菜单keys
-        const defaultOpenKeys = (() => {
-            for (let i = 0; i < leftMenu.length; i++) {
-                if (leftMenu[i].url.indexOf(currentUrl) !== -1) {
-                    return T.lodash.isArray(leftMenu[i].url) ? leftMenu[i].url.join('-') : leftMenu[i].url;
-                }
-            }
-        })();
+        const recursionOpenKeys = (menus, openKeys = []) => {
+			for (let i = 0; i < menus.length; i++) {
+			    const item = menus[i];
+				if (item.url.indexOf(currentUrl) !== -1) {
+					if(Array.isArray(item.url)){
+					    openKeys.push(item.url.join('-'))
+                    }
+
+                    if(item.children && item.children.length > 0){
+						recursionOpenKeys(item.children, openKeys);
+                    }
+				}
+			}
+			return openKeys;
+        }
 
         // 递归获取菜单
         const formatLeftMenu = (menus) => menus.map((val) => {
@@ -276,15 +261,13 @@ export default class MainLayout extends Component {
                     </Menu.SubMenu>
                 );
             } else {
-                let realUrl = (() => {
+                const realUrl = (() => {
                     if (Array.isArray(val.url)){
                         if (val.url.indexOf(currentUrl) !== -1){
                             return currentUrl;
                         }
-
                         return val.url[0];
                     }
-
                     return val.url;
                 })();
 
@@ -308,9 +291,10 @@ export default class MainLayout extends Component {
                 onCollapse={this.onLeftMenuCollapse}
             >
                 <Menu
+                    theme="dark"
                     mode="inline"
                     selectedKeys={[currentUrl]}
-                    defaultOpenKeys={[defaultOpenKeys]}
+                    defaultOpenKeys={recursionOpenKeys(leftMenu)}
                     style={{ height: '100%', borderRight: 0 }}
                 >
                     {formatLeftMenu(leftMenu)}
