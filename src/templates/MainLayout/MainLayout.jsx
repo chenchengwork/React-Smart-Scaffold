@@ -14,8 +14,7 @@ import {
     EnumFragmentMenu,
     getLeftMenu,
     getMenusByCategory,
-    getMenuCategory,
-    getMenuCategoryLabel
+    isRemoveLeftMenu
 } from './menuUtil';
 
 const { Header, Content, Sider } = Layout;
@@ -127,7 +126,7 @@ export default class MainLayout extends Component {
     componentWillMount() {
         const { category, isCollapsedLeftMenu } = UrlToExtraInfoMap[this.context.router.route.match.path];
 
-        if (UrlToExtraInfoMap !== this.state.menuCategory) {
+        if (category !== this.state.menuCategory) {
             this.setState({
                 menuCategory: category,
                 collapsed: isCollapsedLeftMenu,
@@ -142,6 +141,10 @@ export default class MainLayout extends Component {
      * @return {number}
      */
     getAppMenuLeftWidth(collapsed) {
+        // 是否移除左侧菜单
+        const currentUrl = this.context.router.route.match.path;
+        if(isRemoveLeftMenu(currentUrl)) return 0;
+
         return collapsed ? 80 : 180;
     }
 

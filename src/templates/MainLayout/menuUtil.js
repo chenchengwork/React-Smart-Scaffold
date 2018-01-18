@@ -46,7 +46,14 @@ const EnumMenus = (() => {
             }
 
             if (Array.isArray(menu.children) && menu.children.length > 0) {
-                menu.url = Array.isArray(menu.url) || [];
+                if(menu.url){
+                    if(T.lodash.isString(menu.url)){
+                        menu.url = [menu.url];
+                    }
+                } else {
+                    menu.url = [];
+                }
+
                 const result = formatMenus(category, menu.children);
 
                 menu.url = T.lodash.uniq(menu.url.concat(result.urls));
@@ -80,32 +87,38 @@ export const EnumFragmentMenu = [
 ];
 
 /**
- * 获取菜单分类的label
- * @param category
- * @returns {*}
+ * 是否移除左侧菜单
+ * @param url
+ * @return {boolean}
  */
-export const getMenuCategoryLabel = (category) => {
+export const isRemoveLeftMenu = (url) => {
+    for (let i = 0; i < EnumDefaultMenus.length; i++){
+        const childrenMenu = EnumDefaultMenus[i].childrenMenu;
+        for (let j = 0; j < childrenMenu.length; j++) {
+            const menu = childrenMenu[j];
+            let isCheck = false;
 
-    for (let i = 0; i < EnumMenus.length; i++) {
-        if (category === EnumMenus[i].value) {
-            return EnumMenus[i].label;
+            if (menu.url){
+                if (Array.isArray(menu.url) && menu.url.indexOf(url) !== -1){
+                    isCheck = true;
+                } else if(T.lodash.isString(menu.url) && menu.url == url) {
+                    isCheck = true;
+                }
+            }
+
+            if (isCheck){
+                if (!menu.children || menu.children.length < 1) {
+                    return true;
+                }else {
+                    return false;
+                }
+            }
         }
     }
 
-    return null;
+    return false;
 };
 
-/**
- * 获取菜单类别
- */
-export const getMenuCategory = () => EnumMenus.map((val) => {
-    const { label, value } = val;
-    return {
-        label,
-        value,
-		url: val.childrenMenu[0]['url'][0]
-    };
-});
 
 /**
  * 获取菜单的类别
