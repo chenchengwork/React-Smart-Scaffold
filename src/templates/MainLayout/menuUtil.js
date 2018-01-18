@@ -119,6 +119,33 @@ export const isRemoveLeftMenu = (url) => {
     return false;
 };
 
+/**
+ * 获取菜单分类的label
+ * @param category
+ * @returns {*}
+ */
+export const getMenuCategoryLabel = (category) => {
+
+    for (let i = 0; i < EnumMenus.length; i++) {
+        if (category === EnumMenus[i].value) {
+            return EnumMenus[i].label;
+        }
+    }
+
+    return null;
+};
+
+/**
+ * 获取菜单类别
+ */
+export const getMenuCategory = () => EnumMenus.map((val) => {
+    const { label, value } = val;
+    return {
+        label,
+        value,
+        url: val.childrenMenu[0]['url'][0]
+    };
+});
 
 /**
  * 获取菜单的类别
