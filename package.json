@@ -1,30 +1,29 @@
 {
-  "name": "React-Smart-Scaffold",
-  "version": "0.0.1",
+  "name": "Solution-Platform-Web",
+  "version": "1.0.0",
   "author": "chencheng <cheng.chen@tianjishuju.com>",
-  "description": "React smart scaffold",
+  "description": "解决方案前端",
   "main": "src/index",
   "scripts": {
     "dev": "BUILD_DEV=1 node server.js",
     "check-code": "eslint ./src",
-    "mock": "./node_modules/.bin/json-server --watch ./mock/db.json --routes ./mock/routes.json",
     "test": "BABEL_ENV=test jest --colors",
     "coverage": "BABEL_ENV=test jest --colors --coverage",
     "intl": "rimraf ./i18n-messages && BABEL_ENV=i18n babel --quiet ./src > /dev/null && babel-node --presets es2015 ./scripts/translateIntl.js && rimraf ./i18n-messages",
     "publish-alone": "BUILD_DEV=0 node ./scripts/publish.js ~/Desktop/webapp /static/",
-    "publish": "BUILD_DEV=0 node ./scripts/publish.js ~/Desktop/webapp /"
+    "publish": "BUILD_DEV=0 node ./scripts/publish.js /data/webapp /"
   },
   "dependencies": {
-    "antd": "^3.1.0",
+    "antd": "^3.1.3",
     "axios": "^0.17.1",
     "classnames": "^2.2.5",
     "flex.css": "^1.1.7",
-    "immutability-helper": "^2.5.0",
+    "immutability-helper": "^2.6.4",
     "jquery": "^3.2.1",
     "js-cookie": "^2.2.0",
     "lodash": "^4.17.4",
     "onfire.js": "^1.0.6",
-    "promise-polyfill": "^6.0.2",
+    "promise-polyfill": "^7.0.0",
     "prop-types": "^15.6.0",
     "query-string": "^5.0.1",
     "react": "^16.2.0",
@@ -36,16 +35,16 @@
     "redux": "^3.7.2",
     "redux-logger": "^3.0.6",
     "redux-thunk": "^2.2.0",
-    "url-search-params-polyfill": "^2.0.1"
+    "url-search-params-polyfill": "^2.0.2"
   },
   "devDependencies": {
-    "autoprefixer": "^7.1.6",
+    "autoprefixer": "^7.2.5",
     "babel-cli": "^6.26.0",
     "babel-core": "^6.26.0",
-    "babel-eslint": "^8.0.2",
-    "babel-jest": "^21.2.0",
+    "babel-eslint": "^8.2.1",
+    "babel-jest": "^22.1.0",
     "babel-loader": "^7.1.2",
-    "babel-plugin-import": "^1.6.2",
+    "babel-plugin-import": "^1.6.3",
     "babel-plugin-react-intl": "^2.3.1",
     "babel-plugin-transform-decorators": "^6.24.1",
     "babel-plugin-transform-decorators-legacy": "^1.3.4",
@@ -55,39 +54,36 @@
     "babel-preset-stage-0": "^6.24.1",
     "bundle-loader": "^0.5.5",
     "cli-color": "^1.2.0",
-    "copy-webpack-plugin": "^4.2.1",
+    "copy-webpack-plugin": "^4.3.1",
     "crypto": "^1.0.1",
-    "css-loader": "^0.28.7",
+    "css-loader": "^0.28.9",
     "css-to-string-loader": "^0.1.3",
-    "enzyme": "^3.2.0",
-    "eslint": "^4.11.0",
-    "eslint-config-airbnb": "^16.1.0",
-    "eslint-config-alloy": "^1.3.0",
+    "enzyme": "^3.3.0",
+    "eslint": "^4.15.0",
+    "eslint-config-alloy": "^1.4.0",
     "eslint-plugin-import": "^2.8.0",
-    "eslint-plugin-jsx-a11y": "^6.0.2",
+    "eslint-plugin-jsx-a11y": "^6.0.3",
     "eslint-plugin-react": "^7.5.1",
     "extract-text-webpack-plugin": "^3.0.2",
-    "file-loader": "^1.1.5",
+    "file-loader": "^1.1.6",
     "glob": "^7.1.2",
-    "jest": "^21.2.1",
-    "json-server": "^0.12.1",
+    "jest": "^22.1.2",
     "less": "^2.7.3",
     "less-loader": "^4.0.5",
     "mkdirp": "^0.5.1",
     "node-sass": "^4.7.2",
     "postcss-flexbugs-fixes": "^3.2.0",
-    "postcss-loader": "^2.0.8",
-    "react-hot-loader": "^3.1.3",
-    "react-test-renderer": "^16.1.1",
+    "postcss-loader": "^2.0.10",
+    "react-test-renderer": "^16.2.0",
     "rimraf": "^2.6.2",
     "sass-loader": "^6.0.6",
-    "string-loader": "0.0.1",
-    "style-loader": "^0.19.0",
+    "string-loader": "^0.0.1",
+    "style-loader": "^0.19.1",
     "url-loader": "^0.6.2",
     "urlencode": "^1.1.0",
     "urllib-sync": "^1.1.4",
     "webpack": "^3.10.0",
-    "webpack-dev-server": "^2.9.7"
+    "webpack-dev-server": "^2.11.0"
   },
   "jest": {
     "moduleFileExtensions": [
@@ -107,11 +103,11 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/chenchengwork/React-Smart-Scaffold.git"
+    "url": "git+https://gitee.com/TJDS-Project-To-Product/Solution-Platform-Web.git"
   },
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/chenchengwork/React-Smart-Scaffold/issues"
+    "url": "https://gitee.com/TJDS-Project-To-Product/Solution-Platform-Web/issues"
   },
-  "homepage": "https://github.com/chenchengwork/React-Smart-Scaffold#readme"
+  "homepage": "https://gitee.com/TJDS-Project-To-Product/Solution-Platform-Web#readme"
 }

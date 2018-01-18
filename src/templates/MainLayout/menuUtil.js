@@ -5,8 +5,6 @@ import T from 'utils/T';
 import { EnumDefaultMenus, EnumCollapsedLeftMenuUrls } from 'constants/EnumDefaultMenus';
 
 // --图片资源--
-import AdminIcon from './img/admin.svg';
-import HelpIcon from './img/help.svg';
 import LogoutIcon from './img/logout.svg';
 
 /**
@@ -73,18 +71,6 @@ const EnumMenus = (() => {
  * @type {[*]}
  */
 export const EnumFragmentMenu = [
-    {
-        label: 'admin',
-        url: '',
-        icon: AdminIcon,
-        children: []
-    },
-    {
-        label: '帮助',
-        url: '',
-        icon: HelpIcon,
-        children: []
-    },
     {
         label: '退出',
         url: '',

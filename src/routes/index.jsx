@@ -26,7 +26,7 @@ const Routes = () => (
         keyLength={12}
     >
         <Switch>
-            <Route exact path={EnumRouter.rootPath} render={() => <Redirect to={T.auth.isLogin() ? window.ENV.login.defaultRedirectUrl : window.ENV.login.loginUrl} />} />
+            <Route exact path={EnumRouter.rootRoute} render={() => <Redirect to={T.auth.isLogin() ? window.ENV.login.defaultRedirectUrl : window.ENV.login.loginUrl} />} />
 
             {/* 公共--路由 */}
             {CommonRoutes()}

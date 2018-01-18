@@ -10,7 +10,6 @@ $main-layout-header-height:50px;
 		width: 100%;
 		height: $main-layout-header-height;
 		padding: 0 20px;
-		//background-color: $main-menu-background-color;
 		.logo {
 			float: left;
 			width: 148px;
@@ -21,24 +20,7 @@ $main-layout-header-height:50px;
 		}
 		.ant-menu-left {
 			border-bottom-color: $main-menu-background-color;
-			//background-color: $main-menu-background-color;
 			font-size: 16px;
-			//.ant-menu-item {
-			//	margin: -3px 39px 0 39px;
-			//	padding: 0;
-            //
-			//  	&.active{
-			//	  border-bottom: 2px solid #1A96FF;
-			//	  background-color: rgba(0, 51, 102, 0);
-			//	}
-			//}
-			//.ant-menu-item-selected {
-			//	border-bottom: 2px solid #1A96FF;
-			//	background-color: rgba(0, 51, 102, 0);
-			//	& > a {
-			//		color: #1996FF;
-			//	}
-			//}
 		}
 
 		.menu-split {
@@ -60,7 +42,6 @@ $main-layout-header-height:50px;
 		}
 
 		.ant-menu-right {
-			//background-color: $main-menu-background-color;
 			.ant-menu-item {
 				padding: 0;
 				margin-left: 20px;
@@ -85,14 +66,11 @@ $main-layout-header-height:50px;
 			overflow: auto;
 			height: 100vh;
 			left: 0px;
-			//background-color: $main-menu-background-color;
 
 			.ant-layout-sider-children {
 				.ant-menu {
-					//background-color: #002F5E;
 					.ant-menu-item {
 						& > a {
-							//color: #ffffff;
 						  &:hover{
 							color:#4387BF;
 						  }
@@ -115,7 +93,7 @@ $main-layout-header-height:50px;
 			}
 
 			.ant-layout-sider-trigger{
-				//background-color: $main-menu-background-color;
+
 			}
 		}
 
