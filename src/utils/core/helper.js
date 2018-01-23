@@ -37,7 +37,7 @@ class Helper {
     simulateData(data, type = 'success', time = 500) {
         return new Promise((resolve, reject) => {
             setTimeout(() => {
-                if (type == 'success') {
+                if (type === 'success') {
                     resolve({ code: window.ENV.apiSuccessCode, data, msg: "success" })
                 }else {
                     reject({code: "error", data, msg: 'error'})

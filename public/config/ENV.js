@@ -8,6 +8,7 @@ window.ENV = (function () {
     return {
         apiDomain: 'http://localhost:8360',         // api请求接口   测试服务器
         rootPath: rootPath,                       	// 路由的根路径
+        apiSuccessCode: 0,                          // api响应成功的code
 
         login: {
             errorCode: 900,                                 // 未登录的error code
