@@ -188,7 +188,7 @@ export default class MainLayout extends Component {
                         childrenMenu.map((val) => {
                             const url = Array.isArray(val.url) ? val.url[0] : val.url;
 
-                            return (
+                            return T.lodash.isUndefined(val.label) || T.lodash.isEmpty(val.label) ? null :(
                                 <Menu.Item key={url} className={val.url.indexOf(currentUrl) !== -1 ? 'active' : ''}>
                                     <Link to={url}>
                                         <AppIcon {...val.icon} style={{marginRight: 5}}/>
