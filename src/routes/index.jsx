@@ -17,6 +17,12 @@ import DataHubRoutes from './dataHub';                  // 数据采集--相关�
 import DataVisualRoutes from './dataVisual';            // 数据可视化--相关路由
 
 /**
+ * 检测是否登录
+ * @return {*}
+ */
+const checkLoginRedirect = () => <Redirect to={T.auth.isLogin() ? window.ENV.login.defaultRedirectUrl : window.ENV.login.loginUrl} />;
+
+/**
  * 路由配置
  * @constructor
  */
@@ -26,7 +32,8 @@ const Routes = () => (
         keyLength={12}
     >
         <Switch>
-            <Route exact path={EnumRouter.rootRoute} render={() => <Redirect to={T.auth.isLogin() ? window.ENV.login.defaultRedirectUrl : window.ENV.login.loginUrl} />} />
+            <Route exact path={EnumRouter.rootRoute} render={() => checkLoginRedirect()} />
+            <Route exact path="/" render={() => checkLoginRedirect()}  />
 
             {/* 公共--路由 */}
             {CommonRoutes()}
