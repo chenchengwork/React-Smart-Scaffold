@@ -2,7 +2,7 @@ import PropTypes from 'prop-types';
 import T from 'utils/T';
 
 import { Spin } from 'antd';
-import { Component as ReactComponent } from 'react';
+import { PureComponent as ReactComponent } from 'react';
 import { STORE_INJECT } from 'store.js';
 
 const injectReducers = (reducers) => ({ [STORE_INJECT]: { reducers }});

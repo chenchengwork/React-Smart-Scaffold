@@ -1,5 +1,5 @@
 import PropTypes from 'prop-types';
-import { Component } from 'react';
+import { PureComponent } from 'react';
 import { Button } from 'antd';
 
 import EnumRouter from 'constants/EnumRouter';
@@ -10,7 +10,7 @@ import { doLoginAction } from '../../actions/login';
 const logo = require('./img/logo2.png');
 const rightLoginImg = require('./img/right_login.png');
 
-export default class Login extends Component {
+export default class Login extends PureComponent {
     static contextTypes = {
         store: PropTypes.object.isRequired,
         router: PropTypes.object.isRequired

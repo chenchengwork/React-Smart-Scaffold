@@ -2,11 +2,11 @@
  * Created by chencheng on 17-8-31.
  */
 
-import { Component } from 'react';
+import { PureComponent } from 'react';
 
 import { MainHeader, MainContent } from 'templates/MainLayout/MainLayout';
 
-export default class Plugin extends Component {
+export default class Plugin extends PureComponent {
 
     render() {
         return (

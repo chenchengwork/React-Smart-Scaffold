@@ -1,10 +1,9 @@
 import './MainLayout.scss';
 import PropTypes from 'prop-types';
-import PureRenderMixin from 'react-addons-pure-render-mixin';
 import T from 'utils/T';
 import CustomIcon from 'templates/ToolComponents/CustomIcon';
 
-import { Component } from 'react';
+import { PureComponent } from 'react';
 import { Link } from 'react-router-dom';
 
 import { Layout, Menu, Icon, Dropdown, BackTop } from 'antd';
@@ -112,10 +111,9 @@ MainContent.propTypes = {
 };
 
 @T.decorator.contextTypes('router')
-export default class MainLayout extends Component {
+export default class MainLayout extends PureComponent {
     constructor() {
         super();
-        this.shouldComponentUpdate = PureRenderMixin.shouldComponentUpdate.bind(this);
         this.state = {
             collapsed: false,
             menuCategory: '',
