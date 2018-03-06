@@ -7,12 +7,21 @@ const CommonsChunkPlugin = webpack.optimize.CommonsChunkPlugin;   // 提取公�
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
 const autoprefixer = require('autoprefixer');
 
-// 页面入口文件,使用异步加载方式
+/**
+ * 页面入口文件,使用异步加载方式
+ * @type {RegExp}
+ */
 const routesComponentsRegex = /src\/routes\/([\w-])+?\/((.*)\/)?routes\/((.*)\/)?index.js(x)?$/g;
-// 编译排除的文件
+/**
+ * 编译排除的文件
+ * @type {RegExp}
+ */
 const excludeRegex = /(node_modules|bower_modules)/;
 
-// 自定义antd的样式
+/**
+ * 自定义antd的样式
+ * @type {{"@primary-color": string, "@font-size-base": string, "@body-background": string, "@layout-body-background": string}}
+ */
 const customAntdStyle = {
     '@primary-color': '#108ee9',		            // 更改antd的主题颜色;
     // "@icon-url":"'/asserts/ant_font/iconfont'",  //更改字体地址; 注意:必须再加额外的“'”,将icon字体部署到本地
@@ -21,7 +30,11 @@ const customAntdStyle = {
     '@layout-body-background': '#fff',              // 修改layout布局的body背景颜色
 }
 
-// 格式化不同的样式loader
+/**
+ * 格式化不同的样式loader
+ * @param otherLoader
+ * @return {*}
+ */
 const formatStyleLoader = (otherLoader = null) => {
     const baseLoaders = [
         {
@@ -61,6 +74,122 @@ const formatStyleLoader = (otherLoader = null) => {
     )
 };
 
+/**
+ * 获取模型规则
+ * @return {*[]}
+ */
+const getModuleRules = () => {
+    // 处理静态资源规则
+    const staticResourceRules = [
+        {
+            test: /\.(png|jpg|gif)$/,
+            use: 'url-loader?limit=8192' //  <= 8kb的图片base64内联
+        },
+        {
+            test: /\.woff(\?v=\d+\.\d+\.\d+)?$/,
+            use: 'url-loader?limit=10000&minetype=application/font-woff'
+        },
+        {
+            test: /\.woff2(\?v=\d+\.\d+\.\d+)?$/,
+            use: 'url-loader?limit=10&minetype=application/font-woff'
+        },
+        {
+            test: /\.ttf(\?v=\d+\.\d+\.\d+)?$/,
+            use: 'url-loader?limit=10&minetype=application/octet-stream'
+        },
+        {
+            test: /\.eot(\?v=\d+\.\d+\.\d+)?$/,
+            use: 'file-loader'
+        },
+        {
+            test: /\.(txt|doc|docx|swf)$/,
+            use: 'file-loader?name=[path][name].[ext]'
+        },
+        {
+            test: /\.svg(\?v=\d+\.\d+\.\d+)?$/,
+            use: 'url-loader?limit=10&minetype=image/svg+xml'
+        },
+    ];
+
+    // 处理css资源规则
+    const cssRules = [
+        {
+            test: /\.css$/,
+            use: formatStyleLoader()
+        },
+        {
+            test: /\.scss/,
+            exclude: excludeRegex,
+            use: formatStyleLoader({
+                loader: 'sass-loader',
+                options: {
+                    sourceMap: true
+                }
+            })
+        },
+        {
+            test: /\.less/,
+            use: formatStyleLoader({
+                loader: 'less-loader',
+                options: {
+                    sourceMap: true,
+                    modifyVars: customAntdStyle
+                }
+            })
+        },
+    ];
+
+    return [
+        ...staticResourceRules,
+        ...cssRules,
+        // 懒加载代码分离
+        {
+            test: routesComponentsRegex,
+            exclude: excludeRegex,
+            use: [
+                {
+                    loader: 'bundle-loader',
+                    options: {
+                        lazy: true
+                    }
+                }
+            ]
+        },
+
+        // 添加babel转换解决js兼容性问题
+        {
+            loader: 'babel-loader',
+            exclude: [
+                excludeRegex,
+                routesComponentsRegex
+            ],
+            test: /\.jsx?$/,
+            options: {
+                presets: [
+                    'babel-polyfill',
+                    ['env', {
+                        // 根据browserslist来分析支持情况， 具体的配置参照： https://github.com/ai/browserslist
+                        browsers: [
+                            "last 2 versions",
+                            "ie >= 8",
+                        ],
+                        modules: false,
+                        useBuiltIns: true,
+                        debug: true
+                    }],
+                    'react',
+                    'stage-0'
+                ],
+                plugins: [
+                    // babel-plugin-import
+                    ['import', {libraryName: 'antd', 'libraryDirectory': 'es', style: true}], // `style: true` for less
+                    ['transform-decorators-legacy', 'transform-decorators']	// 支持es7的装饰器
+                ]
+            }
+        }
+    ]
+};
+
 module.exports = {
     // 用于生成源代码的mapping
     devtool: 'cheap-module-source-map',	// cheap-module-source-map,cheap-source-map
@@ -93,104 +222,7 @@ module.exports = {
     },
 
     module: {
-        rules: [
-            {
-                test: /\.(png|jpg|gif)$/,
-                use: 'url-loader?limit=8192' //  <= 8kb的图片base64内联
-            },
-            {
-                test: /\.woff(\?v=\d+\.\d+\.\d+)?$/,
-                use: 'url-loader?limit=10000&minetype=application/font-woff'
-            },
-            {
-                test: /\.woff2(\?v=\d+\.\d+\.\d+)?$/,
-                use: 'url-loader?limit=10&minetype=application/font-woff'
-            },
-            {
-                test: /\.ttf(\?v=\d+\.\d+\.\d+)?$/,
-                use: 'url-loader?limit=10&minetype=application/octet-stream'
-            },
-            {
-                test: /\.eot(\?v=\d+\.\d+\.\d+)?$/,
-                use: 'file-loader'
-            },
-            {
-                test: /\.(txt|doc|docx|swf)$/,
-                use: 'file-loader?name=[path][name].[ext]'
-            },
-            {
-                test: /\.svg(\?v=\d+\.\d+\.\d+)?$/,
-                use: 'url-loader?limit=10&minetype=image/svg+xml'
-            },
-            {
-                test: /\.css$/,
-                use: formatStyleLoader()
-            },
-            {
-                test: /\.scss/,
-                exclude: excludeRegex,
-                use: formatStyleLoader({
-                    loader: 'sass-loader',
-                    options: {
-                        sourceMap: true
-                    }
-                })
-            },
-
-            {
-                test: /\.less/,
-                use: formatStyleLoader({
-                    loader: 'less-loader',
-                    options: {
-                        sourceMap: true,
-                        modifyVars: customAntdStyle
-                    }
-                })
-            },
-
-            {
-                test: routesComponentsRegex,
-                exclude: excludeRegex,
-                use: [
-                    {
-                        loader: 'bundle-loader',
-                        options: {
-                            lazy: true
-                        }
-                    }
-                ]
-            },
-            {
-                loader: 'babel-loader',
-                exclude: [
-                    excludeRegex,
-                    routesComponentsRegex
-                ],
-                test: /\.jsx?$/,
-                options: {
-                    presets: [
-                        'babel-polyfill',
-                        ['env', {
-                            // 根据browserslist来分析支持情况， 具体的配置参照： https://github.com/ai/browserslist
-                            browsers: [
-                                "last 2 versions",
-                                "ie >= 8",
-                            ],
-                            modules: false,
-                            useBuiltIns: true,
-                            debug: true
-                        }],
-                        'react',
-                        'stage-0'
-                    ],
-                    plugins: [
-                        // babel-plugin-import
-                        ['import', {libraryName: 'antd', 'libraryDirectory': 'es', style: true}], // `style: true` for less
-                        ['transform-decorators-legacy', 'transform-decorators']	// 支持es7的装饰器
-                    ]
-                }
-            }
-        ]
+        rules: getModuleRules()
     },
 
     plugins: [
