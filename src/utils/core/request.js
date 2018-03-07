@@ -278,7 +278,7 @@ export const form = (url, args = {}, opt = {}, domain = apiDomain) => {
  */
 export function formatUrlParams(url, params = {}) {
     Object.keys(params).forEach((key, index) => {
-        if (index === 0) {
+        if (index === 0 && url.indexOf('?') === -1) {
             url += '?' + key + '=' + params[key];
         } else {
             url += '&' + key + '=' + params[key];
