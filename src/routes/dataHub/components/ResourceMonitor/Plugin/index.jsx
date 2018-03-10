@@ -4,7 +4,7 @@
 
 import { PureComponent } from 'react';
 
-import { MainHeader, MainContent } from 'templates/MainLayout/MainLayout';
+import { MainHeader, MainContent } from 'templates/MainLayout';
 
 export default class Plugin extends PureComponent {
 

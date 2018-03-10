@@ -7,7 +7,7 @@ import {
 } from 'react-router-dom';
 
 import lazyLoad from 'templates/LazyLoad';
-import MainLayoutComponent from 'templates/MainLayout/MainLayout';
+import MainLayoutComponent from 'templates/MainLayout';
 import Exception from 'templates/ToolComponents/Exception';
 
 /**

@@ -1,4 +1,5 @@
-import "./CustomIcon.scss";
+import './icon/iconfont.css';
+import styles from './index.scss';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
 
@@ -11,14 +12,15 @@ import classNames from 'classnames';
  * @return {*}
  * @constructor
  */
-const CustomIcon = ({type, className,  spin, ...rest}) => {
+const CustomIcon = ({ type, className, spin, ...rest }) => {
     const classString = classNames({
         iconfont: true,
-        'custom-icon-spin': !!spin,
+        [styles['custom-icon-spin']]: !!spin,
         [`icon-${type}`]: true,
+        // anticon: true,
     }, className);
 
-    return <i className={classString} {...rest}></i>
+    return <i className={classString} {...rest} />;
 };
 CustomIcon.propTypes = {
     type: PropTypes.string.isRequired,      // icon类型

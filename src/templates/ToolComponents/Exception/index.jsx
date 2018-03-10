@@ -1,4 +1,4 @@
-import "./Exception.scss";
+import styles from "./index.scss";
 import img_404 from './img/404.svg';
 import img_403 from './img/403.svg';
 import img_500 from './img/500.svg';
@@ -24,21 +24,21 @@ const config = {
     },
 };
 
-export default ({ className, linkElement = 'a', type, title, desc, img, ...rest }) => {
+export default ({ className = "", linkElement = 'a', type, title, desc, img, ...rest }) => {
     const pageType = type in config ? type : '404';
 
     return (
-        <div className={"exception " + className} {...rest}>
-            <div className="imgBlock">
+        <div className={styles.exception + " " + className} {...rest}>
+            <div className={styles.imgBlock}>
                 <div
-                    className="imgEle"
+                    className={styles.imgEle}
                     style={{ backgroundImage: `url(${img || config[pageType].img})` }}
                 />
             </div>
-            <div className="content">
+            <div className={styles.content}>
                 <h1>{title || config[pageType].title}</h1>
-                <div className="content">{desc || config[pageType].desc}</div>
-                <div className="actions">
+                <div className={styles.content}>{desc || config[pageType].desc}</div>
+                <div className={styles.actions}>
                     {
                         createElement(linkElement, {
                             to: window.ENV.rootPath,

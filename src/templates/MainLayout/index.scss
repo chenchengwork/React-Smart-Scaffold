@@ -30,26 +30,28 @@ $main-layout-header-height:50px;
 
 			background-color: #6997BF;
 
-		   &.left{
-			 float: left;
-			 margin:10px 10px;
-		   }
+			&.left{
+				float: left;
+				margin:10px 10px;
+			}
 
-		   &.right{
-			 float: right;
-			 margin: 10px 0;
-		   }
+			&.right{
+				float: right;
+				margin: 10px 0;
+			}
 		}
 
 		.ant-menu-right {
-			.ant-menu-item {
-				padding: 0;
-				margin-left: 20px;
-				font-size: 14px;
-				.menu-icon {
-					display: inline-block;
-					margin-right: 10px;
-					vertical-align: middle;
+			:global {
+				.ant-menu-item {
+					padding: 0;
+					margin-left: 20px;
+					font-size: 14px;
+					.menu-icon {
+						display: inline-block;
+						margin-right: 10px;
+						vertical-align: middle;
+					}
 				}
 			}
 		}
@@ -66,34 +68,31 @@ $main-layout-header-height:50px;
 			overflow: auto;
 			height: 100vh;
 			left: 0px;
+			:global {
+				.ant-layout-sider-children {
+					.ant-menu {
+						.ant-menu-item {
+							& > a {
+								&:hover {
+									color: #4387BF;
+								}
+							}
 
-			.ant-layout-sider-children {
-				.ant-menu {
-					.ant-menu-item {
-						& > a {
-						  &:hover{
-							color:#4387BF;
-						  }
 						}
-
-					}
-					.ant-menu-item-selected {
-						background-color: #1A96FF;
-						& > a {
-							color: #E6F3FF;
+						.ant-menu-item-selected {
+							background-color: #1A96FF;
+							& > a {
+								color: #E6F3FF;
+							}
 						}
-					}
-					.ant-menu-submenu-title{
-						color:#fff;
-						&:hover{
-							color:#4387BF;
+						.ant-menu-submenu-title {
+							color: #fff;
+							&:hover {
+								color: #4387BF;
+							}
 						}
 					}
 				}
-			}
-
-			.ant-layout-sider-trigger{
-
 			}
 		}
 

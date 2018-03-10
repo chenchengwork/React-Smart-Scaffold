@@ -64,7 +64,22 @@ const formatStyleLoader = (otherLoader = null) => {
         }
     ];
 
-    if(otherLoader) baseLoaders.push(otherLoader);
+    if(otherLoader) {
+        if(otherLoader.loader == 'sass-loader'){
+            baseLoaders[0] = {
+                loader: 'css-loader',
+                options: {
+                    sourceMap: true,
+                    modules: true,
+                    import: false,
+                    url: false,
+                    localIdentName: '[name]__[local]__[hash:base64:5]'
+                }
+            }
+        }
+
+        baseLoaders.push(otherLoader);
+    }
 
     return ExtractTextPlugin.extract(
         {

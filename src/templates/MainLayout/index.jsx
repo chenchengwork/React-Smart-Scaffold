@@ -1,4 +1,4 @@
-import './MainLayout.scss';
+import styles from './index.scss';
 import PropTypes from 'prop-types';
 import T from 'utils/T';
 import CustomIcon from 'templates/ToolComponents/CustomIcon';
@@ -48,7 +48,7 @@ const AppIcon = ({appType, iconType, spin=false, style= {}}) => {
  * @constructor
  */
 export const MainHeader = ({ className = '', title = '', style = {}, leftRender = null, rightRender = null }) => {
-    let customClassName = 'app-header';
+    let customClassName = styles['app-header'];
     if (className) {
         customClassName = className + ' ' + customClassName;
     }
@@ -57,12 +57,12 @@ export const MainHeader = ({ className = '', title = '', style = {}, leftRender 
     };
 
     const headerContent = [
-        <div key="1" className="flex-box">
-            <div className="vertical-bar" />
-            <div className="title">{title}</div>
+        <div key="1" className={styles["flex-box"]}>
+            <div className={styles["vertical-bar"]} />
+            <div className={styles.title}>{title}</div>
             {leftRender}
         </div>,
-        <div key="2" className="flex-box">
+        <div key="2" className={styles["flex-box"]}>
             {rightRender}
         </div>
     ];
@@ -173,10 +173,10 @@ export default class MainLayout extends PureComponent {
         })();
 
         return (
-            <Header className="menu-header">
-                <h2 className="logo">Demo</h2>
+            <Header className={styles["menu-header"]}>
+                <h2 className={styles.logo}>Demo</h2>
                 <Menu
-                    className="ant-menu-left"
+                    className={styles["ant-menu-left"]}
                     theme="dark"
                     mode="horizontal"
 					selectedKeys={selectedKeys}
@@ -187,7 +187,7 @@ export default class MainLayout extends PureComponent {
                             const url = Array.isArray(val.url) ? val.url[0] : val.url;
 
                             return T.lodash.isUndefined(val.label) || T.lodash.isEmpty(val.label) ? null :(
-                                <Menu.Item key={url} className={val.url.indexOf(currentUrl) !== -1 ? 'active' : ''}>
+                                <Menu.Item key={url} className={val.url.indexOf(currentUrl) !== -1 ? styles.active : ''}>
                                     <Link to={url}>
                                         <AppIcon {...val.icon} style={{marginRight: 5}}/>
                                         {val.label}
@@ -199,7 +199,7 @@ export default class MainLayout extends PureComponent {
                 </Menu>
 
                 <Menu
-                    className="ant-menu-right"
+                    className={styles["ant-menu-right"]}
                     theme="dark"
                     mode="horizontal"
                     style={{ lineHeight: '50px', float: 'right', marginLeft: 0 }}
@@ -209,7 +209,7 @@ export default class MainLayout extends PureComponent {
                             const url = val.url;
                             return <Menu.Item key={url + key}>
                                 <Link to={url}>
-                                    <img className="menu-icon" src={val.icon} />
+                                    <img className={styles["menu-icon"]} src={val.icon} />
                                     {val.label}
                                 </Link>
                             </Menu.Item>;
@@ -217,7 +217,7 @@ export default class MainLayout extends PureComponent {
                     }
                 </Menu>
 
-                <span className="menu-split right" />
+                <span className={styles["menu-split"] + " " + styles.right} />
             </Header>
         );
     }
@@ -285,7 +285,7 @@ export default class MainLayout extends PureComponent {
 
         return (
             <Sider
-                className="menu-left"
+                className={styles["menu-left"]}
                 width={this.state.appMenuLeftWidth}
                 collapsible
                 collapsed={this.state.collapsed}
@@ -308,15 +308,15 @@ export default class MainLayout extends PureComponent {
         const currentUrl = this.context.router.route.match.path;
 
         return (
-            <Layout className="main-layout">
+            <Layout className={styles["main-layout"]}>
 
                 {this.getHeaderMenu(currentUrl)}
 
-                <Layout className="main-content">
+                <Layout className={styles["main-content"]}>
 
                     {this.getLeftMenu(currentUrl)}
 
-                    <Layout className="app-content" style={{ marginLeft: this.state.appMenuLeftWidth }}>
+                    <Layout className={styles["app-content"]} style={{ marginLeft: this.state.appMenuLeftWidth }}>
                         <BackTop style={{right: 100}}/>
                         {this.props.children}
                     </Layout>

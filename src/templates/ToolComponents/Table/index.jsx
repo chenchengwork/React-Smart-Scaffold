@@ -1,4 +1,4 @@
-import "./Table.scss";
+import styles from "./index.scss";
 import { Table } from 'antd';
 
 /**
@@ -7,10 +7,6 @@ import { Table } from 'antd';
  * @returns {*}
  * @constructor
  */
-const Tj_Table = ({...rest}) => {
-    const props = Object.assign({},rest);
-
-    return <div className="tj-table"><Table {...props} /> </div>;
-};
+const Tj_Table = ({...rest}) => <Table className={styles.tj_table} {...rest} />;
 
 export default Tj_Table;
