@@ -2,12 +2,15 @@
     "env": {
         "test":{
             "presets": [
-                [
-                    "es2015",
-                    {
-                        "module": false
-                    }
-                ],
+                ["env", {
+                    "browsers": [
+                        "last 2 versions",
+                        "ie >= 8"
+                    ],
+                    "modules": false,
+                    "useBuiltIns": true,
+                    "debug": false
+                }],
                 "babel-polyfill",
                 "react",
                 "stage-0"
@@ -15,7 +18,16 @@
         },
         "i18n": {
             "presets": [
-                "es2015",
+                "babel-polyfill",
+                ["env", {
+                    "browsers": [
+                        "last 2 versions",
+                        "ie >= 8"
+                    ],
+                    "modules": false,
+                    "useBuiltIns": true,
+                    "debug": false
+                }],
                 "stage-0",
                 "react"
             ],
@@ -26,7 +38,8 @@
                         "messagesDir": "./i18n-messages",
                         "enforceDescriptions": false
                     }
-                ]
+                ],
+                "transform-decorators-legacy"
             ]
         }
     }
