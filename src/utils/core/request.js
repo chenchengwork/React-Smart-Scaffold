@@ -45,6 +45,30 @@ const Singleton = (function () {
     };
 })();
 
+/**
+ * 处理下载
+ * @param resp
+ */
+const processDownload = (resp) => {
+    if(!resp.headers['content-disposition']){
+        throw new Error("response header中缺少content-disposition属性");
+    }
+    const matchFilename = resp.headers['content-disposition'].match(/filename=['"](.*)["']/);
+    let filename = null;
+    if (matchFilename) filename = matchFilename[1];
+    // const blob = new Blob([resp.data], {type: 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet;charset=utf-8'}); // application/vnd.openxmlformats-officedocument.spreadsheetml.sheet这里表示xlsx类型
+    // const blob = new Blob([resp.data], {type: 'application/zip;charset=utf-8'}); // application/zip
+    const blob = new Blob([resp.data]);
+    let downloadElement = document.createElement('a');
+    const href = window.URL.createObjectURL(blob);      //创建下载的链接
+    downloadElement.href = href;
+    downloadElement.download = filename;                //下载后文件名
+    document.body.appendChild(downloadElement);
+    downloadElement.click();                            //点击下载
+    document.body.removeChild(downloadElement);         //下载完成移除元素
+    window.URL.revokeObjectURL(href);                   //释放掉blob对象
+};
+
 
 /**
  *
@@ -52,27 +76,31 @@ const Singleton = (function () {
  * @return {Promise}
  * @private
  */
-const _request = (options = {}) => {
+const _request = (options = {}, isDownload = false) => {
     const successCode = window.ENV.apiSuccessCode;
 
     return new Promise((resolve, reject) => {
         const { errorCode, loginUrl, isCheckLogin } = window.ENV.login;
 
         Singleton.getInstance().request(options).then((resp) => {
+            // 处理下载
+            if(isDownload){
+                processDownload(resp);
+                resolve({code: successCode, data: [], msg: "download success"});
+            }else {
+                const {data, code, msg} = resp.data;
 
-            const { data, code, msg } = resp.data;
-
-            if (successCode === code) {
-                resolve({ code, data, msg });
+                if (successCode === code) {
+                    resolve({code, data, msg});
+                }
+                // 判断是否登录
+                else if (isCheckLogin && errorCode === code) {
+                    window.location.href = loginUrl;
+                } else {
+                    /* eslint prefer-promise-reject-errors:0 */
+                    reject({code, data, msg});
+                }
             }
-            // 判断是否登录
-            else if (isCheckLogin && errorCode === code) {
-                window.location.href = loginUrl;
-            } else {
-                /* eslint prefer-promise-reject-errors:0 */
-                reject({ code, data, msg });
-            }
-
         }).catch((error) => {
             /* eslint prefer-promise-reject-errors:0 */
             reject({
