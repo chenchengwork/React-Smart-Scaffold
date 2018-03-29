@@ -2,10 +2,9 @@
  * Created by chencheng on 2017/6/17.
  */
 
-
 import {
 	login
-} from '../../webAPI/login';
+} from '../webAPI/login';
 
 /**
  * 执行登陆
@@ -13,7 +12,4 @@ import {
  * @param password
  * @returns {*}
  */
-export function doLoginAction(email, password) {
-
-	return login(email, password);
-}
+export const doLoginAction = (email, password) => login(email, password)
