@@ -3,7 +3,7 @@ import { PureComponent } from 'react';
 import { Button } from 'antd';
 
 import EnumRouter from 'constants/EnumRouter';
-import './Login.scss';
+import styles from './index.scss';
 import T from 'utils/T';
 import { doLoginAction } from '../../actions/login';
 
@@ -43,15 +43,15 @@ export default class Login extends PureComponent {
     }
 
     render() {
-        return (<div className="login">
-            <img src={logo} className="img-top" alt="login-top" />
-            <div className="login_box">
-                <div className="login_box_left">
-                    <div className="login_top">后台登录</div>
+        return (<div className={styles.login}>
+            <img src={logo} className={styles["img-top"]} alt="login-top" />
+            <div className={styles.login_box}>
+                <div className={styles.login_box_left}>
+                    <div className={styles.login_top}>后台登录</div>
                     <input
                         type="text"
                         value={this.state.user_email}
-                        className="login_email"
+                        className={styles.login_email}
                         onChange={(e) => this.setState({user_email: e.target.value.trim()})}
                         placeholder="邮箱"
                         onKeyDown={this.onEnterDown}
@@ -59,22 +59,22 @@ export default class Login extends PureComponent {
                     <input
                         type="password"
                         value={this.state.user_password}
-                        className="login_password"
+                        className={styles.login_password}
                         onChange={(e) => this.setState({user_password: e.target.value.trim()})}
                         placeholder="密码"
                         onKeyDown={this.onEnterDown}
                     />
 
                     <Button
-                        className="btn_login" loading={this.state.loading ? { delay: 300 } : false}
+                        className={styles.btn_login} loading={this.state.loading ? { delay: 300 } : false}
                         onClick={this.onSubmit}
                     >
                         登&nbsp;&nbsp;录
                     </Button>
                 </div>
-                <img src={rightLoginImg} className="img_right" alt="login-right" />
+                <img src={rightLoginImg} className={styles.img_right} alt="login-right" />
             </div>
-            <div className="bottom_">Copyright @ 2016-2017 天机数据 京ICP备09083760号-9 | 京公网安备11010502032535</div>
+            <div className={styles.bottom_}>Copyright @ 2016-2017 天机数据 京ICP备09083760号-9 | 京公网安备11010502032535</div>
         </div>);
     }
 }

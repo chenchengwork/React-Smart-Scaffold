@@ -1,5 +1,5 @@
 import { connect } from 'react-redux';
-import Login from '../../components/Login/Login';
+import Login from '../../components/Login';
 
 const mapStateToProps = (state, ownProps) => {
 	return {
