@@ -191,7 +191,11 @@ export function upload(url, params = {}, onUploadProgress = (progressEvent) => {
     if (!(params instanceof FormData)) {
         let formData = new FormData();
         for (let [k, v] of Object.entries(params)) {
-            formData.append(k, v);
+            if(Array.isArray(v)){
+                v.forEach((item) => formData.append(k, item));
+            }else {
+                formData.append(k, v);
+            }
         }
         params = formData;
     }
