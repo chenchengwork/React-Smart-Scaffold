@@ -11,7 +11,7 @@
     "coverage": "BABEL_ENV=test jest --colors --coverage",
     "intl": "rimraf ./i18n-messages && BABEL_ENV=i18n babel --quiet ./src > /dev/null && babel-node --presets es2015 ./scripts/translateIntl.js && rimraf ./i18n-messages",
     "publish-alone": "BUILD_DEV=0 node ./scripts/publish.js ~/Desktop/webapp /static/",
-    "publish": "BUILD_DEV=0 node ./scripts/publish.js /data/webapp /"
+    "publish": "BUILD_DEV=0 node ./scripts/publish.js ~/Desktop/webapp /"
   },
   "dependencies": {
     "antd": "^3.3.0",
@@ -58,11 +58,11 @@
     "enzyme": "^3.3.0",
     "eslint": "^4.15.0",
     "eslint-config-alloy": "^1.4.0",
-    "extract-text-webpack-plugin": "^3.0.2",
     "file-loader": "^1.1.6",
     "jest": "^22.1.2",
     "less": "^2.7.3",
     "less-loader": "^4.0.5",
+    "mini-css-extract-plugin": "^0.4.0",
     "node-sass": "^4.7.2",
     "postcss-flexbugs-fixes": "^3.2.0",
     "postcss-loader": "^2.0.10",
@@ -70,8 +70,8 @@
     "sass-loader": "^6.0.6",
     "style-loader": "^0.19.1",
     "url-loader": "^0.6.2",
-    "webpack": "^3.10.0",
-    "webpack-dev-server": "^2.11.0"
+    "webpack": "^4.5.0",
+    "webpack-dev-server": "^3.1.3"
   },
   "jest": {
     "moduleFileExtensions": [

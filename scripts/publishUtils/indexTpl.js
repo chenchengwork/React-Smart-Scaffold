@@ -23,6 +23,7 @@ var tplStr = `
         <div id="wrapper"></div>
 
         <script src="{$EnvConfJS}"></script>
+        <script src="{$runtime}"></script>
         <script src="{$publicVendorJS}"></script>
         <script src="{$publicAppJS}"></script>
 

@@ -3,8 +3,7 @@
  */
 
 const webpack = require('webpack');
-const CommonsChunkPlugin = webpack.optimize.CommonsChunkPlugin;   // 提取公共库的插件
-const ExtractTextPlugin = require('extract-text-webpack-plugin');
+const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const autoprefixer = require('autoprefixer');
 
 /**
@@ -82,12 +81,9 @@ const formatStyleLoader = (otherLoader = null) => {
         baseLoaders.push(otherLoader);
     }
 
-    return ExtractTextPlugin.extract(
-        {
-            fallback: 'style-loader',
-            use: baseLoaders
-        }
-    )
+	baseLoaders.unshift(MiniCssExtractPlugin.loader);
+
+	return baseLoaders;
 };
 
 /**
@@ -210,17 +206,44 @@ module.exports = {
     // 用于生成源代码的mapping
     devtool: 'cheap-module-source-map',	// cheap-module-source-map,cheap-source-map
 
+	mode: 'development',
+
+	optimization: {
+		// minimizer: [], // [new UglifyJsPlugin({...})]
+		splitChunks: {
+			chunks: 'all',
+			name: 'vendor',
+			minSize: 30000,
+			minChunks: 1,
+			maxAsyncRequests: 5,
+			maxInitialRequests: 3,
+			cacheGroups: {
+				default: {
+					minChunks: 2,
+					priority: -20,
+					reuseExistingChunk: true,
+				},
+				vendors: {
+					test: /[\\/]node_modules[\\/]/,
+					priority: -10
+				},
+                // 合并多个css到一个css文件中
+				styles: {
+					name: 'vendor',
+					test: /\.scss|css|less$/,
+					chunks: 'all',    // merge all the css chunk to one file
+					enforce: true
+				}
+			}
+		},
+
+		runtimeChunk: {
+			name: 'runtime',
+		}
+	},
+
     entry: {
         app: ['./src/index'],
-        // 提取公共包
-        vendor: [
-            'babel-polyfill',
-            'url-search-params-polyfill',
-            'lodash',
-            'react',
-            'react-dom',
-            './src/utils/T'
-        ]
     },
 
     // 指定模块目录名称
@@ -242,8 +265,10 @@ module.exports = {
     },
 
     plugins: [
-        // 第一个参数vendor和entry中verdor名称对应，第二个参数是输出的文件名
-        new CommonsChunkPlugin({name: 'vendor', filename: '[name].js'}),
+		// 提取css
+		new MiniCssExtractPlugin({
+			filename: "[name].css"
+		}),
 
         // 自动加载赋值模块
         new webpack.ProvidePlugin({
@@ -252,22 +277,15 @@ module.exports = {
             React: 'react'
         }),
 
-        // 提取文本
-        new ExtractTextPlugin({
-            filename: 'vendor.css?[hash]-[chunkhash]-[contenthash]-[name]',
-            disable: false,
-            allChunks: true
-        }),
-
         // 开发环境和生产环境配置
-        new webpack.DefinePlugin({
-            'process.env': {
-                /* eslint eqeqeq: 0 */
-                // 控制如react、react-dom等第三方包的warnning输出,设置为production将不输出warnning
-                NODE_ENV: process.env.BUILD_DEV == 1 ? '"dev"' : '"production"'
-            },
-            // __DEV__是可在业务代码中使用变量，用于做些只在开发环境
-            __DEV__: JSON.stringify(JSON.parse(process.env.BUILD_DEV))
-        })
+        // new webpack.DefinePlugin({
+        //     'process.env': {
+        //         /* eslint eqeqeq: 0 */
+        //         // 控制如react、react-dom等第三方包的warnning输出,设置为production将不输出warnning
+        //         NODE_ENV: process.env.BUILD_DEV == 1 ? '"dev"' : '"production"'
+        //     },
+        //     // __DEV__是可在业务代码中使用变量，用于做些只在开发环境
+        //     __DEV__: JSON.stringify(JSON.parse(process.env.BUILD_DEV))
+        // })
     ]
 };

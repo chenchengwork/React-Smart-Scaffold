@@ -30,6 +30,9 @@ const fs = require('fs');
 const clc = require('cli-color');
 
 const webpack = require('webpack');
+const UglifyJsPlugin = require("uglifyjs-webpack-plugin");
+const OptimizeCSSAssetsPlugin = require("optimize-css-assets-webpack-plugin");
+
 const webpackConf = require('../build/webpack.config');
 const indexTplStr = require('./publishUtils/indexTpl');
 const Tool = require('./publishUtils/tool');
@@ -69,33 +72,25 @@ webpackConf.output.publicPath = conf.proxyPath + conf.appName + '/';
 webpackConf.output.path = conf.webPath.ltrimSlash() + '/' + conf.appName;
 webpackConf.devtool = '';
 
-// 编译代码优化压缩
-webpackConf.plugins.push(new webpack.optimize.UglifyJsPlugin({
-    // 最紧凑的输出
-    beautify: false,
-    // 删除所有的注释
-    comments: false,
-    compress: {
-        // 在UglifyJs删除没有用到的代码时不输出警告
-        warnings: false,
+// *************编译代码优化压缩*********************
+webpackConf.mode = 'production';
+webpackConf.optimization.minimizer = [
+	// 优化js
+	new UglifyJsPlugin({
+		cache: true,
+		parallel: true,
+		sourceMap: false
+	}),
+	// 优化css
+	new OptimizeCSSAssetsPlugin({})  // 优化css
+];
 
-        drop_console: false,
-        // 内嵌定义了但是只用到一次的变量
-        collapse_vars: true,
-        // 提取出出现多次但是没有定义成变量去引用的静态值
-        reduce_vars: true,
-    }
-}));
-
-webpackConf.plugins.push(new webpack.LoaderOptionsPlugin({
-    minimize: true,
-    debug: false
-}));
 
 
 // 2.配置和生成入口文件index.html
 let realIndexTpl = indexTplStr.replace('{$publicVendorCSS}', webpackConf.output.publicPath + 'vendor.css')
     .replace('{$EnvConfJS}', conf.proxyPath + 'config/ENV.js')
+    .replace('{$runtime}', webpackConf.output.publicPath + 'runtime.js')
     .replace('{$publicVendorJS}', webpackConf.output.publicPath + 'vendor.js')
     .replace('{$publicAppJS}', webpackConf.output.publicPath + 'app.js');
 
