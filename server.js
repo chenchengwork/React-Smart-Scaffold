@@ -3,15 +3,26 @@
  */
 const webpack = require('webpack');
 const WebpackDevServer = require('webpack-dev-server');
+const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
 const config = require('./build/webpack.config');
 const tool = require('./scripts/tool');
 // const host = tool.getLocalIP() || '0.0.0.0';
 const host = '0.0.0.0';
 const port = 8000;        // 端口号
 const mockHost = 'http://localhost:3000';	// mock服务主机+端口
+const isOpenAnalyzer = true;		// 是否开启性能分析
 
 // webpack 自动重新加载，采用inline
 config.entry.app.push('webpack-dev-server/client?http://' + host + ':' + port + '/');
+
+// 添加webpack包分析工具
+if(isOpenAnalyzer) {
+    config.plugins.push(new BundleAnalyzerPlugin({
+        openAnalyzer: false,            // 禁止自动弹出浏览器窗口
+        analyzerHost: '127.0.0.1',      // 主机ip
+        analyzerPort: port + 100,             // 端口
+    }));
+}
 
 // 启动服务
 const server = new WebpackDevServer(webpack(config), {

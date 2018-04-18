@@ -209,7 +209,7 @@ module.exports = {
 	mode: 'development',
 
 	optimization: {
-		// minimizer: [], // [new UglifyJsPlugin({...})]
+        // 代码分割策略配置
 		splitChunks: {
 			chunks: 'all',
 			name: 'vendor',
@@ -218,20 +218,13 @@ module.exports = {
 			maxAsyncRequests: 5,
 			maxInitialRequests: 3,
 			cacheGroups: {
-				default: {
-					minChunks: 2,
-					priority: -20,
-					reuseExistingChunk: true,
-				},
-				vendors: {
-					test: /[\\/]node_modules[\\/]/,
-					priority: -10
-				},
                 // 合并多个css到一个css文件中
 				styles: {
 					name: 'vendor',
 					test: /\.scss|css|less$/,
 					chunks: 'all',    // merge all the css chunk to one file
+                    minChunks: 1,
+                    reuseExistingChunk: true,
 					enforce: true
 				}
 			}
@@ -276,16 +269,5 @@ module.exports = {
             jQuery: 'jquery',
             React: 'react'
         }),
-
-        // 开发环境和生产环境配置
-        // new webpack.DefinePlugin({
-        //     'process.env': {
-        //         /* eslint eqeqeq: 0 */
-        //         // 控制如react、react-dom等第三方包的warnning输出,设置为production将不输出warnning
-        //         NODE_ENV: process.env.BUILD_DEV == 1 ? '"dev"' : '"production"'
-        //     },
-        //     // __DEV__是可在业务代码中使用变量，用于做些只在开发环境
-        //     __DEV__: JSON.stringify(JSON.parse(process.env.BUILD_DEV))
-        // })
     ]
 };
