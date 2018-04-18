@@ -10,7 +10,7 @@ const tool = require('./scripts/tool');
 const host = '0.0.0.0';
 const port = 8000;        // 端口号
 const mockHost = 'http://localhost:3000';	// mock服务主机+端口
-const isOpenAnalyzer = true;		// 是否开启性能分析
+const isOpenAnalyzer = false;		// 是否开启性能分析
 
 // webpack 自动重新加载，采用inline
 config.entry.app.push('webpack-dev-server/client?http://' + host + ':' + port + '/');
