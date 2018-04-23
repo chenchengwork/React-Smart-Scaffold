@@ -39,7 +39,7 @@ const formatStyleLoader = (otherLoader = null) => {
         {
             loader: 'css-loader',
             options: {
-                sourceMap: true
+                sourceMap: true,
             }
         },
         {
@@ -71,8 +71,6 @@ const formatStyleLoader = (otherLoader = null) => {
                 options: {
                     sourceMap: true,
                     modules: true,
-                    import: false,
-                    url: false,
                     localIdentName: '[name]__[local]__[hash:base64:5]'
                 }
             }
