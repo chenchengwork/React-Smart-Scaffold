@@ -3,6 +3,7 @@
  * @author vision <vision.shi@tianjishuju.com>
  * @license www.tianjishuju.com/license
  */
+import ErrorBoundary from 'templates/ToolComponents/ErrorBoundary';
 import { LocaleProvider } from 'antd';
 import { render } from 'react-dom';
 import { Provider } from 'react-redux';
@@ -28,17 +29,17 @@ const IntlRoutes = injectIntl(Routes);
  * 渲染程序
  */
 const renderApp = () => render(
+    <ErrorBoundary>
+        <Provider store={store()}>
+            <LocaleProvider locale={localeData.antIntlMsg}>
 
+                <IntlProvider locale={localeData.locale} messages={localeData.messages}>
+                    <IntlRoutes />
+                </IntlProvider>
 
-    <Provider store={store()}>
-        <LocaleProvider locale={localeData.antIntlMsg}>
-
-            <IntlProvider locale={localeData.locale} messages={localeData.messages}>
-                <IntlRoutes />
-            </IntlProvider>
-
-        </LocaleProvider>
-    </Provider>,
+            </LocaleProvider>
+        </Provider>
+    </ErrorBoundary>,
 	document.querySelector('#wrapper')
 );
 
