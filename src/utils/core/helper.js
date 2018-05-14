@@ -12,17 +12,17 @@ class Helper {
      * @param component //reactElement react组件
      */
 	renderModal(component) {
-		const domId = 'tj-render-dom';
+        const domId = 'tj-render-dom';
 
-		if ($('#' + domId).length < 1) {
-            $('<div />', {
-                id: domId,
-            }).appendTo('body');
+        let domObject = document.querySelector('#' + domId);
+        if(!domObject){
+            const el = document.createElement('div');
+            el.setAttribute('id', domId);
+            document.querySelector('body').appendChild(el);
+            domObject = el;
         }
 
-        const domObject = document.querySelector('#' + domId);
-
-		unmountComponentAtNode(domObject);
+        unmountComponentAtNode(domObject);
 
         reactDomRender(component, domObject);
 	}
