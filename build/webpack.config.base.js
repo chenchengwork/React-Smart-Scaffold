@@ -240,7 +240,8 @@ module.exports = {
     // 指定模块目录名称
     resolve: {
         extensions: ['.js', '.jsx'],
-        modules: ['node_modules', 'web_modules', './src']
+        modules: ['node_modules', 'web_modules', './src'],
+        mainFields: ['browser', 'main', 'module'],      // 文件入口字段
     },
 
     output: {
