@@ -6,11 +6,7 @@
   "main": "src/index",
   "scripts": {
     "dev": "BUILD_DEV=1 node server.js",
-    "check-code": "eslint ./src",
-    "test": "BABEL_ENV=test jest --colors",
-    "coverage": "BABEL_ENV=test jest --colors --coverage",
     "intl": "rimraf ./i18n-messages && BABEL_ENV=i18n babel --quiet ./src > /dev/null && babel-node --presets es2015 ./scripts/translateIntl.js && rimraf ./i18n-messages",
-    "publish-alone": "BUILD_DEV=0 node ./scripts/publish.js ~/Desktop/webapp /static/",
     "publish": "BUILD_DEV=0 node ./scripts/publish.js /data/webapp /"
   },
   "dependencies": {
@@ -65,22 +61,6 @@
     "webpack": "^4.11.1",
     "webpack-bundle-analyzer": "^2.13.1",
     "webpack-dev-server": "^3.1.4"
-  },
-  "jest": {
-    "moduleFileExtensions": [
-      "js",
-      "jsx"
-    ],
-    "moduleNameMapper": {
-      "\\.(jpg|jpeg|png|gif|eot|otf|webp|svg|ttf|woff|woff2|mp4|webm|wav|mp3|m4a|aac|oga)$": "<rootDir>/__mocks__/fileMock.js",
-      ".*\\.(css|less|scss)$": "<rootDir>/__mocks__/styleMock.js"
-    },
-    "transform": {
-      "^.+\\.js(x)?$": "babel-jest"
-    },
-    "setupFiles": [
-      "<rootDir>/__mocks__/setup.js"
-    ]
   },
   "repository": {
     "type": "git",
