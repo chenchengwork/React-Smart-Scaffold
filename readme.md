@@ -67,3 +67,14 @@ npm install autoprefixer babel-cli babel-core babel-eslint babel-jest babel-load
 npm install antd axios flex.css immutability-helper jquery js-cookie lodash onfire.js promise-polyfill prop-types query-string react react-addons-pure-render-mixin react-dom react-intl react-redux react-router-dom redux redux-logger redux-thunk url-search-params-polyfill  --save  --registry http://registry.cnpmjs.org 
 
 ```
+
+4. 常用组件
+```
+(1). react美化滚动条
+https://github.com/malte-wessel/react-custom-scrollbars
+
+(2). react动画库
+https://github.com/FormidableLabs/react-animations
+
+
+```
