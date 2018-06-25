@@ -75,6 +75,7 @@ https://github.com/malte-wessel/react-custom-scrollbars
 
 (2). react动画库
 https://github.com/FormidableLabs/react-animations
-
+// 组件进入或离开是的过度动画库
+https://github.com/reactjs/react-transition-group
 
 ```
