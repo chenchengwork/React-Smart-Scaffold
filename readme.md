@@ -78,4 +78,9 @@ https://github.com/FormidableLabs/react-animations
 // 组件进入或离开是的过度动画库
 https://github.com/reactjs/react-transition-group
 
+(3). 在线编辑editor
+    a). 基于Monaco Editor的react-monaco-editor
+    https://github.com/superRaytin/react-monaco-editor
+    Monaco Editor官网： https://microsoft.github.io/monaco-editor/index.html
+
 ```
