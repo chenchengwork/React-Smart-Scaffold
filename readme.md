@@ -83,4 +83,8 @@ https://github.com/reactjs/react-transition-group
     https://github.com/superRaytin/react-monaco-editor
     Monaco Editor官网： https://microsoft.github.io/monaco-editor/index.html
 
+(4). react布局
+    a). 自由拖拽布局
+    https://github.com/STRML/react-grid-layout
+
 ```
