@@ -77,6 +77,8 @@ https://github.com/malte-wessel/react-custom-scrollbars
 https://github.com/FormidableLabs/react-animations
 // 组件进入或离开是的过度动画库
 https://github.com/reactjs/react-transition-group
+// antd motion动画库
+https://motion.ant.design/components/tween-one
 
 (3). 在线编辑editor
     a). 基于Monaco Editor的react-monaco-editor
