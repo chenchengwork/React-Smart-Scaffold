@@ -100,39 +100,6 @@ class Helper {
         return result;
     }
 
-    /**
-	 * 浮点型保留小数
-     * @param {Number} num
-     * @param {Number} fixNum
-     * @param {Mixed} defaultVal 格式化错误的默认值
-     * @return {string}
-     */
-	toFixed(num, fixNum = 2, defaultVal = '-') {
-		let result =  Number(num).toFixed(fixNum);
-		return _.isNaN(result) || result === 'NaN' ? defaultVal : result;
-	}
-
-    /**
-     * 是否是一个真实的数值字符串
-     * @param value
-     */
-    isRealNumeric(value) {
-    	return /^(\d+\.)?\d+$/.test(value);
-	}
-
-    /**
-	 * Mb转换成Gb
-     * @param {Number} value
-     * @param {Number} fixNum	保留小数的位数
-     * @param {Mixed} defaultVal	格式化错误的默认值
-     * @return {*}
-     * @constructor
-     */
-	MbToGb(value, fixNum = 2, defaultVal = '-') {
-		let result = value / 1024;
-		return fixNum ? (_.isNaN(result) || result === 'NaN' ? defaultVal : result) : this.toFixed(result, fixNum, defaultVal);
-	}
-
 
     /**
      * 时间格式化
@@ -141,7 +108,7 @@ class Helper {
      * @return {string}
      */
     dateFormat(date = _.now(), template = 'YYYY-MM-DD HH:mm:ss') {
-        if (this.isRealNumeric(date)) {
+        if (/^(\d+\.)?\d+$/.test(date)) {
             date = parseInt(date);
         }
 
@@ -174,120 +141,110 @@ class Helper {
     	return this.apply(func, context, args);
     }
 
+    /**
+     * 减速节流函数
+     * @param {Function} fn 需要延迟执行的函数
+     * @param {Number} time 延迟时间毫秒
+     * @param {Object} context
+     * @return {wrapperFn}
+     *
+     * usage:
+
+     const a_fn = (params) => {}
+     const render = throttle(a_fn, 16, null);
+     render(1);
+     render(2); // 将延迟16毫秒执行
+     */
+    throttle = (fn, time, context) => {
+        let lock, args;
+
+        function later () {
+            // reset lock and call if queued
+            lock = false;
+            if (args) {
+                wrapperFn.apply(context, args);
+                args = false;
+            }
+        }
+
+        function wrapperFn () {
+            if (lock) {
+                // called too soon, queue to call later
+                args = arguments;
+
+            } else {
+                // lock until later then call
+                lock = true;
+                fn.apply(context, arguments);
+                setTimeout(later, time);
+            }
+        }
+
+        return wrapperFn;
+    };
+
 
     /**
-     * 获取queryString
-     *
-     * @returns {Object}
+     * 防抖函数
+     * @param {Function} fn     回调函数
+     * @param {Number} delay    延迟事件
+     * @param {Object} [context]  回调函数上下文
+     * @returns {Function}
      */
-    getUrlParams() {
-		let urlParams = {};
-		const queryString = decodeURIComponent(window.location.search.substr(1));
-		if (queryString) {
-			_.each(queryString.split('&'), (paramString) => {
-				const param = paramString.split('=');
-				urlParams[param[0]] = param[1];
-			});
-		}
+    debounce = (fn, delay, context) => {
+        let timeout;
 
-		return urlParams;
-	}
+        return function(e){
+
+            clearTimeout(timeout);
+
+            context = context || this;
+            let args = arguments
+
+            timeout = setTimeout(function(){
+
+                fn.apply(context, args);
+
+            },delay)
+
+        };
+    };
+
 
     /**
-     * 获取URL参数
-     *
-     * @param {string} name
-     * @returns {string}
+     * 将Blod转成String
+     * @param {Blob} blob       // Blob对象
+     * @param {String} [characterSet]  // 字符集
+     * @returns {Promise<any>}
      */
-    getUrlParam(name) {
-    	return this.getUrlParams()[name];
+    blobToString = (blob, characterSet = 'utf-8') => new Promise((resolve, reject)=> {
+        const reader = new FileReader();
+        reader.readAsText(blob, characterSet);
+        reader.onload = function (e) {
+            resolve(reader.result);
+        };
+
+        reader.onerror = (e) => {
+            reject(e);
+        };
+    });
+
+    /**
+     * 下载文件
+     * @param {String} content 下载内容
+     * @param {String} fileName 文件名称
+     */
+    downloadFile = (content = "", fileName = "") => {
+        const blob = new Blob([content]);
+
+        const a = document.createElement("a");
+        a.href = window.URL.createObjectURL(blob);
+        a.download = fileName;
+
+        document.querySelector('body').appendChild(a);
+        a.click();
+        document.querySelector('body').removeChild(a)
     }
-
-    /**
-     * 生成class
-     * @param {...*=} args
-     */
-    classNames(...args) {
-
-		const classList = [];
-
-		_.each(args, (arg) => {
-
-			if (_.isString(arg)) {
-
-				classList.push(arg);
-
-			} else if (_.isObject(arg)) {
-
-				_.each(arg, (value, key) => {
-					if (value) {
-						classList.push(key);
-					}
-				});
-			}
-		});
-
-		return _.uniq(classList).join(' ');
-	}
-
-
-    /**
-     * 数字格式化
-     * @param {number} number
-     * @param {number=} decimals
-     * @param {string=} decimalPoint
-     * @param {string=} thousandsSep
-     * @return {string}
-     */
-    numberFormat(number, decimals = 0, decimalPoint = '.', thousandsSep = ',') {
-
-		/* eslint-disable no-param-reassign */
-
-		number = _.toNumber(number);
-		decimals = _.clamp(decimals, 0, 10);
-
-		const origDec = (number.toString().split('.')[1] || '').length;
-		const absNumber = Math.abs(number);
-
-		let decimalComponent;
-		let ret;
-
-		if (decimals === -1) {
-
-			decimals = Math.min(origDec, 20);
-
-		} else if (!_.isNumber(decimals)) {
-
-			decimals = 2;
-		}
-
-		const strinteger = String(parseInt(absNumber.toFixed(decimals), 10));
-
-		// 需要几个千分位分隔符
-		const thousands = strinteger.length > 3 ? strinteger.length % 3 : 0;
-
-		// 负数
-		ret = number < 0 ? '-' : '';
-
-		ret += thousands ? strinteger.substr(0, thousands) + thousandsSep : '';
-
-		// 在千分位加上分隔符
-		ret += strinteger.substr(thousands).replace(/(\d{3})(?=\d)/g, `$1${thousandsSep}`);
-
-		// 小数点
-		if (decimals) {
-
-			/* eslint-disable no-restricted-properties */
-			decimalComponent = Math.abs((absNumber - strinteger) + (Math.pow(10, -Math.max(decimals, origDec) - 1)));
-			/* eslint-enable no-restricted-properties */
-
-			ret += decimalPoint + decimalComponent.toFixed(decimals).slice(2);
-		}
-
-		/* eslint-enable no-param-reassign */
-		return ret;
-	}
-
 }
 
 export default new Helper();

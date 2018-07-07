@@ -193,12 +193,29 @@ const getModuleRules = () => {
                 plugins: [
                     // babel-plugin-import
                     ['import', {libraryName: 'antd', 'libraryDirectory': 'es', style: true}], // `style: true` for less
-                    ['transform-decorators-legacy', 'transform-decorators']	// 支持es7的装饰器
-                ]
+                    ['transform-decorators-legacy', 'transform-decorators'],	// 支持es7的装饰器
+                ],
+
             }
         }
     ]
 };
+
+/**
+ * 获取插件
+ * @returns {*[]}
+ */
+const getPlugins = () => ([
+    // 提取css
+    new MiniCssExtractPlugin({
+        filename: "[name].css"
+    }),
+
+    // 自动加载赋值模块
+    new webpack.ProvidePlugin({
+        React: 'react'
+    }),
+]);
 
 module.exports = {
     // 用于生成源代码的mapping
@@ -256,17 +273,5 @@ module.exports = {
         rules: getModuleRules()
     },
 
-    plugins: [
-		// 提取css
-		new MiniCssExtractPlugin({
-			filename: "[name].css"
-		}),
-
-        // 自动加载赋值模块
-        new webpack.ProvidePlugin({
-            $: 'jquery',
-            jQuery: 'jquery',
-            React: 'react'
-        }),
-    ]
+    plugins: getPlugins()
 };
