@@ -67,3 +67,26 @@ npm install autoprefixer babel-cli babel-core babel-eslint babel-jest babel-load
 npm install antd axios flex.css immutability-helper jquery js-cookie lodash onfire.js promise-polyfill prop-types query-string react react-addons-pure-render-mixin react-dom react-intl react-redux react-router-dom redux redux-logger redux-thunk url-search-params-polyfill  --save  --registry http://registry.cnpmjs.org 
 
 ```
+
+4. 常用组件
+```
+(1). react美化滚动条
+https://github.com/malte-wessel/react-custom-scrollbars
+
+(2). react动画库
+https://github.com/FormidableLabs/react-animations
+// 组件进入或离开是的过度动画库
+https://github.com/reactjs/react-transition-group
+// antd motion动画库
+https://motion.ant.design/components/tween-one
+
+(3). 在线编辑editor
+    a). 基于Monaco Editor的react-monaco-editor
+    https://github.com/superRaytin/react-monaco-editor
+    Monaco Editor官网： https://microsoft.github.io/monaco-editor/index.html
+
+(4). react布局
+    a). 自由拖拽布局
+    https://github.com/STRML/react-grid-layout
+
+```
