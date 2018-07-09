@@ -1,6 +1,7 @@
 /**
  * Created by chencheng on 17-9-13.
  */
+import styles from './index.scss';
 import PropTypes from 'prop-types';
 import { Spin } from 'antd';
 
@@ -13,7 +14,7 @@ export default function BoxSpin({ style = {}, spinProps = {}}) {
     }, style);
 
     return (
-        <div style={style} data-flex="main:center cross:center">
+        <div style={style} className={styles.center}>
             <Spin {...spinProps} />
         </div>
     );

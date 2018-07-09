@@ -1,9 +1,10 @@
-import styles from './BaseComponent.scss';
 import T from 'utils/T';
-import PropTypes from 'prop-types';
 import update from 'immutability-helper';
+
+import BoxContent from './ToolComponents/BoxContent';
+import BoxSpin from './ToolComponents/BoxSpin';
+
 import { PureComponent, Fragment } from 'react';
-import { Icon, Spin } from 'antd';
 
 
 @T.decorator.contextTypes('router', 'store')
@@ -53,76 +54,3 @@ export default class BaseComponent extends PureComponent {
     }
 
 }
-
-
-/**
- * 异步加载标示
- * @param style
- * @param spinProps
- * @returns {*}
- * @constructor
- */
-function BoxSpin({ style = {}, spinProps = {}}) {
-    style = Object.assign({
-        position: 'relative',
-        width: '100%',
-        minHeight: 200,
-        textAlign: 'center',
-    }, style);
-
-    return (
-        <div style={style} className={styles.center}>
-            <Spin {...spinProps} />
-        </div>
-    );
-}
-
-BoxSpin.propTypes = {
-    style: PropTypes.object,
-    spinProps: PropTypes.object
-};
-
-/**
- * 内容加载处理
- * @param notDataBodyStyle
- * @param isNotData
- * @param loading
- * @param children
- * @returns {*}
- * @constructor
- */
-function BoxContent({ notDataBodyStyle = {}, isNotData = false, loading = false, children }) {
-    notDataBodyStyle = Object.assign({
-        width: '100%',
-        height: '100%',
-        textAlign: 'center',
-        padding: '10px 0px',
-    }, notDataBodyStyle);
-
-    if (T.lodash.isFunction(isNotData)) {
-        isNotData = isNotData();
-    }
-
-    return (
-        <Fragment>
-            {
-                (() => {
-                    if (loading) {
-                        return <BoxSpin />;
-                    } else {
-                        return !isNotData ? children : <div style={notDataBodyStyle} className={styles.center}>
-                            <Icon type="frown-o" />暂无数据
-                        </div>;
-                    }
-                })()
-
-            }
-        </Fragment>
-    );
-}
-
-BoxContent.propTypes = {
-    notDataBodyStyle: PropTypes.object,
-    isNotData: PropTypes.oneOfType([PropTypes.bool, PropTypes.func]),
-    loading: PropTypes.bool
-};

@@ -1,10 +1,13 @@
 /**
  * Created by chencheng on 17-9-13.
  */
+import styles from './index.scss';
 import PropTypes from 'prop-types';
 import T from 'utils/T';
 import BoxSpin from 'templates/ToolComponents/BoxSpin';
+import { Fragment } from 'react';
 import { Icon } from 'antd';
+
 
 export default function BoxContent({ notDataBodyStyle = {}, isNotData = false, loading = false, children }) {
     notDataBodyStyle = Object.assign({
@@ -19,20 +22,20 @@ export default function BoxContent({ notDataBodyStyle = {}, isNotData = false, l
     }
 
     return (
-        <div>
+        <Fragment>
             {
                 (() => {
                     if (loading) {
                         return <BoxSpin />;
                     } else {
-                        return !isNotData ? children : <div style={notDataBodyStyle} data-flex="main:center cross:center">
+                        return !isNotData ? children : <div style={notDataBodyStyle} className={styles.center}>
                             <Icon type="frown-o" />暂无数据
                         </div>;
                     }
                 })()
 
             }
-        </div>
+        </Fragment>
     );
 }
 
