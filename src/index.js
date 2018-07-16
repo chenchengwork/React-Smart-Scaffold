@@ -6,6 +6,7 @@
 import ErrorBoundary from 'templates/ToolComponents/ErrorBoundary';
 import { render } from 'react-dom';
 import { Provider } from 'react-redux';
+import { LocaleProvider} from 'antd';
 
 // 加载基础样式
 import 'antd/lib/message/style';
@@ -24,7 +25,9 @@ import Routes from './routes/index';
 const renderApp = () => render(
     <ErrorBoundary>
         <Provider store={store()}>
-            <Routes />
+            <LocaleProvider locale={require('antd/lib/locale-provider/zh_CN')}>
+                <Routes />
+            </LocaleProvider>
         </Provider>
     </ErrorBoundary>,
 	document.querySelector('#wrapper')
