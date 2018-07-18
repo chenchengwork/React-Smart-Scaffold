@@ -88,5 +88,14 @@ https://motion.ant.design/components/tween-one
 (4). react布局
     a). 自由拖拽布局
     https://github.com/STRML/react-grid-layout
+    
+    b). 只拖拽
+    https://github.com/mzabriskie/react-draggable
+    
+    c). 只更改dom大小
+    https://github.com/STRML/react-resizable
+    
+    d). 拖拽和更改大小
+    https://github.com/bokuweb/react-rnd
 
 ```
