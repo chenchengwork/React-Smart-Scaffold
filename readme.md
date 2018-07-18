@@ -99,3 +99,16 @@ https://motion.ant.design/components/tween-one
     https://github.com/bokuweb/react-rnd
 
 ```
+
+5. PWA资源
+```
+    a). pwa实战源码
+    https://github.com/deanhume/progressive-web-apps-book
+    
+    b). Workbox构建PWA
+    https://codelabs.developers.google.com/codelabs/workbox-lab-cn/index.html?index=..%2F..%2Fgddchina#0
+    
+    c). workbox结合Webpack构建PWA
+    https://webpack.docschina.org/guides/progressive-web-application/
+
+```
