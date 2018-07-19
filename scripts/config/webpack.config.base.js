@@ -5,6 +5,7 @@
 const webpack = require('webpack');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const autoprefixer = require('autoprefixer');
+const paths = require('./paths');
 
 /**
  * 页面入口文件,使用异步加载方式
@@ -185,7 +186,7 @@ const getModuleRules = () => {
                         ],
                         modules: false,
                         useBuiltIns: true,
-                        debug: true
+                        debug: process.env.NODE_ENV === "production" ? false :true
                     }],
                     'react',
                     'stage-0'
@@ -251,7 +252,7 @@ module.exports = {
 	},
 
     entry: {
-        app: ['./src/index'],
+        app: [paths.app_IndexJs],
     },
 
     // 指定模块目录名称
@@ -263,9 +264,9 @@ module.exports = {
 
     output: {
         // 公网发布的目录
-        publicPath: '/public/',
+        publicPath: paths.webpackPublicPath,
         // 编译的目录
-        path: `${__dirname}/../public/`,
+        path: paths.buildPath,
         filename: '[name].js'
     },
 

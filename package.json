@@ -5,9 +5,9 @@
   "description": "解决方案前端",
   "main": "src/index",
   "scripts": {
-    "dev": "BUILD_DEV=1 node server.js",
     "intl": "rimraf ./i18n-messages && BABEL_ENV=i18n babel --quiet ./src > /dev/null && babel-node --presets es2015 ./scripts/translateIntl.js && rimraf ./i18n-messages",
-    "publish": "BUILD_DEV=0 node ./scripts/publish.js /data/webapp /"
+    "dev": "node ./scripts/dev.js",
+    "build": "node ./scripts/build.js /data/React-Smart-Scaffold /"
   },
   "dependencies": {
     "antd": "^3.6.5",
@@ -51,10 +51,12 @@
     "less-loader": "^4.1.0",
     "mini-css-extract-plugin": "^0.4.1",
     "node-sass": "^4.9.1",
+    "optimize-css-assets-webpack-plugin": "^5.0.0",
     "postcss-flexbugs-fixes": "^3.3.1",
     "postcss-loader": "^2.1.5",
     "sass-loader": "^7.0.3",
     "style-loader": "^0.21.0",
+    "uglifyjs-webpack-plugin": "^1.2.7",
     "url-loader": "^1.0.1",
     "webpack": "^4.15.1",
     "webpack-bundle-analyzer": "^2.13.1",
