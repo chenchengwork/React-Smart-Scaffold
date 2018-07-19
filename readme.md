@@ -88,5 +88,32 @@ https://motion.ant.design/components/tween-one
 (4). react布局
     a). 自由拖拽布局
     https://github.com/STRML/react-grid-layout
+    
+    b). 只拖拽
+    https://github.com/mzabriskie/react-draggable
+    
+    c). 只更改dom大小
+    https://github.com/STRML/react-resizable
+    
+    d). 拖拽和更改大小
+    https://github.com/bokuweb/react-rnd
+    
+(5). 数据格式化
+    a). JSON normalizr
+    https://github.com/paularmstrong/normalizr
+    
+
+```
+
+5. PWA资源
+```
+(1). pwa实战源码
+https://github.com/deanhume/progressive-web-apps-book
+
+(2). Workbox构建PWA
+https://codelabs.developers.google.com/codelabs/workbox-lab-cn/index.html?index=..%2F..%2Fgddchina#0
+
+(3). workbox结合Webpack构建PWA
+https://webpack.docschina.org/guides/progressive-web-application/
 
 ```
