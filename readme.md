@@ -117,3 +117,20 @@ https://codelabs.developers.google.com/codelabs/workbox-lab-cn/index.html?index=
 https://webpack.docschina.org/guides/progressive-web-application/
 
 ```
+6. React 服务器渲染框架
+```
+(1). Next.js
+    https://github.com/zeit/next.js     // 代码仓库
+    https://juejin.im/post/59f72fef518825569538ef5a // Next.js v4.1.4 文档
+    
+(2). gatsby(静态站点生成器)
+    https://github.com/gatsbyjs/gatsby
+    
+注意:
+    next.js 和 gatsby的区别是：
+        next.js是动态在服务器进行渲染成静态页面，然后发送到前端
+        gatsby是预先生成静态页面，避免了重复渲染,它是静态站点生成器
+    
+    
+```
+
