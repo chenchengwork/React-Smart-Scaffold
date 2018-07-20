@@ -12,23 +12,12 @@ const paths = require('./paths');
  * @type {RegExp}
  */
 const routesComponentsRegex = /src\/routes\/([\w-])+?\/((.*)\/)?routes\/((.*)\/)?index.js(x)?$/g;
+
 /**
  * 编译排除的文件
  * @type {RegExp}
  */
 const excludeRegex = /(node_modules|bower_modules)/;
-
-/**
- * 自定义antd的样式
- * @type {{"@primary-color": string, "@font-size-base": string, "@body-background": string, "@layout-body-background": string}}
- */
-const customAntdStyle = {
-    '@primary-color': '#108ee9',		            // 更改antd的主题颜色;
-    // "@icon-url":"'/asserts/ant_font/iconfont'",  //更改字体地址; 注意:必须再加额外的“'”,将icon字体部署到本地
-    '@font-size-base': '12px',                      // 修改基础字体大小
-    '@body-background': '#fff',                     // 修改body的背景颜色
-    '@layout-body-background': '#fff',              // 修改layout布局的body背景颜色
-}
 
 /**
  * 格式化不同的样式loader
@@ -138,16 +127,6 @@ const getModuleRules = () => {
                 }
             })
         },
-        {
-            test: /\.less/,
-            use: formatStyleLoader({
-                loader: 'less-loader',
-                options: {
-                    sourceMap: true,
-                    modifyVars: customAntdStyle
-                }
-            })
-        },
     ];
 
     return [
@@ -192,8 +171,6 @@ const getModuleRules = () => {
                     'stage-0'
                 ],
                 plugins: [
-                    // babel-plugin-import
-                    ['import', {libraryName: 'antd', 'libraryDirectory': 'es', style: true}], // `style: true` for less
                     ['transform-decorators-legacy', 'transform-decorators'],	// 支持es7的装饰器
                 ],
 
@@ -218,38 +195,38 @@ const getPlugins = () => ([
     }),
 ]);
 
-module.exports = {
+const baseWebpackConf = {
     // 用于生成源代码的mapping
     devtool: 'cheap-module-source-map',	// cheap-module-source-map,cheap-source-map
 
-	mode: 'development',
+    mode: 'development',
 
-	optimization: {
+    optimization: {
         // 代码分割策略配置
-		splitChunks: {
-			chunks: 'all',
-			name: 'vendor',
-			minSize: 30000,
-			minChunks: 1,
-			maxAsyncRequests: 5,
-			maxInitialRequests: 3,
-			cacheGroups: {
+        splitChunks: {
+            chunks: 'all',
+            name: 'vendor',
+            minSize: 30000,
+            minChunks: 1,
+            maxAsyncRequests: 5,
+            maxInitialRequests: 3,
+            cacheGroups: {
                 // 合并多个css到一个css文件中
-				styles: {
-					name: 'vendor',
-					test: /\.scss|css|less$/,
-					chunks: 'all',    // merge all the css chunk to one file
+                styles: {
+                    name: 'vendor',
+                    test: /\.scss|css|less$/,
+                    chunks: 'all',    // merge all the css chunk to one file
                     minChunks: 1,
                     reuseExistingChunk: true,
-					enforce: true
-				}
-			}
-		},
+                    enforce: true
+                }
+            }
+        },
 
-		runtimeChunk: {
-			name: 'runtime',
-		}
-	},
+        runtimeChunk: {
+            name: 'runtime',
+        }
+    },
 
     entry: {
         app: [paths.app_IndexJs],
@@ -275,4 +252,10 @@ module.exports = {
     },
 
     plugins: getPlugins()
+};
+
+module.exports = {
+    formatStyleLoader,
+    excludeRegex,
+    baseWebpackConf,
 };
