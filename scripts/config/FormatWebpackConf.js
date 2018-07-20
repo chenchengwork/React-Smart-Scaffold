@@ -12,7 +12,6 @@ module.exports = class {
 	}
 
 	end(){
-        console.log(JSON.stringify(this.webpackConf))
 		return this.webpackConf;
 	}
 }

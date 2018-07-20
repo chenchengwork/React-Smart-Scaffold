@@ -132,19 +132,6 @@ const getModuleRules = () => {
     return [
         ...staticResourceRules,
         ...cssRules,
-        // 懒加载代码分离
-        {
-            test: routesComponentsRegex,
-            exclude: excludeRegex,
-            use: [
-                {
-                    loader: 'bundle-loader',
-                    options: {
-                        lazy: true
-                    }
-                }
-            ]
-        },
 
         // 添加babel转换解决js兼容性问题
         {
@@ -175,7 +162,9 @@ const getModuleRules = () => {
                 ],
 
             }
-        }
+        },
+
+
     ]
 };
 
@@ -254,8 +243,12 @@ const baseWebpackConf = {
     plugins: getPlugins()
 };
 
+
+
+
 module.exports = {
     formatStyleLoader,
+    routesComponentsRegex,
     excludeRegex,
     baseWebpackConf,
 };
