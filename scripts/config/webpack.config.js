@@ -33,7 +33,6 @@ module.exports = new FormatWebpackConf(baseWebpackConf)
     })
     // 支持antd 配置
     .use(function(webpackConf){
-        console.log(111)
         /*
             依赖说明：
                 npm install antd --save
