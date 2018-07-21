@@ -8,7 +8,7 @@ import _ from 'lodash';
 // 解决IE报warning Unhandled Rejections Error 参数书不正确的问题
 Promise._unhandledRejectionFn = function (rejectError) {};
 
-const apiDomain = window.ENV.mock.isStart ? window.ENV.mock.apiDomain : window.ENV.apiDomain;
+const apiDomain = window.ENV.apiDomain;
 
 const Singleton = (function () {
     let instantiated;
