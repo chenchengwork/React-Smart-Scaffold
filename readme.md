@@ -133,4 +133,10 @@ https://webpack.docschina.org/guides/progressive-web-application/
     
     
 ```
+7. 实现高阶组件常用包
+```
+(1). hoist-non-react-statics
+    它会自动拷贝所有非React的静态方法
+    https://github.com/mridgway/hoist-non-react-statics
 
+```
