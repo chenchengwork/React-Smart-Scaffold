@@ -104,6 +104,9 @@ https://motion.ant.design/components/tween-one
     
 (6). 轻量级react table
     https://react-table.js.org/#/story/readme
+    
+(7). 添加全屏背景视频的库
+    https://github.com/rishabhp/bideo.js
 
 ```
 
