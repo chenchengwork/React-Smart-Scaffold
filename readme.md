@@ -107,6 +107,9 @@ https://motion.ant.design/components/tween-one
     
 (7). 添加全屏背景视频的库
     https://github.com/rishabhp/bideo.js
+    
+(8). 键盘操作事件库
+    https://github.com/ccampbell/mousetrap
 
 ```
 
