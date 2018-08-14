@@ -13,6 +13,7 @@ class Registry {
 
     injectReducers(reducers) {
         // console.log(reducers)
+        this._reducers = {};
         Object.assign(
             this._reducers,
             reducers.reduce((acc, reducer) => {
