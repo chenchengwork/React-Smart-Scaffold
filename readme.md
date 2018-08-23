@@ -110,6 +110,9 @@ https://motion.ant.design/components/tween-one
     
 (8). 键盘操作事件库
     https://github.com/ccampbell/mousetrap
+    
+(9). 颜色选择器
+    https://github.com/casesandberg/react-color
 
 ```
 
