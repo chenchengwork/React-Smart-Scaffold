@@ -151,3 +151,12 @@ https://webpack.docschina.org/guides/progressive-web-application/
     https://github.com/mridgway/hoist-non-react-statics
 
 ```
+8. React兼容的第三方mini库
+```
+(1). 完全兼容React16的第三方库
+https://github.com/RubyLouvre/anu
+
+(2). preact
+https://github.com/developit/preact
+
+```
