@@ -167,3 +167,10 @@ https://github.com/developit/preact
 https://github.com/ozantunca/locally
 
 ```
+
+10. js算法
+```
+(1). 字符串压缩算法
+http://pieroxy.net/blog/pages/lz-string/index.html
+
+```
