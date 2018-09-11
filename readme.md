@@ -160,3 +160,10 @@ https://github.com/RubyLouvre/anu
 https://github.com/developit/preact
 
 ```
+
+9. 浏览器本地存储管理包
+```
+(1). localStore管理
+https://github.com/ozantunca/locally
+
+```
