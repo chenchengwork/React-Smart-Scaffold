@@ -174,3 +174,25 @@ https://github.com/ozantunca/locally
 http://pieroxy.net/blog/pages/lz-string/index.html
 
 ```
+
+11. 组件工具
+```
+(1). 飞冰可视化设计器
+https://alibaba.github.io/ice/docs/ice-design
+
+```
+
+12. 可视化组件库
+```
+(1). echarts
+
+(2). highcharts
+
+(3). antV
+https://antv.alipay.com/zh-cn/index.html
+备注： 针对antV封装的react组件库
+http://bizcharts.net/index
+
+```
+
+
