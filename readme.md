@@ -114,6 +114,8 @@ https://motion.ant.design/components/tween-one
 (9). 颜色选择器
     https://github.com/casesandberg/react-color
 
+(10). 头部进度条
+    http://ricostacruz.com/nprogress/
 ```
 
 5. PWA资源
