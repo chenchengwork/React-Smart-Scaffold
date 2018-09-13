@@ -116,6 +116,13 @@ https://motion.ant.design/components/tween-one
 
 (10). 头部进度条
     http://ricostacruz.com/nprogress/
+    
+(11). 全局提示组件
+    https://github.com/fkhadra/react-toastify
+    
+(12). 全局提示框
+    https://github.com/haradakunihiko/react-confirm
+    
 ```
 
 5. PWA资源
