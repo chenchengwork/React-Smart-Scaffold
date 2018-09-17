@@ -73,13 +73,6 @@ npm install antd axios flex.css immutability-helper jquery js-cookie lodash onfi
 (1). react美化滚动条
 https://github.com/malte-wessel/react-custom-scrollbars
 
-(2). react动画库
-https://github.com/FormidableLabs/react-animations
-// 组件进入或离开是的过度动画库
-https://github.com/reactjs/react-transition-group
-// antd motion动画库
-https://motion.ant.design/components/tween-one
-
 (3). 在线编辑editor
     a). 基于Monaco Editor的react-monaco-editor
     https://github.com/superRaytin/react-monaco-editor
@@ -201,6 +194,38 @@ https://alibaba.github.io/ice/docs/ice-design
 https://antv.alipay.com/zh-cn/index.html
 备注： 针对antV封装的react组件库
 http://bizcharts.net/index
+
+```
+
+13. react动画组件
+```
+(1).
+https://github.com/FormidableLabs/react-animations
+
+(2). 组件进入或离开是的过度动画库
+https://github.com/reactjs/react-transition-group
+
+(3). antd motion动画库
+https://motion.ant.design/components/tween-one
+
+(4). React FLIP动画助手库，用于高度可配置的过渡
+https://github.com/aholachek/react-flip-toolkit
+
+(5). 滚动动画
+https://github.com/gilbox/react-spark-scroll
+
+(6). 动画问题的春天
+https://github.com/chenglou/react-motion
+
+(7). 数据驱动动画
+https://github.com/tkh44/data-driven-motion
+
+(8). 数据驱动动画
+https://github.com/react-tools/react-move
+
+(9). 交互dom速率组件包
+https://github.com/google-fabric/velocity-react
+
 
 ```
 
