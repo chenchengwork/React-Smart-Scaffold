@@ -226,6 +226,21 @@ https://github.com/react-tools/react-move
 (9). 交互dom速率组件包
 https://github.com/google-fabric/velocity-react
 
+```
+
+14. react中内置style css
+```
+1. 自带样式的组件
+https://github.com/styled-components/styled-components
+
+2. 
+https://github.com/cssinjs/react-jss
+
+3.
+https://github.com/Khan/aphrodite
+
+4.
+https://github.com/FormidableLabs/radium
 
 ```
 
