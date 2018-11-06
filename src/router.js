@@ -1,6 +1,5 @@
 import transformRouter from './transformRouter';
 import EnumRouter from 'constants/EnumRouter';
-import store from './store';
 
 /**
  * 定义路由
@@ -23,12 +22,10 @@ const routes = [
     {
         uri: EnumRouter.screen,
         component: import("./pages/Screen"),
-        store: store.screenStore,
     },
     {
         uri: EnumRouter.data,
         component: import("./pages/DataSource"),
-        store: store.dataSourceStore,
     },
 ];
 

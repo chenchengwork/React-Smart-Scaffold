@@ -8,6 +8,28 @@ const mountDomId = 'tj-render-dom';
 class Helper {
 
     /**
+     * 模拟数据
+     * @param data
+     * @param isMockError
+     * @return {Promise<any>}
+     */
+    mockData(data, isMockError = false) {
+        return new Promise((resolve, reject) => {
+            setTimeout(() => {
+                if(!isMockError) {
+                    resolve({
+                        code: "success",
+                        data,
+                        msg: "success"
+                    })
+                } else {
+                    reject({code: "error", data, msg: "error"});
+                }
+            }, 500);
+        });
+    }
+
+    /**
 	 * 挂载react组件
      * @param component //reactElement react组件
      */

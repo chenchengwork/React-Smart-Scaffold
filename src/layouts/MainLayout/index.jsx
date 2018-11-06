@@ -7,11 +7,9 @@ import CustomIcon from 'components/CustomIcon';
 import { PureComponent } from 'react';
 import { Link } from 'react-router-dom';
 
-import { Layout, Menu, Icon, Dropdown, BackTop } from 'antd';
+import { Layout, Menu, Icon, BackTop } from 'antd';
 import { EnumIconTypes } from 'constants/EnumDefaultMenus';
 import { UrlToExtraInfoMap, getLeftMenu, getMenusByCategory, isRemoveLeftMenu } from './menuUtil';
-import { doLogout } from 'action/auth';
-import EnumRouter from 'constants/EnumRouter';
 
 const { Header, Content, Sider } = Layout;
 
@@ -135,10 +133,10 @@ export default class MainLayout extends PureComponent {
      * 退出登录
      */
     logout = () => {
-        prompt.confirm(
-            () =>  doLogout().then(resp => this.context.router.history.push(EnumRouter.login), resp => prompt.error(resp.msg)),
-            {title: "确定退出登录?"}
-        )
+        // prompt.confirm(
+        //     () =>  doLogout().then(resp => this.context.router.history.push(EnumRouter.login), resp => prompt.error(resp.msg)),
+        //     {title: "确定退出登录?"}
+        // )
     }
 
     /**

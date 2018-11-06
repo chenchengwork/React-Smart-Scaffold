@@ -21,17 +21,4 @@ export default {
     updateScreen: (screen_id) => proxyAPI(`/screen/updateScreen?screen_id=${screen_id}`),
     deleteScreen: proxyAPI("/screen/deleteScreen"),
     uploadCover: (screen_id) => proxyAPI(`/screen/uploadScreenCover?screen_id=${screen_id}`),
-
-    /*
-    |-----------------------------------------------------------------------------------------------------
-    | 数据源相关的API
-    |-----------------------------------------------------------------------------------------------------
-    */
-    getDsTypes: proxyAPI("/dataSource/getDataSourceTypes"),
-    getDsJsonSchema: proxyAPI("/dataSource/getDataSourceJsonSchema"),
-    getDs: proxyAPI("/dataSource/getDataSource"),
-    getDsPageList: proxyAPI("/dataSource/getPageList"),
-    createDs: proxyAPI("/dataSource/createDataSource"),
-    updateDs: (data_source_id) => proxyAPI(`/dataSource/updateDataSource?data_source_id=${data_source_id}`),
-    deleteDs: proxyAPI("/dataSource/deleteDataSource"),
 }
