@@ -4,10 +4,6 @@
 import {checkType, helper} from 'utils/T';
 import { EnumDefaultMenus, EnumCollapsedLeftMenuUrls } from 'constants/EnumDefaultMenus';
 
-// --图片资源--
-import AdminIcon from './img/admin.svg';
-import HelpIcon from './img/help.svg';
-
 /**
  * url和分类值的对应关系
  * @type {{}}
@@ -53,10 +49,7 @@ const EnumMenus = (() => {
                 menu.url = helper.uniq(menu.url.concat(result.urls));
                 urls = helper.uniq(urls.concat(menu.url));
             }
-
         });
-
-
 
         return {
             menus,
@@ -71,25 +64,6 @@ const EnumMenus = (() => {
 
 })();
 
-
-/**
- * 枚举碎片
- * @type {[*]}
- */
-export const EnumFragmentMenu = [
-    /*{
-        label: 'admin',
-        url: '',
-        icon: AdminIcon,
-        children: []
-    },
-    {
-        label: '帮助',
-        url: '',
-        icon: HelpIcon,
-        children: []
-    },*/
-];
 
 /**
  * 是否移除左侧菜单

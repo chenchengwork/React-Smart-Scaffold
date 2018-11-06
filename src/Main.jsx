@@ -10,4 +10,4 @@ export default () => (
             <Router />
         </Provider>
     </LocaleWrapper>
-)
+);

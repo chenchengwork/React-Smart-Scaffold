@@ -53,10 +53,6 @@ export const EnumDefaultMenus = [
                         label: "我的可视化",
                         url: EnumRouter.screen,
                     },
-                    {
-                        label: "我的数据",
-                        url: EnumRouter.data,
-                    }
                 ]
             },
         ]

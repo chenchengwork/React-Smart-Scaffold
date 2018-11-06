@@ -3,6 +3,7 @@ import EnumAPI from 'constants/EnumAPI';
 const { get, postJSON, put, del } = request;
 
 export const screen = {
+
     /**
      * 获取分页列表
      * @param {Object} params
