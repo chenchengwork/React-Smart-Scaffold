@@ -1,3 +1,10 @@
+/*
+    开启国际化的步骤:
+        1. 安装依赖 npm install react-intl --save   npm install atool-l10n babel-plugin-react-intl --save-dev
+        2. 在webpack配置中添加babel-plugin-react-intl插件
+        3. 执行 npm run trans 进行翻译
+*/
+
 import { LocaleProvider } from "antd";
 import zhCN from 'antd/lib/locale-provider/zh_CN';
 
