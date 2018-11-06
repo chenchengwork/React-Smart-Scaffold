@@ -6,7 +6,8 @@
   "main": "src/index",
   "scripts": {
     "dev": "node ./scripts/dev.js",
-    "build": "node ./scripts/build.js /data/web_bundle/vis_web /public/vis_web"
+    "build": "node ./scripts/build.js /data/web_bundle/vis_web /public/vis_web",
+    "trans": "atool-l10n"
   },
   "dependencies": {
     "antd": "^3.10.4",
@@ -20,9 +21,12 @@
     "query-string": "^6.1.0",
     "react": "^16.6.0",
     "react-dom": "^16.6.0",
+    "react-intl": "^2.7.2",
     "react-router-dom": "^4.3.1"
   },
   "devDependencies": {
+    "atool-l10n": "^0.3.1",
+    "babel-plugin-react-intl": "^3.0.1",
     "webpack-pipe": "^1.0.0"
   },
   "repository": {

@@ -7,4 +7,5 @@ yarn.lock
 coverage/
 .idea/
 .DS_Store
+i18n-messages
 
