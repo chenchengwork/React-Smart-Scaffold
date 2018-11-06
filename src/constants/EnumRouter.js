@@ -1,31 +1,14 @@
 /**
- * Created by chencheng on 2017/6/13.
- */
-
-/**
  *
- * @type {{rootRoute: string, login: *, dHub_pluginManage: *, dHub_hostMonitor: *, dHub_pluginMonitor: *, dMart_dataSource: *, dVisual_bigScreen: *}}
+ * @type {{rootRoute: string, login: string, screen: string, data: string}}
  */
 const EnumRouter = {
-    rootRoute: '',		// 根路由
+    rootRoute: '',		        // 根路由
 
-    login: 'login',		// 登陆
+    login: 'login',		// 登录
+    screen: 'screen',		// 我的可视化
+    data: 'data',		    // 我的数据
 
-    /*
-     |-----------------------------------------------
-     | 数据采集-相关的路由
-     |-----------------------------------------------
-     */
-    dHub_pluginManage: 'dataHub/pluginManage',
-    dHub_hostMonitor: 'dataHub/resourceMonitor/host',
-    dHub_pluginMonitor: 'dataHub/resourceMonitor/plugin',
-
-    /*
-     |-----------------------------------------------
-     | 数据可视化-相关的路由
-     |-----------------------------------------------
-     */
-    dVisual_bigScreen: 'dataVisual/bigScreen',
 };
 
 
@@ -37,7 +20,6 @@ export default (() => {
                 return window.ENV.rootPath + route;
 
                 // TODO 后续改用这种方式
-
                 // const path = window.ENV.rootPath + route;
                 // return {
                 //     path,

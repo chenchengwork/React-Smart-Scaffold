@@ -18,13 +18,14 @@ export const EnumIconTypes = {
     custom: 'custom'
 };
 
+
 /**
  * 菜单配置
  *
  * Usage:
  * 左侧菜单参数使用说明:
  * {
-        label:"ETL应用",
+        label:"Apex应用",
 
         //antd中的icon type
         icon:"swap",
@@ -42,56 +43,19 @@ export const EnumDefaultMenus = [
         value: 'dataPlatform',
         childrenMenu: [
             {
-                label: '数据采集',
+                // label: '可视化组件',
                 icon: {
                     appType: EnumIconTypes.custom,
-                    iconType:'caiji'
+                    iconType: 'zujian1'
                 },
                 children: [
                     {
-                        label: '插件管理',
-                        icon: {
-                            appType: EnumIconTypes.antd,
-                            iconType:'switcher'
-                        },
-                        url: EnumRouter.dHub_pluginManage,
-                        children: []
+                        label: "我的可视化",
+                        url: EnumRouter.screen,
                     },
                     {
-                        label: '资源监控',
-                        icon: {
-                            appType: EnumIconTypes.antd,
-                            iconType:'hdd'
-                        },
-                        children: [
-                            {
-                                label: '主机监控',
-                                url: EnumRouter.dHub_hostMonitor,
-                                children: []
-                            },
-                            {
-                                label: '插件监控',
-                                url: EnumRouter.dHub_pluginMonitor,
-                                children: []
-                            }
-                        ]
-                    }
-                ]
-            },
-        ]
-    },
-    {
-        label: '数据应用',
-        value: 'dataApp',
-        childrenMenu: [
-            {
-                label: '数据可视化',
-                children: [
-                    {
-                        label: '作品集',
-                        icon: 'pie-chart',
-                        url: EnumRouter.dVisual_bigScreen,
-                        children: []
+                        label: "我的数据",
+                        url: EnumRouter.data,
                     }
                 ]
             },

@@ -1,37 +1,12 @@
 /**
- * @description 项目入口文件
- * @author vision <vision.shi@tianjishuju.com>
- * @license www.tianjishuju.com/license
+ * 入口文件
  */
-import ErrorBoundary from 'templates/ToolComponents/ErrorBoundary';
-import { render } from 'react-dom';
-import { Provider } from 'react-redux';
-import { LocaleProvider} from 'antd';
+import React  from "react";
+import {render} from "react-dom";
 
-// 加载基础样式
-import 'antd/lib/message/style';
-import 'antd/lib/modal/style';
-import './base.scss';
+import lazyScreen from 'utils/loadable/lazyScreen';
+const Main = lazyScreen(import("./Main"));
 
-// 加载 redux store
-import store from './store';
+render(<Main />, document.getElementById("wrapper"));
 
-// 加载路由
-import Routes from './routes/index';
-
-/**
- * 渲染程序
- */
-const renderApp = () => render(
-    <ErrorBoundary>
-        <Provider store={store()}>
-            <LocaleProvider locale={require('antd/lib/locale-provider/zh_CN')}>
-                <Routes />
-            </LocaleProvider>
-        </Provider>
-    </ErrorBoundary>,
-	document.querySelector('#wrapper')
-);
-
-renderApp();
 

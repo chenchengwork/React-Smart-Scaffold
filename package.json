@@ -1,74 +1,37 @@
 {
-  "name": "Solution-Platform-Web",
+  "name": "React-Smart-Scaffold",
   "version": "1.0.0",
-  "author": "chencheng <cheng.chen@tianjishuju.com>",
-  "description": "解决方案前端",
+  "author": "chencheng <daniel_txy@163.com>",
+  "description": "React smart scaffold",
   "main": "src/index",
   "scripts": {
-    "intl": "rimraf ./i18n-messages && BABEL_ENV=i18n babel --quiet ./src > /dev/null && babel-node --presets es2015 ./scripts/translateIntl.js && rimraf ./i18n-messages",
     "dev": "node ./scripts/dev.js",
-    "build": "node ./scripts/build.js /data/React-Smart-Scaffold /"
+    "build": "node ./scripts/build.js /data/web_bundle/vis_web /public/vis_web"
   },
   "dependencies": {
-    "antd": "^3.6.5",
-    "axios": "^0.18.0",
+    "antd": "^3.10.4",
+    "axios": "^0.19.0-beta.1",
     "classnames": "^2.2.6",
-    "immutability-helper": "^2.7.1",
     "js-cookie": "^2.2.0",
-    "lodash": "^4.17.10",
-    "onfire.js": "^1.0.6",
-    "promise-polyfill": "^8.0.0",
+    "mobx": "^5.5.2",
+    "mobx-react": "^5.3.5",
+    "omit.js": "^1.0.0",
     "prop-types": "^15.6.2",
     "query-string": "^6.1.0",
-    "react": "^16.4.1",
-    "react-dom": "^16.4.1",
-    "react-intl": "^2.4.0",
-    "react-redux": "^5.0.7",
-    "react-router-dom": "^4.3.1",
-    "redux": "^3.7.2",
-    "redux-logger": "^3.0.6",
-    "redux-thunk": "^2.3.0",
-    "url-search-params-polyfill": "^4.0.0"
+    "react": "^16.6.0",
+    "react-dom": "^16.6.0",
+    "react-router-dom": "^4.3.1"
   },
   "devDependencies": {
-    "autoprefixer": "^8.6.5",
-    "babel-cli": "^6.26.0",
-    "babel-core": "^6.26.3",
-    "babel-loader": "^7.1.4",
-    "babel-plugin-import": "^1.8.0",
-    "babel-plugin-react-intl": "^2.4.0",
-    "babel-plugin-transform-decorators": "^6.24.1",
-    "babel-plugin-transform-decorators-legacy": "^1.3.5",
-    "babel-polyfill": "^6.26.0",
-    "babel-preset-env": "^1.7.0",
-    "babel-preset-es2015": "^6.24.1",
-    "babel-preset-react": "^6.24.1",
-    "babel-preset-stage-0": "^6.24.1",
-    "bundle-loader": "^0.5.6",
-    "css-loader": "^1.0.0",
-    "file-loader": "^1.1.11",
-    "less": "2.7.2",
-    "less-loader": "^4.1.0",
-    "mini-css-extract-plugin": "^0.4.1",
-    "node-sass": "^4.9.1",
-    "optimize-css-assets-webpack-plugin": "^5.0.0",
-    "postcss-flexbugs-fixes": "^3.3.1",
-    "postcss-loader": "^2.1.5",
-    "sass-loader": "^7.0.3",
-    "style-loader": "^0.21.0",
-    "uglifyjs-webpack-plugin": "^1.2.7",
-    "url-loader": "^1.0.1",
-    "webpack": "^4.15.1",
-    "webpack-bundle-analyzer": "^2.13.1",
-    "webpack-dev-server": "^3.1.4"
+    "webpack-pipe": "^1.0.0"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://gitee.com/TJDS-Project-To-Product/Solution-Platform-Web.git"
+    "url": "git+https://github.com/chenchengwork/React-Smart-Scaffold.git"
   },
-  "license": "ISC",
+  "license": "MIT",
   "bugs": {
-    "url": "https://gitee.com/TJDS-Project-To-Product/Solution-Platform-Web/issues"
+    "url": "https://github.com/chenchengwork/React-Smart-Scaffold/ssues"
   },
-  "homepage": "https://gitee.com/TJDS-Project-To-Product/Solution-Platform-Web#readme"
+  "homepage": "https://github.com/chenchengwork/React-Smart-Scaffold#readme"
 }

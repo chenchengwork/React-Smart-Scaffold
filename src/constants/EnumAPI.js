@@ -1,23 +1,37 @@
-/**
- * Created by chencheng on 2017/6/16.
- */
+const apiPrefix = window.ENV.apiPrefix || '/';
 
-const _processAPI = (api) => {
-	if (window.ENV.mock.isStart) {
-		return '/mockAPI' + api;
-	}
-
-	return api;
-};
+const proxyAPI = (api) => apiPrefix.replace(/\/$/, "") + "/" + api.replace(/^\//, "");
 
 
-/**
- *
- * @type {{login}}
- */
-const EnumAPI = {
+export default {
+    login: proxyAPI("login"),                   // 登录
+    logout: proxyAPI("logout"),                 // 退出
+    register: proxyAPI("register"),             // 注册
 
-	login: _processAPI('/p/login'),
-};
+    /*
+     |-----------------------------------------------------------------------------------------------------
+     | 大屏相关的API
+     |-----------------------------------------------------------------------------------------------------
+     */
+    getScreen: proxyAPI("/screen/getScreen"),
+    uploadSource: proxyAPI("/screen/uploadSource"),
 
-export default EnumAPI;
+    screenPageList: proxyAPI("/screen/getPageList"),
+    createScreen: proxyAPI("/screen/createScreen"),
+    updateScreen: (screen_id) => proxyAPI(`/screen/updateScreen?screen_id=${screen_id}`),
+    deleteScreen: proxyAPI("/screen/deleteScreen"),
+    uploadCover: (screen_id) => proxyAPI(`/screen/uploadScreenCover?screen_id=${screen_id}`),
+
+    /*
+    |-----------------------------------------------------------------------------------------------------
+    | 数据源相关的API
+    |-----------------------------------------------------------------------------------------------------
+    */
+    getDsTypes: proxyAPI("/dataSource/getDataSourceTypes"),
+    getDsJsonSchema: proxyAPI("/dataSource/getDataSourceJsonSchema"),
+    getDs: proxyAPI("/dataSource/getDataSource"),
+    getDsPageList: proxyAPI("/dataSource/getPageList"),
+    createDs: proxyAPI("/dataSource/createDataSource"),
+    updateDs: (data_source_id) => proxyAPI(`/dataSource/updateDataSource?data_source_id=${data_source_id}`),
+    deleteDs: proxyAPI("/dataSource/deleteDataSource"),
+}
