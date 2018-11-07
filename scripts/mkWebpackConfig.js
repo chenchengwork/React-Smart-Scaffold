@@ -48,6 +48,29 @@ const intl =  (config) => {
     return config;
 };
 
+
+const styledJsx = (config) => {
+    config.module.rules = config.module.rules.map(rule => {
+        if (rule.loader === "babel-loader"){
+            // styled-jsx
+            rule.options.plugins.push([
+                "styled-jsx/babel",
+                {
+                    "vendorPrefixes": true,     // 为css自动添加前缀
+                    "plugins": [
+                        ["styled-jsx-plugin-sass",{sassOptions: {}}]
+                    ]
+                }
+            ]);
+            return rule;
+        }
+
+        return rule;
+    });
+
+    return config;
+};
+
 /**
  * 组装webpack config
  * @return {*}
@@ -56,6 +79,7 @@ module.exports = (pipeNodes = []) => {
     const config = assemble([
         ...pipeNodes,
         intl,
+        styledJsx,
         pipe.base,
         pipe.staticResource,
         pipe.css,

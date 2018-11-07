@@ -57,25 +57,6 @@ class Helper {
         if(domObject) unmountComponentAtNode(domObject);
     }
 
-    /**
-     * 模拟request api数据
-     * @param data
-     * @param type "success" | "error"
-     * @param time 延迟时间
-     * @return {Promise<any>}
-     */
-    simulateData(data, type = 'success', time = 500) {
-        return new Promise((resolve, reject) => {
-            setTimeout(() => {
-                if (type == 'success') {
-                    resolve({ code: window.ENV.apiSuccessCode, data, msg: "success" })
-                }else {
-                    reject({code: "error", data, msg: 'error'})
-                }
-            }, time);
-        })
-    }
-
 	/**
 	 * 跳转页面
 	 * @param url
