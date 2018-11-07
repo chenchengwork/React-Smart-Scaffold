@@ -1,4 +1,4 @@
-import { request, localStore } from 'utils/T';
+import { request, localStore, checkType } from 'utils/T';
 import EnumAPI from 'constants/EnumAPI';
 const { get, postJSON } = request;
 
@@ -7,7 +7,7 @@ const { get, postJSON } = request;
  */
 class Permission {
     constructor() {
-        this.localPermissioKey = "";
+        this.localPermissioKey = "sk_permission";
     }
 
     /**
@@ -20,25 +20,46 @@ class Permission {
     }
 
     /**
-     * 是否可写
+     * 验证是否有权限
      */
-    isWrite(mark) {
+    can(mark) {
         const permissions = this.get();
 
         return Reflect.has(permissions, mark) ? permissions[mark] : false;
     }
 
+    /**
+     * 保存权限
+     * @param permissions
+     */
     set(permissions = {}) {
+        if(checkType.isPlainObject(permissions)) throw new Error("权限格式不正确");
+
         localStore.set(this.localPermissioKey, permissions);
     }
 
+    /**
+     * 获取权限
+     * @return {*}
+     */
     get(){
         return localStore.get(this.localPermissioKey);
     }
+
+    /**
+     * 清除权限
+     */
+    clear(){
+        localStore.remove(this.localPermissioKey);
+    }
 }
 
-
+/**
+ * 导出权限
+ * @type {Permission}
+ */
 export const permission = new Permission();
+
 
 /**
  * 登录
@@ -48,7 +69,8 @@ export const permission = new Permission();
  */
 export const login = (user_email, password) => {
     return postJSON(EnumAPI.login, {user_email, password}).then((resp) => {
-        // permission.set(resp);
+        // 用于保存当前登录者的权限信息
+        permission.set({});
 
         return resp;
     });
@@ -58,7 +80,12 @@ export const login = (user_email, password) => {
  * 退出登录
  * @return {Promise}
  */
-export const logout = () => get(EnumAPI.logout);
+export const logout = () => get(EnumAPI.logout).then(resp => {
+    // 清空权限信息
+    permission.clear();
+
+    return resp;
+});
 
 
 /**

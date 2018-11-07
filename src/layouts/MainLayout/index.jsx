@@ -1,5 +1,4 @@
 import styles from './index.scss';
-
 import PropTypes from 'prop-types';
 import {decorator, checkType, prompt} from 'utils/T';
 import CustomIcon from 'components/CustomIcon';
@@ -10,11 +9,11 @@ import { Link } from 'react-router-dom';
 import { Layout, Menu, Icon, BackTop } from 'antd';
 import { EnumIconTypes } from 'constants/EnumDefaultMenus';
 import { UrlToExtraInfoMap, getLeftMenu, getMenusByCategory, isRemoveLeftMenu } from './menuUtil';
-
 const { Header, Content, Sider } = Layout;
 
 import img_iconTj from './img/iconTj.png';
-
+import { logout } from 'services/auth';
+import EnumRouter from 'constants/EnumRouter';
 
 /**
  * 应用icon
@@ -132,12 +131,10 @@ export default class MainLayout extends PureComponent {
     /**
      * 退出登录
      */
-    logout = () => {
-        // prompt.confirm(
-        //     () =>  doLogout().then(resp => this.context.router.history.push(EnumRouter.login), resp => prompt.error(resp.msg)),
-        //     {title: "确定退出登录?"}
-        // )
-    }
+    logout = () => prompt.confirm(
+        () =>  logout().then(() => this.context.router.history.push(EnumRouter.login), resp => prompt.error(resp.msg)),
+        {title: "确定退出登录?"}
+    );
 
     /**
 	 * 获取左侧菜单宽度

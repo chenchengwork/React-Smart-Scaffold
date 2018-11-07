@@ -1,5 +1,5 @@
 import styles from './index.scss';
-import { PureComponent } from 'react';
+import React, { PureComponent } from 'react';
 
 /**
  * 应用错误便捷
