@@ -1,4 +1,4 @@
-import { prompt } from 'utils/T';
+import prompt from 'utils/prompt';
 import { screen } from 'services/api';
 import {observable, action, runInAction, toJS} from 'mobx';
 

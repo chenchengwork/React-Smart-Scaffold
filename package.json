@@ -6,7 +6,7 @@
   "main": "src/index",
   "scripts": {
     "dev": "node ./scripts/dev.js",
-    "build": "node ./scripts/build.js /data/web_bundle/vis_web /public/vis_web",
+    "build": "node ./scripts/build.js /data/web_bundle/react_smart_scaffold /",
     "trans": "atool-l10n"
   },
   "dependencies": {
@@ -30,7 +30,7 @@
     "atool-l10n": "^0.3.1",
     "babel-plugin-react-intl": "^3.0.1",
     "styled-jsx-plugin-sass": "^0.3.0",
-    "webpack-pipe": "^1.0.0"
+    "webpack-pipe": "^1.0.1"
   },
   "repository": {
     "type": "git",

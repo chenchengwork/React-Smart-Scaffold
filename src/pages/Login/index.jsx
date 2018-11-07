@@ -1,4 +1,5 @@
-import {decorator, prompt} from 'utils/T';
+import {decorator} from 'utils/T';
+import prompt from 'utils/prompt';
 import React, { Component } from 'react';
 import {  Alert } from 'antd';
 import Login from './lib';

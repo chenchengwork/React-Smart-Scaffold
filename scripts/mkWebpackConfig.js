@@ -71,6 +71,21 @@ const styledJsx = (config) => {
     return config;
 };
 
+
+// const webpackbarPlugin = (config) => {
+//     const WebpackBar = require('webpackbar');
+//     return depend.merge({
+//         plugins: [
+//             new WebpackBar({
+//                 name: 'Webpack',
+//                 minimal: false,
+//                 profile: true
+//             })
+//         ]
+//     }, config)
+// };
+
+
 /**
  * 组装webpack config
  * @return {*}
@@ -90,6 +105,7 @@ module.exports = (pipeNodes = []) => {
         pipe.miniCssExtractPlugin,
         pipe.provideReactPlugin,
         pipe.autoDllReactPlugin,
+        pipe.webpackbarPlugin,
 
         resolve,
         output,

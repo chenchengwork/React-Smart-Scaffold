@@ -1,6 +1,7 @@
 import styles from './index.scss';
 import PropTypes from 'prop-types';
-import {decorator, checkType, prompt} from 'utils/T';
+import {decorator, checkType} from 'utils/T';
+import prompt from 'utils/prompt';
 import CustomIcon from 'components/CustomIcon';
 
 import { PureComponent } from 'react';

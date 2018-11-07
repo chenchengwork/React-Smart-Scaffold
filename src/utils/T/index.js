@@ -1,5 +1,4 @@
 export helper from './core/helper';
-export prompt from './core/prompt';
 export queryString from 'query-string';
 import locallyjs from 'locallyjs';
 
