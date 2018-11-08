@@ -1,10 +1,7 @@
 /**
  * Created by chencheng on 17-8-30.
  */
-import 'antd/lib/modal/style/index.css';
-import 'antd/lib/message/style/index.css';
-import  Modal  from 'antd/lib/modal';
-import message from 'antd/lib/message';
+import { Modal, message } from 'antd';
 
 class Prompt {
 

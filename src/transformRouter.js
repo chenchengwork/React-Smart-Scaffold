@@ -15,7 +15,9 @@ const lazy = (component, isMainLayout, store, props ) => {
     if(!props.store) delete props.store;
     const Layout = isMainLayout ? MainLayout : Fragment;
 
-    // return () => <Redirect to={window.ENV.login.loginUrl} />;
+    if(window.location.pathname !== window.ENV.login.loginUrl) {
+        // return () => <Redirect to={window.ENV.login.loginUrl} />;
+    }
 
     return () => <Layout><LazyComponent {...props} /></Layout>
 };

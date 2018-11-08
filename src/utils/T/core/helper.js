@@ -3,7 +3,31 @@
  */
 import * as checkType from './checkType';
 import { render as reactDomRender, unmountComponentAtNode } from 'react-dom';
+import deepCloneOrigin from './deepClone';
+import deepmergeOrigin from 'deepmerge';
+
 const mountDomId = 'tj-render-dom';
+
+/**
+ * 验证是否相等
+ * 文档说明: https://github.com/ljharb/is-equal
+ */
+export isEqual from 'is-equal';
+
+/**
+ * 深度合并对象
+ * 文档说明: https://github.com/KyleAMathews/deepmerge
+ */
+export const deepmerge = (...rest) => deepmergeOrigin.all(rest, {arrayMerge: (destinationArray, sourceArray, options) => sourceArray});
+
+/**
+ * 深度clone
+ */
+export const deepClone = (originData) => {
+    if(Array.isArray(originData)) return deepCloneOrigin([], originData);
+    return deepCloneOrigin({}, originData);
+};
+
 
 class Helper {
 
