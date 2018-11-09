@@ -1,5 +1,6 @@
-import { request, localStore, checkType } from 'utils/T';
+import { request, localStore, checkType, Cookies } from 'utils/T';
 import EnumAPI from 'constants/EnumAPI';
+import EnumEnv from 'constants/EnumEnv';
 const { get, postJSON } = request;
 
 /**
@@ -14,10 +15,7 @@ class Permission {
      * 是否已经登录
      * @return {boolean}
      */
-    isLogin(){
-
-        return true;
-    }
+    isLogin = () => EnumEnv.login.isStartLoginCheck ? !!Cookies.get(EnumEnv.login.cookieKey) : true;
 
     /**
      * 验证是否有权限

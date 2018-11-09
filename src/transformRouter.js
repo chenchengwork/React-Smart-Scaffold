@@ -11,8 +11,8 @@ import EnumEnv from 'constants/EnumEnv';
 import { permission } from "services/auth";
 
 // 懒加载组件
-const lazy = (component, isMainLayout, store, props ) => {
-    if(window.location.pathname !== EnumEnv.login.loginUrl && !permission.isLogin()) return () => <Redirect to={window.ENV.login.loginUrl} />;
+const lazy = (uri, component, isMainLayout, store, props ) => {
+    if(!permission.isLogin() && uri !== EnumEnv.login.loginUrl) return () => <Redirect to={EnumEnv.login.loginUrl} />;
 
     const LazyComponent = loadable(component);
     props = {store, ...props};
@@ -26,8 +26,7 @@ const lazy = (component, isMainLayout, store, props ) => {
  * 检测是否登录
  * @return {*}
  */
-// const checkLoginRedirect = () => <Redirect to={permission.isLogin() ? window.ENV.login.defaultRedirectUrl : window.ENV.login.loginUrl} />
-const checkLoginRedirect = () => <Redirect to={EnumEnv.login.defaultRedirectUrl} />;
+const checkLoginRedirect = () => <Redirect to={permission.isLogin() ? EnumEnv.login.defaultRedirectUrl : EnumEnv.login.loginUrl} />;
 
 /**
  * 路由配置
@@ -65,7 +64,7 @@ const transformRouter = (routes) => () => (
                             key={index}
                             path={uri}
                             exact={true}
-                            component={lazy(component, isMainLayout, store, props)}
+                            component={lazy(uri, component, isMainLayout, store, props)}
                         />
                     })
                 }

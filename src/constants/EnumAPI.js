@@ -9,17 +9,14 @@ export default {
     logout: proxyAPI("logout"),                 // 退出
     register: proxyAPI("register"),             // 注册
 
-    /*
-     |-----------------------------------------------------------------------------------------------------
-     | 大屏相关的API
-     |-----------------------------------------------------------------------------------------------------
+    /**
+     * 业务A相关的API
      */
-    getScreen: proxyAPI("/screen/getScreen"),
-    uploadSource: proxyAPI("/screen/uploadSource"),
-
-    screenPageList: proxyAPI("/screen/getPageList"),
-    createScreen: proxyAPI("/screen/createScreen"),
-    updateScreen: (screen_id) => proxyAPI(`/screen/updateScreen?screen_id=${screen_id}`),
-    deleteScreen: proxyAPI("/screen/deleteScreen"),
-    uploadCover: (screen_id) => proxyAPI(`/screen/uploadScreenCover?screen_id=${screen_id}`),
+    screen: {
+        getItem: proxyAPI("/screen/getScreen"),
+        getPageList: proxyAPI("/screen/getPageList"),
+        createItem: proxyAPI("/screen/createScreen"),
+        updateItem: (screen_id) => proxyAPI(`/screen/updateScreen?screen_id=${screen_id}`),
+        deleteItem: proxyAPI("/screen/deleteScreen")
+    },
 }

@@ -33,7 +33,7 @@ export const screen = {
             }]
         });
 
-        return get(EnumAPI.screenPageList, params);
+        return get(EnumAPI.screen.getPageList, params);
     },
 
     /**
@@ -41,7 +41,7 @@ export const screen = {
      * @param {String} screen_id
      * @return {Promise}
      */
-    get: (screen_id) => get(EnumAPI.getScreen, {screen_id}),
+    get: (screen_id) => get(EnumAPI.screen.getItem, {screen_id}),
 
     /**
      * 创建元素
@@ -49,7 +49,7 @@ export const screen = {
      * @param {String} params.name
      * @return {Promise}
      */
-    create: (params = {}) => postJSON(EnumAPI.createScreen, params),
+    create: (params = {}) => postJSON(EnumAPI.screen.createItem, params),
 
     /**
      * 更新元素
@@ -59,14 +59,14 @@ export const screen = {
      * @param {String} [params.config]
      * @return {Promise}
      */
-    update: (screen_id, params = {}) => put(EnumAPI.updateScreen(screen_id), params),
+    update: (screen_id, params = {}) => put(EnumAPI.screen.updateItem(screen_id), params),
 
     /**
      * 删除元素
      * @param {Array} screen_ids
      * @return {Promise}
      */
-    delete: (screen_ids = []) => del(EnumAPI.deleteScreen, {screen_ids}),
+    delete: (screen_ids = []) => del(EnumAPI.screen.deleteItem, {screen_ids}),
 };
 
 
