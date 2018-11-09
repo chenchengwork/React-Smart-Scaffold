@@ -6,11 +6,12 @@ import axios from 'axios';
 import * as checkType from './checkType';
 import Cookies from 'js-cookie';
 import EnumRouter from 'constants/EnumRouter'
+import EnumEnv from 'constants/EnumEnv';
 
 // TODO 解决IE报warning Unhandled Rejections Error 参数书不正确的问题
 Promise._unhandledRejectionFn = function (rejectError) {};
 
-const { apiDomain, respCode } = window.ENV;
+const { apiDomain, respCode } = EnumEnv;
 
 class Csrf{
     // 校验是否是安全方法

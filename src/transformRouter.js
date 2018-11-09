@@ -1,3 +1,5 @@
+import React, { Fragment } from 'react';
+import { BrowserRouter,Route,Switch,Redirect,Link } from 'react-router-dom';
 import loadable from 'utils/loadable';
 
 import MainLayout from 'layouts/MainLayout';
@@ -5,19 +7,17 @@ const Exception = loadable(import("components/Exception"));
 const ErrorBoundary = loadable(import("components/ErrorBoundary"));
 
 import EnumRouter from 'constants/EnumRouter';
-import { Fragment } from 'react';
-import { BrowserRouter,Route,Switch,Redirect,Link } from 'react-router-dom';
+import EnumEnv from 'constants/EnumEnv';
+import { permission } from "services/auth";
 
 // 懒加载组件
 const lazy = (component, isMainLayout, store, props ) => {
+    if(window.location.pathname !== EnumEnv.login.loginUrl && !permission.isLogin()) return () => <Redirect to={window.ENV.login.loginUrl} />;
+
     const LazyComponent = loadable(component);
     props = {store, ...props};
     if(!props.store) delete props.store;
     const Layout = isMainLayout ? MainLayout : Fragment;
-
-    if(window.location.pathname !== window.ENV.login.loginUrl) {
-        // return () => <Redirect to={window.ENV.login.loginUrl} />;
-    }
 
     return () => <Layout><LazyComponent {...props} /></Layout>
 };
@@ -26,8 +26,8 @@ const lazy = (component, isMainLayout, store, props ) => {
  * 检测是否登录
  * @return {*}
  */
-// const checkLoginRedirect = () => <Redirect to={T.auth.isLogin() ? window.ENV.login.defaultRedirectUrl : window.ENV.login.loginUrl} />
-const checkLoginRedirect = () => <Redirect to={window.ENV.login.defaultRedirectUrl} />;
+// const checkLoginRedirect = () => <Redirect to={permission.isLogin() ? window.ENV.login.defaultRedirectUrl : window.ENV.login.loginUrl} />
+const checkLoginRedirect = () => <Redirect to={EnumEnv.login.defaultRedirectUrl} />;
 
 /**
  * 路由配置

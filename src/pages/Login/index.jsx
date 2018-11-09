@@ -5,7 +5,8 @@ import {  Alert } from 'antd';
 import Login from './lib';
 import styles from './index.scss';
 const { Tab, UserEmail, Password, Submit } = Login;
-const { login } = window.ENV;
+import EnumEnv from 'constants/EnumEnv';
+const { login } = EnumEnv;
 
 @decorator.contextTypes("router")
 export default class LoginPage extends Component {

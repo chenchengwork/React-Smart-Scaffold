@@ -1,4 +1,5 @@
-const apiPrefix = window.ENV.apiPrefix || '/';
+import EnumEnv from 'constants/EnumEnv';
+const apiPrefix = EnumEnv.apiPrefix || '/';
 
 const proxyAPI = (api) => apiPrefix.replace(/\/$/, "") + "/" + api.replace(/^\//, "");
 

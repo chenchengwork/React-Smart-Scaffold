@@ -1,12 +1,13 @@
-export helper from './core/helper';
 export queryString from 'query-string';
 import locallyjs from 'locallyjs';
 
+import * as helper from './core/helper';
 import * as checkType from './core/checkType';
 import * as request from './core/request';
 import * as decorator from './core/decorator';
 
 
+export { helper }
 export { checkType }
 export { request }
 export { decorator }

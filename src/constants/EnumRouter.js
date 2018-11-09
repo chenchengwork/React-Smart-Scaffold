@@ -1,4 +1,5 @@
-const to = (route) =>  window.ENV.rootPath + route;
+import EnumEnv from 'constants/EnumEnv';
+const to = (route) =>  EnumEnv.rootPath + route;
 
 /**
  * 路由枚举

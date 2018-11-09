@@ -42,8 +42,8 @@ export default ({ className = "", linkElement = 'a', type, title, desc, img, ...
                 <div className={styles.actions}>
                     {
                         createElement(linkElement, {
-                            to: window.ENV.rootPath,
-                            href: window.ENV.rootPath,
+                            to: "/",
+                            href: "/",
                         }, <Button type="primary">返回首页</Button>)
                     }
                 </div>
