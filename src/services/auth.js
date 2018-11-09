@@ -15,7 +15,17 @@ class Permission {
      * 是否已经登录
      * @return {boolean}
      */
-    isLogin = () => EnumEnv.login.isStartLoginCheck ? !!Cookies.get(EnumEnv.login.cookieKey) : true;
+    isLogin = () => {
+        if(EnumEnv.login.isStartLoginCheck){
+            const isLogined = !!Cookies.get(EnumEnv.login.cookieKey);
+            // 清空缓存
+            if(!isLogined) this.clear();
+
+            return isLogined;
+        }
+
+        return true;
+    }
 
     /**
      * 验证是否有权限
