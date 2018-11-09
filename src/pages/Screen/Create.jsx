@@ -1,30 +1,49 @@
 import PropTypes from 'prop-types';
-import React, { Component } from 'react';
-import { Form, Icon, Input, Button, Checkbox } from 'antd';
+import React, { PureComponent } from 'react';
+import { Form, Input } from 'antd';
 const FormItem = Form.Item;
 
+import prompt from 'utils/prompt';
+import { screen } from 'services/api';
 
-
-class Create extends React.Component {
+class Create extends PureComponent {
     static propTypes = {
-        modalControl: PropTypes.object
+        modalControl: PropTypes.object,
+        screen_id: PropTypes.number
     };
 
     componentDidMount(){
-        this.props.modalControl.registerOk(() => {
-            this.handleSubmit();
-        });
+        this.props.modalControl.registerOk(this.handleSubmit);
+        this.loadData();
     }
 
-    handleSubmit = (e) => {
-        // e.preventDefault();
+    loadData = () => {
+        const { screen_id } = this.props;
+        if(screen_id){
+            screen.get(screen_id).then(() => {
+
+            })
+        }
+    };
+
+    handleSubmit = () => {
+        const { screen_id } = this.props;
         this.props.form.validateFields((err, values) => {
             if (!err) {
-                console.log('Received values of form: ', values);
-                this.props.modalControl.close();
+                // console.log('Received values of form: ', values);
+                if(screen_id) {
+                    screen.create(values).then(
+                        () => this.props.modalControl.close(),
+                        (resp) => prompt.error(resp.msg)
+                    );
+                }else {
+                    screen.update(screen_id, values).then(
+                        () => this.props.modalControl.close(),
+                        (resp) => prompt.error(resp.msg)
+                    );
+                }
             }else {
                 this.props.modalControl.hideSaving();
-
             }
         });
     };
@@ -34,37 +53,30 @@ class Create extends React.Component {
         return (
             <Form onSubmit={this.handleSubmit} className="login-form">
                 <FormItem>
-                    {getFieldDecorator('userName', {
-                        rules: [{ required: true, message: 'Please input your username!' }],
+                    {getFieldDecorator('name', {
+                        rules: [{ required: true, message: '请输入姓名!' }],
                     })(
-                        <Input prefix={<Icon type="user" style={{ color: 'rgba(0,0,0,.25)' }} />} placeholder="Username" />
+                        <Input  placeholder="姓名" />
                     )}
                 </FormItem>
                 <FormItem>
-                    {getFieldDecorator('password', {
-                        rules: [{ required: true, message: 'Please input your Password!' }],
+                    {getFieldDecorator('age', {
+                        rules: [{ required: true, message: '请输入年龄!' }],
                     })(
-                        <Input prefix={<Icon type="lock" style={{ color: 'rgba(0,0,0,.25)' }} />} type="password" placeholder="Password" />
+                        <Input placeholder="年龄" />
                     )}
                 </FormItem>
+
                 <FormItem>
-                    {getFieldDecorator('remember', {
-                        valuePropName: 'checked',
-                        initialValue: true,
+                    {getFieldDecorator('address', {
+                        rules: [{ required: true, message: '请输入住址!' }],
                     })(
-                        <Checkbox>Remember me</Checkbox>
+                        <Input placeholder="住址" />
                     )}
-                    <a className="login-form-forgot" href="">Forgot password</a>
-                    <Button type="primary" htmlType="submit" className="login-form-button">
-                        Log in
-                    </Button>
-                    Or <a href="">register now!</a>
                 </FormItem>
             </Form>
         );
     }
 }
 
-const WrappedCreate = Form.create()(Create);
-
-export default WrappedCreate;
+export default Form.create()(Create);

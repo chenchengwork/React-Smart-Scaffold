@@ -55,6 +55,7 @@ export default class Screen extends PureComponent{
                     loading={loading}
                     dataSource={data.rows}
                     columns={this.columns}
+                    rowKey={(row) => row.name}
                     pagination={{
                         total: data.count,
                         pageSize: 15

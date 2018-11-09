@@ -34,7 +34,7 @@ export const deepClone = (originData) => {
  * @param isMockError
  * @return {Promise<any>}
  */
-export const mockData = (data, isMockError = false) => {
+export const mockData = (data = null, isMockError = false) => {
     return new Promise((resolve, reject) => {
         setTimeout(() => {
             if(!isMockError) {
