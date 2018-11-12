@@ -4,8 +4,6 @@
 import * as checkType from './checkType';
 import { render as reactDomRender, unmountComponentAtNode } from 'react-dom';
 import deepCloneOrigin from './deepClone';
-import deepmergeOrigin from 'deepmerge';
-
 const mountDomId = 'tj-render-dom';
 
 /**
@@ -18,7 +16,8 @@ export isEqual from 'is-equal';
  * 深度合并对象
  * 文档说明: https://github.com/KyleAMathews/deepmerge
  */
-export const deepmerge = (...rest) => deepmergeOrigin.all(rest, {arrayMerge: (destinationArray, sourceArray, options) => sourceArray});
+export deepmerge from './deepmerge';
+export deepmergeOrigin from 'deepmerge';
 
 /**
  * 深度clone
@@ -139,7 +138,7 @@ export const getImmutabilityHelperContent = (keyPath, value, updateType = '$set'
 /**
  * 时间格式化
  * @param {number} timestamp
- * @param {string} template
+ * @param {string} fmt
  * @return {string}
  */
 export const dateFormat = (timestamp, fmt = "yyyy-MM-dd hh:mm:ss") => {
@@ -192,11 +191,10 @@ export const uniq = (data) => Array.from(new Set(data));
  * @return {wrapperFn}
  *
  * usage:
-
- const a_fn = (params) => {}
- const render = throttle(a_fn, 16, null);
- render(1);
- render(2); // 将延迟16毫秒执行
+     const a_fn = (params) => {}
+     const render = throttle(a_fn, 16, null);
+     render(1);
+     render(2); // 将延迟16毫秒执行
  */
 export const throttle = (fn, time, context) => {
     let lock, args;

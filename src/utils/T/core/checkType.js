@@ -18,10 +18,10 @@ export const isObject = (val) => val != null && typeof val === 'object' && Array
 export const isPlainObject = (o) => {
     const isObjectObject = () => isObject(o) === true && Object.prototype.toString.call(o) === '[object Object]';
 
+    if (isObjectObject(o) === false) return false;
+
     let ctor = o.constructor,
         prot = ctor.prototype;
-
-    if (isObjectObject(o) === false) return false;
 
     // If has modified constructor
     if (typeof ctor !== 'function') return false;
