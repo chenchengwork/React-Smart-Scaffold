@@ -3,13 +3,16 @@
  */
 const mkWebpackConfig = require("./mkWebpackConfig");
 const { doDev, pipe } = require("webpack-pipe");
+const webpackConfig = mkWebpackConfig([pipe.development]);
 
 doDev({
-	webpackConfig: mkWebpackConfig([pipe.development]),
+	webpackConfig,
     devServerConfig: {},
 	host: "localhost",
 	port: 8000
 });
+
+console.log(process.env)
 
 
 

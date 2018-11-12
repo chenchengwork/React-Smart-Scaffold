@@ -22,8 +22,8 @@
     "omit.js": "^1.0.0",
     "prop-types": "^15.6.2",
     "query-string": "^6.1.0",
-    "react": "^16.6.0",
-    "react-dom": "^16.6.0",
+    "react": "^16.6.1",
+    "react-dom": "^16.6.1",
     "react-intl": "^2.7.2",
     "react-router-dom": "^4.3.1",
     "styled-jsx": "^3.1.0"
@@ -32,7 +32,7 @@
     "atool-l10n": "^0.3.1",
     "babel-plugin-react-intl": "^3.0.1",
     "styled-jsx-plugin-sass": "^0.3.0",
-    "webpack-pipe": "^1.0.1"
+    "webpack-pipe": "^1.0.2"
   },
   "repository": {
     "type": "git",

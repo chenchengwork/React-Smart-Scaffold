@@ -72,7 +72,7 @@ export const screen = {
      */
     delete: (screen_ids = []) => {
 
-        return mockScreen.deleteItem();
+        return mockScreen.deleteItem(screen_ids);
 
         return del(EnumAPI.screen.deleteItem, {screen_ids});
     },
