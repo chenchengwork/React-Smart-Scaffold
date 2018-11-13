@@ -126,7 +126,30 @@ function executeDeepMerge (target, _objects = [], _options = {}) {
 
 }
 
-export default function objectAssignDeep (...objects) {
-    return executeDeepMerge({}, objects);
+/*
+ * Merge all the supplied objects into the target object, breaking all references, including those of nested objects
+ * and arrays, and even objects nested inside arrays. The first parameter is not mutated unlike Object.assign().
+ * Properties in later objects will always overwrite.
+ */
+export function objectAssignDeep (target, ...objects) {
+    return executeDeepMerge(target, objects);
 };
 
+export default (originData) => {
+    if(Array.isArray(originData)) return objectAssignDeep([], originData);
+    return objectAssignDeep({}, originData);
+}
+
+// /*
+//  * Same as objectAssignDeep() except it doesn't mutate the target object and returns an entirely new object.
+//  */
+// module.exports.noMutate = function objectAssignDeepInto (...objects) {
+//     return executeDeepMerge({}, objects);
+// };
+//
+// /*
+//  * Allows an options object to be passed in to customise the behaviour of the function.
+//  */
+// module.exports.withOptions = function objectAssignDeepInto (target, objects, options) {
+//     return executeDeepMerge(target, objects, options);
+// };

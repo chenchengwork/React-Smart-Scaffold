@@ -20,7 +20,7 @@ export const isPlainObject = (o) => {
 
     if (isObjectObject(o) === false) return false;
 
-    let ctor = o.constructor,
+    const ctor = o.constructor,
         prot = ctor.prototype;
 
     // If has modified constructor

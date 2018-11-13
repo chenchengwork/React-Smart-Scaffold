@@ -3,7 +3,6 @@
  */
 import * as checkType from './checkType';
 import { render as reactDomRender, unmountComponentAtNode } from 'react-dom';
-import deepCloneOrigin from './deepClone';
 const mountDomId = 'tj-render-dom';
 
 /**
@@ -22,10 +21,7 @@ export deepmergeOrigin from 'deepmerge';
 /**
  * 深度clone
  */
-export const deepClone = (originData) => {
-    if(Array.isArray(originData)) return deepCloneOrigin([], originData);
-    return deepCloneOrigin({}, originData);
-};
+export deepClone from './deepClone';
 
 /**
  * 模拟数据
