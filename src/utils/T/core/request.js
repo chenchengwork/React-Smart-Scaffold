@@ -102,9 +102,8 @@ const _request = (options = {}, isDownload = false) => {
     return new Promise((resolve, reject) => {
         options = csrf.setToken(options);
 
+        const {  apiSuccessCode, errorCode, noLoginCode, invalidParamCode } = respCode;
         Singleton.getInstance().request(options).then((resp) => {
-            const {  apiSuccessCode, errorCode, noLoginCode, invalidParamCode } = respCode;
-
             // 处理下载
             if(isDownload){
                 processDownload(resp);
