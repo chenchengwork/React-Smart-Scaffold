@@ -1,8 +1,8 @@
-import {helper} from 'utils/T';
+import { deepmerge } from 'utils/T/core/helper';
 
 const rootPath = window.ENV ? window.ENV.rootPath || "/" : "/";
 
-const EnumEnv = helper.deepmerge({
+const EnumEnv = deepmerge({
     rootPath,                                      // 根路由前缀
     apiDomain: "",                                 // api域名
     apiPrefix: '/',                                // api前缀
@@ -20,6 +20,5 @@ const EnumEnv = helper.deepmerge({
         loginUrl: rootPath + "login",                   // 登录页面路由
     }
 }, window.ENV || {});
-
 
 export default EnumEnv;

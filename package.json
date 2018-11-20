@@ -32,7 +32,7 @@
     "atool-l10n": "^0.3.1",
     "babel-plugin-react-intl": "^3.0.1",
     "styled-jsx-plugin-sass": "^0.3.0",
-    "webpack-pipe": "^1.0.2"
+    "webpack-pipe": "^1.0.3"
   },
   "repository": {
     "type": "git",
