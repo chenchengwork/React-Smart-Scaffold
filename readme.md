@@ -217,10 +217,14 @@ https://github.com/toji/gl-matrix
 14. web端语音识别
 
 (1). js中内置的语音api
+```
 https://juejin.im/entry/5afe4ad3518825426539b0ca
+```
 
 (2). JuliusJS: 基于JavaScript的在线语音识别库
+```
 http://ourjs.com/detail/54387c58bc3f9b154e000009
+```
 
 
 
