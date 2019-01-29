@@ -225,7 +225,16 @@ https://juejin.im/entry/5afe4ad3518825426539b0ca
 ```
 http://ourjs.com/detail/54387c58bc3f9b154e000009
 ```
+15. react拖拽放置
 
+(1). 列表拖拽库
+```
+https://github.com/chinanf-boy/react-beautiful-dnd-zh
+```
+(2). Drag and Drop for React
+```
+https://github.com/react-dnd/react-dnd/
+```
 
 
 
