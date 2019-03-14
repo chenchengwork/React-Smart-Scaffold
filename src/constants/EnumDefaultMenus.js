@@ -38,11 +38,11 @@ export const EnumIconTypes = {
  */
 export const EnumDefaultMenus = [
     {
-        // label: '可视化组件',
-        // icon: {
-        //     appType: EnumIconTypes.custom,
-        //     iconType: 'fuwei'
-        // },
+        label: '可视化组件',
+        icon: {
+            appType: EnumIconTypes.custom,
+            iconType: 'fuwei'
+        },
         children: [
             {
                 icon: {
@@ -51,6 +51,23 @@ export const EnumDefaultMenus = [
                 },
                 label: "我的可视化",
                 url: EnumRouter.screen,
+            },
+        ]
+    },
+    {
+        label: '可视化组件1',
+        icon: {
+            appType: EnumIconTypes.custom,
+            iconType: 'fuwei'
+        },
+        children: [
+            {
+                icon: {
+                    appType: EnumIconTypes.custom,
+                    iconType: 'fuwei'
+                },
+                label: "我的可视化1",
+                url: "/b",
             },
         ]
     },

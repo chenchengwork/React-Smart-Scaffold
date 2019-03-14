@@ -11,8 +11,6 @@ import widthModal from 'components/Hoc/widthModal';
 import Create from './Create';
 import PropTypes from 'prop-types';
 
-import CustomIcon from 'components/CustomIcon';
-
 @inject((stores) => ({
     listStore: stores.screen.listStore,
     createStore: stores.screen.createStore,
