@@ -9,7 +9,7 @@ import { Link, withRouter } from 'react-router-dom';
 
 import { Layout, Menu, Icon, BackTop } from 'antd';
 import { EnumIconTypes } from 'constants/EnumDefaultMenus';
-import { UrlToExtraInfoMap, getLeftMenu, getMenusByCategory, isRemoveLeftMenu } from './menuUtil';
+import { UrlToExtraInfoMap, getLeftMenu, getMenus, isRemoveLeftMenu } from './menuUtil';
 const { Header, Content, Sider } = Layout;
 
 import img_iconTj from './img/iconTj.png';
@@ -111,22 +111,18 @@ class MainLayout extends PureComponent {
         super();
         this.state = {
             collapsed: false,
-            menuCategory: '',
             appMenuLeftWidth: 200,		// 左侧菜单的宽度
             openKeys: []
         };
     }
 
     componentDidMount() {
-        const { category, isCollapsedLeftMenu } = UrlToExtraInfoMap[this.props.match.path] || {};
+        const { isCollapsedLeftMenu } = UrlToExtraInfoMap[this.props.match.path] || {};
 
-        if (UrlToExtraInfoMap !== this.state.menuCategory) {
-            this.setState({
-                menuCategory: category,
-                collapsed: isCollapsedLeftMenu,
-                appMenuLeftWidth: this.getAppMenuLeftWidth(isCollapsedLeftMenu)
-            });
-        }
+        this.setState({
+            collapsed: isCollapsedLeftMenu,
+            appMenuLeftWidth: this.getAppMenuLeftWidth(isCollapsedLeftMenu)
+        });
     }
 
     /**
@@ -181,7 +177,7 @@ class MainLayout extends PureComponent {
                     style={{ lineHeight: '60px', marginLeft: 10, border: 0 }}
                 >
                     {
-                        getMenusByCategory(this.state.menuCategory).map((val, key) => {
+                        getMenus().map((val, key) => {
                             const url = Array.isArray(val.url) ? val.url[0] : val.url;
 
                             return checkType.isUndefined(val.label) || checkType.isEmpty(val.label) ? null : (
@@ -218,7 +214,7 @@ class MainLayout extends PureComponent {
 	 * @returns {*}
 	 */
     getLeftMenu(currentUrl) {
-        const leftMenu = getLeftMenu(currentUrl, this.state.menuCategory);
+        const leftMenu = getLeftMenu(currentUrl);
 
         if (leftMenu.length < 1) return null;
 
