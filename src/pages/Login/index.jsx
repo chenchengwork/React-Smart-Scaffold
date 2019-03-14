@@ -1,6 +1,6 @@
 import React, { PureComponent } from 'react';
 import {  Alert } from 'antd';
-import {decorator} from 'utils/T';
+import { withRouter } from 'react-router-dom';
 import prompt from 'utils/prompt';
 
 import Login from './lib';
@@ -9,8 +9,7 @@ const { Tab, UserEmail, Password, Submit } = Login;
 import EnumEnv from 'constants/EnumEnv';
 import { login } from 'services/auth';
 
-@decorator.contextTypes("router")
-export default class LoginPage extends PureComponent {
+class LoginPage extends PureComponent {
     static defaultProps = {
         login: {
             status: "success",
@@ -33,7 +32,7 @@ export default class LoginPage extends PureComponent {
             login(user_email, password).then(resp => {
                 prompt.success("登录成功");
                 this.setState({submitting: false});
-                this.context.router.history.push(EnumEnv.login.defaultRedirectUrl);
+                this.props.history.push(EnumEnv.login.defaultRedirectUrl);
             }, resp => {
                 prompt.error(resp.msg);
                 this.setState({submitting: false});
@@ -69,3 +68,5 @@ export default class LoginPage extends PureComponent {
         );
     }
 }
+
+export default withRouter(LoginPage)

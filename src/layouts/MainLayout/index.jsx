@@ -1,11 +1,11 @@
 import styles from './index.scss';
 import PropTypes from 'prop-types';
-import {decorator, checkType} from 'utils/T';
+import {checkType} from 'utils/T';
 import prompt from 'utils/prompt';
 import CustomIcon from 'components/CustomIcon';
 
 import { PureComponent } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, withRouter } from 'react-router-dom';
 
 import { Layout, Menu, Icon, BackTop } from 'antd';
 import { EnumIconTypes } from 'constants/EnumDefaultMenus';
@@ -105,8 +105,7 @@ MainContent.propTypes = {
     children: PropTypes.node
 };
 
-@decorator.contextTypes('router')
-export default class MainLayout extends PureComponent {
+class MainLayout extends PureComponent {
     constructor() {
         super();
         this.state = {
@@ -118,7 +117,7 @@ export default class MainLayout extends PureComponent {
     }
 
     componentDidMount() {
-        const { category, isCollapsedLeftMenu } = UrlToExtraInfoMap[this.context.router.route.match.path] || {};
+        const { category, isCollapsedLeftMenu } = UrlToExtraInfoMap[this.props.match.path] || {};
 
         if (UrlToExtraInfoMap !== this.state.menuCategory) {
             this.setState({
@@ -133,7 +132,7 @@ export default class MainLayout extends PureComponent {
      * 退出登录
      */
     logout = () => prompt.confirm(
-        () =>  logout().then(() => this.context.router.history.push(EnumRouter.login), resp => prompt.error(resp.msg)),
+        () =>  logout().then(() => this.props.history.push(EnumRouter.login), resp => prompt.error(resp.msg)),
         {title: "确定退出登录?"}
     );
 
@@ -144,7 +143,7 @@ export default class MainLayout extends PureComponent {
      */
     getAppMenuLeftWidth(collapsed) {
         // 是否移除左侧菜单
-        const currentUrl = this.context.router.route.match.path;
+        const currentUrl = this.props.match.path;
         if(isRemoveLeftMenu(currentUrl)) return 0;
 
         return collapsed ? 80 : 200;
@@ -296,7 +295,8 @@ export default class MainLayout extends PureComponent {
     }
 
     render() {
-        const currentUrl = this.context.router.route.match.path;
+        const currentUrl = this.props.match.path;
+
         return (
             <Layout className={styles["main-layout"]}>
 
@@ -319,3 +319,4 @@ export default class MainLayout extends PureComponent {
     }
 }
 
+export default withRouter(MainLayout)

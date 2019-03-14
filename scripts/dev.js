@@ -12,7 +12,6 @@ doDev({
 	port: 8000
 });
 
-console.log(process.env)
 
 
 

@@ -16,7 +16,6 @@ export isEqual from 'is-equal';
  * 文档说明: https://github.com/KyleAMathews/deepmerge
  */
 export deepmerge from './deepmerge';
-export deepmergeOrigin from 'deepmerge';
 
 /**
  * 深度clone
@@ -93,45 +92,6 @@ export const redirect = (url, timeout) => {
 
 
 /**
- * 获取包“immutability-helper”中的update内容
- * @param {String | Array}  keyPath "str1.str2..." //依点分割key 或 [key1,key2]
- * @param {Mixed} value
- * @param {String} updateType //可填写类型：$set,$push,$unshift,$splice,$unset,$merge,$apply
- * @return {{}}
- */
-export const getImmutabilityHelperContent = (keyPath, value, updateType = '$set') => {
-    let keyArr = Array.isArray(keyPath) ? keyPath : keyPath.split('.');
-    let keyLen = keyArr.length;
-    let result = {};
-
-    /* eslint no-eval:0 */
-    /* eslint no-return-assign:0 */
-    const getTmpRes = (keys, val = null) => {
-        let res = 'result';
-        keys.forEach(key => res += "['" + key + "']");
-        res += '={}';
-        eval(res);
-        return eval(res.replace('={}', ''));
-    };
-
-
-    let usedKeys = [];
-    keyArr.forEach((key, index) => {
-        const currentLen = index + 1;
-        usedKeys.push(key);
-
-        if (currentLen === keyLen) {
-            getTmpRes(usedKeys)[updateType] = value;
-        } else {
-            getTmpRes(usedKeys);
-        }
-    });
-
-    return result;
-}
-
-
-/**
  * 时间格式化
  * @param {number} timestamp
  * @param {string} fmt
@@ -168,7 +128,7 @@ export const dateFormat = (timestamp, fmt = "yyyy-MM-dd hh:mm:ss") => {
     }
 
     return fmt;
-}
+};
 
 
 /**
