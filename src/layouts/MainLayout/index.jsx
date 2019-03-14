@@ -106,7 +106,8 @@ MainContent.propTypes = {
     children: PropTypes.node
 };
 
-class MainLayout extends PureComponent {
+@withRouter
+export default class MainLayout extends PureComponent {
     constructor() {
         super();
         this.state = {
@@ -315,5 +316,3 @@ class MainLayout extends PureComponent {
 
     }
 }
-
-export default withRouter(MainLayout)

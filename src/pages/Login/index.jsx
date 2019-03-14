@@ -9,7 +9,8 @@ const { Tab, UserEmail, Password, Submit } = Login;
 import EnumEnv from 'constants/EnumEnv';
 import { login } from 'services/auth';
 
-class LoginPage extends PureComponent {
+@withRouter
+export default class LoginPage extends PureComponent {
     static defaultProps = {
         login: {
             status: "success",
@@ -69,4 +70,3 @@ class LoginPage extends PureComponent {
     }
 }
 
-export default withRouter(LoginPage)
