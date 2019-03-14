@@ -1,7 +1,7 @@
 import EnumEnv from 'constants/EnumEnv';
 const apiPrefix = EnumEnv.apiPrefix || '/';
 
-const proxyAPI = (api) => apiPrefix.replace(/\/$/, "") + "/" + api.replace(/^\//, "");
+export const proxyAPI = (api) => apiPrefix.replace(/\/$/, "") + "/" + api.replace(/^\//, "");
 
 
 export default {

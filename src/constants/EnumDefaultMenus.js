@@ -44,12 +44,16 @@ export const EnumDefaultMenus = [
         childrenMenu: [
             {
                 // label: '可视化组件',
-                icon: {
-                    appType: EnumIconTypes.custom,
-                    iconType: 'zujian1'
-                },
+                // icon: {
+                //     appType: EnumIconTypes.custom,
+                //     iconType: 'fuwei'
+                // },
                 children: [
                     {
+                        icon: {
+                            appType: EnumIconTypes.custom,
+                            iconType: 'fuwei'
+                        },
                         label: "我的可视化",
                         url: EnumRouter.screen,
                     },

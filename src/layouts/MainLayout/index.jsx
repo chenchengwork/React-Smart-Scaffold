@@ -24,13 +24,14 @@ import EnumRouter from 'constants/EnumRouter';
  * @constructor
  */
 const AppIcon = ({ appType, iconType, spin = false, style = {}}) => {
-    if (appType == EnumIconTypes.antd) {
-        return <Icon type={iconType} spin={spin} style={style} />;
-    } else if (appType == EnumIconTypes.custom) {
-        return <CustomIcon type={iconType} spin={spin} style={style} />;
+    switch (appType) {
+        case EnumIconTypes.antd:
+            return <Icon type={iconType} spin={spin} style={style} />;
+        case EnumIconTypes.custom:
+            return <CustomIcon type={iconType} spin={spin} style={style} />;
+        default:
+            return null
     }
-
-    return null;
 };
 
 /**

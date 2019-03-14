@@ -1,6 +1,6 @@
-import React, {PureComponent, Fragment, Component} from 'react';
+import React, { Fragment, Component} from 'react';
 import {observer, inject} from 'mobx-react';
-import { FormattedMessage } from 'react-intl';
+// import { FormattedMessage } from 'react-intl';
 
 import styles from './index.scss';
 import { Table, Button } from 'antd';
@@ -10,6 +10,8 @@ import { MainContent, MainHeader } from 'layouts/MainLayout'
 import widthModal from 'components/Hoc/widthModal';
 import Create from './Create';
 import PropTypes from 'prop-types';
+
+import CustomIcon from 'components/CustomIcon';
 
 @inject((stores) => ({
     listStore: stores.screen.listStore,

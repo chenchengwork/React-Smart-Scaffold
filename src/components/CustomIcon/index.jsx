@@ -1,33 +1,24 @@
-import './icon/iconfont.css';
-import React from "react";
-import styles from './index.scss';
+import React from 'react';
+import {Icon} from 'antd';
 import PropTypes from 'prop-types';
-import classNames from 'classnames';
+
+const MyIcon = Icon.createFromIconfontCN({
+    scriptUrl: require("./iconfont"), // 在 iconfont.cn 上生成, 下载到本地icon.js中
+});
 
 /**
  * 自定义icon
  * @param type
- * @param className
- * @param spin
  * @param rest
  * @return {*}
  * @constructor
  */
-const CustomIcon = ({ type, className, spin, ...rest }) => {
-    const classString = classNames({
-        iconfont: true,
-        [styles['custom-icon-spin']]: !!spin,
-        [`icon-${type}`]: true,
-        // anticon: true,
-    }, className);
+const CustomIcon = ({ type,  ...rest }) => {
 
-    return <i className={classString} {...rest} />;
+    return <MyIcon type={`icon-${type}`} {...rest} />;
 };
 CustomIcon.propTypes = {
     type: PropTypes.string.isRequired,      // icon类型
-    className: PropTypes.string,            // 类名
-    spin: PropTypes.bool,                   // 是否旋转
-    style: PropTypes.object,                // 样式
 };
 
 export default CustomIcon;
