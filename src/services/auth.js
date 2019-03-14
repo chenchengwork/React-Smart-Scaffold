@@ -1,5 +1,5 @@
 import { request, localStore, checkType, Cookies } from 'utils/T';
-import EnumAPI from 'constants/EnumAPI';
+import {proxyAPI} from 'services/proxyAPI';
 import EnumEnv from 'constants/EnumEnv';
 const { get, postJSON } = request;
 
@@ -76,7 +76,7 @@ export const permission = new Permission();
  * @return {Promise}
  */
 export const login = (user_email, password) => {
-    return postJSON(EnumAPI.login, {user_email, password}).then((resp) => {
+    return postJSON(proxyAPI("login"), {user_email, password}).then((resp) => {
         // 用于保存当前登录者的权限信息
         permission.set({});
 
@@ -88,7 +88,7 @@ export const login = (user_email, password) => {
  * 退出登录
  * @return {Promise}
  */
-export const logout = () => get(EnumAPI.logout).then(resp => {
+export const logout = () => get(proxyAPI("logout")).then(resp => {
     // 清空权限信息
     permission.clear();
 
@@ -101,6 +101,6 @@ export const logout = () => get(EnumAPI.logout).then(resp => {
  * @param {Object} params
  * @return {Promise}
  */
-export const register = (params = {}) => postJSON(EnumAPI.register, params);
+export const register = (params = {}) => postJSON(proxyAPI("register"), params);
 
 

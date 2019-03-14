@@ -1,5 +1,5 @@
 import PropTypes from 'prop-types';
-import {EnumIconTypes} from "constants/EnumDefaultMenus";
+import {EnumIconTypes} from "./constants/EnumDefaultMenus";
 import CustomIcon from "components/CustomIcon";
 import { Icon } from 'antd';
 

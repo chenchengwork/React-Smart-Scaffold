@@ -2,7 +2,7 @@
  * Created by chencheng on 2017/8/28.
  */
 import {checkType, helper} from 'utils/T';
-import { EnumDefaultMenus, EnumCollapsedLeftMenuUrls } from 'constants/EnumDefaultMenus';
+import { EnumDefaultMenus, EnumCollapsedLeftMenuUrls } from './constants/EnumDefaultMenus';
 
 /**
  * url和分类值的对应关系

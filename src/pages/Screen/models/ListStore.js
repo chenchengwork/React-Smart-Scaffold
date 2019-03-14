@@ -1,5 +1,5 @@
 import prompt from 'utils/prompt';
-import { screen } from 'services/api';
+import { getPageList, deleteScreen } from '../api';
 import {observable, action, runInAction, toJS} from 'mobx';
 
 /**
@@ -24,7 +24,7 @@ export default class ListStore {
         this.loading = true;
         params = Object.assign({ search: toJS(this.search), page: 1, pageSize: 10 }, params);
 
-        screen.getPageList(params).then(
+        getPageList(params).then(
             (resp) => runInAction(()=>{
                 this.data = resp.data;
                 this.loading = false;
@@ -42,7 +42,7 @@ export default class ListStore {
      */
     delItem = (screen_ids) => {
         screen_ids = !Array.isArray(screen_ids) ? [screen_ids] : screen_ids;
-        return screen.delete(screen_ids).then(
+        return deleteScreen(screen_ids).then(
             (resp) => this.fetchPageList(),
             (resp) =>  prompt.error(resp.msg)
         )

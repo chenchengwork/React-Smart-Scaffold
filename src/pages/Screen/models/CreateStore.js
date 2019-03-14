@@ -1,7 +1,7 @@
 import { observable, action, runInAction } from 'mobx';
 import prompt from 'utils/prompt';
 import {checkType} from 'utils/T';
-import {screen} from 'services/api';
+import { getScreen, updateScreen, createScreen } from '../api';
 
 
 export default class CreateStore {
@@ -17,7 +17,7 @@ export default class CreateStore {
     fetchData = (screen_id) => {
         if(screen_id) {
             this.loading = true;
-            screen.get(screen_id).then(
+            getScreen(screen_id).then(
                 (resp) => runInAction(() => {
                     this.loading = false;
                     this.data = resp.data;
@@ -57,11 +57,11 @@ export default class CreateStore {
 
         // 更新item
         if(screen_id){
-            screen.update(screen_id, params).then(...thenResp);
+            updateScreen(screen_id, params).then(...thenResp);
         }
         // 创建item
         else {
-            screen.create(params).then(...thenResp);
+            createScreen(params).then(...thenResp);
         }
     }
 
