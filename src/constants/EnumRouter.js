@@ -1,5 +1,5 @@
 import EnumEnv from 'constants/EnumEnv';
-const to = (route) =>  EnumEnv.rootPath + route;
+const to = (route) =>  EnumEnv.rootPath.replace(/\/$/, "") + "/" + route;
 
 /**
  * 路由枚举
@@ -9,6 +9,7 @@ const EnumRouter = {
 
     login: to('login'),		    // 登录
     screen: to('screen'),		// 我的可视化
+    reactHooks: to("react/hooks")
 };
 
 export default EnumRouter;

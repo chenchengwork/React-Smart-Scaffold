@@ -23,6 +23,10 @@ const routes = [
         uri: EnumRouter.screen,
         component: import("./pages/Screen"),
     },
+    {
+        uri: EnumRouter.reactHooks,
+        component: import("./pages/ReactHooks"),
+    },
 ];
 
 
