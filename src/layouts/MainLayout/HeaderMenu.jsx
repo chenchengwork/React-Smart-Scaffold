@@ -8,8 +8,8 @@ import AppIcon from './AppIcon';
 
 const HeaderMenu = ({currentUrl, menus, logout}) => (
     <Layout.Header className={styles["menu-header"]}>
-        <img src={require("./img/iconTj.png")} style={{height:35, marginTop: 6}} />
-        <span className={styles["logo"]} style={{width: 108}}>可视化</span>
+        <img src={require("./img/logo.svg")} style={{height:35, marginTop: 6}} />
+        <span className={styles["logo"]} style={{width: 108}}>React脚手架</span>
 
         <Menu
             className={styles["ant-menu-left"]}
