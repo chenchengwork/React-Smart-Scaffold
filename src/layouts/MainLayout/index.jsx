@@ -19,19 +19,10 @@ export MainContent from "./MainContent"
 @withRouter
 export default class MainLayout extends PureComponent {
     state = {
-        collapsed: false,
-        appMenuLeftWidth: 200,		// 左侧菜单的宽度
+        collapsed: !UrlToExtraInfoMap[this.props.match.path],
+        appMenuLeftWidth: this.getLeftMenuWidth(!UrlToExtraInfoMap[this.props.match.path]),		// 左侧菜单的宽度
         openKeys: []
     };
-
-    componentDidMount() {
-        const { isCollapsedLeftMenu } = UrlToExtraInfoMap[this.props.match.path] || {};
-
-        this.setState({
-            collapsed: isCollapsedLeftMenu,
-            appMenuLeftWidth: this.getLeftMenuWidth(isCollapsedLeftMenu)
-        });
-    }
 
     /**
      * 退出登录
