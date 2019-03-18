@@ -1,5 +1,4 @@
 import styles from './index.scss';
-import PropTypes from 'prop-types';
 import { PureComponent } from 'react';
 import { withRouter } from 'react-router-dom';
 import { Layout, BackTop } from 'antd';
@@ -10,8 +9,8 @@ import { UrlToExtraInfoMap, getLeftMenu, getMenus, isRemoveLeftMenu } from './me
 import { logout } from 'services/auth';
 import EnumRouter from 'constants/EnumRouter';
 
-import HeaderMenu from './HeaderMenu';
-import LeftMenu from './LeftMenu';
+import MenuHeader from './MenuHeader';
+import MenuLeft from './MenuLeft';
 
 export MainHeader from './MainHeader';
 export MainContent from "./MainContent"
@@ -56,14 +55,14 @@ export default class MainLayout extends PureComponent {
         const { appMenuLeftWidth, collapsed } = this.state;
         return (
             <Layout className={styles["main-layout"]}>
-                <HeaderMenu
+                <MenuHeader
                     currentUrl={currentUrl}
                     menus={getMenus()}
                     logout={this.logout}
                 />
 
                 <Layout className={styles["main-content"]}>
-                    <LeftMenu
+                    <MenuLeft
                         currentUrl={currentUrl}
                         leftMenu={getLeftMenu(currentUrl)}
                         leftWidth={appMenuLeftWidth}

@@ -63,7 +63,7 @@ const formatLeftMenu = (menus, currentUrl) => menus.map((val) => {
     }
 });
 
-const LeftMenu = ({leftMenu, currentUrl, leftWidth, collapsed, onLeftMenuCollapse}) => {
+const MenuLeft = ({leftMenu, currentUrl, leftWidth, collapsed, onLeftMenuCollapse}) => {
     if (leftMenu.length < 1) return null;
 
     return (
@@ -86,7 +86,7 @@ const LeftMenu = ({leftMenu, currentUrl, leftWidth, collapsed, onLeftMenuCollaps
     );
 };
 
-LeftMenu.propTypes = {
+MenuLeft.propTypes = {
     leftMenu: PropTypes.array.isRequired,
     currentUrl: PropTypes.string.isRequired,
     leftWidth: PropTypes.number.isRequired,
@@ -94,4 +94,4 @@ LeftMenu.propTypes = {
     onLeftMenuCollapse: PropTypes.func.isRequired,
 };
 
-export default LeftMenu;
+export default MenuLeft;

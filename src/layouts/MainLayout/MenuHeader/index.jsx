@@ -6,7 +6,7 @@ import {checkType} from "utils/T";
 
 import AppIcon from '../AppIcon';
 
-const HeaderMenu = ({currentUrl, menus, logout}) => (
+const MenuHeader = ({currentUrl, menus, logout}) => (
     <Layout.Header className={styles["menu-header"]}>
         <img src={require("./img/logo.svg")} style={{height:35, marginTop: 6}} />
         <span className={styles["logo"]} style={{minWidth: 108}}>React Scaffold</span>
@@ -51,10 +51,10 @@ const HeaderMenu = ({currentUrl, menus, logout}) => (
     </Layout.Header>
 );
 
-HeaderMenu.propTypes = {
+MenuHeader.propTypes = {
     currentUrl: PropTypes.string.isRequired,
     menus: PropTypes.array.isRequired,
     logout: PropTypes.func.isRequired,
 }
 
-export default HeaderMenu;
+export default MenuHeader;
