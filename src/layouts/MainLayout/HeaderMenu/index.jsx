@@ -4,12 +4,12 @@ import { Link } from 'react-router-dom';
 import { Layout, Menu, Icon } from 'antd';
 import {checkType} from "utils/T";
 
-import AppIcon from './AppIcon';
+import AppIcon from '../AppIcon';
 
 const HeaderMenu = ({currentUrl, menus, logout}) => (
     <Layout.Header className={styles["menu-header"]}>
         <img src={require("./img/logo.svg")} style={{height:35, marginTop: 6}} />
-        <span className={styles["logo"]} style={{width: 108}}>React脚手架</span>
+        <span className={styles["logo"]} style={{minWidth: 108}}>React Scaffold</span>
 
         <Menu
             className={styles["ant-menu-left"]}
@@ -19,12 +19,13 @@ const HeaderMenu = ({currentUrl, menus, logout}) => (
         >
             {
                 menus.map((val, key) => {
+
                     const linkTo = Array.isArray(val.url) ? val.url[0] : val.url;
                     const target = val.target || "";
                     const RouteLink = target === "_blank" ? ({children, to,  ...rest}) => (<a href={to} {...rest}>{children}</a>) : Link;
 
                     return checkType.isUndefined(val.label) || checkType.isEmpty(val.label) ? null : (
-                        <Menu.Item key={url + key} className={val.url.indexOf(currentUrl) !== -1 ? 'active' : ''}>
+                        <Menu.Item key={linkTo + key} className={val.url.indexOf(currentUrl) !== -1 ? 'active' : ''}>
                             <RouteLink to={linkTo} target={target}>
                                 <AppIcon {...val.icon} style={{ marginRight: 10 }} />
                                 {val.label}

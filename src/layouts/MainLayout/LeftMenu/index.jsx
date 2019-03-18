@@ -2,7 +2,7 @@ import PropTypes from 'prop-types';
 import { Link } from "react-router-dom";
 import { Layout, Menu } from 'antd';
 
-import AppIcon from "./AppIcon";
+import AppIcon from "../AppIcon";
 import styles from "./index.scss";
 
 // 获取默认展开的菜单keys
@@ -22,7 +22,6 @@ const recursionOpenKeys = (menus, currentUrl, openKeys = []) => {
 
     return openKeys;
 };
-
 
 // 递归获取菜单
 const formatLeftMenu = (menus, currentUrl) => menus.map((val) => {
@@ -63,8 +62,6 @@ const formatLeftMenu = (menus, currentUrl) => menus.map((val) => {
         );
     }
 });
-
-
 
 const LeftMenu = ({leftMenu, currentUrl, leftWidth, collapsed, onLeftMenuCollapse}) => {
     if (leftMenu.length < 1) return null;
