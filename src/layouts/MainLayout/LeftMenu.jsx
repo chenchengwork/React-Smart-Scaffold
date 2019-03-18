@@ -49,12 +49,16 @@ const formatLeftMenu = (menus, currentUrl) => menus.map((val) => {
             return val.url;
         })();
 
+        const linkTo = Array.isArray(val.url) ? val.url[0] : val.url;
+        const target = val.target || "";
+        const RouteLink = target === "_blank" ? ({children, to,  ...rest}) => (<a href={to} {...rest}>{children}</a>) : Link;
+
         return (
             <Menu.Item key={realUrl}>
-                <Link to={Array.isArray(val.url) ? val.url[0] : val.url}>
+                <RouteLink to={linkTo} target={target}>
                     {val.icon ? <AppIcon {...val.icon} style={{ fontSize: 14, marginRight: 10 }} /> : null}
                     <span>{val.label}</span>
-                </Link>
+                </RouteLink>
             </Menu.Item>
         );
     }

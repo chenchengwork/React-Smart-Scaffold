@@ -41,7 +41,7 @@ class Permission {
      * @param permissions
      */
     set(permissions = {}) {
-        if(checkType.isPlainObject(permissions)) throw new Error("权限格式不正确");
+        if(!checkType.isPlainObject(permissions)) throw new Error("权限格式不正确");
 
         localStore.set(this.localPermissioKey, permissions);
     }

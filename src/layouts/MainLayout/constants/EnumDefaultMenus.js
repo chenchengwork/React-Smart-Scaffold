@@ -29,6 +29,9 @@ export const EnumIconTypes = {
         //antd中的icon type
         icon:"swap",
 
+        // 连接弹出方式
+        target: "",   // _blank, _self, _parent, _top
+
         //可以是字符串,也可以是数组,当作为数组时可以将数组内的所有url都让该栏目保持高亮
         url:"url1" || ["url1", "url2"],
 
