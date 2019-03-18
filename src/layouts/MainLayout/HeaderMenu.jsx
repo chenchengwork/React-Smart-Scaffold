@@ -19,14 +19,16 @@ const HeaderMenu = ({currentUrl, menus, logout}) => (
         >
             {
                 menus.map((val, key) => {
-                    const url = Array.isArray(val.url) ? val.url[0] : val.url;
+                    const linkTo = Array.isArray(val.url) ? val.url[0] : val.url;
+                    const target = val.target || "";
+                    const RouteLink = target === "_blank" ? ({children, to,  ...rest}) => (<a href={to} {...rest}>{children}</a>) : Link;
 
                     return checkType.isUndefined(val.label) || checkType.isEmpty(val.label) ? null : (
                         <Menu.Item key={url + key} className={val.url.indexOf(currentUrl) !== -1 ? 'active' : ''}>
-                            <Link to={url}>
+                            <RouteLink to={linkTo} target={target}>
                                 <AppIcon {...val.icon} style={{ marginRight: 10 }} />
                                 {val.label}
-                            </Link>
+                            </RouteLink>
                         </Menu.Item>
                     );
                 })
