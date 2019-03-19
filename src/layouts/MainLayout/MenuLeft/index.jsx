@@ -29,7 +29,7 @@ const formatLeftMenu = (menus, currentUrl) => menus.map((val) => {
         return (
             <Menu.SubMenu
                 key={val.url.join('-')}
-                title={<span><AppIcon {...val.icon} style={{ fontSize: 14, marginRight: 10 }} /><span>{val.label}</span></span>}
+                title={<span>{ val.icon ? <AppIcon {...val.icon} style={{ fontSize: 14, marginRight: 10 }} /> : null}<span>{val.label}</span></span>}
             >
                 {formatLeftMenu(val.children, currentUrl)}
 
@@ -68,6 +68,7 @@ const MenuLeft = ({leftMenu, currentUrl, leftWidth, collapsed, onLeftMenuCollaps
 
     return (
         <Layout.Sider
+            theme="dark"
             className={styles["menu-left"]}
             width={leftWidth}
             collapsible
@@ -75,6 +76,7 @@ const MenuLeft = ({leftMenu, currentUrl, leftWidth, collapsed, onLeftMenuCollaps
             onCollapse={onLeftMenuCollapse}
         >
             <Menu
+                theme="dark"
                 mode="inline"
                 selectedKeys={[currentUrl]}
                 defaultOpenKeys={recursionOpenKeys(leftMenu, currentUrl)}

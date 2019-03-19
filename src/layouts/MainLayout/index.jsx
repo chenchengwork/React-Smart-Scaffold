@@ -70,7 +70,7 @@ export default class MainLayout extends PureComponent {
                         onLeftMenuCollapse={this.onLeftMenuCollapse}
                     />
 
-                    <Layout className={styles["app-content"]} style={{ marginLeft: appMenuLeftWidth }}>
+                    <Layout className={styles["app-content"]}>
                         <BackTop style={{ right: 100 }} />
                         {this.props.children}
                     </Layout>

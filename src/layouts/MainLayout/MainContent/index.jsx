@@ -11,7 +11,7 @@ import { Layout } from 'antd';
  */
 const MainContent = ({ className = '', style = {}, children = null, ...rest }) => {
     let defaultStyle = {
-        margin: '0px 10px 0px 10px',
+        // margin: '0px 10px 0px 10px',
     };
     return (
         <Layout.Content className={className} style={Object.assign(defaultStyle, style)} {...rest}>
