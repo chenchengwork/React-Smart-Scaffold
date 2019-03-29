@@ -6,5 +6,9 @@ package-lock.json
 yarn.lock
 coverage/
 .idea/
+run/
 .DS_Store
-i18n-messages
+*.sw*
+*.un~
+typings/
+.nyc_output/
