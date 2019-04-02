@@ -51,7 +51,7 @@ class Permission {
      * @return {*}
      */
     get(){
-        return localStore.get(this.localPermissioKey);
+        return localStore.get(this.localPermissioKey) || {};
     }
 
     /**

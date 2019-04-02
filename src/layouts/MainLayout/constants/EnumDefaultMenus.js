@@ -35,6 +35,7 @@ export const EnumIconTypes = {
         //可以是字符串,也可以是数组,当作为数组时可以将数组内的所有url都让该栏目保持高亮
         url:"url1" || ["url1", "url2"],
 
+        uniqueIdentity: "",  // 唯一权限标识
         children:[]
     }
  * @type {[*]}
