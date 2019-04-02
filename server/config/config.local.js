@@ -59,6 +59,7 @@ module.exports = appInfo => {
         buffer: false,     // 是否将访问的文放入到内存中
     };
 
+    // 配置graphql
     config.graphql = {
         router: '/graphql',
         // 是否加载到 app 上，默认开启
@@ -71,7 +72,7 @@ module.exports = appInfo => {
         onPreGraphQL: async function (ctx) {},
         // 开发工具 graphiQL 路由前的拦截器，建议用于做权限操作(如只提供开发者使用)
         onPreGraphiQL: async function (ctx) {},
-    }
+    };
 
     config.middleware = [ 'graphql' ];
 

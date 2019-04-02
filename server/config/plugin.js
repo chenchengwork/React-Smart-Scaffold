@@ -8,6 +8,12 @@ module.exports = {
         package: 'egg-cors',
     },
 
+    // 支持sequelize
+    sequelize:{
+        enable: true,
+        package: 'egg-sequelize',
+    },
+
     // 支持graphql
     graphql: {
         enable: true,
