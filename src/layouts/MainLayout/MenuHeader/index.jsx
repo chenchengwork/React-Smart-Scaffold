@@ -8,8 +8,8 @@ import AppIcon from '../AppIcon';
 
 const MenuHeader = ({currentUrl, menus, logout}) => (
     <Layout.Header className={styles["menu-header"]}>
-        <img src={require("./img/logo.svg")} style={{height:35, marginTop: 6}} />
-        <span className={styles["logo"]} style={{minWidth: 108}}>React Scaffold</span>
+        <img className={styles.logoImg} src={require("./img/logo.svg")}  />
+        <span className={styles["logo"]}>React-Scaffold</span>
 
         <Menu
             className={styles["ant-menu-left"]}
