@@ -25,7 +25,7 @@ export default () => {
               }
             `
         })
-        .then(result => console.log(result), err => console.log(err));
+        .then(resp => console.log(resp), err => console.log(err));
 
     }, []);
 
