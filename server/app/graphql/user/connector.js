@@ -9,7 +9,7 @@ class UserConnector {
     }
 
     fetch(ids) {
-        const users = this.ctx.app.model.User.findAll({
+        const users = this.ctx.app.model.Users.findAll({
             where: {
                 id: {
                     $in: ids,
