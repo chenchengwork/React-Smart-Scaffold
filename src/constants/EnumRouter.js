@@ -11,6 +11,7 @@ const EnumRouter = {
     screen: to('screen'),		        // 我的可视化
     reactHooks: to("react/hooks"),    // 测试react hooks
     graphql: to("graphql"),           // 测试graphql
+    x_components: to("x_components"),  // 测试x-components
 };
 
 export default EnumRouter;

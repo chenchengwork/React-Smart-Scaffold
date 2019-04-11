@@ -31,6 +31,10 @@ const routes = [
         uri: EnumRouter.graphql,
         component: import("./pages/Graphql"),
     },
+    {
+        uri: EnumRouter.x_components,
+        component: import("./pages/XComponent"),
+    },
 ];
 
 

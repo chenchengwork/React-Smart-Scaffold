@@ -1,0 +1,9 @@
+{
+  "name": "x-components",
+  "version": "1.0.0",
+  "author": "chencheng <daniel_txy@163.com>",
+  "description": "实验性公共组件",
+  "dependencies": {
+    "react-virtualized": "^9.21.0"
+  }
+}

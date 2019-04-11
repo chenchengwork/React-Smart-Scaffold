@@ -72,6 +72,14 @@ export const EnumDefaultMenus = [
                 label: "Graphql",
                 url: EnumRouter.graphql,
             },
+            {
+                icon: {
+                    appType: EnumIconTypes.custom,
+                    iconType: 'fuwei'
+                },
+                label: "X_Components",
+                url: EnumRouter.x_components,
+            },
         ]
     }
 ];
