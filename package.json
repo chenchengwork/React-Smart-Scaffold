@@ -21,6 +21,7 @@
     "locallyjs": "^0.3.3",
     "mobx": "^5.9.4",
     "mobx-react": "^5.4.3",
+    "mobx-react-lite": "^1.2.0",
     "omit.js": "^1.0.0",
     "prop-types": "^15.7.2",
     "query-string": "^6.4.2",

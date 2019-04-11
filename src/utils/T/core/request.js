@@ -313,3 +313,20 @@ export function formatUrlParams(url, params = {}) {
 
     return url;
 }
+
+
+/**
+ * 模拟响应数据
+ * @param {Any} data
+ * @return {Promise<any>}
+ */
+export function mockRespData(data) {
+    const {  apiSuccessCode } = respCode;
+    return new Promise((resolve) => {
+        setTimeout(() => resolve({
+            code: apiSuccessCode,
+            msg: "success",
+            data
+        }), 500);
+    })
+}
