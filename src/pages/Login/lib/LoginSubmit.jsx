@@ -1,8 +1,7 @@
 import React from 'react';
-import classNames from 'classnames';
 import { Button, Form } from 'antd';
 import styles from './index.scss';
-
+import { classNames } from './util';
 const FormItem = Form.Item;
 
 const LoginSubmit = ({ className, ...rest }) => {

@@ -1,11 +1,12 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { Form, Tabs } from 'antd';
-import classNames from 'classnames';
+// import classNames from 'classnames';
 import LoginItem from './LoginItem';
 import LoginTab from './LoginTab';
 import LoginSubmit from './LoginSubmit';
 import styles from './index.scss';
+import {classNames} from './util';
 
 class Login extends Component {
   static propTypes = {

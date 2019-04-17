@@ -1,10 +1,9 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { Form, Button, Row, Col } from 'antd';
-import omit from 'omit.js';
 import styles from './index.scss';
 import map from './map';
-
+import {omit} from './util';
 const FormItem = Form.Item;
 
 function generator({ defaultProps, defaultRules, type }) {
