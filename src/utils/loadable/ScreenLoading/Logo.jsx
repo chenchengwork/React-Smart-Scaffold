@@ -3,7 +3,7 @@ import React from "react";
 // 说明:
 // 将其他格式的图片转成svg的在线地址: https://onlineconvertfree.com/zh/convert-format/png-to-svg/
 // 将svg图片转成react组件的方法:https://github.com/smooth-code/svgr
-// 用命令生成svg react组件: npx @svgr/cli --icon --replace-attr-values "#063855=currentColor" logo.svg
+// 用命令生成svg react组件: npx @svgr/cli  logo.svg
 
 /**
  * 默认的logo
