@@ -1,4 +1,5 @@
 import React, { Fragment } from 'react';
+import { Provider } from 'mobx-react';
 import { BrowserRouter,Route,Switch,Redirect,Link, HashRouter } from 'react-router-dom';
 import loadable from 'utils/loadable';
 
@@ -6,20 +7,31 @@ import MainLayout from 'layouts/MainLayout';
 const Exception = loadable(import("components/Exception"));
 const ErrorBoundary = loadable(import("components/ErrorBoundary"));
 
+import stores from './store';
 import EnumRouter from 'constants/EnumRouter';
 import EnumEnv from 'constants/EnumEnv';
 import { permission } from "services/auth";
 
 // 懒加载组件
-const lazy = (uri, component, isMainLayout, store, props ) => {
+const lazy = (uri, component, isMainLayout, storeKeys, props ) => {
     if(!permission.isLogin() && uri !== EnumEnv.login.loginUrl) return () => <Redirect to={EnumEnv.login.loginUrl} />;
 
     const LazyComponent = loadable(component);
-    props = {store, ...props};
-    if(!props.store) delete props.store;
     const Layout = isMainLayout ? MainLayout : Fragment;
 
-    return () => <Layout><LazyComponent {...props} /></Layout>
+    return () => {
+        // 保证页面切换时, 重新实例化mobx状态实例
+        const storeIns = {};
+        (storeKeys || []).forEach(key => storeIns[key] = stores[key]())
+
+        return(
+            <Provider {...storeIns}>
+                <Layout>
+                    <LazyComponent {...props} />
+                </Layout>
+            </Provider>
+        )
+    }
 };
 
 /**
@@ -56,7 +68,7 @@ const transformRouter = (routes) => () => (
                 {
                     routes.map((item, index) => {
                         // exact关键字表示对path进行完全匹配
-                        let {uri, component, isMainLayout, store, props} = item;
+                        let {uri, component, isMainLayout, storeKeys, props} = item;
                         props = props || {};
                         isMainLayout = typeof isMainLayout === 'undefined' ? true : isMainLayout;
 
@@ -64,7 +76,7 @@ const transformRouter = (routes) => () => (
                             key={index}
                             path={uri}
                             exact={true}
-                            component={lazy(uri, component, isMainLayout, store, props)}
+                            component={lazy(uri, component, isMainLayout, storeKeys, props)}
                         />
                     })
                 }
