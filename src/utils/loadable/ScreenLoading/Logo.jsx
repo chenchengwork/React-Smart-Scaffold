@@ -29,7 +29,7 @@ const DefaultLogo = props => (
  * @constructor
  */
 const RealLogo = props => (
-    <svg width="1em" height="1em" viewBox="0 0 800 222" {...props}>
+    <svg viewBox="0 0 800 222" {...props}>
 
     </svg>
 );
