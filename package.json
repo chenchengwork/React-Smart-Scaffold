@@ -10,10 +10,10 @@
     "trans": "atool-l10n"
   },
   "dependencies": {
-    "antd": "^3.16.1",
+    "antd": "^3.17.0",
     "mobx": "^5.9.4",
     "mobx-react": "^5.4.3",
-    "mobx-react-lite": "^1.2.0",
+    "mobx-react-lite": "^1.3.1",
     "prop-types": "^15.7.2",
     "react": "^16.8.6",
     "react-dom": "^16.8.6",
