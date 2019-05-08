@@ -4,6 +4,9 @@
   "author": "chencheng <daniel_txy@163.com>",
   "description": "实验性公共组件",
   "dependencies": {
+    "apollo-boost": "^0.3.1",
+    "graphql": "^14.3.0",
+    "graphql-tag": "^2.10.1",
     "react-virtualized": "^9.21.0"
   }
 }

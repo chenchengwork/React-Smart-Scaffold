@@ -61,22 +61,6 @@ export const EnumDefaultMenus = [
                     appType: EnumIconTypes.custom,
                     iconType: 'fuwei'
                 },
-                label: "ReactHooks",
-                url: EnumRouter.reactHooks,
-            },
-            {
-                icon: {
-                    appType: EnumIconTypes.custom,
-                    iconType: 'fuwei'
-                },
-                label: "Graphql",
-                url: EnumRouter.graphql,
-            },
-            {
-                icon: {
-                    appType: EnumIconTypes.custom,
-                    iconType: 'fuwei'
-                },
                 label: "X_Components",
                 url: EnumRouter.x_components,
             },

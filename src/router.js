@@ -25,14 +25,6 @@ const routes = [
         storeKeys: ["screen"]
     },
     {
-        uri: EnumRouter.reactHooks,
-        component: import("./pages/ReactHooks"),
-    },
-    {
-        uri: EnumRouter.graphql,
-        component: import("./pages/Graphql"),
-    },
-    {
         uri: EnumRouter.x_components,
         component: import("./pages/XComponent"),
     },

@@ -70,43 +70,36 @@ export default () => {
 
     return (
         <Fragment>
-            <MainHeader
-                title="React Hooks"
-                rightRender={
-                    <Button
-                        type="primary"
-                        onClick={()=>{ setHooks([...hooks, hooks[0]]) }}
-                    >添加</Button>
+            <Button
+                type="primary"
+                onClick={()=>{ setHooks([...hooks, hooks[0]]) }}
+            >添加</Button>
+            <Row gutter={16}>
+                {
+                    hooks.map((item, idx) => {
+                        const { label, ComHook, props } = item;
+                        return (
+                            <Col key={idx} span={6} style={{marginBottom: 16, height: 157}}>
+                                <Card
+                                    title={label}
+                                    extra={
+                                        <span>
+                                            <a target="_blank" href={props.explain}>
+                                                文档
+                                            </a>
+                                            <a onClick={() => delHook(idx)} style={{color: "red", marginLeft: 5}}>
+                                                <Icon type="delete" />
+                                            </a>
+                                        </span>
+                                    }
+                                >
+                                    <ComHook />
+                                </Card>
+                            </Col>
+                        )
+                    })
                 }
-            />
-            <MainContent>
-                <Row gutter={16}>
-                    {
-                        hooks.map((item, idx) => {
-                            const { label, ComHook, props } = item;
-                            return (
-                                <Col key={idx} span={6} style={{marginBottom: 16, height: 157}}>
-                                    <Card
-                                        title={label}
-                                        extra={
-                                            <span>
-                                                <a target="_blank" href={props.explain}>
-                                                    文档
-                                                </a>
-                                                <a onClick={() => delHook(idx)} style={{color: "red", marginLeft: 5}}>
-                                                    <Icon type="delete" />
-                                                </a>
-                                            </span>
-                                        }
-                                    >
-                                        <ComHook />
-                                    </Card>
-                                </Col>
-                            )
-                        })
-                    }
-                </Row>
-            </MainContent>
+            </Row>
         </Fragment>
     )
 }

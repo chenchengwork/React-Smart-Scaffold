@@ -23,18 +23,21 @@ const List = () => {
     for(let i = 0; i < 1000; i++){
         list.push("大数据量列表")
     }
+
     return (
-        <AutoSizer defaultHeight={100}>
-            {({ height, width }) => (
-                <VList
-                    height={height}
-                    rowCount={list.length}
-                    rowHeight={20}
-                    rowRenderer={rowRenderer}
-                    width={width}
-                />
-            )}
-        </AutoSizer>
+        <div style={{height: 300}}>
+            <AutoSizer defaultHeight={100}>
+                {({ height, width }) => (
+                    <VList
+                        height={height}
+                        rowCount={list.length}
+                        rowHeight={20}
+                        rowRenderer={rowRenderer}
+                        width={width}
+                    />
+                )}
+            </AutoSizer>
+        </div>
     )
 }
 
