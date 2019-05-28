@@ -1,4 +1,6 @@
 import { configure } from 'mobx';
+import { createContext } from 'react';
+
 /**
  * mobx的配置
  */
@@ -6,6 +8,8 @@ configure({
     enforceActions: "observed",     // 强制使用action
 });
 
-export default {
+export const StoreCtx = createContext({});
+
+export const stores = {
     screen: require("./pages/Screen/models").default
 };

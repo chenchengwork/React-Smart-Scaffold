@@ -1,32 +1,22 @@
 import PropTypes from 'prop-types';
-import React, { Component } from 'react';
-import { observer } from 'mobx-react';
+import React, { Component, useEffect, useState } from 'react';
+import { observer } from 'mobx-react-lite';
 import { Form, Input } from 'antd';
 import Box from 'components/Box';
 const FormItem = Form.Item;
 
-@observer
-class Create extends Component {
-    static propTypes = {
-        modalControl: PropTypes.object,
-        screen_id: PropTypes.string,
-        createStore: PropTypes.object,
-        listStore: PropTypes.object,
-    };
+const Create = observer(({modalControl, screen_id, createStore, listStore}) => {
+    const [ form, setForm ] = useState(null);
+    useEffect(() => {
+        modalControl.registerOk(handleSubmit);
+    });
 
-    componentDidMount(){
-        this.props.modalControl.registerOk(this.handleSubmit);
-        this.loadData();
-    }
-
-    loadData = () => {
-        const { screen_id, createStore } = this.props;
+    useEffect(() => {
         createStore.fetchData(screen_id);
-    };
+    }, []);
 
-    handleSubmit = () => {
-        const { screen_id, modalControl,  createStore, listStore } = this.props;
-        this.props.form.validateFields((err, values) => {
+    const handleSubmit = () => {
+        form && form.validateFields((err, values) => {
             if (!err) {
                 createStore.save(screen_id, values,
                     () => {
@@ -41,42 +31,63 @@ class Create extends Component {
         });
     };
 
+    const { data, loading } = createStore;
+
+    return (
+        <Box loading={loading}>
+            <CreateFormWrapper data={data} loading={loading} setForm={setForm}/>
+        </Box>
+    )
+});
+
+Create.propTypes = {
+    modalControl: PropTypes.object,
+    screen_id: PropTypes.string,
+    createStore: PropTypes.object,
+    listStore: PropTypes.object,
+};
+
+export default Create;
+
+class CreateForm extends Component {
+    componentDidMount() {
+        this.props.setForm(this.props.form);
+    }
+
     render() {
         const { getFieldDecorator } = this.props.form;
-        const { data, loading } = this.props.createStore;
+        const { data } = this.props;
 
         return (
-            <Box loading={loading}>
-                <Form onSubmit={this.handleSubmit} className="login-form">
-                    <FormItem>
-                        {getFieldDecorator('name', {
-                            initialValue: data.name,
-                            rules: [{ required: true, message: '请输入姓名!' }],
-                        })(
-                            <Input  placeholder="姓名" />
-                        )}
-                    </FormItem>
-                    <FormItem>
-                        {getFieldDecorator('age', {
-                            initialValue: data.age,
-                            rules: [{ required: true, message: '请输入年龄!' }],
-                        })(
-                            <Input placeholder="年龄" />
-                        )}
-                    </FormItem>
+            <Form className="login-form">
+                <FormItem>
+                    {getFieldDecorator('name', {
+                        initialValue: data.name,
+                        rules: [{ required: true, message: '请输入姓名!' }],
+                    })(
+                        <Input  placeholder="姓名" />
+                    )}
+                </FormItem>
+                <FormItem>
+                    {getFieldDecorator('age', {
+                        initialValue: data.age,
+                        rules: [{ required: true, message: '请输入年龄!' }],
+                    })(
+                        <Input placeholder="年龄" />
+                    )}
+                </FormItem>
 
-                    <FormItem>
-                        {getFieldDecorator('address', {
-                            initialValue: data.address,
-                            rules: [{ required: true, message: '请输入住址!' }],
-                        })(
-                            <Input placeholder="住址" />
-                        )}
-                    </FormItem>
-                </Form>
-            </Box>
+                <FormItem>
+                    {getFieldDecorator('address', {
+                        initialValue: data.address,
+                        rules: [{ required: true, message: '请输入住址!' }],
+                    })(
+                        <Input placeholder="住址" />
+                    )}
+                </FormItem>
+            </Form>
         );
     }
 }
 
-export default Form.create()(Create);
+const CreateFormWrapper = Form.create()(CreateForm);

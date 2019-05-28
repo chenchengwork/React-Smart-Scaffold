@@ -1,13 +1,12 @@
 import React, { Fragment } from 'react';
-import { Provider } from 'mobx-react';
-import { BrowserRouter,Route,Switch,Redirect,Link, HashRouter } from 'react-router-dom';
+import { BrowserRouter, Route, Switch, Redirect, Link, HashRouter } from 'react-router-dom';
 import loadable from 'utils/loadable';
 
 import MainLayout from 'layouts/MainLayout';
 const Exception = loadable(import("components/Exception"));
 const ErrorBoundary = loadable(import("components/ErrorBoundary"));
 
-import stores from './store';
+import { stores, StoreCtx } from './store';
 import EnumRouter from 'constants/EnumRouter';
 import EnumEnv from 'constants/EnumEnv';
 import { permission } from "services/auth";
@@ -22,14 +21,14 @@ const lazy = (uri, component, isMainLayout, storeKeys, props ) => {
     return () => {
         // 保证页面切换时, 重新实例化mobx状态实例
         const storeIns = {};
-        (storeKeys || []).forEach(key => storeIns[key] = stores[key]())
+        (storeKeys || []).forEach(key => storeIns[key] = stores[key]());
 
         return(
-            <Provider {...storeIns}>
+            <StoreCtx.Provider value={storeIns}>
                 <Layout>
                     <LazyComponent {...props} />
                 </Layout>
-            </Provider>
+            </StoreCtx.Provider>
         )
     }
 };
