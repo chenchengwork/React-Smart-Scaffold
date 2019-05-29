@@ -1,6 +1,5 @@
-import { request } from 'utils/T';
 import {proxyAPI} from '@/services/proxyAPI';
-const { get, postJSON, put, del } = request;
+import { get, postJSON, put, del } from '@/services/request';
 
 // TODO 测试使用
 import * as mockData from './mockData';

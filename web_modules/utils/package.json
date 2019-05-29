@@ -4,10 +4,8 @@
   "author": "chencheng <daniel_txy@163.com>",
   "description": "常用工具包",
   "dependencies": {
-    "axios": "^0.18.0",
     "deepmerge": "^3.2.0",
     "is-equal": "^1.5.5",
-    "js-cookie": "^2.2.0",
     "locallyjs": "^0.3.3",
     "query-string": "^6.4.2"
   }

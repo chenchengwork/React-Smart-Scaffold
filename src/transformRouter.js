@@ -56,7 +56,7 @@ const checkLoginRedirect = () => <Redirect to={permission.isLogin() ? EnumEnv.lo
  */
 const transformRouter = (routes) => () => (
     <ErrorBoundary>
-        <HashRouter
+        <BrowserRouter
             forceRefresh={!('pushState' in window.history)}
             keyLength={12}
         >
@@ -85,7 +85,7 @@ const transformRouter = (routes) => () => (
 
             </Switch>
 
-        </HashRouter>
+        </BrowserRouter>
     </ErrorBoundary>
 );
 

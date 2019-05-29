@@ -3,7 +3,7 @@
  */
 
 import axios from 'axios';
-import * as checkType from './checkType';
+import { checkType } from 'utils/T';
 import Cookies from 'js-cookie';
 import EnumRouter from '@/constants/EnumRouter'
 import EnumEnv from '@/constants/EnumEnv';
