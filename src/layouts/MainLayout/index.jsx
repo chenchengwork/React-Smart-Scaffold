@@ -6,8 +6,8 @@ import { Layout, BackTop } from 'antd';
 import prompt from 'utils/prompt';
 
 import { UrlToExtraInfoMap, getLeftMenu, getMenus, isRemoveLeftMenu } from './menuUtil';
-import { logout } from 'services/auth';
-import EnumRouter from 'constants/EnumRouter';
+import { logout } from '@/services/auth';
+import EnumRouter from '@/constants/EnumRouter';
 
 import MenuHeader from './MenuHeader';
 import MenuLeft from './MenuLeft';

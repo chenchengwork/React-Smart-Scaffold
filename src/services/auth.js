@@ -1,6 +1,6 @@
 import { request, localStore, checkType, Cookies } from 'utils/T';
-import {proxyAPI} from 'services/proxyAPI';
-import EnumEnv from 'constants/EnumEnv';
+import {proxyAPI} from '@/services/proxyAPI';
+import EnumEnv from '@/constants/EnumEnv';
 const { get, postJSON } = request;
 
 /**

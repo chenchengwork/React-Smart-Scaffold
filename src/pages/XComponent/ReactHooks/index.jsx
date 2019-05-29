@@ -1,6 +1,6 @@
 import { Fragment, useState } from 'react';
 import { Card, Row, Col, Button, Icon } from 'antd';
-import { MainHeader, MainContent} from "layouts/MainLayout";
+import { MainHeader, MainContent} from "@/layouts/MainLayout";
 
 /*
     Hooks的使用有两个原则：

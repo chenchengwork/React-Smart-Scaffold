@@ -1,5 +1,5 @@
 import { request } from 'utils/T';
-import {proxyAPI} from 'services/proxyAPI';
+import {proxyAPI} from '@/services/proxyAPI';
 const { get, postJSON, put, del } = request;
 
 // TODO 测试使用

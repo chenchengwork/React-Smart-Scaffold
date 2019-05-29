@@ -1,6 +1,6 @@
 import React, { Fragment, useState } from 'react';
 import { Card, Button } from 'antd';
-import { MainHeader, MainContent} from "layouts/MainLayout";
+import { MainHeader, MainContent} from "@/layouts/MainLayout";
 import loadable from 'utils/loadable';
 
 const components = [

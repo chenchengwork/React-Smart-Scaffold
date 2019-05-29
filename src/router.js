@@ -1,5 +1,5 @@
 import transformRouter from './transformRouter';
-import EnumRouter from 'constants/EnumRouter';
+import EnumRouter from '@/constants/EnumRouter';
 
 /**
  * 定义路由

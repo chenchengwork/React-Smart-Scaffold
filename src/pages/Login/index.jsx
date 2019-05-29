@@ -6,8 +6,8 @@ import prompt from 'utils/prompt';
 import Login from './lib';
 import styles from './index.scss';
 const { Tab, UserEmail, Password, Submit } = Login;
-import EnumEnv from 'constants/EnumEnv';
-import { login } from 'services/auth';
+import EnumEnv from '@/constants/EnumEnv';
+import { login } from '@/services/auth';
 
 @withRouter
 export default class LoginPage extends PureComponent {

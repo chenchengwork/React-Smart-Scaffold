@@ -2,14 +2,14 @@ import React, { Fragment } from 'react';
 import { BrowserRouter, Route, Switch, Redirect, Link, HashRouter } from 'react-router-dom';
 import loadable from 'utils/loadable';
 
-import MainLayout from 'layouts/MainLayout';
-const Exception = loadable(import("components/Exception"));
-const ErrorBoundary = loadable(import("components/ErrorBoundary"));
+import MainLayout from '@/layouts/MainLayout';
+const Exception = loadable(import("@/components/Exception"));
+const ErrorBoundary = loadable(import("@/components/ErrorBoundary"));
 
 import { stores, StoreCtx } from './store';
-import EnumRouter from 'constants/EnumRouter';
-import EnumEnv from 'constants/EnumEnv';
-import { permission } from "services/auth";
+import EnumRouter from '@/constants/EnumRouter';
+import EnumEnv from '@/constants/EnumEnv';
+import { permission } from "@/services/auth";
 
 // 懒加载组件
 const lazy = (uri, component, isMainLayout, storeKeys, props ) => {

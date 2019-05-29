@@ -1,4 +1,4 @@
-import EnumEnv from 'constants/EnumEnv';
+import EnumEnv from '@/constants/EnumEnv';
 const to = (route) =>  EnumEnv.rootPath.replace(/\/$/, "") + "/" + route;
 
 /**

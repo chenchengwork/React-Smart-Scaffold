@@ -7,10 +7,11 @@ import { Table, Button } from 'antd';
 
 import prompt from 'utils/prompt';
 import { helper } from 'utils/T';
-import { MainContent, MainHeader } from 'layouts/MainLayout'
-import widthModal from 'components/Hoc/widthModal';
-import { StoreCtx } from 'store';
+import { MainContent, MainHeader } from '@/layouts/MainLayout'
+import widthModal from '@/components/Hoc/widthModal';
+import { StoreCtx } from '@/store';
 import Create from './Create';
+
 
 const Screen = observer(() => {
     const { listStore, createStore } = useContext(StoreCtx).screen;

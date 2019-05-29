@@ -1,5 +1,5 @@
+const path = require("path");
 const { assemble, pipe, depend } = require("webpack-pipe");
-
 // 入口配置
 const entry = (config) => depend.merge({
     entry:{
@@ -20,10 +20,11 @@ const output = (config) => depend.merge({
 const resolve = (config) => depend.merge({
     resolve: {
         "modules": [
-            // "node_modules",
             "web_modules",
-            "src"
-        ]
+        ],
+        alias: {
+            "@": path.resolve(__dirname, '../src/'),
+        }
     }
 }, config);
 

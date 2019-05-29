@@ -2,7 +2,7 @@ import PropTypes from 'prop-types';
 import React, { Component, useEffect, useState } from 'react';
 import { observer } from 'mobx-react-lite';
 import { Form, Input } from 'antd';
-import Box from 'components/Box';
+import Box from '@/components/Box';
 const FormItem = Form.Item;
 
 const Create = observer(({modalControl, screen_id, createStore, listStore}) => {

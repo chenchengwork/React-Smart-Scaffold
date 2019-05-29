@@ -1,7 +1,7 @@
 /**
  * Created by chencheng on 17-9-14.
  */
-import EnumRouter from 'constants/EnumRouter';
+import EnumRouter from '@/constants/EnumRouter';
 
 /**
  * 枚举默认收起左侧菜单的URL
