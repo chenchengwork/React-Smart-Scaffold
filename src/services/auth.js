@@ -75,24 +75,25 @@ export const permission = new Permission();
  * @param {String} password
  * @return {Promise}
  */
-export const login = (user_email, password) => {
-    return postJSON(proxyAPI("login"), {user_email, password}).then((resp) => {
+export const login = (user_email, password) => new Promise((resolve, reject) => {
+    postJSON(proxyAPI("login"), {user_email, password}).then((resp) => {
         // 用于保存当前登录者的权限信息
         permission.set({});
+        resolve(resp)
+    }, (resp) => reject(resp) );
+});
 
-        return resp;
-    });
-};
 
 /**
  * 退出登录
  * @return {Promise}
  */
-export const logout = () => get(proxyAPI("logout")).then(resp => {
-    // 清空权限信息
-    permission.clear();
-
-    return resp;
+export const logout = () => new Promise((resolve, reject) => {
+    get(proxyAPI("logout")).then(resp => {
+        // 清空权限信息
+        permission.clear();
+        resolve(resp);
+    },(resp) => reject(resp))
 });
 
 
