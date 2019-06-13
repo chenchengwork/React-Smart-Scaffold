@@ -1,9 +1,14 @@
-import React from "react";
+import * as React from "react";
 
 // 说明:
 // 将其他格式的图片转成svg的在线地址: https://onlineconvertfree.com/zh/convert-format/png-to-svg/
 // 将svg图片转成react组件的方法:https://github.com/smooth-code/svgr
 // 用命令生成svg react组件: npx @svgr/cli  logo.svg
+
+export interface logoProps {
+    className: string
+}
+
 
 /**
  * 默认的logo
@@ -11,7 +16,7 @@ import React from "react";
  * @return {*}
  * @constructor
  */
-const DefaultLogo = props => (
+const DefaultLogo = (props: logoProps) => (
     <svg width="112" height="112" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 841.9 595.3" {...props}>
         <g fill="#61DAFB">
             <path
@@ -28,7 +33,7 @@ const DefaultLogo = props => (
  * @return {*}
  * @constructor
  */
-const RealLogo = props => (
+const RealLogo = (props: logoProps) => (
     <svg viewBox="0 0 800 222" {...props}>
 
     </svg>

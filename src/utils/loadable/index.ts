@@ -1,3 +1,4 @@
+import * as React from 'react'
 import AntdSpin from './AntdSpin';
 import lazy from './lazyCore';
 
@@ -6,9 +7,9 @@ import lazy from './lazyCore';
  * @param rest
  * @return {*}
  */
-const lazyCom = (...rest) => {
+const lazyCom = (...rest: [Promise<{default: React.ComponentType}>, [React.FC, object]?]) => {
     if(!rest[1]){
-        rest[1] = [AntdSpin, {}];
+        rest[1] = [<React.FC>AntdSpin, {}];
     }
 
     return lazy(...rest);

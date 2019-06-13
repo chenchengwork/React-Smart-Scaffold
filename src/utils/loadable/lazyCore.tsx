@@ -2,20 +2,17 @@
     异步组件同步加载的核心包
  */
 
-import React from "react";
+import * as React from "react";
 const DefaultSpin = () => <div>loading...</div>
 
 class ErrorBoundary extends React.PureComponent {
-    constructor(props) {
-        super(props);
-        this.state = { hasError: false };
-    }
+    state = { hasError: false }
 
-    static getDerivedStateFromError(error) {
+    static getDerivedStateFromError(error: Error | null) {
         return { hasError: true };
     }
 
-    componentDidCatch(error, info) {
+    componentDidCatch(error: Error | null, info: object) {
         console.error(error);
     }
 
@@ -32,10 +29,10 @@ class ErrorBoundary extends React.PureComponent {
  * 默认loading参数
  * @type {*[]}
  */
-const defaultLoading = [DefaultSpin, {}];
+const defaultLoading: [React.FC, object] = [DefaultSpin, {}];
 
 
-export default (AsyncCom, loading = defaultLoading) => {
+export default (AsyncCom: Promise<{default: React.ComponentType}>, loading = defaultLoading) => {
     const Com = React.lazy(() => AsyncCom);
 
     if(!Array.isArray(loading)){
@@ -49,7 +46,7 @@ export default (AsyncCom, loading = defaultLoading) => {
     const Loading = loading[0];
     const loadingProps = loading[1] || {};
 
-    return (props) => (
+    return (props: object) => (
         <ErrorBoundary>
             <React.Suspense fallback={<Loading {...loadingProps}/>}>
                 <Com {...props} />
