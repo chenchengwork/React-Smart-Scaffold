@@ -3,7 +3,7 @@ import { PureComponent } from 'react';
 import { withRouter } from 'react-router-dom';
 import { Layout, BackTop } from 'antd';
 
-import prompt from 'utils/prompt';
+import prompt from '@/utils/prompt';
 
 import { UrlToExtraInfoMap, getLeftMenu, getMenus, isRemoveLeftMenu } from './menuUtil';
 import { logout } from '@/services/auth';
