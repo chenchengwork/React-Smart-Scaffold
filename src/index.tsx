@@ -4,7 +4,7 @@
 import * as React  from "react";
 import * as ReactDOM from "react-dom";
 
-// import lazyScreen from 'utils/loadable/lazyScreen';
+import lazyScreen from '@/utils/loadable/lazyScreen';
 // const Main = lazyScreen(import("./Main"));
 
 const Main: React.FC = () => {
