@@ -1,6 +1,6 @@
 import React, { Fragment } from 'react';
 import { BrowserRouter, Route, Switch, Redirect, Link, HashRouter } from 'react-router-dom';
-import loadable from 'utils/loadable';
+import loadable from '@/utils/loadable';
 
 import MainLayout from '@/layouts/MainLayout';
 const Exception = loadable(import("@/components/Exception"));

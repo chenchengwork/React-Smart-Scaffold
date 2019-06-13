@@ -1,7 +1,7 @@
 import React, { PureComponent } from 'react';
 import {  Alert } from 'antd';
 import { withRouter } from 'react-router-dom';
-import prompt from 'utils/prompt';
+import prompt from '@/utils/prompt';
 
 import Login from './lib';
 import styles from './index.scss';

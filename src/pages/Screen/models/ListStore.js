@@ -1,4 +1,4 @@
-import prompt from 'utils/prompt';
+import prompt from '@/utils/prompt';
 import { getPageList, deleteScreen } from '../api';
 import {observable, action, runInAction, toJS} from 'mobx';
 

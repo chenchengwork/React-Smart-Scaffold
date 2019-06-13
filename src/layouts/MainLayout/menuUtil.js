@@ -1,7 +1,7 @@
 /**
  * Created by chencheng on 2017/8/28.
  */
-import {checkType, helper} from 'utils/T';
+import {checkType, helper} from '@/utils/T';
 import { permission } from '@/services/auth';
 import { EnumDefaultMenus, EnumCollapsedLeftMenuUrls } from './constants/EnumDefaultMenus';
 

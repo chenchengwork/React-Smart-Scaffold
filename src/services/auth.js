@@ -1,7 +1,8 @@
-import { localStore, checkType, Cookies } from 'utils/T';
+import { localStore, checkType, Cookies } from '@/utils/T';
 import {proxyAPI} from '@/services/proxyAPI';
 import EnumEnv from '@/constants/EnumEnv';
-import { get, postJSON } from '@/services/request';
+import { request } from '@/utils/T';
+const { get, postJSON } = request;
 
 /**
  * 权限管理

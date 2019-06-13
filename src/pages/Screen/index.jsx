@@ -5,8 +5,8 @@ import { observer } from 'mobx-react-lite';
 import { Table, Button } from 'antd';
 // import { FormattedMessage } from 'react-intl';
 
-import prompt from 'utils/prompt';
-import { helper } from 'utils/T';
+import prompt from '@/utils/prompt';
+import { helper } from '@/utils/T';
 import { MainContent, MainHeader } from '@/layouts/MainLayout'
 import widthModal from '@/components/Hoc/widthModal';
 import { StoreCtx } from '@/store';

@@ -1,6 +1,6 @@
 // TODO 是测试用的,实际生产可以把文件删除
 
-import { helper, localStore } from 'utils/T';
+import { helper, localStore } from '@/utils/T';
 
 const mockStoreKey = "test_mockScreenKey";
 

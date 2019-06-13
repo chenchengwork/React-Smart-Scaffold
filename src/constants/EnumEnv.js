@@ -1,4 +1,4 @@
-import deepmerge from 'utils/T/core/deepmerge';
+import deepmerge from '@/utils/T/core/deepmerge';
 
 const rootPath = window.ENV ? window.ENV.rootPath || "/" : "/";
 
