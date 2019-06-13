@@ -1,8 +1,31 @@
 import deepmerge from '@/utils/T/core/deepmerge';
 
+// @ts-ignore
 const rootPath = window.ENV ? window.ENV.rootPath || "/" : "/";
 
-const EnumEnv = deepmerge({
+interface RespCode {
+    apiSuccessCode: string
+    errorCode: string
+    noLoginCode: string
+    invalidParamCode: string
+}
+
+interface Login {
+    isStartLoginCheck: boolean
+    cookieKey: string
+    defaultRedirectUrl: string
+    loginUrl: string
+}
+
+interface enumEnv {
+    rootPath: string
+    apiDomain: string
+    apiPrefix: string
+    respCode: RespCode
+    login: Login
+}
+
+const EnumEnv: enumEnv = deepmerge({
     rootPath,                                      // 根路由前缀
     apiDomain: "",                                 // api域名
     apiPrefix: '/',                                // api前缀
@@ -19,6 +42,8 @@ const EnumEnv = deepmerge({
         defaultRedirectUrl: rootPath + "screen",        // 默认跳转页面
         loginUrl: rootPath + "login",                   // 登录页面路由
     }
-}, window.ENV || {});
+},
+    // @ts-ignore
+    window.ENV || {});
 
 export default EnumEnv;

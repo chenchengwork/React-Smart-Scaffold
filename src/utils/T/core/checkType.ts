@@ -8,15 +8,15 @@ const toString = Object.prototype.toString;
  * @param val
  * @returns {boolean}
  */
-export const isObject = (val) => val != null && typeof val === 'object' && Array.isArray(val) === false;
+export const isObject = (val: any) => val != null && typeof val === 'object' && Array.isArray(val) === false;
 
 /**
  * 验证是否是朴素对象
  * @param o
  * @returns {boolean}
  */
-export const isPlainObject = (o) => {
-    const isObjectObject = () => isObject(o) === true && Object.prototype.toString.call(o) === '[object Object]';
+export const isPlainObject = (o: any) => {
+    const isObjectObject = (o: any) => isObject(o) === true && Object.prototype.toString.call(o) === '[object Object]';
 
     if (isObjectObject(o) === false) return false;
 
@@ -41,63 +41,63 @@ export const isPlainObject = (o) => {
  * @param data
  * @returns {boolean}
  */
-export const isNumber = (data) => typeof data === 'number' && data > neginf && data < posinf;
+export const isNumber = (data: any) => typeof data === 'number' && data > neginf && data < posinf;
 
 /**
  * 是否是整型
  * @param data
  * @returns {boolean}
  */
-export const isInteger = (data) => typeof data === 'number' && data % 1 === 0;
+export const isInteger = (data: any) => typeof data === 'number' && data % 1 === 0;
 
 /**
  * 是否是字符串
  * @param data
  * @returns {boolean}
  */
-export const isString = (data) => typeof data === 'string';
+export const isString = (data: any) => typeof data === 'string';
 
 /**
  * 是否是数组
  * @param arr
  * @returns {boolean}
  */
-export const isArray = (arr) => Array.isArray(arr);
+export const isArray = (arr: any) => Array.isArray(arr);
 
 /**
  * 是否是boolean
  * @param bool
  * @returns {boolean}
  */
-export const isBoolean = (bool) => bool === false || bool === true;
+export const isBoolean = (bool: any) => bool === false || bool === true;
 
 /**
  * 是否是undefined
  * @param data
  * @returns {boolean}
  */
-export const isUndefined = (data) => data === undefined;
+export const isUndefined = (data: any) => data === undefined;
 
 /**
  * 是否是null
  * @param data
  * @returns {boolean}
  */
-export const isNull = (data) => data === null;
+export const isNull = (data: any) => data === null;
 
 /**
  * 是否是函数
  * @param data
  * @returns {boolean}
  */
-export const isFunction = (data) => typeof data === 'function';
+export const isFunction = (data: any) => typeof data === 'function';
 
 /**
  * 验证是否是错误对象
  * @param value
  * @returns {boolean}
  */
-export const isError = (value) => {
+export const isError = (value: any) => {
     switch (Object.prototype.toString.call(value)) {
         case '[object Error]': return true;
         case '[object Exception]': return true;
@@ -111,7 +111,7 @@ export const isError = (value) => {
  * @param val
  * @returns {boolean}
  */
-export const isEmpty = (val) => {
+export const isEmpty = (val: any) => {
     // Null and Undefined...
     if (val == null) return true;
 

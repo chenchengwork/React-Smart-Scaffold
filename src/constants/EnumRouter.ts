@@ -1,5 +1,5 @@
 import EnumEnv from '@/constants/EnumEnv';
-const to = (route) =>  EnumEnv.rootPath.replace(/\/$/, "") + "/" + route;
+const to = (route: string) =>  EnumEnv.rootPath.replace(/\/$/, "") + "/" + route;
 
 /**
  * 路由枚举

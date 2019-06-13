@@ -2,23 +2,25 @@
  * Created by chencheng on 2017/6/14.
  */
 
-import axios from 'axios';
+import axios, { AxiosInstance, AxiosRequestConfig, AxiosResponse } from 'axios';
 import { checkType } from '@/utils/T';
 import Cookies from 'js-cookie';
 import EnumRouter from '@/constants/EnumRouter'
 import EnumEnv from '@/constants/EnumEnv';
 
 // TODO 解决IE报warning Unhandled Rejections Error 参数书不正确的问题
+// @ts-ignore
 Promise._unhandledRejectionFn = function (rejectError) {};
 
 const { apiDomain, respCode } = EnumEnv;
 
+
 class Csrf{
     // 校验是否是安全方法
-    safeMethod = (method) => (/^(GET|HEAD|OPTIONS|TRACE)$/i.test(method));
+    safeMethod = (method: string) => (/^(GET|HEAD|OPTIONS|TRACE)$/i.test(method));
 
     // 设置安全认证token
-    setToken = (options) => {
+    setToken = (options: AxiosRequestConfig) => {
         let { method } = options;
         const csrfToken = Cookies.get("csrfToken");
         if(!this.safeMethod(method) && csrfToken){
@@ -33,10 +35,9 @@ const csrf = new Csrf();
 
 
 const Singleton = (function () {
-    let instantiated;
+    let instantiated: AxiosInstance;
 
     function init() {
-
         return axios.create({
             baseURL: apiDomain,
 
@@ -71,7 +72,7 @@ const Singleton = (function () {
  * 处理下载
  * @param resp
  */
-const processDownload = (resp) => {
+const processDownload = (resp: AxiosResponse) => {
     if(!resp.headers['content-disposition']){
         throw new Error("response header中缺少content-disposition属性");
     }
@@ -103,7 +104,7 @@ const _request = (options = {}, isDownload = false) => {
         options = csrf.setToken(options);
 
         const {  apiSuccessCode, errorCode, noLoginCode, invalidParamCode } = respCode;
-        Singleton.getInstance().request(options).then((resp) => {
+        Singleton.getInstance().request(options).then((resp: AxiosResponse) => {
             // 处理下载
             if(isDownload){
                 processDownload(resp);
@@ -129,6 +130,7 @@ const _request = (options = {}, isDownload = false) => {
 
                     resolve({code: apiSuccessCode, data: resp.data, msg: "请求成功"});
                 }else {
+                    // @ts-ignore
                     reject({code: errorCode, data: null, msg: resp.message});
                 }
             }
@@ -151,7 +153,7 @@ const _request = (options = {}, isDownload = false) => {
  * @param {object} options
  * @returns {Promise}
  */
-export function get(url, params = {}, options = {}) {
+export function get(url: string, params = {}, options = {}) {
     Object.assign(options, {
         url,
         method: 'get',
@@ -168,7 +170,7 @@ export function get(url, params = {}, options = {}) {
  * @param {object} options
  * @returns {Promise}
  */
-export function post(url, params = {}, options = {}) {
+export function post(url: string, params:StrToAnyObj = {}, options = {}) {
     let requestParams = new URLSearchParams();
     for (let [k, v] of Object.entries(params)) {
         requestParams.append(k, v);
@@ -194,7 +196,7 @@ export function post(url, params = {}, options = {}) {
  * @param {object} options
  * @returns {Promise}
  */
-export function postJSON(url, params = {}, options = {}) {
+export function postJSON(url: string, params = {}, options = {}) {
     options = Object.assign({
         url,
         method: 'post',
@@ -216,7 +218,7 @@ export function postJSON(url, params = {}, options = {}) {
  * @param {Object} options
  * @returns {Promise}
  */
-export function upload(url, params = {}, onUploadProgress = (progressEvent) => {}, options = {}) {
+export function upload(url: string, params:StrToAnyObj = {}, onUploadProgress = (progressEvent: any) => {}, options = {}) {
     if (!(params instanceof FormData)) {
         let formData = new FormData();
         for (let [k, v] of Object.entries(params)) {
@@ -251,7 +253,7 @@ export function upload(url, params = {}, onUploadProgress = (progressEvent) => {
  * @param {Object} options
  * @returns {Promise}
  */
-export function del(url, params = {}, options = {}) {
+export function del(url: string, params = {}, options = {}) {
     options = Object.assign({
         url,
         method: 'delete',
@@ -272,7 +274,7 @@ export function del(url, params = {}, options = {}) {
  * @param {Object} options
  * @returns {Promise}
  */
-export function put(url, params = {}, options = {}) {
+export function put(url: string, params = {}, options = {}) {
     options = Object.assign({
         url,
         method: 'put',
@@ -290,7 +292,7 @@ export function put(url, params = {}, options = {}) {
  * 并发执行多个请求
  * @returns {Promise.<*>}
  */
-export function all(args = null) {
+export function all<T>(args: Promise<T>[] = []) {
 
     return Array.isArray(args) ? Promise.all(args) : Promise.all([...arguments]);
 }
@@ -302,7 +304,7 @@ export function all(args = null) {
  * @param params
  * @returns {*}
  */
-export function formatUrlParams(url, params = {}) {
+export function formatUrlParams(url: string, params:StrToAnyObj = {}) {
     Object.keys(params).forEach((key, index) => {
         if (index === 0 && url.indexOf('?') === -1) {
             url += '?' + key + '=' + params[key];
@@ -320,7 +322,7 @@ export function formatUrlParams(url, params = {}) {
  * @param {Any} data
  * @return {Promise<any>}
  */
-export function mockRespData(data) {
+export function mockRespData(data: any) {
     const {  apiSuccessCode } = respCode;
     return new Promise((resolve) => {
         setTimeout(() => resolve({

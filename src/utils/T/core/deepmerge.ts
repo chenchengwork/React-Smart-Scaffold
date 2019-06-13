@@ -5,15 +5,15 @@ import deepmergeOrigin from "deepmerge";
  * @param val
  * @returns {boolean}
  */
-const isObject = (val) => val != null && typeof val === 'object' && Array.isArray(val) === false;
+const isObject = (val: any) => val != null && typeof val === 'object' && Array.isArray(val) === false;
 
 /**
  * 验证是否是朴素对象
  * @param o
  * @returns {boolean}
  */
-const isPlainObject = (o) => {
-    const isObjectObject = () => isObject(o) === true && Object.prototype.toString.call(o) === '[object Object]';
+const isPlainObject = (o:any) => {
+    const isObjectObject = (o: any) => isObject(o) === true && Object.prototype.toString.call(o) === '[object Object]';
 
     if (isObjectObject(o) === false) return false;
 
@@ -32,7 +32,6 @@ const isPlainObject = (o) => {
     // Most likely a plain Object
     return true;
 };
-
 
 /**
  * 深度合并, 并且可以只能的合并数组的元素
@@ -75,8 +74,8 @@ const isPlainObject = (o) => {
                 // b: [2,3,4]
         })
  */
-const deepmerge = (...rest) => deepmergeOrigin.all(rest, {
-    arrayMerge: (destArray, sourceArray, options) => {
+const deepmerge = <T>(...rest: T[]):T => deepmergeOrigin.all(rest, {
+    arrayMerge: (destArray: T[], sourceArray: T[], options?: object) => {
         if(destArray.length < 1) return sourceArray;
 
         if(sourceArray.length >= destArray.length){

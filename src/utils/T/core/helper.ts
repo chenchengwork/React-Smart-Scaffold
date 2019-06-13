@@ -1,26 +1,30 @@
 /**
  * Created by chencheng on 2017/6/16.
  */
+import * as React from 'react'
+import * as ReactDOM from 'react-dom';
+
 import * as checkType from './checkType';
-import { render as reactDomRender, unmountComponentAtNode } from 'react-dom';
 const mountDomId = 'tj-render-dom';
 
 /**
  * 验证是否相等
  * 文档说明: https://github.com/ljharb/is-equal
  */
-export isEqual from 'is-equal';
+import isEqual from 'is-equal'
+export {isEqual}
 
 /**
  * 深度合并对象
  * 文档说明: https://github.com/KyleAMathews/deepmerge
  */
-export deepmerge from './deepmerge';
-
+import deepmerge from './deepmerge';
+export {deepmerge}
 /**
  * 深度clone
  */
-export deepClone from './deepClone';
+import deepClone from './deepClone';
+export {deepClone}
 
 /**
  * 模拟数据
@@ -28,7 +32,7 @@ export deepClone from './deepClone';
  * @param isMockError
  * @return {Promise<any>}
  */
-export const mockData = (data = null, isMockError = false) => {
+export const mockData = (data: any = null, isMockError = false) => {
     return new Promise((resolve, reject) => {
         setTimeout(() => {
             if(!isMockError) {
@@ -49,7 +53,7 @@ export const mockData = (data = null, isMockError = false) => {
  * 挂载react组件
  * @param component //reactElement react组件
  */
-export const mountReact = (component) => {
+export const mountReact = (component: React.ReactElement) => {
     const domId = mountDomId;
 
     let domObject = document.querySelector('#' + domId);
@@ -60,9 +64,9 @@ export const mountReact = (component) => {
         domObject = el;
     }
 
-    unmountComponentAtNode(domObject);
+    ReactDOM.unmountComponentAtNode(domObject);
 
-    reactDomRender(component, domObject);
+    ReactDOM.render(component, domObject);
 };
 
 /**
@@ -70,7 +74,7 @@ export const mountReact = (component) => {
  */
 export const unmountReact = () => {
     const domObject = document.querySelector('#' + mountDomId);
-    if(domObject) unmountComponentAtNode(domObject);
+    if(domObject) ReactDOM.unmountComponentAtNode(domObject);
 }
 
 
@@ -79,12 +83,7 @@ export const unmountReact = () => {
  * @param url
  * @param timeout
  */
-export const redirect = (url, timeout) => {
-    if (checkType.isNumber(url) && typeof timeout === 'undefined') {
-        timeout = url;
-        url = null;
-    }
-
+export const redirect = (url: string, timeout: number) => {
     setTimeout(function () {
         location.href = url || location.href;
     }, timeout || 0);
@@ -97,7 +96,7 @@ export const redirect = (url, timeout) => {
  * @param {string} fmt
  * @return {string}
  */
-export const dateFormat = (timestamp, fmt = "yyyy-MM-dd hh:mm:ss") => {
+export const dateFormat = (timestamp: number|string, fmt = "yyyy-MM-dd hh:mm:ss") => {
     const date = new Date(timestamp);
 
     const o = {
@@ -122,6 +121,7 @@ export const dateFormat = (timestamp, fmt = "yyyy-MM-dd hh:mm:ss") => {
                 fmt = fmt.replace(RegExp.$1, ("00" + o[k]).substr(("" + o[k]).length - 1,lens));
             }
             else{
+                // @ts-ignore
                 fmt = fmt.replace(RegExp.$1, (RegExp.$1.length == 1) ? (o[k]) : (("00" + o[k]).substr(("" + o[k]).length)));
             }
         }
@@ -136,7 +136,7 @@ export const dateFormat = (timestamp, fmt = "yyyy-MM-dd hh:mm:ss") => {
  * @param {Array} data
  * @return {*[]}
  */
-export const uniq = (data) => Array.from(new Set(data));
+export const uniq = (data: []) => Array.from(new Set(data));
 
 
 /**
@@ -152,8 +152,8 @@ export const uniq = (data) => Array.from(new Set(data));
      render(1);
      render(2); // 将延迟16毫秒执行
  */
-export const throttle = (fn, time, context) => {
-    let lock, args;
+export const throttle = (fn: () => {}, time: number, context: any) => {
+    let lock: boolean, args: boolean | IArguments;
 
     function later () {
         // reset lock and call if queued
@@ -184,14 +184,14 @@ export const throttle = (fn, time, context) => {
 /**
  * 防抖函数
  * @param {Function} fn     回调函数
- * @param {Number} delay    延迟事件
+ * @param {Number} delay    延迟时间
  * @param {Object} [context]  回调函数上下文
  * @returns {Function}
  */
-export const debounce = (fn, delay, context) => {
-    let timeout;
+export const debounce = (fn: () => {}, delay: number, context: any) => {
+    let timeout: any;
 
-    return function(e){
+    return function(){
 
         clearTimeout(timeout);
 
@@ -214,7 +214,7 @@ export const debounce = (fn, delay, context) => {
  * @param {String} [characterSet]  // 字符集
  * @returns {Promise<any>}
  */
-export const blobToString = (blob, characterSet = 'utf-8') => new Promise((resolve, reject)=> {
+export const blobToString = (blob: Blob, characterSet: string = 'utf-8') => new Promise((resolve, reject)=> {
     const reader = new FileReader();
     reader.readAsText(blob, characterSet);
     reader.onload = function (e) {
@@ -231,7 +231,7 @@ export const blobToString = (blob, characterSet = 'utf-8') => new Promise((resol
  * @param {String} content 下载内容
  * @param {String} fileName 文件名称
  */
-export const downloadFile = (content = "", fileName = "") => {
+export const downloadFile = (content: string = "", fileName: string = "") => {
     const blob = new Blob([content]);
 
     const a = document.createElement("a");
