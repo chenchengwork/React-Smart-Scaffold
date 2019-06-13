@@ -24,7 +24,8 @@ const resolve = (config) => depend.merge({
         ],
         alias: {
             "@": path.resolve(__dirname, '../src/'),
-        }
+        },
+        extensions: [ '.tsx', '.ts', '.js', ".jsx" ],
     }
 }, config);
 
@@ -87,7 +88,7 @@ module.exports = (pipeNodes = []) => {
         pipe.css,
         pipe.scss,
         pipe.babelAntd,
-        pipe.babelReact,
+        pipe.babelTsReact,
 
         pipe.miniCssExtractPlugin,
         pipe.provideReactPlugin,

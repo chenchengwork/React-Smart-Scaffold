@@ -7,7 +7,9 @@
   "scripts": {
     "dev": "node ./scripts/dev.js",
     "build": "node ./scripts/build.js /data/web_bundle/react-smart-scaffold /",
-    "trans": "atool-l10n"
+    "trans": "atool-l10n",
+    "type-check": "tsc --noEmit",
+    "type-check:watch": "npm run type-check -- --watch"
   },
   "dependencies": {
     "antd": "^3.19.1",
@@ -23,9 +25,12 @@
     "styled-jsx": "^3.2.1"
   },
   "devDependencies": {
+    "@types/react": "^16.8.19",
+    "@types/react-dom": "^16.8.4",
     "atool-l10n": "^0.3.1",
     "babel-plugin-react-intl": "^3.0.1",
     "styled-jsx-plugin-sass": "^1.0.0",
+    "typescript": "^3.5.1",
     "webpack-pipe": "^1.0.14"
   },
   "repository": {
