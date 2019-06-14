@@ -1,6 +1,7 @@
 import styles from './index.scss';
-import React, { Fragment, useContext, useEffect } from 'react';
-import PropTypes from 'prop-types';
+import * as React from 'react';
+const { Fragment, useContext, useEffect } = React
+import * as PropTypes from 'prop-types';
 import { observer } from 'mobx-react-lite';
 import { Table, Button } from 'antd';
 // import { FormattedMessage } from 'react-intl';
