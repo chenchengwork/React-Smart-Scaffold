@@ -1,72 +1,68 @@
-import React, { PureComponent } from 'react';
-import {  Alert } from 'antd';
-import { withRouter } from 'react-router-dom';
+import React, {useState} from 'react';
+import {withRouter} from 'react-router-dom';
+import {Input, Icon, Button} from 'antd'
+
 import prompt from '@/utils/prompt';
-
-import Login from './lib';
-import styles from './index.scss';
-const { Tab, UserEmail, Password, Submit } = Login;
 import EnumEnv from '@/constants/EnumEnv';
-import { login } from '@/services/auth';
+import {login} from '@/services/auth';
 
-@withRouter
-export default class LoginPage extends PureComponent {
-    static defaultProps = {
-        login: {
-            status: "success",
-            type: ""
-        },
-        submitting: false,
-    };
+const Login = ({history}) => {
+    const [email, setEmail] = useState("")
+    const [password, setPassword] = useState("")
+    const [submitting, setSubmitting] = useState(false)
 
-    state = {
-        type: 'account',
-    };
-
-    onTabChange = type => this.setState({ type });
-
-    handleSubmit = (err, values) => {
-        if(err) return false;
-        const { user_email, password } = values;
-
-        this.setState({submitting: true}, () => {
-            login(user_email, password).then(resp => {
-                prompt.success("登录成功");
-                this.setState({submitting: false});
-                this.props.history.push(EnumEnv.login.defaultRedirectUrl);
-            }, resp => {
-                prompt.error(resp.msg);
-                this.setState({submitting: false});
-            })
+    const handleSubmit = () => {
+        setSubmitting(true);
+        login(email, password).then(resp => {
+            prompt.success("登录成功");
+            setSubmitting(false);
+            history.push(EnumEnv.login.defaultRedirectUrl);
+        }, resp => {
+            prompt.error(resp.msg);
+            setSubmitting(false);
         })
     };
 
-    renderMessage = content => {
-        return <Alert style={{ marginBottom: 24 }} message={content} type="error" showIcon />;
-    };
+    return (
+        <div className="main">
+            <div style={{fontSize: 18, textAlign: "center", marginTop: 20, fontWeight: 900}}>登录</div>
+            <Input
+                {...{
+                    size: 'large',
+                    prefix: <Icon type="mail" style={{fontSize: 14}}/>,
+                    placeholder: '邮箱',
+                    style: {marginBottom: 10},
+                    value: email,
+                    onChange: (e) => setEmail(e.target.value.trim())
+                }}
+            />
 
-    render() {
-        const { login, submitting } = this.props;
-        const { type } = this.state;
+            <Input {...{
+                type: "password",
+                size: 'large',
+                prefix: <Icon type="lock" style={{fontSize: 14}}/>,
+                placeholder: '密码',
+                value: password,
+                onChange: (e) => setPassword(e.target.value.trim())
+            }} />
 
-        return (
-            <div className={styles.main}>
-                <Login defaultActiveKey={type} onTabChange={this.onTabChange} onSubmit={this.handleSubmit}>
-                    <Tab key="account" tab="登录">
-                        {
-                            login.status === 'error' &&
-                            login.type === 'account' &&
-                            !submitting &&
-                            this.renderMessage('账户或密码错误')
-                        }
-                        <UserEmail name="user_email" placeholder="邮箱" />
-                        <Password name="password" placeholder="密码" />
-                    </Tab>
+            <Button type="primary" icon={submitting ? "loading": ""} size="large" onClick={handleSubmit} style={{width: "100%", marginTop: 24}}>登录</Button>
 
-                    <Submit loading={submitting}>登录</Submit>
-                </Login>
-            </div>
-        );
-    }
+            {/*language=SCSS*/}
+            <style jsx>{`
+                .main {
+                    width: 368px;
+                    margin: 0 auto;
+                    @media screen and (max-width: 576px) {
+                        width: 95%;
+                    }
+                }
+            `}</style>
+        </div>
+    );
 }
+
+
+export default withRouter(Login)
+
 
