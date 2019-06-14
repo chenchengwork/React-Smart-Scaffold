@@ -32,7 +32,7 @@ class ErrorBoundary extends React.PureComponent {
 const defaultLoading: [React.FC, object] = [DefaultSpin, {}];
 
 
-export default (AsyncCom: Promise<{default: React.ComponentType}>, loading = defaultLoading) => {
+export default (AsyncCom: Promise<{default: React.ComponentType<any>}>, loading = defaultLoading) => {
     const Com = React.lazy(() => AsyncCom);
 
     if(!Array.isArray(loading)){
@@ -46,7 +46,7 @@ export default (AsyncCom: Promise<{default: React.ComponentType}>, loading = def
     const Loading = loading[0];
     const loadingProps = loading[1] || {};
 
-    return (props: object) => (
+    return (props: any) => (
         <ErrorBoundary>
             <React.Suspense fallback={<Loading {...loadingProps}/>}>
                 <Com {...props} />

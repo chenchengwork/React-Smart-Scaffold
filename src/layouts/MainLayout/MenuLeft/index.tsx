@@ -1,12 +1,14 @@
-import PropTypes from 'prop-types';
+import * as React from 'react';
+import * as PropTypes from 'prop-types';
 import { Link } from "react-router-dom";
 import { Layout, Menu } from 'antd';
+import { TypeMenu } from '../constants/EnumDefaultMenus'
 
 import AppIcon from "../AppIcon";
 import styles from "./index.scss";
 
 // 获取默认展开的菜单keys
-const recursionOpenKeys = (menus, currentUrl, openKeys = []) => {
+const recursionOpenKeys = (menus: TypeMenu[], currentUrl: string, openKeys: string[] = []) => {
     for (let i = 0; i < menus.length; i++) {
         const item = menus[i];
         if (item.url.indexOf(currentUrl) !== -1) {
@@ -24,11 +26,11 @@ const recursionOpenKeys = (menus, currentUrl, openKeys = []) => {
 };
 
 // 递归获取菜单
-const formatLeftMenu = (menus, currentUrl) => menus.map((val) => {
+const formatLeftMenu = (menus: TypeMenu[], currentUrl: string) => menus.map((val) => {
     if (val.children.length > 0) {
         return (
             <Menu.SubMenu
-                key={val.url.join('-')}
+                key={(val.url as string[]).join('-')}
                 title={<span>{ val.icon ? <AppIcon {...val.icon} style={{ fontSize: 14, marginRight: 10 }} /> : null}<span>{val.label}</span></span>}
             >
                 {formatLeftMenu(val.children, currentUrl)}
@@ -50,7 +52,7 @@ const formatLeftMenu = (menus, currentUrl) => menus.map((val) => {
 
         const linkTo = Array.isArray(val.url) ? val.url[0] : val.url;
         const target = val.target || "";
-        const RouteLink = target === "_blank" ? ({children, to,  ...rest}) => (<a href={to} {...rest}>{children}</a>) : Link;
+        const RouteLink = target === "_blank" ? ({children, to,  ...rest}: {children: React.ReactNode, to: string, target: string}) => (<a href={to} {...rest}>{children}</a>) : Link;
 
         return (
             <Menu.Item key={realUrl}>
@@ -63,7 +65,15 @@ const formatLeftMenu = (menus, currentUrl) => menus.map((val) => {
     }
 });
 
-const MenuLeft = ({leftMenu, currentUrl, leftWidth, collapsed, onLeftMenuCollapse}) => {
+interface MenuLeftProps {
+    leftMenu: TypeMenu[];
+    currentUrl: string;
+    leftWidth: number;
+    collapsed: boolean;
+    onLeftMenuCollapse: (collapsed: boolean) => void;
+}
+
+const MenuLeft = ({leftMenu, currentUrl, leftWidth, collapsed, onLeftMenuCollapse}: MenuLeftProps) => {
     if (leftMenu.length < 1) return null;
 
     return (

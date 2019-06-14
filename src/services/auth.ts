@@ -8,9 +8,11 @@ const { get, postJSON } = request;
  * 权限管理
  */
 class Permission {
-    constructor() {
-        this.localPermissioKey = "sk_permission";
-    }
+    // constructor() {
+    //     this.localPermissioKey = "sk_permission";
+    // }
+
+    localPermissioKey = "sk_permission";
 
     /**
      * 是否已经登录
@@ -31,7 +33,7 @@ class Permission {
     /**
      * 验证是否有权限
      */
-    can(mark) {
+    can(mark: string) {
         const permissions = this.get();
 
         return Reflect.has(permissions, mark) ? permissions[mark] : false;
@@ -76,7 +78,7 @@ export const permission = new Permission();
  * @param {String} password
  * @return {Promise}
  */
-export const login = (user_email, password) => new Promise((resolve, reject) => {
+export const login = (user_email: string, password: string) => new Promise((resolve, reject) => {
     postJSON(proxyAPI("login"), {user_email, password}).then((resp) => {
         // 用于保存当前登录者的权限信息
         permission.set({});

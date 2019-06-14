@@ -1,8 +1,14 @@
-import PropTypes from 'prop-types';
+import * as React from 'react'
+import * as PropTypes from 'prop-types';
 import {EnumIconTypes} from "./constants/EnumDefaultMenus";
 import CustomIcon from "@/components/CustomIcon";
 import { Icon } from 'antd';
+import {IconProps} from 'antd/lib/icon'
 
+interface AppIconProps extends IconProps{
+    appType: string;
+    iconType: string;
+}
 /**
  * 应用icon
  * @param appType
@@ -10,7 +16,7 @@ import { Icon } from 'antd';
  * @return {*}
  * @constructor
  */
-const AppIcon = ({ appType, iconType, ...rest}) => {
+const AppIcon = ({ appType, iconType, ...rest}: AppIconProps) => {
     switch (appType) {
         case EnumIconTypes.antd:
             return <Icon type={iconType} {...rest} />;

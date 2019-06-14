@@ -19,15 +19,15 @@ const routes = [
         component: import("./pages/Login"),
         isMainLayout: false
     },
-    {
-        uri: EnumRouter.screen,
-        component: import("./pages/Screen"),
-        storeKeys: ["screen"]
-    },
-    {
-        uri: EnumRouter.x_components,
-        component: import("./pages/XComponent"),
-    },
+    // {
+    //     uri: EnumRouter.screen,
+    //     component: import("./pages/Screen"),
+    //     storeKeys: ["screen"]
+    // },
+    // {
+    //     uri: EnumRouter.x_components,
+    //     component: import("./pages/XComponent"),
+    // },
 ];
 
 

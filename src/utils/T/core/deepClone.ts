@@ -82,7 +82,7 @@ function quickCloneObject (input: anyObj) {
 interface optsInterface {
     arrayBehaviour?: string
 }
-function executeDeepMerge (target: [] | object, _objects:([]|anyObj)[] = [], _options:optsInterface = {}) {
+function executeDeepMerge (target: [] | object, _objects:([]|anyObj)[] = [], _options:optsInterface = {}): any {
 
     const options = {
         arrayBehaviour: _options.arrayBehaviour || 'replace',  // Can be "merge" or "replace".
@@ -147,7 +147,7 @@ export function objectAssignDeep (target: [] | object, ...objects: ([]|anyObj)[]
     return executeDeepMerge(target, objects);
 };
 
-export default (originData: [] | anyObj) => {
+export default (originData: [] | object) => {
     if(Array.isArray(originData)) return objectAssignDeep([], originData);
     return objectAssignDeep({}, originData);
 }

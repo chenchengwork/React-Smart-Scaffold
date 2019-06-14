@@ -7,7 +7,7 @@ import EnumRouter from '@/constants/EnumRouter';
  * 枚举默认收起左侧菜单的URL
  * @type {[*]}
  */
-export const EnumCollapsedLeftMenuUrls = [];
+export const EnumCollapsedLeftMenuUrls: string[] = [];
 
 /**
  * icon 类型
@@ -17,6 +17,21 @@ export const EnumIconTypes = {
     antd: 'antd',
     custom: 'custom'
 };
+
+export interface TypeIcon {
+    appType: string,
+    iconType: string
+}
+
+export interface TypeMenu {
+    label?: string
+    icon?: TypeIcon
+    url?: string[]|string
+    target?: string
+    children?: TypeMenu[]
+}
+
+
 
 /**
  * 菜单配置
@@ -40,7 +55,7 @@ export const EnumIconTypes = {
     }
  * @type {[*]}
  */
-export const EnumDefaultMenus = [
+export const EnumDefaultMenus: TypeMenu[] = [
     {
         // label: '可视化组件',
         // icon: {

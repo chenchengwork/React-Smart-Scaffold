@@ -14,6 +14,8 @@ Promise._unhandledRejectionFn = function (rejectError) {};
 
 const { apiDomain, respCode } = EnumEnv;
 
+export type Resp = {code: string|number, data: any, msg: string}
+export type PromiseResp = Promise<Resp>
 
 class Csrf{
     // 校验是否是安全方法
@@ -99,7 +101,7 @@ const processDownload = (resp: AxiosResponse) => {
  * @return {Promise}
  * @private
  */
-const _request = (options = {}, isDownload = false) => {
+const _request = (options = {}, isDownload = false): PromiseResp => {
     return new Promise((resolve, reject) => {
         options = csrf.setToken(options);
 

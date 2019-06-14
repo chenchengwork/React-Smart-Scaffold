@@ -1,6 +1,6 @@
 import styles from './index.scss';
-import { PureComponent } from 'react';
-import { withRouter } from 'react-router-dom';
+import * as React from 'react';
+import { withRouter, RouteComponentProps } from 'react-router-dom';
 import { Layout, BackTop } from 'antd';
 
 import prompt from '@/utils/prompt';
@@ -12,15 +12,16 @@ import EnumRouter from '@/constants/EnumRouter';
 import MenuHeader from './MenuHeader';
 import MenuLeft from './MenuLeft';
 
-export MainHeader from './MainHeader';
-export MainContent from "./MainContent"
+import MainHeader from './MainHeader';
+export {MainHeader}
+import MainContent from "./MainContent"
+export {MainContent}
 
-@withRouter
-export default class MainLayout extends PureComponent {
+class MainLayout extends React.PureComponent<RouteComponentProps> {
     state = {
         collapsed: !UrlToExtraInfoMap[this.props.match.path],
         appMenuLeftWidth: this.getLeftMenuWidth(!UrlToExtraInfoMap[this.props.match.path]),		// 左侧菜单的宽度
-        openKeys: []
+        openKeys: Array()
     };
 
     /**
@@ -36,7 +37,7 @@ export default class MainLayout extends PureComponent {
      * @param {bool} collapsed
      * @return {number}
      */
-    getLeftMenuWidth(collapsed) {
+    getLeftMenuWidth(collapsed: boolean) {
         // 是否移除左侧菜单
         const currentUrl = this.props.match.path;
         if(isRemoveLeftMenu(currentUrl)) return 0;
@@ -48,7 +49,7 @@ export default class MainLayout extends PureComponent {
 	 * 左侧菜单的收起和关闭
      * @param collapsed
      */
-     onLeftMenuCollapse = (collapsed) => this.setState({ collapsed, appMenuLeftWidth: this.getLeftMenuWidth(collapsed) });
+     onLeftMenuCollapse = (collapsed: boolean) => this.setState({ collapsed, appMenuLeftWidth: this.getLeftMenuWidth(collapsed) });
 
     render() {
         const currentUrl = this.props.match.path;
@@ -82,3 +83,5 @@ export default class MainLayout extends PureComponent {
 
     }
 }
+
+export default withRouter(MainLayout)

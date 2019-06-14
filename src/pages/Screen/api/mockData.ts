@@ -4,18 +4,18 @@ import { helper, localStore } from '@/utils/T';
 
 const mockStoreKey = "test_mockScreenKey";
 
-const defaultData = {count: 0, rows: []};
+const defaultData = {count: 0, rows: Array()};
 
 const mkScreenId = () => "id_" + Date.now()
 
-export const getPageList = () => {
+export const getPageList = ()  => {
 
     const data  = localStore.get(mockStoreKey);
 
     return helper.mockData(data || defaultData);
 };
 
-export const getItem = (screen_id) => {
+export const getItem = (screen_id: string) => {
     const data = localStore.get(mockStoreKey) || defaultData;
 
     for(let i = 0; i < data.rows.length; i++){
@@ -26,7 +26,7 @@ export const getItem = (screen_id) => {
     }
 };
 
-export const createItem = (params) => {
+export const createItem = (params: {[index: string]: any}) => {
     const data = localStore.get(mockStoreKey) || defaultData;
 
     params.id = mkScreenId();
@@ -38,7 +38,7 @@ export const createItem = (params) => {
     return helper.mockData();
 };
 
-export const updateItem = (screen_id, params) => {
+export const updateItem = (screen_id: string, params: {[index: string]: any}) => {
     const data = localStore.get(mockStoreKey) || defaultData;
 
     for(let i = 0; i < data.rows.length; i++){
@@ -56,9 +56,9 @@ export const updateItem = (screen_id, params) => {
     return helper.mockData();
 };
 
-export const deleteItem = (screen_ids) => {
+export const deleteItem = (screen_ids: string[]) => {
     const data = localStore.get(mockStoreKey) || defaultData;
-    const newData = {count: 0, rows: []};
+    const newData = {count: 0, rows: Array()};
     for(let i = 0; i < data.rows.length; i++){
         const row = data.rows[i];
         if(screen_ids.indexOf(row.id) === -1 ){

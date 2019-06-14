@@ -32,7 +32,7 @@ export {deepClone}
  * @param isMockError
  * @return {Promise<any>}
  */
-export const mockData = (data: any = null, isMockError = false) => {
+export const mockData = (data: any = null, isMockError = false): Promise<{code: string, data: any, msg: string}> => {
     return new Promise((resolve, reject) => {
         setTimeout(() => {
             if(!isMockError) {
@@ -136,7 +136,7 @@ export const dateFormat = (timestamp: number|string, fmt = "yyyy-MM-dd hh:mm:ss"
  * @param {Array} data
  * @return {*[]}
  */
-export const uniq = (data: []) => Array.from(new Set(data));
+export const uniq = <T>(data: T[]): T[] => Array.from(new Set(data));
 
 
 /**

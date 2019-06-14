@@ -1,6 +1,15 @@
+import * as React from 'react'
+import * as PropTypes from 'prop-types';
 import styles from "./index.scss";
-import PropTypes from 'prop-types';
 import { Layout } from 'antd';
+
+interface MainHeaderProps {
+    className: string;
+    title: string;
+    style: React.CSSProperties;
+    leftRender: React.ReactNode;
+    rightRender: React.ReactNode;
+}
 
 /**
  * 头部组件
@@ -12,7 +21,7 @@ import { Layout } from 'antd';
  * @returns {XML}
  * @constructor
  */
-const MainHeader = ({ className = '', title = '', style = {}, leftRender = null, rightRender = null }) => {
+const MainHeader = ({ className = '', title = '', style = {}, leftRender = null, rightRender = null }: MainHeaderProps) => {
     let customClassName = styles['app-header'];
     if (className) {
         customClassName = className + ' ' + customClassName;

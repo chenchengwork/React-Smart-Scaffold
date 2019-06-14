@@ -1,6 +1,13 @@
-import PropTypes from 'prop-types';
+import * as React from 'react';
+import * as PropTypes from 'prop-types';
 import { Layout } from 'antd';
+import {LayoutProps} from 'antd/lib/layout'
 
+interface MainContentProps extends LayoutProps{
+    className: string;
+    style: React.CSSProperties;
+    children: React.ReactNode;
+}
 /**
  * 内容组件
  * @param {String} className
@@ -9,7 +16,7 @@ import { Layout } from 'antd';
  * @returns {XML}
  * @constructor
  */
-const MainContent = ({ className = '', style = {}, children = null, ...rest }) => {
+const MainContent = ({ className = '', style = {}, children = null, ...rest }: MainContentProps) => {
     let defaultStyle = {
         // margin: '0px 10px 0px 10px',
     };

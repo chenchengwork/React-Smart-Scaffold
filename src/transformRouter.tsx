@@ -1,9 +1,10 @@
-import React, { Fragment } from 'react';
+import * as React from 'react';
 import { BrowserRouter, Route, Switch, Redirect, Link, HashRouter } from 'react-router-dom';
 import loadable from '@/utils/loadable';
 
 import MainLayout from '@/layouts/MainLayout';
 const Exception = loadable(import("@/components/Exception"));
+// import Exception  from "@/components/Exception";
 const ErrorBoundary = loadable(import("@/components/ErrorBoundary"));
 
 import { stores, StoreCtx } from './store';
@@ -11,16 +12,19 @@ import EnumRouter from '@/constants/EnumRouter';
 import EnumEnv from '@/constants/EnumEnv';
 import { permission } from "@/services/auth";
 
+export type TypeLazyComponent = Promise<{default: React.ComponentType<any>}>
+export type TypeRoutes = {uri: string, component: TypeLazyComponent, isMainLayout?: boolean, storeKeys?: string[], props?: any}[]
+
 // 懒加载组件
-const lazy = (uri, component, isMainLayout, storeKeys, props ) => {
+const lazy = (uri: string, component: TypeLazyComponent , isMainLayout: boolean, storeKeys: string[]|undefined, props: any) => {
     if(!permission.isLogin() && uri !== EnumEnv.login.loginUrl) return () => <Redirect to={EnumEnv.login.loginUrl} />;
 
     const LazyComponent = loadable(component);
-    const Layout = isMainLayout ? MainLayout : Fragment;
+    const Layout = isMainLayout ? MainLayout : React.Fragment;
 
     return () => {
         // 保证页面切换时, 重新实例化mobx状态实例
-        const storeIns = {};
+        const storeIns: {[index: string]: object} = {};
         (storeKeys || []).forEach(key => storeIns[key] = stores[key]());
 
         return(
@@ -39,6 +43,9 @@ const lazy = (uri, component, isMainLayout, storeKeys, props ) => {
  */
 const checkLoginRedirect = () => <Redirect to={permission.isLogin() ? EnumEnv.login.defaultRedirectUrl : EnumEnv.login.loginUrl} />;
 
+
+
+
 /**
  * 路由配置
  * @param {Array} routes
@@ -54,7 +61,7 @@ const checkLoginRedirect = () => <Redirect to={permission.isLogin() ? EnumEnv.lo
          },
     ];
  */
-const transformRouter = (routes) => () => (
+const transformRouter = (routes: TypeRoutes) => () => (
     <ErrorBoundary>
         <BrowserRouter
             forceRefresh={!('pushState' in window.history)}

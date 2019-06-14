@@ -17,7 +17,7 @@ class Prompt {
      * @param {Number} duration
      * @param {Function} onClose
      */
-    success(msg, duration = 2, onClose = () => {}) {
+    success(msg: string, duration = 2, onClose = () => {}) {
         message.success(msg, duration, onClose);
     }
 
@@ -27,7 +27,7 @@ class Prompt {
      * @param {Number} duration
      * @param {Function} onClose
      */
-    error(msg, duration = 2, onClose = () => {}) {
+    error(msg: string, duration = 2, onClose = () => {}) {
         if(Array.isArray(msg)){
             let newMsg = "";
             msg.forEach(item => newMsg += `${item.message}\n`);
@@ -43,7 +43,7 @@ class Prompt {
      * @param {Number} duration
      * @param {Function} onClose
      */
-    warn(msg, duration = 2, onClose = () => {}) {
+    warn(msg: string, duration = 2, onClose = () => {}) {
         message.warn(msg, duration, onClose);
     }
 
@@ -52,7 +52,7 @@ class Prompt {
      * @param {Function} cbForOk return Promise对象
      * @param {Object} options
      */
-    confirm(cbForOk, options = {}) {
+    confirm(cbForOk: () => {}, options = {}) {
         options = Object.assign({
             title: '确定删除吗？',
             // content: <h1>When clicked the OK button, this dialog will be closed after 1 second</h1>,

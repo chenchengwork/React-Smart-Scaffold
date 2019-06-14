@@ -1,4 +1,5 @@
-import React from 'react';
+import * as React from 'react';
+import { Link } from 'react-router-dom'
 import styles from "./index.scss";
 import img_404 from './img/404.svg';
 import img_403 from './img/403.svg';
@@ -7,25 +8,45 @@ import img_500 from './img/500.svg';
 import {createElement} from 'react';
 import { Button } from 'antd';
 
-const config = {
-    403: {
+interface ExceptionProps {
+    className?: string;
+    linkElement?: string | typeof Link;
+    type: string;
+    title?: string;
+    desc?: string;
+    img?: string;
+    style?: React.CSSProperties,
+}
+
+interface ConfigItem {
+    img: string;
+    title: string;
+    desc: string;
+}
+
+interface Config {
+    [index: string]: ConfigItem
+}
+
+const config: Config = {
+    "403": {
         img: img_403,
         title: '403',
         desc: '抱歉，你无权访问该页面',
     },
-    404: {
+    "404": {
         img: img_404,
         title: '404',
         desc: '抱歉，你访问的页面不存在',
     },
-    500: {
+    "500": {
         img: img_500,
         title: '500',
         desc: '抱歉，服务器出错了',
     },
 };
 
-export default ({ className = "", linkElement = 'a', type, title, desc, img, ...rest }) => {
+export default ({ className = "", linkElement = 'a', type, title, desc, img, ...rest }: ExceptionProps) => {
     const pageType = type in config ? type : '404';
 
     return (

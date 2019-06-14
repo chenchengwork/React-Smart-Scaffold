@@ -1,6 +1,6 @@
-import React from 'react';
+import * as React from 'react';
 import {Icon} from 'antd';
-import PropTypes from 'prop-types';
+import * as PropTypes from 'prop-types';
 
 const MyIcon = Icon.createFromIconfontCN({
     scriptUrl: require("./iconfont"), // 在 iconfont.cn 上生成, 下载到本地icon.js中
@@ -13,7 +13,7 @@ const MyIcon = Icon.createFromIconfontCN({
  * @return {*}
  * @constructor
  */
-const CustomIcon = ({ type,  ...rest }) => {
+const CustomIcon = ({ type,  ...rest }: {type: string}) => {
 
     return <MyIcon type={`icon-${type}`} {...rest} />;
 };

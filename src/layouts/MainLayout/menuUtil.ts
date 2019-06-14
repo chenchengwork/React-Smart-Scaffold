@@ -3,13 +3,27 @@
  */
 import {checkType, helper} from '@/utils/T';
 import { permission } from '@/services/auth';
-import { EnumDefaultMenus, EnumCollapsedLeftMenuUrls } from './constants/EnumDefaultMenus';
+import { EnumDefaultMenus, EnumCollapsedLeftMenuUrls, TypeIcon, TypeMenu } from './constants/EnumDefaultMenus';
+
+interface TypeUrlToExtraInfo {
+    icon: TypeIcon
+    isCollapsedLeftMenu: boolean
+}
+
+interface TypeUrlToExtraInfoMap {
+    [index:string]: TypeUrlToExtraInfo
+}
+
+interface TypeFormatMenus {
+    menus: TypeMenu[]
+    urls: string[]
+}
 
 /**
  * url和分类值的对应关系
  * @type {{}}
  */
-export const UrlToExtraInfoMap = {};
+export const UrlToExtraInfoMap: TypeUrlToExtraInfoMap = {};
 
 /**
  * 配置菜单文件
@@ -19,9 +33,9 @@ const EnumMenus = (() => {
      * 获取url对应额外信息的Item
      * @param url
      */
-    const getUrlToExtraInfoMapItem = (url, icon) => ({ icon, isCollapsedLeftMenu: EnumCollapsedLeftMenuUrls.indexOf(url) !== -1 });
+    const getUrlToExtraInfoMapItem = (url: string, icon: TypeIcon) => ({ icon, isCollapsedLeftMenu: EnumCollapsedLeftMenuUrls.indexOf(url) !== -1 });
 
-    const formatMenus = (menus, urls = []) => {
+    const formatMenus = (menus: TypeMenu[], urls: string[] = []): TypeFormatMenus => {
         menus.forEach(menu => {
             if (checkType.isUndefined(menu.children)) menu.children = [];
 
@@ -37,7 +51,7 @@ const EnumMenus = (() => {
             if (Array.isArray(menu.children) && menu.children.length > 0) {
                 if(menu.url){
                     if(checkType.isString(menu.url)){
-                        menu.url = [menu.url];
+                        menu.url = [menu.url as string];
                     }
                 } else {
                     menu.url = [];
@@ -45,7 +59,7 @@ const EnumMenus = (() => {
 
                 const result = formatMenus(menu.children);
 
-                menu.url = helper.uniq(menu.url.concat(result.urls));
+                menu.url = helper.uniq((menu.url as string[]).concat(result.urls));
                 urls = helper.uniq(urls.concat(menu.url));
             }
         });
@@ -104,7 +118,7 @@ const EnumMenus = (() => {
  * @param url
  * @return {boolean}
  */
-export const isRemoveLeftMenu = (url) => {
+export const isRemoveLeftMenu = (url:string) => {
 
     for (let j = 0; j < EnumMenus.length; j++) {
         const menu = EnumMenus[j];
@@ -141,7 +155,7 @@ export const getMenus = () => EnumMenus;
  * @param url
  * @returns {Array}
  */
-export const getLeftMenu = (url) => {
+export const getLeftMenu = (url: string) => {
     const menu = EnumMenus;
 
     for (let i = 0; i < menu.length; i++) {

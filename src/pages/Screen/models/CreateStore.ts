@@ -1,10 +1,10 @@
 import { observable, action, runInAction } from 'mobx';
 import prompt from '@/utils/prompt';
-import {checkType} from '@/utils/T';
+import {checkType, request} from '@/utils/T';
 import { getScreen, updateScreen, createScreen } from '../api';
+import { CreateStoreInterface } from '../typings'
 
-
-export default class CreateStore {
+export default class CreateStore{
     @observable saving = false;
     @observable loading = false;
     @observable data = {};
@@ -14,7 +14,7 @@ export default class CreateStore {
      * @param screen_id
      */
     @action
-    fetchData = (screen_id) => {
+    fetchData = (screen_id: string) => {
         if(screen_id) {
             this.loading = true;
             getScreen(screen_id).then(
@@ -40,15 +40,15 @@ export default class CreateStore {
      * @param callbackFailed
      */
     @action
-    save = (screen_id, params, callbackSuccess, callbackFailed) => {
+    save = (screen_id: string, params: {[index: string]: any}, callbackSuccess: () => void, callbackFailed: () => void) => {
 
         this.saving = true;
         const thenResp = [
-            (resp) => runInAction(() => {
+            (resp: request.Resp) => runInAction(() => {
                 this.saving = false;
                 checkType.isFunction(callbackSuccess) && callbackSuccess();
             }),
-            (resp) => runInAction(() => {
+            (resp: request.Resp) => runInAction(() => {
                 this.saving = false;
                 prompt.error(resp.msg);
                 checkType.isFunction(callbackFailed) && callbackFailed();

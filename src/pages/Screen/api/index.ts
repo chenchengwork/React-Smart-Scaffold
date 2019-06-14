@@ -14,7 +14,7 @@ import * as mockData from './mockData';
  * @param {String} [params.search.name]
  * @return {Promise}
  */
-export const getPageList =  (params) => {
+export const getPageList =  (params: {page?: number, pageSize?: number, search?:{[index: string]: any}}) => {
     params.page = params.page || 1;
     params.pageSize = params.pageSize || 15;
     params.search = params.search || {};
@@ -29,7 +29,7 @@ export const getPageList =  (params) => {
  * @param {String} screen_id
  * @return {Promise}
  */
-export const getScreen = (screen_id) => {
+export const getScreen = (screen_id: string) => {
     return mockData.getItem(screen_id);
 
     return get(proxyAPI("/screen/getScreen"), {screen_id})
@@ -56,7 +56,7 @@ export const createScreen = (params = {}) => {
  * @param {String} [params.config]
  * @return {Promise}
  */
-export const updateScreen = (screen_id, params = {}) => {
+export const updateScreen = (screen_id: string, params = {}) => {
 
     return mockData.updateItem(screen_id, params);
 
@@ -68,7 +68,7 @@ export const updateScreen = (screen_id, params = {}) => {
  * @param {Array} screen_ids
  * @return {Promise}
  */
-export const deleteScreen =(screen_ids = []) => {
+export const deleteScreen =(screen_ids: string[] = []) => {
 
     return mockData.deleteItem(screen_ids);
 

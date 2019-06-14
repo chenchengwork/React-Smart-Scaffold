@@ -10,6 +10,10 @@ configure({
 
 export const StoreCtx = createContext({});
 
-export const stores = {
+interface Store {
+    [index: string]: () => object
+}
+
+export const stores: Store = {
     screen: require("./pages/Screen/models").default
 };
