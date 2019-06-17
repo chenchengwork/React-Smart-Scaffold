@@ -43,7 +43,7 @@ export default class ListStore {
      * 删除元素
      * @param screen_ids
      */
-    delItem = (screen_ids: string[]) => {
+    delItem = (screen_ids: string[] | string) => {
         screen_ids = !Array.isArray(screen_ids) ? [screen_ids] : screen_ids;
         return deleteScreen(screen_ids).then(
             () => this.fetchPageList(),

@@ -4,8 +4,8 @@ import { Layout } from 'antd';
 import {LayoutProps} from 'antd/lib/layout'
 
 interface MainContentProps extends LayoutProps{
-    className: string;
-    style: React.CSSProperties;
+    className?: string;
+    style?: React.CSSProperties;
     children: React.ReactNode;
 }
 /**

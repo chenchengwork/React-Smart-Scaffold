@@ -1,12 +1,18 @@
 /**
  * Created by chencheng on 17-9-13.
  */
-import React from "react";
+import * as React from "react";
+import * as PropTypes from 'prop-types';
 import styles from './index.scss';
-import PropTypes from 'prop-types';
 import { Spin } from 'antd';
+import { SpinProps } from 'antd/lib/spin'
 
-export default function BoxSpin({ style = {}, spinProps = {}}) {
+interface BoxSpinProps {
+    style?: React.CSSProperties;
+    spinProps?: SpinProps
+}
+
+export default function BoxSpin({ style = {}, spinProps = {}}: BoxSpinProps) {
     style = Object.assign({
         position: 'relative',
         width: '100%',

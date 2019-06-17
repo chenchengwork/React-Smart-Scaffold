@@ -36,7 +36,7 @@ const Screen = observer(() => {
         },
         {
             title: "操作",
-            render: (text, record) => (
+            render: (text: string, record: {id: string}) => (
                 <Fragment>
                     <Button type="primary" icon="edit" onClick={() => renderCreateModal(record.id)}>编辑</Button>
 
@@ -51,7 +51,7 @@ const Screen = observer(() => {
         }
     ];
 
-    const renderCreateModal = (screen_id) => {
+    const renderCreateModal = (screen_id?: string) => {
         const CreateModal = widthModal(Create);
         helper.mountReact(<CreateModal
             modalProps={{title: screen_id ? "编辑" :"创建"}}

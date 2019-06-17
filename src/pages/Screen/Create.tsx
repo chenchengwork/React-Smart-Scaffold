@@ -1,11 +1,14 @@
-import PropTypes from 'prop-types';
-import React, { Component, useEffect, useState } from 'react';
+import * as React from 'react';
+import * as PropTypes from 'prop-types';
+const { Component, useEffect, useState } = React;
 import { observer } from 'mobx-react-lite';
 import { Form, Input } from 'antd';
 import Box from '@/components/Box';
+import {WrappedComponentProps} from '@/components/Hoc/widthModal';
+import { FormComponentProps } from 'antd/lib/form'
 const FormItem = Form.Item;
 
-const Create = observer(({modalControl, screen_id, createStore, listStore}) => {
+const Create = observer(({modalControl, screen_id, createStore, listStore}: WrappedComponentProps) => {
     const [ form, setForm ] = useState(null);
     useEffect(() => {
         modalControl.registerOk(handleSubmit);
@@ -16,7 +19,7 @@ const Create = observer(({modalControl, screen_id, createStore, listStore}) => {
     }, []);
 
     const handleSubmit = () => {
-        form && form.validateFields((err, values) => {
+        form && form.validateFields((err: Error, values: any) => {
             if (!err) {
                 createStore.save(screen_id, values,
                     () => {
@@ -49,7 +52,17 @@ Create.propTypes = {
 
 export default Create;
 
-class CreateForm extends Component {
+
+interface CreateFormProps extends FormComponentProps{
+    data: {
+        name: string;
+        age: string|number;
+        address: string;
+    };
+    loading: boolean;
+    setForm: (form: any) => void
+}
+class CreateForm extends Component<CreateFormProps> {
     componentDidMount() {
         this.props.setForm(this.props.form);
     }
@@ -90,4 +103,4 @@ class CreateForm extends Component {
     }
 }
 
-const CreateFormWrapper = Form.create()(CreateForm);
+const CreateFormWrapper = Form.create<CreateFormProps>()(CreateForm);

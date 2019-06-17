@@ -4,11 +4,11 @@ import styles from "./index.scss";
 import { Layout } from 'antd';
 
 interface MainHeaderProps {
-    className: string;
-    title: string;
-    style: React.CSSProperties;
-    leftRender: React.ReactNode;
-    rightRender: React.ReactNode;
+    className?: string;
+    title?: string;
+    style?: React.CSSProperties;
+    leftRender?: React.ReactNode;
+    rightRender?: React.ReactNode;
 }
 
 /**

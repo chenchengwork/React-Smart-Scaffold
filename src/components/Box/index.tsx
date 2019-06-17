@@ -1,7 +1,16 @@
-import PropTypes from 'prop-types';
+import * as React from 'react';
+import * as PropTypes from 'prop-types';
 import styles from './index.scss';
-import React, { Fragment } from 'react';
 import BoxSpin from '../BoxSpin';
+const { Fragment } = React;
+
+interface BoxProps {
+    loading?: boolean;
+    isNoData?: boolean;
+    className?: string;
+    style?: React.CSSProperties;
+    children: React.ReactNode
+}
 
 /**
  * 盒子内容
@@ -13,7 +22,7 @@ import BoxSpin from '../BoxSpin';
  * @returns {*}
  * @constructor
  */
-const Box = ({loading = false, isNoData = false, className = "", style = {}, children = null}) => {
+const Box = ({loading = false, isNoData = false, className = "", style = {}, children = null}: BoxProps) => {
     const defaultStyle = {
         width: "100%",
         height: "100%",
