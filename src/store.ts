@@ -20,7 +20,7 @@ interface StoreCtxVal {
 export const StoreCtx: React.Context<StoreCtxVal> = createContext({});
 
 interface Store {
-    [index: string]: () => object
+    [index: string]: object
 }
 
 export const stores: Store = {

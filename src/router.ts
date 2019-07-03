@@ -22,7 +22,7 @@ const routes = [
     {
         uri: EnumRouter.screen,
         component: import("./pages/Screen"),
-        storeKeys: ["screen"]
+        storeKeys: ["screen.listStore", "screen.createStore"]
     },
     // {
     //     uri: EnumRouter.x_components,

@@ -24,8 +24,20 @@ const lazy = (uri: string, component: TypeLazyComponent , isMainLayout: boolean,
 
     return () => {
         // 保证页面切换时, 重新实例化mobx状态实例
-        const storeIns: {[index: string]: object} = {};
-        (storeKeys || []).forEach(key => storeIns[key] = stores[key]());
+        const storeIns = {};
+        (storeKeys || []).forEach(key => {
+            const keys = key.split(".");
+            if(keys.length > 0){
+                const [key1, key2] = keys;
+                // @ts-ignore
+                if(!storeIns[key1]) storeIns[key1] = {};
+                // @ts-ignore
+                storeIns[key1][key2] = new stores[key1][key2]();
+            }else {
+                // @ts-ignore
+                storeIns[key] = (new stores[key]()) as object;
+            }
+        });
 
         return(
             <StoreCtx.Provider value={storeIns}>
