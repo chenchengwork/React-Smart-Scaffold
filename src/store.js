@@ -9,7 +9,3 @@ configure({
 });
 
 export const StoreCtx = createContext({});
-
-export const stores = {
-    screen: require("./pages/Screen/models").default
-};
