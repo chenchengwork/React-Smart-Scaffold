@@ -1,10 +1,9 @@
-import React  from 'react';
+import React, { PureComponent }  from 'react';
 import styles from './index.scss';
-import { PureComponent } from 'react';
 import { withRouter } from 'react-router-dom';
 import { Layout, BackTop } from 'antd';
 
-import { prompt } from '@/utils/T';
+import prompt from '@/utils/prompt';
 
 import { UrlToExtraInfoMap, getLeftMenu, getMenus, isRemoveLeftMenu } from './menuUtil';
 import { logout } from '@/services/auth';
@@ -16,8 +15,6 @@ import MenuLeft from './MenuLeft';
 
 export MainHeader from './MainHeader';
 export MainContent from "./MainContent"
-
-
 
 @withRouter
 export default class MainLayout extends PureComponent {
