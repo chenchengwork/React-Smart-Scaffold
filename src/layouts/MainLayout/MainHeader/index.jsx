@@ -1,7 +1,7 @@
 import styles from "./index.scss";
 import PropTypes from 'prop-types';
 import { Layout } from 'antd';
-
+import { LayoutCtx } from "../layoutContext";
 /**
  * 头部组件
  * @param {String} className
@@ -19,7 +19,7 @@ const MainHeader = ({ className = '', title = '', style = {}, leftRender = null,
     }
 
     let defaultStyle = {
-        marginBottom: 10
+        marginBottom: 10,
     };
 
     const headerContent = [
@@ -33,9 +33,16 @@ const MainHeader = ({ className = '', title = '', style = {}, leftRender = null,
     ];
 
     return (
-        <Layout.Header className={customClassName} style={Object.assign(defaultStyle, style)}>
-            {headerContent}
-        </Layout.Header>
+        <LayoutCtx.Consumer>
+            {({leftMenuW}) => {
+                const width = window.innerWidth - leftMenuW;
+                return (
+                    <Layout.Header className={customClassName} style={Object.assign({width},defaultStyle, style)}>
+                        {headerContent}
+                    </Layout.Header>
+                )
+            }}
+        </LayoutCtx.Consumer>
     );
 };
 MainHeader.propTypes = {

@@ -63,27 +63,28 @@ const Screen = observer(() => {
     const { data, loading } = listStore;
 
     return (
-        <MainContent className={styles.screen}>
-            <MainHeader title="可视化列表" rightRender={<Button icon="plus" onClick={() => renderCreateModal()}>创建</Button>}/>
+        <Fragment>
+            <MainHeader title="可视化列表" rightRender={<Button icon="plus" type="primary" onClick={() => renderCreateModal()}>创建</Button>}/>
+            <MainContent className={styles.screen}>
+                {/* 国际化调用 */}
+                {/*<FormattedMessage*/}
+                {/*id="Screen.test"*/}
+                {/*defaultMessage={'你有条新信息'}*/}
+                {/*values={{unreadCount: 10}}*/}
+                {/*/>*/}
 
-            {/* 国际化调用 */}
-            {/*<FormattedMessage*/}
-            {/*id="Screen.test"*/}
-            {/*defaultMessage={'你有条新信息'}*/}
-            {/*values={{unreadCount: 10}}*/}
-            {/*/>*/}
-
-            <Table
-                loading={loading}
-                dataSource={data.rows}
-                columns={columns}
-                rowKey={(row) => row.name}
-                pagination={{
-                    total: data.count,
-                    pageSize: 15
-                }}
-            />
-        </MainContent>
+                <Table
+                    loading={loading}
+                    dataSource={data.rows}
+                    columns={columns}
+                    rowKey={(row) => row.name}
+                    pagination={{
+                        total: data.count,
+                        pageSize: 15
+                    }}
+                />
+            </MainContent>
+        </Fragment>
     )
 })
 

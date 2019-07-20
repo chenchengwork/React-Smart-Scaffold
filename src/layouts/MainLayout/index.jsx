@@ -1,19 +1,23 @@
+import React  from 'react';
 import styles from './index.scss';
 import { PureComponent } from 'react';
 import { withRouter } from 'react-router-dom';
 import { Layout, BackTop } from 'antd';
 
-import prompt from '@/utils/prompt';
+import { prompt } from '@/utils/T';
 
 import { UrlToExtraInfoMap, getLeftMenu, getMenus, isRemoveLeftMenu } from './menuUtil';
 import { logout } from '@/services/auth';
 import EnumRouter from '@/constants/EnumRouter';
+import { LayoutCtx } from './layoutContext';
 
 import MenuHeader from './MenuHeader';
 import MenuLeft from './MenuLeft';
 
 export MainHeader from './MainHeader';
 export MainContent from "./MainContent"
+
+
 
 @withRouter
 export default class MainLayout extends PureComponent {
@@ -33,7 +37,6 @@ export default class MainLayout extends PureComponent {
 
     /**
 	 * 获取左侧菜单宽度
-     * @param {bool} collapsed
      * @return {number}
      */
     getLeftMenuWidth(collapsed) {
@@ -54,30 +57,32 @@ export default class MainLayout extends PureComponent {
         const currentUrl = this.props.match.path;
         const { appMenuLeftWidth, collapsed } = this.state;
         return (
-            <Layout className={styles["main-layout"]}>
-                <MenuHeader
-                    currentUrl={currentUrl}
-                    menus={getMenus()}
-                    logout={this.logout}
-                />
-
-                <Layout className={styles["main-content"]}>
-                    <MenuLeft
+            <LayoutCtx.Provider value={{leftMenuW: appMenuLeftWidth}}>
+                <Layout className={styles["main-layout"]}>
+                    <MenuHeader
                         currentUrl={currentUrl}
-                        leftMenu={getLeftMenu(currentUrl)}
-                        leftWidth={appMenuLeftWidth}
-                        collapsed={collapsed}
-                        onLeftMenuCollapse={this.onLeftMenuCollapse}
+                        menus={getMenus()}
+                        logout={this.logout}
                     />
 
-                    <Layout className={styles["app-content"]}>
-                        <BackTop style={{ right: 100 }} />
-                        {this.props.children}
+                    <Layout className={styles["main-content"]}>
+                        <MenuLeft
+                            currentUrl={currentUrl}
+                            leftMenu={getLeftMenu(currentUrl)}
+                            leftWidth={appMenuLeftWidth}
+                            collapsed={collapsed}
+                            onLeftMenuCollapse={this.onLeftMenuCollapse}
+                        />
+
+                        <Layout className={styles["app-content"]}>
+                            <BackTop style={{ right: 100 }} />
+                            {this.props.children}
+                        </Layout>
+
                     </Layout>
 
                 </Layout>
-
-            </Layout>
+            </LayoutCtx.Provider>
         );
 
     }

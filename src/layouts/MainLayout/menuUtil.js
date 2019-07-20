@@ -2,7 +2,6 @@
  * Created by chencheng on 2017/8/28.
  */
 import {checkType, helper} from '@/utils/T';
-import { permission } from '@/services/auth';
 import { EnumDefaultMenus, EnumCollapsedLeftMenuUrls } from './constants/EnumDefaultMenus';
 
 /**
@@ -57,46 +56,7 @@ const EnumMenus = (() => {
     };
 
 
-    let menus = formatMenus(helper.deepClone(EnumDefaultMenus)).menus;
-
-    // ------------权限过滤菜单--------------
-    // TODO 需要权限过滤将其开启
-    // const permissionKeys = Object.keys(permission.get());
-    //
-    // function difference(array, values){
-    //     if(!array || !Array.isArray(array) || array.length<=0){
-    //         return [];
-    //     }
-    //
-    //     const except=Array.from(arguments).slice(1);
-    //     if(!except || except.length<=0) return array.concat();
-    //
-    //     return array.filter(function(value){
-    //         return except.indexOf(value) < 0;
-    //     });
-    // }
-    //
-    // const permissionMenus = (menus) => {
-    //     let newMenus = [];
-    //     for (let i = 0; i < menus.length; i++){
-    //         let menu = menus[i];
-    //         let childrenPermission = [];
-    //         if (Array.isArray(menu.children) && menu.children.length > 0) {
-    //             childrenPermission = menu.children.map(item => item.uniqueIdentity);
-    //             menu.children = permissionMenus(menu.children);
-    //         }
-    //
-    //         if (!(!permission.can(menu.uniqueIdentity) && difference(childrenPermission, permissionKeys).length === childrenPermission.length)) {
-    //             newMenus.push(menu);
-    //         }
-    //     }
-    //
-    //     return newMenus;
-    // };
-    //
-    // menus = permissionMenus(menus);
-
-    return menus;
+    return formatMenus(helper.deepClone(EnumDefaultMenus)).menus;
 })();
 
 /**

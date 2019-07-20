@@ -11,7 +11,8 @@
 	display: flex;
 
 	.logo {
-		padding-left: 5px;
+		display: flex;
+		min-width: 200px;
 		height: $main-layout-header-height;
 		line-height: $main-layout-header-height;
 		font-size: 18px;
@@ -21,35 +22,12 @@
 		text-overflow: ellipsis;
 		overflow: hidden;
 		white-space: nowrap;
-	}
-
-	.logoImg{
-		width: 40px;
-		height: 50px;
-	}
-
-	.ant-dropdown-link {
-		font-size: 12px;
-		line-height: 24px;
-		color: #ACC2D8;
-		margin-top: 13px;
-		text-align: center;
-		text-decoration: none;
-
-		text-overflow: ellipsis;
-		overflow: hidden;
-		white-space: nowrap;
-
-		width: 115px;
-		height: 24px;
-		border-radius: 100px;
-		background-color: rgba(63, 77, 115, 0.2);
-		border: solid 1px #394973;
-		.anticon {
-			vertical-align: middle;
+		.logoImg{
+			//width: 111px;
+			//height:18px;
 		}
-
 	}
+
 	.ant-menu-left {
 		flex: 1;
 		border-bottom-color: $main-menu-background-color;
@@ -76,7 +54,7 @@
 						color: #0099FF;
 					}
 				}
-				&:last-child{
+				&:nth-last-child(2){
 					> a{
 						border-right: none
 					}
@@ -84,7 +62,6 @@
 			}
 			.ant-menu-item-selected {
 				border-bottom: 2px solid #509be6;
-				// background-color: rgba(0, 51, 102, 0);
 				background-color: transparent;
 				& > a {
 					color: #fafcff;
@@ -119,26 +96,6 @@
 			border:none;
 		}
 	}
-	.menu-split {
-		display: inline-block;
-		width: 1px;
-		height: 20px;
-		// margin-top: 25px!important;
-
-		background-color: #384466;
-
-		&.left {
-			// float: left;
-			margin: 15px 0 15px 20px;
-		}
-
-		&.right {
-			// float: right;
-			margin: 15px 0;
-		}
-	}
-
-
 }
 
 

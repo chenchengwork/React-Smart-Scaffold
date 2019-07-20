@@ -1,9 +1,15 @@
+@import "../theme";
 .app-header {
+    position: fixed;
+    z-index: 10;
+    top: $main-layout-header-height;
+
     display: flex;
     flex-direction: row;
     align-items: center;
     justify-content: space-between;
-    background: #edf1f5;
+    //background: #edf1f5;
+    background: #fff;
     padding: 0 24px;
     height: 45px;
     margin-bottom: 1px;
@@ -25,12 +31,5 @@
         font-size: 18px;
         text-align: left;
         color: #99A3BF;
-    }
-
-    :global {
-        .ant-form {
-            position: absolute;
-            right: 16px;
-        }
     }
 }

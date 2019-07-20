@@ -1,5 +1,6 @@
 import PropTypes from 'prop-types';
 import { Layout } from 'antd';
+import styles from './index.scss';
 
 /**
  * 内容组件
@@ -13,8 +14,9 @@ const MainContent = ({ className = '', style = {}, children = null, ...rest }) =
     let defaultStyle = {
         // margin: '0px 10px 0px 10px',
     };
+
     return (
-        <Layout.Content className={className} style={Object.assign(defaultStyle, style)} {...rest}>
+        <Layout.Content className={`${styles["main-content"]} ${className}`} style={Object.assign(defaultStyle, style)} {...rest}>
             {children}
         </Layout.Content>
     );

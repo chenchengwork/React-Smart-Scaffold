@@ -3,7 +3,6 @@
 :global {
 	body {
 		height: 100%;
-
 		> #wrapper {
 			height: 100%;
 		}
@@ -17,14 +16,12 @@
 	.main-content {
 		margin-top: $main-layout-header-height;
 		height: 100%;
-
 		.app-content {
-			//应用区中的header
+			position: relative;
 			height: 100%;
+			width: 100%;
 			background-color: #edf1f5;
-			padding: 5px;
 		}
-
 	}
 
 }

@@ -8,14 +8,16 @@ import AppIcon from '../AppIcon';
 
 const MenuHeader = ({currentUrl, menus, logout}) => (
     <Layout.Header className={styles["menu-header"]}>
-        <img className={styles.logoImg} src={require("./img/logo.svg")}  />
-        <span className={styles["logo"]}>React-Scaffold</span>
+        <div className={styles["logo"]} >
+            {/*<img className={styles.logoImg} src={require("./img/logo.svg")} style={{height:35, marginTop: 6}} />*/}
+            <span style={{width: 108}}>可视化平台</span>
+        </div>
 
         <Menu
             className={styles["ant-menu-left"]}
             theme="dark"
             mode="horizontal"
-            style={{ lineHeight: '60px', marginLeft: 10, border: 0 }}
+            style={{ lineHeight: '60px', marginLeft: 0, border: 0 }}
         >
             {
                 menus.map((val, key) => {
@@ -27,7 +29,7 @@ const MenuHeader = ({currentUrl, menus, logout}) => (
                     return checkType.isUndefined(val.label) || checkType.isEmpty(val.label) ? null : (
                         <Menu.Item key={linkTo + key} className={val.url.indexOf(currentUrl) !== -1 ? 'active' : ''}>
                             <RouteLink to={linkTo} target={target}>
-                                <AppIcon {...val.icon} style={{ marginRight: 10 }} />
+                                {val.icon ? <AppIcon {...val.icon} style={{ marginRight: 10 }} /> : null}
                                 {val.label}
                             </RouteLink>
                         </Menu.Item>
