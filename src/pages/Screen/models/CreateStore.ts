@@ -2,7 +2,6 @@ import { observable, action, runInAction } from 'mobx';
 import prompt from '@/utils/prompt';
 import {checkType, request} from '@/utils/T';
 import { getScreen, updateScreen, createScreen } from '../api';
-import { CreateStoreInterface } from '../typings'
 
 export default class CreateStore{
     @observable saving = false;

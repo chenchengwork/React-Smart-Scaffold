@@ -8,13 +8,12 @@ configure({
 });
 
 
-import ScreenListStore from "./pages/Screen/models/ListStore"
-import ScreenCreateStore from "./pages/Screen/models/CreateStore"
 interface StoreCtxVal {
-    screen?: {
-        listStore: ScreenListStore,
-        createStore: ScreenCreateStore,
-    }
+    // screen?: {
+    //     listStore: ScreenListStore,
+    //     createStore: ScreenCreateStore,
+    // }
+    [index: string]: any
 }
 
 export const StoreCtx: React.Context<StoreCtxVal> = createContext({});
