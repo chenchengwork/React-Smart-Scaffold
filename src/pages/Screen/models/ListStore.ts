@@ -7,8 +7,6 @@ const initData = {
     rows: Array()
 }
 
-type TypeData = typeof initData
-
 /**
  * 大屏状态管理
  */
