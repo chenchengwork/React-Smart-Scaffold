@@ -13,10 +13,10 @@ import widthModal from '@/components/Hoc/widthModal';
 import { StoreCtx } from '@/store';
 import Create from './Create';
 
-import { storeType } from './models/StoreType';
+import { typeStore } from './models/TypeStore';
 
 const Screen = observer(() => {
-    const { createStore, listStore } = useContext(StoreCtx) as storeType;
+    const { createStore, listStore } = useContext(StoreCtx) as typeStore;
 
     useEffect(() => {
         listStore.fetchPageList();

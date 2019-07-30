@@ -4,7 +4,7 @@ import ListStore from './ListStore';
 export { CreateStore };
 export { ListStore };
 
-export interface storeType {
+export interface typeStore {
         listStore: ListStore,
         createStore: CreateStore,
 }
