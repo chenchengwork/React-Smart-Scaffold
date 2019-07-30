@@ -1,12 +1,18 @@
-import { observable, action, runInAction } from 'mobx';
+import {observable, action, runInAction} from 'mobx';
 import prompt from '@/utils/prompt';
 import {checkType, request} from '@/utils/T';
-import { getScreen, updateScreen, createScreen } from '../api';
+import {getScreen, updateScreen, createScreen} from '../api';
 
-export default class CreateStore{
+const getInitData = () => ({
+    name: "",
+    age: "",
+    address: ""
+})
+
+export default class CreateStore {
     @observable saving = false;
     @observable loading = false;
-    @observable data = {};
+    @observable data = getInitData();
 
     /**
      * 获取数据
@@ -14,7 +20,7 @@ export default class CreateStore{
      */
     @action
     fetchData = (screen_id: string) => {
-        if(screen_id) {
+        if (screen_id) {
             this.loading = true;
             getScreen(screen_id).then(
                 (resp) => runInAction(() => {
@@ -26,8 +32,8 @@ export default class CreateStore{
                     prompt.error(resp.msg)
                 }),
             )
-        }else {
-            this.data = {};
+        } else {
+            this.data = getInitData();
         }
     };
 
@@ -39,7 +45,7 @@ export default class CreateStore{
      * @param callbackFailed
      */
     @action
-    save = (screen_id: string, params: {[index: string]: any}, callbackSuccess: () => void, callbackFailed: () => void) => {
+    save = (screen_id: string, params: { [index: string]: any }, callbackSuccess: () => void, callbackFailed: () => void) => {
 
         this.saving = true;
         const thenResp = [
@@ -55,7 +61,7 @@ export default class CreateStore{
         ];
 
         // 更新item
-        if(screen_id){
+        if (screen_id) {
             updateScreen(screen_id, params).then(...thenResp);
         }
         // 创建item

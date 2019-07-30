@@ -22,12 +22,11 @@ const routes = [
     {
         uri: EnumRouter.screen,
         component: import("./pages/Screen"),
-        storeKeys: ["screen.listStore", "screen.createStore"]
+        stores: {
+            listStore: require("@/pages/Screen/models/ListStore").default,
+            createStore: require("@/pages/Screen/models/CreateStore").default,
+        }
     },
-    // {
-    //     uri: EnumRouter.x_components,
-    //     component: import("./pages/XComponent"),
-    // },
 ];
 
 

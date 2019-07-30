@@ -4,19 +4,21 @@ import loadable from '@/utils/loadable';
 
 import MainLayout from '@/layouts/MainLayout';
 const Exception = loadable(import("@/components/Exception"));
-// import Exception  from "@/components/Exception";
 const ErrorBoundary = loadable(import("@/components/ErrorBoundary"));
 
-import { stores, StoreCtx } from './store';
+import { StoreCtx } from './store';
 import EnumRouter from '@/constants/EnumRouter';
 import EnumEnv from '@/constants/EnumEnv';
 import { permission } from "@/services/auth";
 
 export type TypeLazyComponent = Promise<{default: React.ComponentType<any>}>
-export type TypeRoutes = {uri: string, component: TypeLazyComponent, isMainLayout?: boolean, storeKeys?: string[], props?: any}[]
+interface typeStores {
+    [index: string]: any
+}
+export type TypeRoutes = {uri: string, component: TypeLazyComponent, isMainLayout?: boolean, stores?: typeStores, props?: any}[]
 
 // 懒加载组件
-const lazy = (uri: string, component: TypeLazyComponent , isMainLayout: boolean, storeKeys: string[]|undefined, props: any) => {
+const lazy = (uri: string, component: TypeLazyComponent , isMainLayout: boolean, stores: typeStores, props: any) => {
     if(!permission.isLogin() && uri !== EnumEnv.login.loginUrl) return () => <Redirect to={EnumEnv.login.loginUrl} />;
 
     const LazyComponent = loadable(component);
@@ -25,19 +27,12 @@ const lazy = (uri: string, component: TypeLazyComponent , isMainLayout: boolean,
     return () => {
         // 保证页面切换时, 重新实例化mobx状态实例
         const storeIns = {};
-        (storeKeys || []).forEach(key => {
-            const keys = key.split(".");
-            if(keys.length > 0){
-                const [key1, key2] = keys;
+        if(stores){
+            for(let [key, Store] of Object.entries(stores)){
                 // @ts-ignore
-                if(!storeIns[key1]) storeIns[key1] = {};
-                // @ts-ignore
-                storeIns[key1][key2] = new stores[key1][key2]();
-            }else {
-                // @ts-ignore
-                storeIns[key] = (new stores[key]()) as object;
+                storeIns[key] = new Store();
             }
-        });
+        }
 
         return(
             <StoreCtx.Provider value={storeIns}>
@@ -86,7 +81,7 @@ const transformRouter = (routes: TypeRoutes) => () => (
                 {
                     routes.map((item, index) => {
                         // exact关键字表示对path进行完全匹配
-                        let {uri, component, isMainLayout, storeKeys, props} = item;
+                        let {uri, component, isMainLayout, stores, props} = item;
                         props = props || {};
                         isMainLayout = typeof isMainLayout === 'undefined' ? true : isMainLayout;
 
@@ -94,7 +89,7 @@ const transformRouter = (routes: TypeRoutes) => () => (
                             key={index}
                             path={uri}
                             exact={true}
-                            component={lazy(uri, component, isMainLayout, storeKeys, props)}
+                            component={lazy(uri, component, isMainLayout, stores, props)}
                         />
                     })
                 }

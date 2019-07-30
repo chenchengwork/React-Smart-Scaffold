@@ -16,7 +16,7 @@ import Create from './Create';
 import { storeType } from './models/StoreType';
 
 const Screen = observer(() => {
-    const { createStore, listStore } = useContext(StoreCtx).screen as storeType;
+    const { createStore, listStore } = useContext(StoreCtx) as storeType;
 
     useEffect(() => {
         listStore.fetchPageList();

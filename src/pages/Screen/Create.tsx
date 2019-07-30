@@ -8,7 +8,12 @@ import {WrappedComponentProps} from '@/components/Hoc/widthModal';
 import { FormComponentProps } from 'antd/lib/form'
 const FormItem = Form.Item;
 
-const Create = observer(({modalControl, screen_id, createStore, listStore}: WrappedComponentProps) => {
+import { CreateStore, ListStore } from "./models/StoreType"
+
+const Create = observer(({modalControl, screen_id, ...rest}: WrappedComponentProps) => {
+    const createStore = rest.createStore as CreateStore;
+    const listStore = rest.listStore as ListStore;
+
     const [ form, setForm ] = useState(null);
     useEffect(() => {
         modalControl.registerOk(handleSubmit);

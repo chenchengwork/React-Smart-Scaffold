@@ -9,10 +9,6 @@ configure({
 
 
 interface StoreCtxVal {
-    // screen?: {
-    //     listStore: ScreenListStore,
-    //     createStore: ScreenCreateStore,
-    // }
     [index: string]: any
 }
 
