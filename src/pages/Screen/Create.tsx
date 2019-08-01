@@ -8,7 +8,7 @@ import {WrappedComponentProps} from '@/components/Hoc/widthModal';
 import { FormComponentProps } from 'antd/lib/form'
 const FormItem = Form.Item;
 
-import { CreateStore, ListStore } from "./models/StoreType"
+import { CreateStore, ListStore } from "./models/TypeStore"
 
 const Create = observer(({modalControl, screen_id, ...rest}: WrappedComponentProps) => {
     const createStore = rest.createStore as CreateStore;

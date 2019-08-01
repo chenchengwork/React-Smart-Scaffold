@@ -15,10 +15,13 @@ import Create from './Create';
 
 import { typeStore } from './models/TypeStore';
 
+// import {helper} from '@/utils/T';
+
 const Screen = observer(() => {
     const { createStore, listStore } = useContext(StoreCtx) as typeStore;
 
     useEffect(() => {
+        console.log(helper.isEqual(1, 1))
         listStore.fetchPageList();
     }, []);
 

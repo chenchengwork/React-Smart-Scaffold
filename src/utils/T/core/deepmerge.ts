@@ -1,4 +1,4 @@
-import deepmergeOrigin from "deepmerge";
+import * as deepmergeOrigin from "deepmerge";
 
 /**
  * 验证是否是对象

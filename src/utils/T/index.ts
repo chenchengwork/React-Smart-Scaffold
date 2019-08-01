@@ -3,8 +3,8 @@ import * as helper from './core/helper';
 import * as checkType from './core/checkType';
 import * as request from './core/request';
 
-import queryString from 'query-string';
-import Cookies from 'js-cookie';
+import * as queryString from 'query-string';
+import * as Cookies from 'js-cookie';
 export {queryString}
 export {Cookies}
 export { helper }

@@ -12,11 +12,15 @@ declare module '*.tiff';
 
 
 declare module "locallyjs"
-declare module "is-equal"
-declare module "deepmerge"
-declare module "query-string"
-declare module "js-cookie"
+declare module "is-equal"{
+    export default function isEqual(value: any, other: any): boolean;
+}
 
 declare interface StrToAnyObj {
     [index: string]: any
 }
+
+
+// declare module "query-string" {
+//     export function parse(target: string): string
+// }
