@@ -19,8 +19,3 @@ declare module "is-equal"{
 declare interface StrToAnyObj {
     [index: string]: any
 }
-
-
-// declare module "query-string" {
-//     export function parse(target: string): string
-// }
