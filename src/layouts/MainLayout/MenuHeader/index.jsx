@@ -1,35 +1,93 @@
+import React from 'react'
 import styles from './index.scss';
 import PropTypes from 'prop-types';
+import css from 'styled-jsx/css';
 import { Link } from 'react-router-dom';
 import { Layout, Menu, Icon } from 'antd';
 import {checkType} from "@/utils/T";
-
 import AppIcon from '../AppIcon';
+import { theme } from "../theme";
 
-const MenuHeader = ({currentUrl, menus, logout}) => (
-    <Layout.Header className={styles["menu-header"]}>
-        <div className={styles["logo"]} >
-            {/*<img className={styles.logoImg} src={require("./img/logo.svg")} style={{height:35, marginTop: 6}} />*/}
-            <span style={{width: 108}}>可视化平台</span>
-        </div>
+const MenuHeader = ({currentUrl, menus, logout}) => {
+    // language=SCSS
+    const {styles, className} = css.resolve`
+        .menu-header{
+            position: fixed;
+            z-index: 100;
+            width: 100%;
+            height: ${theme.headerHeight}px;
+            padding: 0;
+            background-color: ${theme.headerBgColor};
+            display: flex;
+        }
+    `
 
+    return (
+        <Layout.Header className={`${className} menu-header`}>
+            <Logo />
+            <Left currentUrl={currentUrl} menus={menus} />
+            <Right logout={logout} />
+            {styles}
+        </Layout.Header>
+    );
+}
+
+MenuHeader.propTypes = {
+    currentUrl: PropTypes.string.isRequired,
+    menus: PropTypes.array.isRequired,
+    logout: PropTypes.func.isRequired,
+};
+
+export default MenuHeader;
+
+const Logo = () => {
+    return (
+        <React.Fragment>
+            <img className="logoImg" src={require("./img/logo.svg")}  />
+            <span className="logo">React-Scaffold</span>
+            {/*language=SCSS*/}
+            <style jsx>{`
+                .logo {
+                    padding-left: 5px;
+                    height: 50px;
+                    line-height: 50px;
+                    font-size: 18px;
+                    font-weight: 500;
+                    text-align: center;
+                    color: #07a8fb;
+                    text-overflow: ellipsis;
+                    overflow: hidden;
+                    white-space: nowrap;
+                }
+                .logoImg{
+                    width: 40px;
+                    height: 50px;
+                }
+            `}</style>
+        </React.Fragment>
+    )
+}
+
+const Left = ({currentUrl, menus}) => {
+
+    return (
         <Menu
             className={styles["ant-menu-left"]}
             theme="dark"
             mode="horizontal"
-            style={{ lineHeight: '60px', marginLeft: 0, border: 0 }}
+            style={{ lineHeight: '60px', marginLeft: 10, border: 0 }}
         >
             {
                 menus.map((val, key) => {
-
                     const linkTo = Array.isArray(val.url) ? val.url[0] : val.url;
                     const target = val.target || "";
                     const RouteLink = target === "_blank" ? ({children, to,  ...rest}) => (<a href={to} {...rest}>{children}</a>) : Link;
 
                     return checkType.isUndefined(val.label) || checkType.isEmpty(val.label) ? null : (
                         <Menu.Item key={linkTo + key} className={val.url.indexOf(currentUrl) !== -1 ? 'active' : ''}>
-                            <RouteLink to={linkTo} target={target}>
-                                {val.icon ? <AppIcon {...val.icon} style={{ marginRight: 10 }} /> : null}
+                            <AppIcon appType="1" iconType="12" style={{ marginRight: 10 }}/>
+                            <RouteLink to={"a"} target={target}>
+                                <AppIcon {...val.icon} style={{ marginRight: 10 }} />
                                 {val.label}
                             </RouteLink>
                         </Menu.Item>
@@ -37,7 +95,12 @@ const MenuHeader = ({currentUrl, menus, logout}) => (
                 })
             }
         </Menu>
+    )
+}
 
+const Right = ({logout}) => {
+
+    return (
         <Menu
             className={styles["ant-menu-right"]}
             theme="dark"
@@ -50,13 +113,5 @@ const MenuHeader = ({currentUrl, menus, logout}) => (
                 </a>
             </Menu.Item>
         </Menu>
-    </Layout.Header>
-);
-
-MenuHeader.propTypes = {
-    currentUrl: PropTypes.string.isRequired,
-    menus: PropTypes.array.isRequired,
-    logout: PropTypes.func.isRequired,
+    )
 }
-
-export default MenuHeader;

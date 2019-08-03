@@ -1,54 +1,71 @@
-import styles from "./index.scss";
+import React from 'react'
 import PropTypes from 'prop-types';
+import css from 'styled-jsx/css';
 import { Layout } from 'antd';
-import { LayoutCtx } from "../layoutContext";
+import { LayoutCtx } from '../layoutContext'
+
 /**
  * 头部组件
- * @param {String} className
- * @param {String} title
- * @param {Object} style
- * @param {Function} leftRender
- * @param {Function} rightRender
- * @returns {XML}
  * @constructor
  */
 const MainHeader = ({ className = '', title = '', style = {}, leftRender = null, rightRender = null }) => {
-    let customClassName = styles['app-header'];
-    if (className) {
-        customClassName = className + ' ' + customClassName;
-    }
 
-    let defaultStyle = {
-        marginBottom: 10,
-    };
-
-    const headerContent = [
-        <div key="1" className={styles["flex-box"]}>
-            <div className={styles["title"]}>{title}</div>
-            {leftRender}
-        </div>,
-        <div key="2" className={styles["flex-box"]}>
-            {rightRender}
-        </div>
-    ];
+    // language=SCSS
+    const {styles, className: appHeaderClassName} = css.resolve`
+        .app-header{
+            position: fixed;
+            width: 100%;
+            z-index: 2;
+            top: 50px;
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+            justify-content: space-between;
+            background: #edf1f5;
+            padding: 0 24px;
+            height: 45px;
+        }
+    `
 
     return (
         <LayoutCtx.Consumer>
-            {({leftMenuW}) => {
-                const width = window.innerWidth - leftMenuW;
+            {({appMenuLeftWidth}) => {
                 return (
-                    <Layout.Header className={customClassName} style={Object.assign({width},defaultStyle, style)}>
-                        {headerContent}
+                    <Layout.Header className={`${appHeaderClassName} app-header ${className}`} style={style}>
+                        <div className="flex-box">
+                            <div className="title">{title}</div>
+                            {leftRender}
+                        </div>
+                        <div className="flex-box">
+                            {rightRender}
+                            <div style={{marginRight: appMenuLeftWidth}}></div>
+                        </div>
+
+                        {/*language=SCSS*/}
+                        <style jsx>{`
+                .flex-box {
+                    display: flex;
+                    flex-direction: row;
+                    align-items: center;
+                }
+                .title {
+                    font-size: 18px;
+                    text-align: left;
+                    color: #99A3BF;
+                }
+        `}</style>
+                        {styles}
                     </Layout.Header>
                 )
             }}
+
         </LayoutCtx.Consumer>
     );
 };
+
 MainHeader.propTypes = {
     className: PropTypes.string,
     style: PropTypes.object,
-    children: PropTypes.node,
     leftRender: PropTypes.node,
     rightRender: PropTypes.node,
 };

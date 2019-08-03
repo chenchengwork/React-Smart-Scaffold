@@ -1,3 +1,6 @@
 import { createContext } from "react";
 
-export const LayoutCtx = createContext({leftMenuW: 200})
+export const LayoutCtx = createContext({
+    leftMenuCollapsed: false,
+    handleLeftMenuCollapse: () => {},
+});

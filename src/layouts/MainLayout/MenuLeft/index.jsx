@@ -1,9 +1,10 @@
+import React from 'react';
 import PropTypes from 'prop-types';
 import { Link } from "react-router-dom";
+import css from 'styled-jsx/css';
 import { Layout, Menu } from 'antd';
-
 import AppIcon from "../AppIcon";
-import styles from "./index.scss";
+import {theme} from "../theme";
 
 // 获取默认展开的菜单keys
 const recursionOpenKeys = (menus, currentUrl, openKeys = []) => {
@@ -66,10 +67,22 @@ const formatLeftMenu = (menus, currentUrl) => menus.map((val) => {
 const MenuLeft = ({leftMenu, currentUrl, leftWidth, collapsed, onLeftMenuCollapse}) => {
     if (leftMenu.length < 1) return null;
 
+    // language=SCSS
+    const {styles, className} = css.resolve`
+        .menu-left{
+            overflow: auto;
+            height: 100vh;
+            position: fixed;
+            left: 0px;
+            top: ${theme.headerHeight}px;
+            z-index: 10000;
+        }
+    `;
+
     return (
         <Layout.Sider
             theme="dark"
-            className={styles["menu-left"]}
+            className={`${className} menu-left`}
             width={leftWidth}
             collapsible
             collapsed={collapsed}
@@ -80,10 +93,11 @@ const MenuLeft = ({leftMenu, currentUrl, leftWidth, collapsed, onLeftMenuCollaps
                 mode="inline"
                 selectedKeys={[currentUrl]}
                 defaultOpenKeys={recursionOpenKeys(leftMenu, currentUrl)}
-                style={{ borderRight: 0, overflow: 'hidden' }}
             >
                 {formatLeftMenu(leftMenu, currentUrl)}
             </Menu>
+
+            {styles}
         </Layout.Sider>
     );
 };

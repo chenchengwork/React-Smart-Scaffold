@@ -1,14 +1,11 @@
+import React from 'react'
 import PropTypes from 'prop-types';
-import {EnumIconTypes} from "./constants/EnumDefaultMenus";
+import { EnumIconTypes } from "./constants/EnumDefaultMenus";
 import CustomIcon from "@/components/CustomIcon";
 import { Icon } from 'antd';
 
 /**
  * 应用icon
- * @param appType
- * @param iconType
- * @return {*}
- * @constructor
  */
 const AppIcon = ({ appType, iconType, ...rest}) => {
     switch (appType) {

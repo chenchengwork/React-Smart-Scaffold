@@ -18,6 +18,7 @@ export const EnumIconTypes = {
     custom: 'custom'
 };
 
+
 /**
  * 菜单配置
  *
@@ -55,14 +56,24 @@ export const EnumDefaultMenus = [
                 },
                 label: "我的可视化",
                 url: EnumRouter.screen,
-            },
-            {
-                icon: {
-                    appType: EnumIconTypes.custom,
-                    iconType: 'fuwei'
-                },
-                label: "X_Components",
-                url: EnumRouter.x_components,
+                // children: [
+                //     {
+                //         icon: {
+                //             appType: EnumIconTypes.custom,
+                //             iconType: 'fuwei'
+                //         },
+                //         label: "我的可视化",
+                //         url: "a",
+                //     },
+                //     {
+                //         icon: {
+                //             appType: EnumIconTypes.custom,
+                //             iconType: 'fuwei'
+                //         },
+                //         label: "我的可视化",
+                //         url: "b",
+                //     }
+                // ]
             },
         ]
     }
