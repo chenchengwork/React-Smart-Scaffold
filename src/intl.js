@@ -8,7 +8,7 @@ import { LocaleProvider } from "antd";
 
 const lang = {
     zh: {
-        antdLocale: require('antd/lib/locale-provider/zh_CN'),
+        antdLocale: require('antd/lib/locale-provider/zh_CN').default,
         intlLocale: "zh",
 
         // TODO 注释掉,关闭国际化模式
@@ -17,7 +17,7 @@ const lang = {
     },
     // TODO 注释掉,关闭国际化模式
     // en: {
-    //     antdLocale: require('antd/lib/locale-provider/en_US'),
+    //     antdLocale: require('antd/lib/locale-provider/en_US').default,
     //     intlLocale: "en",
     //     intlMessages: require('../locales/en.json'),
     //     localeData: require('react-intl/locale-data/en')
