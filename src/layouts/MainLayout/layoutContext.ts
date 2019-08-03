@@ -3,6 +3,7 @@ import {theme } from './theme';
 
 interface layoutCtxInterface {
     theme?: typeof theme;
+    appMenuLeftWidth?: number;
     leftMenuCollapsed: boolean;
     handleLeftMenuCollapse: () => void;
 }
