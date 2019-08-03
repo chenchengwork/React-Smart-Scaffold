@@ -1,6 +1,6 @@
 import * as React from 'react'
 import * as PropTypes from 'prop-types';
-import styles from "./index.scss";
+import * as css from 'styled-jsx/css';
 import { Layout } from 'antd';
 
 interface MainHeaderProps {
@@ -13,44 +13,58 @@ interface MainHeaderProps {
 
 /**
  * 头部组件
- * @param {String} className
- * @param {String} title
- * @param {Object} style
- * @param {Function} leftRender
- * @param {Function} rightRender
- * @returns {XML}
  * @constructor
  */
-const MainHeader = ({ className = '', title = '', style = {}, leftRender = null, rightRender = null }: MainHeaderProps) => {
-    let customClassName = styles['app-header'];
-    if (className) {
-        customClassName = className + ' ' + customClassName;
-    }
+const MainHeader: React.FC<MainHeaderProps> = ({ className = '', title = '', style = {}, leftRender = null, rightRender = null }) => {
 
-    let defaultStyle = {
-        marginBottom: 10
-    };
-
-    const headerContent = [
-        <div key="1" className={styles["flex-box"]}>
-            <div className={styles["title"]}>{title}</div>
-            {leftRender}
-        </div>,
-        <div key="2" className={styles["flex-box"]}>
-            {rightRender}
-        </div>
-    ];
+    // language=SCSS
+    const {styles, className: appHeaderClassName} = css.resolve`
+        .app-header{
+            position: fixed;
+            width: 100%;
+            z-index: 2;
+            top: 50px;
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+            justify-content: space-between;
+            background: #edf1f5;
+            padding: 0 24px;
+            height: 45px;
+        }
+    `
 
     return (
-        <Layout.Header className={customClassName} style={Object.assign(defaultStyle, style)}>
-            {headerContent}
+        <Layout.Header className={`${appHeaderClassName} app-header ${className}`} style={style}>
+            <div className="flex-box">
+                <div className="title">{title}</div>
+                {leftRender}
+            </div>
+            <div className="flex-box">
+                {rightRender}
+            </div>
+
+            {/*language=SCSS*/}
+            <style jsx>{`
+                .flex-box {
+                    display: flex;
+                    flex-direction: row;
+                    align-items: center;
+                }
+                .title {
+                    font-size: 18px;
+                    text-align: left;
+                    color: #99A3BF;
+                }
+        `}</style>
+            {styles}
         </Layout.Header>
     );
 };
+
 MainHeader.propTypes = {
     className: PropTypes.string,
     style: PropTypes.object,
-    children: PropTypes.node,
     leftRender: PropTypes.node,
     rightRender: PropTypes.node,
 };
