@@ -93,7 +93,7 @@ const Left: React.FC<MenuHeaderProps> = ({currentUrl, menus}) => {
                     return checkType.isUndefined(val.label) || checkType.isEmpty(val.label) ? null : (
                         <Menu.Item key={linkTo + key} className={val.url.indexOf(currentUrl) !== -1 ? 'active' : ''}>
                             <AppIcon appType="1" iconType="12" style={{ marginRight: 10 }}/>
-                            <RouteLink to={"a"} target={target}>
+                            <RouteLink to={val.url as string} target={target}>
                                 <AppIcon {...val.icon} style={{ marginRight: 10 }} />
                                 {val.label}
                             </RouteLink>
