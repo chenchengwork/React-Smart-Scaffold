@@ -1,4 +1,4 @@
-import * as React from 'react'
+import React from 'react'
 import styles from './index.scss';
 import * as PropTypes from 'prop-types';
 import * as css from 'styled-jsx/css';

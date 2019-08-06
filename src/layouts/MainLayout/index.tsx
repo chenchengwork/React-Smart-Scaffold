@@ -1,4 +1,4 @@
-import * as React from 'react';
+import React from 'react';
 const { useState } = React;
 import { withRouter, RouteComponentProps } from 'react-router-dom';
 import * as css from 'styled-jsx/css';

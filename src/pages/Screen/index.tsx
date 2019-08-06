@@ -1,5 +1,5 @@
 import styles from './index.scss';
-import * as React from 'react';
+import React from 'react';
 const { Fragment, useContext, useEffect } = React
 import * as PropTypes from 'prop-types';
 import { observer } from 'mobx-react-lite';

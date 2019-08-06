@@ -2,7 +2,7 @@
     异步组件同步加载的核心包
  */
 
-import * as React from "react";
+import React from "react";
 const DefaultSpin = () => <div>loading...</div>
 
 class ErrorBoundary extends React.PureComponent {

@@ -1,7 +1,7 @@
 /**
  * Created by chencheng on 2017/6/16.
  */
-import * as React from 'react'
+import React from 'react'
 import * as ReactDOM from 'react-dom';
 
 import * as checkType from './checkType';

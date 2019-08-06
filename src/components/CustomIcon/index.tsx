@@ -1,4 +1,4 @@
-import * as React from 'react';
+import React from 'react';
 import {Icon} from 'antd';
 import * as PropTypes from 'prop-types';
 

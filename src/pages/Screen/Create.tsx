@@ -1,4 +1,4 @@
-import * as React from 'react';
+import React from 'react';
 import * as PropTypes from 'prop-types';
 const { Component, useEffect, useState } = React;
 import { observer } from 'mobx-react-lite';

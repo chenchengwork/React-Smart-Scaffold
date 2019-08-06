@@ -9,6 +9,7 @@
     "jsx": "react",
     "lib": ["es6", "dom", "dom.iterable", "scripthost", "es7", "es2015"],
     "baseUrl": ".",
+    "allowSyntheticDefaultImports": true,
     "paths": {
       "@/*": ["./src/*"]
     }

@@ -1,7 +1,7 @@
 /**
  * Created by chencheng on 17-9-13.
  */
-import * as React from "react";
+import React from "react";
 import * as PropTypes from 'prop-types';
 import styles from './index.scss';
 import { Spin } from 'antd';

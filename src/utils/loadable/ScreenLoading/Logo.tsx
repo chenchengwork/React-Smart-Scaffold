@@ -1,4 +1,4 @@
-import * as React from "react";
+import React from "react";
 
 // 说明:
 // 将其他格式的图片转成svg的在线地址: https://onlineconvertfree.com/zh/convert-format/png-to-svg/

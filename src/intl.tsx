@@ -4,7 +4,7 @@
         2. 在webpack配置中添加babel-plugin-react-intl插件
         3. 执行 npm run trans 进行翻译
 */
-import * as React from 'react';
+import React from 'react';
 import { LocaleProvider } from "antd";
 
 const lang = {
