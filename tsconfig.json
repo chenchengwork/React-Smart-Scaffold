@@ -6,7 +6,7 @@
     "experimentalDecorators": true,
     "module": "commonjs",
     "target": "es6",
-    "jsx": "react",
+    "jsx": "preserve",
     "lib": ["es6", "dom", "dom.iterable", "scripthost", "es7", "es2015"],
     "baseUrl": ".",
     "allowSyntheticDefaultImports": true,
