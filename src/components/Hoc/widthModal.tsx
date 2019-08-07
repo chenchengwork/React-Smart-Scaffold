@@ -13,7 +13,7 @@ interface ModalHocProps extends RestProps{
 }
 
 export interface WrappedComponentProps extends RestProps{
-    modalControl: {
+    modalControl?: {
         show?: (cb?:Callback) => void;
         close?: (cb?:Callback) => void;
         showSaving?: (cb?:Callback) => void;
