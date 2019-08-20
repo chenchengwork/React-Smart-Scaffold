@@ -14,14 +14,12 @@ const lang = {
 
         // TODO 注释掉,关闭国际化模式
         // intlMessages: require('../locales/zh.json'),
-        // localeData: require('react-intl/locale-data/zh')
     },
     // TODO 注释掉,关闭国际化模式
     // en: {
     //     antdLocale: require('antd/lib/locale-provider/en_US').default,
     //     intlLocale: "en",
     //     intlMessages: require('../locales/en.json'),
-    //     localeData: require('react-intl/locale-data/en')
     // },
 };
 
@@ -30,14 +28,14 @@ export default function LocaleWrapper({children}: {children: React.ReactNode}){
 
 
     // TODO 打开下面的注释, 开启国际化模式
-    // const { antdLocale, intlLocale, intlMessages, localeData } = lang["zh"];
+    // const { antdLocale, intlLocale, intlMessages } = lang["zh"];
     // const { IntlProvider } = require("react-intl");
     // return (
-    //     <LocaleProvider locale={antdLocale}>
+    //     <ConfigProvider locale={antdLocale}>
     //         <IntlProvider locale={intlLocale} messages={{...intlMessages}}>
     //             {children}
     //         </IntlProvider>
-    //     </LocaleProvider>
+    //     </ConfigProvider>
     // )
 
     // TODO 打开下面的注释, 开启非国际化模式
