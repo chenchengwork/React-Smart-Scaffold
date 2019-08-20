@@ -5,7 +5,7 @@
         3. 执行 npm run trans 进行翻译
 */
 import React from 'react';
-import { LocaleProvider } from "antd";
+import { ConfigProvider } from "antd";
 
 const lang = {
     zh: {
@@ -43,9 +43,9 @@ export default function LocaleWrapper({children}: {children: React.ReactNode}){
     // TODO 打开下面的注释, 开启非国际化模式
     const { antdLocale, intlLocale } = lang["zh"];
     return (
-        <LocaleProvider locale={antdLocale}>
+        <ConfigProvider locale={antdLocale}>
             {children}
-        </LocaleProvider>
+        </ConfigProvider>
     );
 }
 

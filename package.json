@@ -13,7 +13,7 @@
     "type-check:watch": "npm run type-check -- --watch"
   },
   "dependencies": {
-    "antd": "^3.20.7",
+    "antd": "^3.22.0",
     "axios": "^0.19.0",
     "deepmerge": "^4.0.0",
     "is-equal": "^1.5.5",
