@@ -4,7 +4,7 @@
         2. 在webpack配置中添加babel-plugin-react-intl插件
         3. 执行 npm run trans 进行翻译
 */
-import { LocaleProvider } from "antd";
+import { ConfigProvider } from "antd";
 
 const lang = {
     zh: {
@@ -42,9 +42,9 @@ export default function LocaleWrapper({children}){
     // TODO 打开下面的注释, 开启非国际化模式
 
     return (
-        <LocaleProvider locale={antdLocale}>
+        <ConfigProvider locale={antdLocale}>
             {children}
-        </LocaleProvider>
+        </ConfigProvider>
     );
 }
 
