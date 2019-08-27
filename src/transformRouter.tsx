@@ -15,7 +15,7 @@ export type TypeLazyComponent = Promise<{default: React.ComponentType<any>}>
 interface typeStores {
     [index: string]: any
 }
-export type TypeRoutes = {uri: string, component: TypeLazyComponent, isMainLayout?: boolean, stores?: typeStores, props?: any}[]
+export type TypeRoutes = {uri: string|[], component: TypeLazyComponent, isMainLayout?: boolean, stores?: typeStores, props?: any}[]
 
 // 懒加载组件
 const lazy = (uri: string, component: TypeLazyComponent , isMainLayout: boolean, stores: typeStores, props: any) => {
@@ -85,12 +85,12 @@ const transformRouter = (routes: TypeRoutes) => () => (
                         props = props || {};
                         isMainLayout = typeof isMainLayout === 'undefined' ? true : isMainLayout;
 
-                        return <Route
+                        return (Array.isArray(uri)? uri : [uri]).map((realUri) =><Route
                             key={index}
-                            path={uri}
+                            path={realUri}
                             exact={true}
-                            component={lazy(uri, component, isMainLayout, stores, props)}
-                        />
+                            component={lazy(realUri, component, isMainLayout, stores, props)}
+                        />);
                     })
                 }
 
