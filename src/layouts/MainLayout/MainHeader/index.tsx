@@ -2,7 +2,8 @@ import React from 'react'
 import * as PropTypes from 'prop-types';
 import * as css from 'styled-jsx/css';
 import { Layout } from 'antd';
-import { LayoutCtx } from '../layoutContext'
+import { LayoutCtx } from '../layoutContext';
+import {theme} from '../theme';
 interface MainHeaderProps {
     className?: string;
     title?: string;
@@ -23,14 +24,14 @@ const MainHeader: React.FC<MainHeaderProps> = ({ className = '', title = '', sty
             position: fixed;
             width: 100%;
             z-index: 2;
-            top: 50px;
+            top: ${theme.headerHeight}px;
             display: flex;
             flex-direction: row;
             align-items: center;
             justify-content: space-between;
             background: #edf1f5;
             padding: 0 24px;
-            height: 45px;
+            height: ${theme.mainHeaderHeight}px;
         }
     `
 
