@@ -1,7 +1,6 @@
 import React from 'react';
 const { useState } = React;
 import { withRouter, RouteComponentProps } from 'react-router-dom';
-import * as css from 'styled-jsx/css';
 import { Layout } from 'antd';
 import prompt from '@/utils/prompt';
 
@@ -20,6 +19,7 @@ import MainContent from "./MainContent"
 export {MainContent}
 
 const MainLayout: React.FC<RouteComponentProps> = (props) => {
+
     /**
      * 获取左侧菜单宽度
      * @param {bool} collapsed
@@ -47,7 +47,7 @@ const MainLayout: React.FC<RouteComponentProps> = (props) => {
     /**
      * 左侧菜单的收起和关闭
      */
-    const  onLeftMenuCollapse = () => {
+    const onLeftMenuCollapse = () => {
         const newCollapsed = !collapsed;
         setCollapsed(newCollapsed)
         setAppMenuLeftWidth(getLeftMenuWidth(newCollapsed))
@@ -55,34 +55,17 @@ const MainLayout: React.FC<RouteComponentProps> = (props) => {
 
     const currentUrl = props.match.path;
 
-    // language=SCSS
-    const { styles, className: mainLayoutClassName } = css.resolve`
-        .main-layout {
-            height: 100%;
-            
-            //左侧菜单样式
-            :global(.main-content) {
-                height: 100%;
-                margin-top: ${theme.headerHeight}px;
-                :global(.app-content) {
-                    //应用区中的header
-                    height: 100%;
-                    background-color: #edf1f5;
-                    padding: 5px;
-                }
-            }
-        }
-    `;
-
     return (
         <LayoutCtx.Provider value={{handleLeftMenuCollapse: onLeftMenuCollapse, leftMenuCollapsed: collapsed, appMenuLeftWidth, theme}}>
-            <Layout className={`${mainLayoutClassName} main-layout`}>
+            <Layout style={{height: "100%"}}>
+                {/*头部菜单*/}
                 <MenuHeader
                     currentUrl={currentUrl}
                     menus={getMenus()}
                     logout={doLogout}
                 />
 
+                {/*左侧菜单*/}
                 <MenuLeft
                     currentUrl={currentUrl}
                     leftMenu={getLeftMenu(currentUrl)}
@@ -91,24 +74,10 @@ const MainLayout: React.FC<RouteComponentProps> = (props) => {
                     onLeftMenuCollapse={onLeftMenuCollapse}
                 />
 
-                <Layout className="main-content" style={{ marginLeft: getLeftMenuWidth(collapsed) }}>
-                    <Layout className="app-content">
-                        {props.children}
-                    </Layout>
+                {/*内容区域*/}
+                <Layout style={{ marginLeft: getLeftMenuWidth(collapsed), height: "100%" }}>
+                    {props.children}
                 </Layout>
-
-                {/*language=SCSS*/}
-                <style jsx>{`
-                    :global(body){
-                        height: 100%;
-                        #wrapper {
-                            height: 100%;
-                        }
-                    }
-                `}</style>
-
-                {styles}
-
             </Layout>
         </LayoutCtx.Provider>
     )
