@@ -152,7 +152,7 @@ export const uniq = <T>(data: T[]): T[] => Array.from(new Set(data));
      render(1);
      render(2); // 将延迟16毫秒执行
  */
-export const throttle = (fn: () => {}, time: number, context: any) => {
+export const throttle = (fn: Function, time: number, context: any) => {
     let lock: boolean, args: boolean | IArguments;
 
     function later () {
@@ -188,7 +188,7 @@ export const throttle = (fn: () => {}, time: number, context: any) => {
  * @param {Object} [context]  回调函数上下文
  * @returns {Function}
  */
-export const debounce = (fn: () => {}, delay: number, context: any) => {
+export const debounce = (fn: Function, delay: number, context: any) => {
     let timeout: any;
 
     return function(){
