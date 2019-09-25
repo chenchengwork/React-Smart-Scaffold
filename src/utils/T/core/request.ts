@@ -1,9 +1,8 @@
 /**
  * Created by chencheng on 2017/6/14.
  */
-
 import axios, { AxiosInstance, AxiosRequestConfig, AxiosResponse } from 'axios';
-import { checkType } from '@/utils/T';
+import * as checkType from '@/utils/T/core/checkType';
 import Cookies from 'js-cookie';
 import EnumRouter from '@/constants/EnumRouter'
 import EnumEnv from '@/constants/EnumEnv';
@@ -14,8 +13,8 @@ Promise._unhandledRejectionFn = function (rejectError) {};
 
 const { apiDomain, respCode } = EnumEnv;
 
-export type Resp = {code: string|number, data: any, msg: string}
-export type PromiseResp = Promise<Resp>
+export type Resp<T> = {code: string|number, data: T, msg: string}
+export type PromiseResp<T> = Promise<Resp<T>>
 
 class Csrf{
     // 校验是否是安全方法
@@ -34,7 +33,6 @@ class Csrf{
 }
 
 const csrf = new Csrf();
-
 
 const Singleton = (function () {
     let instantiated: AxiosInstance;
@@ -71,70 +69,39 @@ const Singleton = (function () {
 })();
 
 /**
- * 处理下载
- * @param resp
- */
-const processDownload = (resp: AxiosResponse) => {
-    if(!resp.headers['content-disposition']){
-        throw new Error("response header中缺少content-disposition属性");
-    }
-    const matchFilename = resp.headers['content-disposition'].match(/filename=['"](.*)["']/);
-    let filename = null;
-    if (matchFilename) filename = matchFilename[1];
-    // const blob = new Blob([resp.data], {type: 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet;charset=utf-8'}); // application/vnd.openxmlformats-officedocument.spreadsheetml.sheet这里表示xlsx类型
-    // const blob = new Blob([resp.data], {type: 'application/zip;charset=utf-8'}); // application/zip
-    const blob = new Blob([resp.data]);
-    let downloadElement = document.createElement('a');
-    const href = window.URL.createObjectURL(blob);      //创建下载的链接
-    downloadElement.href = href;
-    downloadElement.download = filename;                //下载后文件名
-    document.body.appendChild(downloadElement);
-    downloadElement.click();                            //点击下载
-    document.body.removeChild(downloadElement);         //下载完成移除元素
-    window.URL.revokeObjectURL(href);                   //释放掉blob对象
-};
-
-
-/**
- *
+ * 组装request
  * @param options
  * @return {Promise}
  * @private
  */
-const _request = (options = {}, isDownload = false): PromiseResp => {
+const _request = (options = {}): PromiseResp<any> => {
     return new Promise((resolve, reject) => {
         options = csrf.setToken(options);
 
         const {  apiSuccessCode, errorCode, noLoginCode, invalidParamCode } = respCode;
         Singleton.getInstance().request(options).then((resp: AxiosResponse) => {
-            // 处理下载
-            if(isDownload){
-                processDownload(resp);
-                resolve({code: apiSuccessCode, data: [], msg: "download success"});
-            }else {
-                if(resp.status === 200){
-                    if (checkType.isPlainObject(resp.data)){
-                        const {data, code, msg} = resp.data;
-                        if (apiSuccessCode === code) {
-                            return resolve({code, data, msg});
+            if(resp.status === 200){
+                if (checkType.isPlainObject(resp.data)){
+                    const {data, code, msg} = resp.data;
+                    if (apiSuccessCode === code) {
+                        return resolve({code, data, msg});
 
-                        }else if(code == noLoginCode){  // 未登录
-                            window.location.href = EnumRouter.login;
-                            reject({code: noLoginCode, data: resp.data, msg});
+                    }else if(code == noLoginCode){  // 未登录
+                        window.location.href = EnumRouter.login;
+                        reject({code: noLoginCode, data: resp.data, msg});
 
-                        }else if(code == invalidParamCode){ // 参数校验失败
-                            reject({code: invalidParamCode, data, msg});
+                    }else if(code == invalidParamCode){ // 参数校验失败
+                        reject({code: invalidParamCode, data, msg});
 
-                        }else { // 系统内部错误
-                            return reject({code: errorCode, data: null, msg});
-                        }
+                    }else { // 系统内部错误
+                        return reject({code: errorCode, data: null, msg});
                     }
-
-                    resolve({code: apiSuccessCode, data: resp.data, msg: "请求成功"});
-                }else {
-                    // @ts-ignore
-                    reject({code: errorCode, data: null, msg: resp.message});
                 }
+
+                resolve({code: apiSuccessCode, data: resp.data, msg: "请求成功"});
+            }else {
+                // @ts-ignore
+                reject({code: errorCode, data: null, msg: resp.message});
             }
         }).catch((error) => {
             reject({
@@ -143,7 +110,6 @@ const _request = (options = {}, isDownload = false): PromiseResp => {
                 msg: error.message
             });
         });
-
     });
 };
 
