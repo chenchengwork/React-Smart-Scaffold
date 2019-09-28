@@ -48,25 +48,34 @@ export default class CreateStore {
     save = (screen_id: string, params: { [index: string]: any }, callbackSuccess: () => void, callbackFailed: () => void) => {
 
         this.saving = true;
-        const thenResp = [
-            (resp: request.Resp) => runInAction(() => {
-                this.saving = false;
-                checkType.isFunction(callbackSuccess) && callbackSuccess();
-            }),
-            (resp: request.Resp) => runInAction(() => {
-                this.saving = false;
-                prompt.error(resp.msg);
-                checkType.isFunction(callbackFailed) && callbackFailed();
-            }),
-        ];
 
         // 更新item
         if (screen_id) {
-            updateScreen(screen_id, params).then(...thenResp);
+            updateScreen(screen_id, params).then(
+                (resp) => runInAction(() => {
+                    this.saving = false;
+                    checkType.isFunction(callbackSuccess) && callbackSuccess();
+                }),
+                (resp) => runInAction(() => {
+                    this.saving = false;
+                    prompt.error(resp.msg);
+                    checkType.isFunction(callbackFailed) && callbackFailed();
+                })
+            );
         }
         // 创建item
         else {
-            createScreen(params).then(...thenResp);
+            createScreen(params).then(
+                (resp) => runInAction(() => {
+                    this.saving = false;
+                    checkType.isFunction(callbackSuccess) && callbackSuccess();
+                }),
+                (resp) => runInAction(() => {
+                    this.saving = false;
+                    prompt.error(resp.msg);
+                    checkType.isFunction(callbackFailed) && callbackFailed();
+                })
+            );
         }
     }
 
