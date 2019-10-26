@@ -1,4 +1,4 @@
-import transformRouter from './transformRouter';
+import transformRouter from '../transformRouter';
 import EnumRouter from '@/constants/EnumRouter';
 
 /**
@@ -16,12 +16,12 @@ import EnumRouter from '@/constants/EnumRouter';
 const routes = [
     {
         uri: EnumRouter.login,
-        component: import("./pages/Login"),
+        component: import("@/pages/Login"),
         isMainLayout: false
     },
     {
         uri: EnumRouter.screen,
-        component: import("./pages/Screen"),
+        component: import("@/pages/Screen"),
         stores: {
             listStore: require("@/pages/Screen/models/ListStore").default,
             createStore: require("@/pages/Screen/models/CreateStore").default,
