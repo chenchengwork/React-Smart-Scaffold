@@ -1,4 +1,4 @@
-import transformRouter from '../transformRouter';
+import transformRouter from './transformRouter';
 import EnumRouter from '@/constants/EnumRouter';
 
 /**
