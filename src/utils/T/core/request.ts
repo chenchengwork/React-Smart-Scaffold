@@ -74,7 +74,7 @@ const Singleton = (function () {
  * @return {Promise}
  * @private
  */
-const _request = (options = {}): PromiseResp<any> => {
+const _request = (options:AxiosRequestConfig = {}): PromiseResp<any> => {
     return new Promise((resolve, reject) => {
         options = csrf.setToken(options);
 
