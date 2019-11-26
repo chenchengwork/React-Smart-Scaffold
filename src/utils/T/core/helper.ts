@@ -3,9 +3,7 @@
  */
 import React from 'react'
 import * as ReactDOM from 'react-dom';
-import { ConfigProvider } from "antd";
-import zhCN from 'antd/lib/locale-provider/zh_CN';
-
+import { IntlWrapper } from "@/lang";
 import * as checkType from './checkType';
 const mountDomId = 'tj-render-dom';
 
@@ -69,7 +67,7 @@ export const mountReact = (component: React.ReactElement) => {
     ReactDOM.unmountComponentAtNode(domObject);
 
     ReactDOM.render(
-        React.createElement(ConfigProvider, {locale: zhCN}, component),
+        React.createElement(IntlWrapper, {}, component),
         domObject
     );
 };
