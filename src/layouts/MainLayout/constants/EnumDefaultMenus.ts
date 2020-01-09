@@ -69,7 +69,7 @@ export const EnumDefaultMenus: TypeMenu[] = [
                     iconType: 'fuwei'
                 },
                 label: "我的可视化",
-                url: EnumRouter.screen,
+                url: EnumRouter.demoList,
                 // children: [
                 //     {
                 //         icon: {

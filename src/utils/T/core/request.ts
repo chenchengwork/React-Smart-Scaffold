@@ -287,11 +287,11 @@ export function formatUrlParams(url: string, params:StrToAnyObj = {}) {
 
 /**
  * 模拟响应数据
- * @param {Any} data
  * @return {Promise<any>}
  */
-export function mockRespData(data: any) {
+export function mockRespData<T>(data: T): PromiseResp<T> {
     const {  apiSuccessCode } = respCode;
+
     return new Promise((resolve) => {
         setTimeout(() => resolve({
             code: apiSuccessCode,

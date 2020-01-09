@@ -20,11 +20,10 @@ const routes = [
         isMainLayout: false
     },
     {
-        uri: EnumRouter.screen,
-        component: import("@/pages/Screen"),
+        uri: EnumRouter.demoList,
+        component: import("@/pages/DemoList"),
         stores: {
-            listStore: require("@/pages/Screen/models/ListStore").default,
-            createStore: require("@/pages/Screen/models/CreateStore").default,
+            listStore: require("@/pages/DemoList/model/ListStore").default,
         }
     },
 ];

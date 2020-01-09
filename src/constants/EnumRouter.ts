@@ -8,7 +8,7 @@ const EnumRouter = {
     rootRoute: to(''),		        // 根路由
 
     login: to('login'),		        // 登录
-    screen: to('screen'),		        // 我的可视化
+    demoList: to('demoList'),		        // 我的可视化
     x_components: to("x_components"),  // 测试x-components
 };
 
