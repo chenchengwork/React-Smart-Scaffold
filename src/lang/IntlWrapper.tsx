@@ -9,12 +9,12 @@ const {lang: currentLang} = EnumEnv.intl;
 
 const lang = {
     [EnumLangType.zh]: {
-        antdLocale: require('antd/lib/locale-provider/zh_CN'),
+        antdLocale: require('antd/lib/locale-provider/zh_CN').default,
         intlLocale: EnumLangType.zh,
         intlMessages: require('../../locales/zh.json'),
     },
     [EnumLangType.en]: {
-        antdLocale: require('antd/lib/locale-provider/en_US'),
+        antdLocale: require('antd/lib/locale-provider/en_US').default,
         intlLocale: EnumLangType.en,
         intlMessages: require('../../locales/en.json'),
     },
