@@ -74,6 +74,25 @@ const styledJsx = (config) => {
     return config;
 };
 
+const themeAntd = (config) => {
+    config.module.rules = config.module.rules.map(rule => {
+        (Array.isArray(rule.use) ? rule.use : []).forEach(item => {
+            if (item.loader === "less-loader"){
+                item.options = {
+                    ...rule.use.options,
+                    modifyVars: require("./theme")
+                }
+
+                return item;
+            }
+        })
+        return rule;
+    });
+
+    return config;
+};
+
+
 /**
  * 组装webpack config
  * @return {*}
@@ -83,6 +102,7 @@ module.exports = (pipeNodes = []) => {
         ...pipeNodes,
         intl,
         styledJsx,
+        themeAntd,
         pipe.base,
         pipe.staticResource,
         pipe.css,
