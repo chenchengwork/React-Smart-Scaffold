@@ -7,7 +7,7 @@ import { MainContent, MainHeader } from '@/layouts/MainLayout'
 import { StoreCtx } from '@/store';
 import { ListStoreType } from './model/ListStore';
 
-const DemoList = observer(() => {
+const DemoList = ()=> {
     const listStore = useContext(StoreCtx).listStore as ListStoreType;
 
     useEffect(() => {
@@ -60,6 +60,6 @@ const DemoList = observer(() => {
             </MainContent>
         </Fragment>
     )
-})
+}
 
-export default DemoList;
+export default observer(DemoList);
