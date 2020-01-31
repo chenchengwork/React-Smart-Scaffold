@@ -7,6 +7,7 @@ const defaultEnumEnv = {
     rootPath,                                      // 根路由前缀
     apiDomain: "",                                 // api域名
     apiPrefix: '/',                                 // api前缀
+    title: "React-Scaffold",
     intl: {
         lang: 'zh',                 // 语言
         timeZoneOffset: 8 * 60,     // 时区偏差, 单位分钟

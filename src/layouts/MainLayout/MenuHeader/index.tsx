@@ -1,11 +1,12 @@
 import React from 'react'
-import styles from './index.scss';
-import * as PropTypes from 'prop-types';
-import * as css from 'styled-jsx/css';
+import PropTypes from 'prop-types';
+import css from 'styled-jsx/css';
 import { Link } from 'react-router-dom';
 import { Layout, Menu, Icon } from 'antd';
 import {checkType} from "@/utils/T";
-import { TypeMenu } from '../constants/EnumDefaultMenus'
+import styles from './index.scss';
+import { TypeMenu } from '../constants/EnumDefaultMenus';
+import EnumEnv from "@/constants/EnumEnv";
 import AppIcon from '../AppIcon';
 import { theme } from "../theme";
 
@@ -51,7 +52,7 @@ const Logo: React.FC = () => {
     return (
         <React.Fragment>
             <img className="logoImg" src={require("./img/logo.svg")}  />
-            <span className="logo">React-Scaffold</span>
+            <span className="logo">{EnumEnv.title}</span>
             {/*language=SCSS*/}
             <style jsx>{`
                 .logo {
