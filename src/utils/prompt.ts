@@ -52,7 +52,7 @@ class Prompt {
      * @param {Function} cbForOk return Promise对象
      * @param {Object} options
      */
-    confirm(cbForOk: () => {}, options = {}) {
+    confirm<T>(cbForOk: () => Promise<T>, options = {}) {
         options = Object.assign({
             title: '确定删除吗？',
             // content: <h1>When clicked the OK button, this dialog will be closed after 1 second</h1>,
