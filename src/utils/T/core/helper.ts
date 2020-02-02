@@ -141,7 +141,6 @@ export const dateFormat = (timestamp: number|string, fmt = "yyyy-MM-dd hh:mm:ss"
  */
 export const uniq = <T>(data: T[]): T[] => Array.from(new Set(data));
 
-
 /**
  * 减速节流函数
  * @param {Function} fn 需要延迟执行的函数
@@ -155,8 +154,8 @@ export const uniq = <T>(data: T[]): T[] => Array.from(new Set(data));
      render(1);
      render(2); // 将延迟16毫秒执行
  */
-export const throttle = (fn: Function, time: number, context: any) => {
-    let lock: boolean, args: boolean | IArguments;
+export const throttle = (fn: Function, time = 100, context?: any) => {
+    let lock: boolean, args: boolean | any[];
 
     function later () {
         // reset lock and call if queued
@@ -167,15 +166,15 @@ export const throttle = (fn: Function, time: number, context: any) => {
         }
     }
 
-    function wrapperFn () {
+    function wrapperFn (...rest: any[]) {
         if (lock) {
             // called too soon, queue to call later
-            args = arguments;
+            args = rest;
 
         } else {
             // lock until later then call
             lock = true;
-            fn.apply(context, arguments);
+            fn.apply(context, rest);
             setTimeout(later, time);
         }
     }
@@ -191,15 +190,15 @@ export const throttle = (fn: Function, time: number, context: any) => {
  * @param {Object} [context]  回调函数上下文
  * @returns {Function}
  */
-export const debounce = (fn: Function, delay: number, context: any) => {
+export const debounce = (fn: Function, delay = 100, context?: any) => {
     let timeout: any;
 
-    return function(){
+    return function(...args: any[]){
 
         clearTimeout(timeout);
 
         context = context || this;
-        let args = arguments
+        // let args = arguments
 
         timeout = setTimeout(function(){
 
@@ -209,7 +208,6 @@ export const debounce = (fn: Function, delay: number, context: any) => {
 
     };
 };
-
 
 /**
  * 将Blod转成String
