@@ -15,7 +15,7 @@ export type TypeLazyComponent = Promise<{default: React.ComponentType<any>}>
 interface typeStores {
     [index: string]: any
 }
-export type TypeRoutes = {uri: string|[], component: TypeLazyComponent, isMainLayout?: boolean, stores?: typeStores, props?: any}[]
+export type TypeRoutes = {uri: string | string[], component: TypeLazyComponent, isMainLayout?: boolean, stores?: typeStores, props?: any}[]
 
 // 懒加载组件
 const lazy = (uri: string, component: TypeLazyComponent , isMainLayout: boolean, stores: typeStores, props: any) => {
