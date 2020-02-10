@@ -1,14 +1,22 @@
 import React from 'react'
-import * as PropTypes from 'prop-types';
-import {EnumIconTypes} from "./constants/EnumDefaultMenus";
-import CustomIcon from "@/components/CustomIcon";
 import { Icon } from 'antd';
 import {IconProps} from 'antd/lib/icon'
+import CustomIcon from "./CustomIcon";
 
-interface AppIconProps extends IconProps{
+/**
+ * icon 类型
+ * @type {{antd: string, custom: string}}
+ */
+export const EnumIconTypes = {
+    antd: 'antd',
+    custom: 'custom'
+};
+
+export interface AppIconProps extends IconProps{
     appType: string;
     iconType: string;
 }
+
 /**
  * 应用icon
  * @param appType
@@ -16,7 +24,7 @@ interface AppIconProps extends IconProps{
  * @return {*}
  * @constructor
  */
-const AppIcon = ({ appType, iconType, ...rest}: AppIconProps) => {
+const AppIcon: React.FC<AppIconProps> = ({ appType, iconType, ...rest}) => {
     switch (appType) {
         case EnumIconTypes.antd:
             return <Icon type={iconType} {...rest} />;
@@ -26,11 +34,5 @@ const AppIcon = ({ appType, iconType, ...rest}: AppIconProps) => {
             return null
     }
 };
-
-AppIcon.propTypes = {
-    appType: PropTypes.string.isRequired,
-    iconType: PropTypes.string.isRequired,
-};
-
 
 export default AppIcon;

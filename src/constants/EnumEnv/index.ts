@@ -7,7 +7,11 @@ const defaultEnumEnv = {
     rootPath,                                      // 根路由前缀
     apiDomain: "",                                 // api域名
     apiPrefix: '/',                                 // api前缀
-    title: "React-Scaffold",
+    // 平台相关的配置
+    platform: {
+        title: "React-Smart-Scaffold",                        // 平台标题
+        logoUrl: require("./img/logo.svg"),      // logo的url地址
+    },
     intl: {
         lang: 'zh',                 // 语言
         timeZoneOffset: 8 * 60,     // 时区偏差, 单位分钟

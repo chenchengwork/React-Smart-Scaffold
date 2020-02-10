@@ -1,10 +1,10 @@
 import React from 'react';
-import * as PropTypes from 'prop-types';
+import PropTypes from 'prop-types';
 import { Link } from "react-router-dom";
-import * as css from 'styled-jsx/css';
+import css from 'styled-jsx/css';
 import { Layout, Menu } from 'antd';
 import { TypeMenu } from '../constants/EnumDefaultMenus'
-import AppIcon from "../AppIcon";
+import AppIcon from "@/components/AppIcon";
 import {theme} from "../theme";
 
 // 获取默认展开的菜单keys

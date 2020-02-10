@@ -1,0 +1,36 @@
+import React from "react";
+import EnumEnv from "@/constants/EnumEnv";
+
+const Logo: React.FC = () => {
+	return (
+		<div className="header">
+			<img className="logo" src={EnumEnv.platform.logoUrl} />
+			<span className="title">{EnumEnv.platform.title}</span>
+			{/*language=SCSS*/}
+			<style jsx>{`
+                .header{
+                    min-width: 200px;
+                    display: flex;
+                    align-items: center;
+                    
+                    .logo{
+                        width: 40px;
+                        height: 50px;
+                    }
+                    
+                    .title {
+                        padding: 0px 5px;
+                        font-size: 18px;
+                        font-weight: 500;
+                        color: #07a8fb;
+                        text-overflow: ellipsis;
+                        overflow: hidden;
+                        white-space: nowrap;
+                    }
+                }
+            `}</style>
+		</div>
+	)
+};
+
+export default Logo;

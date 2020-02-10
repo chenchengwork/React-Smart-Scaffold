@@ -1,9 +1,7 @@
-import styles from './index.scss';
 import React from 'react';
 
-
 /**
- * 应用错误便捷
+ * 应用错误边界
  */
 export default class ErrorBoundary extends React.PureComponent {
     state = {
@@ -18,7 +16,12 @@ export default class ErrorBoundary extends React.PureComponent {
 
     render() {
         if (this.state.hasError) {
-            return <h1 className={styles["text-center"]}>页面产生错误，请联系管理员!</h1>;
+            return (
+                <div>
+                    <h1 style={{textAlign: "center"}}>页面产生错误，请联系管理员!</h1>
+                </div>
+            )
+
         }
 
         return this.props.children;

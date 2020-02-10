@@ -57,11 +57,11 @@ export interface TypeMenu {
  */
 export const EnumDefaultMenus: TypeMenu[] = [
     {
-        // label: '可视化组件',
-        // icon: {
-        //     appType: EnumIconTypes.custom,
-        //     iconType: 'fuwei'
-        // },
+        label: '可视化组件',
+        icon: {
+            appType: EnumIconTypes.custom,
+            iconType: 'fuwei'
+        },
         children: [
             {
                 icon: {

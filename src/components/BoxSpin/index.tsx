@@ -2,8 +2,7 @@
  * Created by chencheng on 17-9-13.
  */
 import React from "react";
-import * as PropTypes from 'prop-types';
-import styles from './index.scss';
+import PropTypes from 'prop-types';
 import { Spin } from 'antd';
 import { SpinProps } from 'antd/lib/spin'
 
@@ -21,8 +20,17 @@ export default function BoxSpin({ style = {}, spinProps = {}}: BoxSpinProps) {
     }, style);
 
     return (
-        <div style={style} className={styles.center}>
+        <div style={style} className="box-spin">
             <Spin {...spinProps} />
+
+            {/*language=SCSS*/}
+            <style>{`
+                .box-spin {
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                }
+            `}</style>
         </div>
     );
 }
