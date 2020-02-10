@@ -2,21 +2,13 @@
  * Created by chencheng on 17-9-14.
  */
 import EnumRouter from '@/constants/EnumRouter';
+import { EnumIconType } from '@/components/AppIcon';
 
 /**
  * 枚举默认收起左侧菜单的URL
  * @type {[*]}
  */
 export const EnumCollapsedLeftMenuUrls: string[] = [];
-
-/**
- * icon 类型
- * @type {{antd: string, custom: string}}
- */
-export const EnumIconTypes = {
-    antd: 'antd',
-    custom: 'custom'
-};
 
 export interface TypeIcon {
     appType: string,
@@ -30,8 +22,6 @@ export interface TypeMenu {
     target?: string
     children?: TypeMenu[]
 }
-
-
 
 /**
  * 菜单配置
@@ -59,35 +49,17 @@ export const EnumDefaultMenus: TypeMenu[] = [
     {
         label: '可视化组件',
         icon: {
-            appType: EnumIconTypes.custom,
+            appType: EnumIconType.custom,
             iconType: 'fuwei'
         },
         children: [
             {
                 icon: {
-                    appType: EnumIconTypes.custom,
+                    appType: EnumIconType.custom,
                     iconType: 'fuwei'
                 },
                 label: "我的可视化",
                 url: EnumRouter.demoList,
-                // children: [
-                //     {
-                //         icon: {
-                //             appType: EnumIconTypes.custom,
-                //             iconType: 'fuwei'
-                //         },
-                //         label: "我的可视化",
-                //         url: "a",
-                //     },
-                //     {
-                //         icon: {
-                //             appType: EnumIconTypes.custom,
-                //             iconType: 'fuwei'
-                //         },
-                //         label: "我的可视化",
-                //         url: "b",
-                //     }
-                // ]
             },
         ]
     }

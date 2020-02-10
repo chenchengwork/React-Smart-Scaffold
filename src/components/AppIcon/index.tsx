@@ -7,7 +7,7 @@ import CustomIcon from "./CustomIcon";
  * icon 类型
  * @type {{antd: string, custom: string}}
  */
-export const EnumIconTypes = {
+export const EnumIconType = {
     antd: 'antd',
     custom: 'custom'
 };
@@ -26,9 +26,9 @@ export interface AppIconProps extends IconProps{
  */
 const AppIcon: React.FC<AppIconProps> = ({ appType, iconType, ...rest}) => {
     switch (appType) {
-        case EnumIconTypes.antd:
+        case EnumIconType.antd:
             return <Icon type={iconType} {...rest} />;
-        case EnumIconTypes.custom:
+        case EnumIconType.custom:
             return <CustomIcon type={iconType} {...rest} />;
         default:
             return null
