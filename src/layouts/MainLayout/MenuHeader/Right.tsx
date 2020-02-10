@@ -2,6 +2,7 @@ import React from "react";
 import { Icon, Menu } from "antd";
 import css from "styled-jsx/css";
 import { MenuHeaderProps } from './menuHeader.type'
+import { theme } from '@/constants/theme';
 
 const Right: React.FC<MenuHeaderProps> = ({logout}) => {
 	const { styles, className } = getStyle();
@@ -30,7 +31,7 @@ const getStyle = () => {
 	return css.resolve`
         .right {
             width: 100px;
-            background-color: #1D2440;
+            background-color: ${theme.headerBgColor};
             padding: 0 30px;
 
             :global(.ant-menu-item) {

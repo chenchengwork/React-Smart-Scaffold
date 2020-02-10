@@ -3,7 +3,7 @@ import * as PropTypes from 'prop-types';
 import * as css from 'styled-jsx/css';
 import { Layout } from 'antd';
 import { LayoutCtx } from '../layoutContext';
-import {theme} from '../theme';
+import {theme} from '@/constants/theme';
 interface MainHeaderProps {
     className?: string;
     title?: string;

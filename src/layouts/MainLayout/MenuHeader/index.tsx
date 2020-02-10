@@ -6,7 +6,7 @@ import { MenuHeaderProps } from './menuHeader.type'
 import Logo from "./Logo";
 import Left from "./Left";
 import Right from "./Right";
-import { theme } from "../theme";
+import { theme } from "@/constants/theme";
 
 const MenuHeader: React.FC<MenuHeaderProps> = ({currentUrl, menus, logout}) => {
     // language=SCSS

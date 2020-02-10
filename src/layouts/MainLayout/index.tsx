@@ -8,7 +8,7 @@ import { UrlToExtraInfoMap, getLeftMenu, getMenus, isRemoveLeftMenu } from './me
 import { logout } from '@/services/auth';
 import EnumRouter from '@/constants/EnumRouter';
 import { LayoutCtx } from './layoutContext';
-import {theme} from './theme';
+import {theme} from '@/constants/theme';
 
 import MenuHeader from './MenuHeader';
 import MenuLeft from './MenuLeft';

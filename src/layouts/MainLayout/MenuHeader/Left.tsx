@@ -1,9 +1,10 @@
 import React from "react";
 import {Menu} from "antd";
 import {Link} from "react-router-dom";
+import css from "styled-jsx/css";
 import { checkType } from "@/utils/T";
 import AppIcon from "@/components/AppIcon";
-import css from "styled-jsx/css";
+import { theme } from '@/constants/theme'
 import {MenuHeaderProps} from './menuHeader.type'
 
 const Left: React.FC<MenuHeaderProps> = ({currentUrl, menus}) => {
@@ -43,34 +44,45 @@ const getStyle = () => {
 	return css.resolve`
         .left {
             flex: 1;
-            background-color: #1D2440;
+            background-color: ${theme.headerBgColor};
             display: flex;
 
             :global(.ant-menu-item) {
                 padding: 15px 0;
                 line-height: 20px;
-
+				border-bottom: none;
+				
                 > :global(a) {
                     font-size: 14px;
                     font-weight: 500;
-                    color: #6E7A99;
+                    //color: #6E7A99;
+                    color: ${theme.headerFontColor};
                     padding: 0 16px 0 26px;
                     border-right: 1px solid #384466;
                 }
+                
             }
-
+			
+			// hover效果的样式
+			:global(.ant-menu-item.ant-menu-item-active) {
+				border-bottom: none;
+			 	> :global(a) {
+			 		color: ${theme.headerFontColorActive};
+			 	}
+			}
+			
             :global(.ant-menu-item:last-child) {
                 > :global(a) {
                     border-right: none
                 }
             }
-
+			
+			// 选中的样式
             :global(.ant-menu-item.active), :global(.ant-menu-item-selected) {
-                border-bottom: 2px solid #509be6;
+                //border-bottom: 2px solid #509be6;
                 background-color: transparent;
-
                 > :global(a) {
-                    color: #fafcff;
+                    color: ${theme.headerFontColorActive};
                 }
             }
         }

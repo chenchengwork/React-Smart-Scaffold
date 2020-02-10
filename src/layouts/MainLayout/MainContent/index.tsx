@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import css from 'styled-jsx/css';
 import { Layout } from 'antd';
 import {LayoutProps} from 'antd/lib/layout'
-import {theme} from '../theme';
+import {theme} from '@/constants/theme';
 interface MainContentProps extends LayoutProps{
     className?: string;
     style?: React.CSSProperties;

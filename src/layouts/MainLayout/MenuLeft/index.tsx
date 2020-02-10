@@ -5,7 +5,7 @@ import css from 'styled-jsx/css';
 import { Layout, Menu } from 'antd';
 import { TypeMenu } from '../constants/EnumDefaultMenus'
 import AppIcon from "@/components/AppIcon";
-import {theme} from "../theme";
+import {theme} from "@/constants/theme";
 
 // 获取默认展开的菜单keys
 const recursionOpenKeys = (menus: TypeMenu[], currentUrl: string, openKeys: string[] = []) => {

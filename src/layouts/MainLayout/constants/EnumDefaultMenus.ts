@@ -62,5 +62,13 @@ export const EnumDefaultMenus: TypeMenu[] = [
                 url: EnumRouter.demoList,
             },
         ]
+    },
+    {
+        label: '可视化组件11',
+        icon: {
+            appType: EnumIconType.custom,
+            iconType: 'fuwei'
+        },
+        url: "s"
     }
 ];

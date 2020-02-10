@@ -1,5 +1,6 @@
 import React from "react";
 import EnumEnv from "@/constants/EnumEnv";
+import { theme } from '@/constants/theme';
 
 const Logo: React.FC = () => {
 	return (
@@ -22,7 +23,7 @@ const Logo: React.FC = () => {
                         padding: 0px 5px;
                         font-size: 18px;
                         font-weight: 500;
-                        color: #07a8fb;
+                        color: ${theme.logoTitleColor};
                         text-overflow: ellipsis;
                         overflow: hidden;
                         white-space: nowrap;
