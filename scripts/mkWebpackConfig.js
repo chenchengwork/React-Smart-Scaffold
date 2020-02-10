@@ -80,7 +80,7 @@ const themeAntd = (config) => {
             if (item.loader === "less-loader"){
                 item.options = {
                     ...rule.use.options,
-                    modifyVars: require("./theme")
+                    modifyVars: require("./ant_theme")
                 }
 
                 return item;
