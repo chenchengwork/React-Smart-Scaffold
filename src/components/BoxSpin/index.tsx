@@ -11,7 +11,7 @@ interface BoxSpinProps {
     spinProps?: SpinProps
 }
 
-export default function BoxSpin({ style = {}, spinProps = {}}: BoxSpinProps) {
+const BoxSpin: React.FC<BoxSpinProps> = ({ style, spinProps}) => {
     style = Object.assign({
         position: 'relative',
         width: '100%',
@@ -33,9 +33,16 @@ export default function BoxSpin({ style = {}, spinProps = {}}: BoxSpinProps) {
             `}</style>
         </div>
     );
-}
+};
+
+BoxSpin.defaultProps = {
+    style: {},
+    spinProps: {}
+};
 
 BoxSpin.propTypes = {
     style: PropTypes.object,
     spinProps: PropTypes.object
 };
+
+export default BoxSpin;
