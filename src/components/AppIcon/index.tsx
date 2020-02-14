@@ -13,16 +13,12 @@ export const EnumIconType = {
 };
 
 export interface AppIconProps extends IconProps{
-    appType: string;
+    appType?: string;
     iconType: string;
 }
 
 /**
  * 应用icon
- * @param appType
- * @param iconType
- * @return {*}
- * @constructor
  */
 const AppIcon: React.FC<AppIconProps> = ({ appType, iconType, ...rest}) => {
     switch (appType) {
@@ -33,6 +29,10 @@ const AppIcon: React.FC<AppIconProps> = ({ appType, iconType, ...rest}) => {
         default:
             return null
     }
+};
+
+AppIcon.defaultProps = {
+    appType: EnumIconType.custom
 };
 
 export default AppIcon;
