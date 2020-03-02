@@ -1,6 +1,5 @@
 import { Fragment, useState } from 'react';
-import { Card, Row, Col, Button, Icon } from 'antd';
-import { MainHeader, MainContent} from "@/layouts/MainLayout";
+import { Card, Row, Col, Button } from 'antd';
 
 /*
     Hooks的使用有两个原则：
@@ -88,7 +87,7 @@ export default () => {
                                                 文档
                                             </a>
                                             <a onClick={() => delHook(idx)} style={{color: "red", marginLeft: 5}}>
-                                                <Icon type="delete" />
+                                                删除
                                             </a>
                                         </span>
                                     }

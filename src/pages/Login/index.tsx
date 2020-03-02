@@ -1,14 +1,15 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { withRouter, RouteComponentProps } from 'react-router-dom';
-import {Input, Icon, Button} from 'antd'
-
+import {Input, Button} from 'antd';
+import {LoadingOutlined} from '@ant-design/icons'
+import AppIcon from "@/components/AppIcon";
 import prompt from '@/utils/prompt';
 import EnumEnv from '@/constants/EnumEnv';
 import {login} from '@/services/auth';
 
-const { useState } = React;
+interface LoginProps extends RouteComponentProps{}
 
-const Login = ({history}: RouteComponentProps) => {
+const Login: React.FC<LoginProps> = ({history}) => {
     const [email, setEmail] = useState("")
     const [password, setPassword] = useState("")
     const [submitting, setSubmitting] = useState(false)
@@ -25,15 +26,13 @@ const Login = ({history}: RouteComponentProps) => {
         })
     };
 
-    // @ts-ignore
-    // @ts-ignore
     return (
         <div className="main">
             <div style={{fontSize: 18, textAlign: "center", marginTop: 20, fontWeight: 900}}>登录</div>
             <Input
                 {...{
                     size: 'large',
-                    prefix: <Icon type="mail" style={{fontSize: 14}}/>,
+                    prefix: <AppIcon appType="antd" iconType={require('@ant-design/icons').MailOutlined} style={{fontSize: 14}}/>,
                     placeholder: '邮箱',
                     style: {marginBottom: 10},
                     value: email,
@@ -44,13 +43,13 @@ const Login = ({history}: RouteComponentProps) => {
             <Input {...{
                 type: "password",
                 size: 'large',
-                prefix: <Icon type="lock" style={{fontSize: 14}}/>,
+                prefix: <AppIcon appType="antd" iconType={require('@ant-design/icons').LockOutlined} style={{fontSize: 14}}/>,
                 placeholder: '密码',
                 value: password,
                 onChange: (e) => setPassword(e.target.value.trim())
             }} />
 
-            <Button type="primary" icon={submitting ? "loading": ""} size="large" onClick={handleSubmit} style={{width: "100%", marginTop: 24}}>登录</Button>
+            <Button type="primary" icon={submitting ? <LoadingOutlined />: ""} size="large" onClick={handleSubmit} style={{width: "100%", marginTop: 24}}>登录</Button>
 
             {/*language=SCSS*/}
             <style jsx>{`

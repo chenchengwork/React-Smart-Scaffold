@@ -1,6 +1,8 @@
 import React from "react";
-import { Icon, Menu } from "antd";
+import { Menu } from "antd";
 import css from "styled-jsx/css";
+import { LogoutOutlined } from '@ant-design/icons'
+import AppIcon from '@/components/AppIcon'
 import { MenuHeaderProps } from './menuHeader.type'
 import { theme } from '@/constants/theme';
 
@@ -9,14 +11,13 @@ const Right: React.FC<MenuHeaderProps> = ({logout}) => {
 
 	return (
 		<Menu
-			// className={styles["ant-menu-right"]}
 			className={`right ${className}`}
 			mode="horizontal"
 			style={{ lineHeight: '60px', marginLeft: 10, border: 0 }}
 		>
 			<Menu.Item>
 				<a onClick={logout} title="退出登录">
-					<Icon type="logout" />
+					<AppIcon appType="antd" iconType={LogoutOutlined} />
 				</a>
 			</Menu.Item>
 

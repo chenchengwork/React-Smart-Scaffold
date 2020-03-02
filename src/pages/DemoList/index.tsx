@@ -1,6 +1,7 @@
 import React, { Fragment, useContext, useEffect } from 'react';
 import { observer } from 'mobx-react-lite';
 import { Table, Button } from 'antd';
+import { DeleteOutlined } from '@ant-design/icons'
 import { ColumnProps } from 'antd/lib/table'
 import { RespDemoList } from '@/typings/api/response'
 import { MainContent, MainHeader } from '@/layouts/MainLayout'
@@ -33,7 +34,7 @@ const DemoList = ()=> {
                 <Fragment>
                     <Button
                         type="danger"
-                        icon="delete"
+                        icon={<DeleteOutlined />}
                         style={{marginLeft: 5}}
                     >删除</Button>
                 </Fragment>

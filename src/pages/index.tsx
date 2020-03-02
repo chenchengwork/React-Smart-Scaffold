@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { withRouter, RouteComponentProps } from 'react-router-dom';
 import {Input, Button} from 'antd';
+import { LoadingOutlined } from '@ant-design/icons'
 import AppIcon from "@/components/AppIcon";
 import prompt from '@/utils/prompt';
 import EnumEnv from '@/constants/EnumEnv';
@@ -46,7 +47,7 @@ const Login = ({history}: RouteComponentProps) => {
                 onChange: (e) => setPassword(e.target.value.trim())
             }} />
 
-            <Button type="primary" icon={submitting ? "loading": ""} size="large" onClick={handleSubmit} style={{width: "100%", marginTop: 24}}>登录</Button>
+            <Button type="primary" icon={submitting ? <LoadingOutlined />: ""} size="large" onClick={handleSubmit} style={{width: "100%", marginTop: 24}}>登录</Button>
 
             {/*language=SCSS*/}
             <style jsx>{`
