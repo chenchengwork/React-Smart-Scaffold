@@ -1,7 +1,6 @@
 import React from 'react'
-import { Icon } from 'antd';
-import {IconProps} from 'antd/lib/icon'
 import CustomIcon from "./CustomIcon";
+import { AntdIconProps } from '@ant-design/icons/lib/components/AntdIcon'
 
 /**
  * icon 类型
@@ -12,20 +11,25 @@ export const EnumIconType = {
     custom: 'custom'
 };
 
-export interface AppIconProps extends IconProps{
+export interface AppIconProps extends AntdIconProps{
     appType?: string;
-    iconType: string;
+    iconType: string | React.FC<AntdIconProps>;
 }
 
 /**
  * 应用icon
+ * @param appType
+ * @param iconType
+ * @return {*}
+ * @constructor
  */
 const AppIcon: React.FC<AppIconProps> = ({ appType, iconType, ...rest}) => {
     switch (appType) {
         case EnumIconType.antd:
-            return <Icon type={iconType} {...rest} />;
+            const RealIcon = iconType;
+            return <RealIcon {...rest} />;
         case EnumIconType.custom:
-            return <CustomIcon type={iconType} {...rest} />;
+            return <CustomIcon type={iconType as string} {...rest} />;
         default:
             return null
     }
