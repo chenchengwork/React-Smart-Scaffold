@@ -4,6 +4,7 @@ import css from 'styled-jsx/css';
 import { Layout } from 'antd';
 import {LayoutProps} from 'antd/lib/layout'
 import {theme} from '@/constants/theme';
+import AutoScrollbars from "@/components/AutoScrollbars";
 interface MainContentProps extends LayoutProps{
     className?: string;
     style?: React.CSSProperties;
@@ -32,7 +33,9 @@ const MainContent: React.FC<MainContentProps> = ({ className = '', style = {}, c
 
     return (
         <Layout.Content className={`${mainClassName} main-content ${className}`} style={Object.assign(defaultStyle, style)} {...rest}>
+            <AutoScrollbars>
             {children}
+            </AutoScrollbars>
             {styles}
         </Layout.Content>
     );
