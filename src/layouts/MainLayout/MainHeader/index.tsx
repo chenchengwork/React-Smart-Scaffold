@@ -60,6 +60,7 @@ const MainHeader: React.FC<MainHeaderProps> = ({ className, title, style, leftRe
                             .title {
                                 font-size: 18px;
                                 text-align: left;
+                                margin-right: 10px;
                                 color: #99A3BF;
                             }
                         `}</style>
