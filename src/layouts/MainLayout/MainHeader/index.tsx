@@ -42,7 +42,7 @@ const MainHeader: React.FC<MainHeaderProps> = ({ className, title, style, leftRe
                 return (
                     <Layout.Header className={`${appHeaderClassName} app-header ${className}`} style={style}>
                         <div className="flex-box">
-                            <div className="title">{title}</div>
+                            {title && <div className="title">{title}</div> }
                             {leftRender}
                         </div>
                         {rightRender && <div className="flex-box">
