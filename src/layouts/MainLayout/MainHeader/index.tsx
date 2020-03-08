@@ -16,7 +16,7 @@ interface MainHeaderProps {
  * 头部组件
  * @constructor
  */
-const MainHeader: React.FC<MainHeaderProps> = ({ className = '', title = '', style = {}, leftRender = null, rightRender = null }) => {
+const MainHeader: React.FC<MainHeaderProps> = ({ className, title, style, leftRender, rightRender }) => {
 
     // language=SCSS
     const {styles, className: appHeaderClassName} = css.resolve`
@@ -29,9 +29,10 @@ const MainHeader: React.FC<MainHeaderProps> = ({ className = '', title = '', sty
             flex-direction: row;
             align-items: center;
             justify-content: space-between;
-            background: #edf1f5;
+            background: #fff;
             padding: 0 24px;
             height: ${theme.mainHeaderHeight}px;
+             box-shadow:0px 1px 6px #333333;
         }
     `
 
@@ -44,24 +45,24 @@ const MainHeader: React.FC<MainHeaderProps> = ({ className = '', title = '', sty
                             <div className="title">{title}</div>
                             {leftRender}
                         </div>
-                        <div className="flex-box">
+                        {rightRender && <div className="flex-box">
                             {rightRender}
                             <div style={{marginRight: appMenuLeftWidth}}></div>
-                        </div>
+                        </div>}
 
                         {/*language=SCSS*/}
                         <style jsx>{`
-                .flex-box {
-                    display: flex;
-                    flex-direction: row;
-                    align-items: center;
-                }
-                .title {
-                    font-size: 18px;
-                    text-align: left;
-                    color: #99A3BF;
-                }
-        `}</style>
+                            .flex-box {
+                                display: flex;
+                                align-items: center;
+                                //width: 100%;
+                            }
+                            .title {
+                                font-size: 18px;
+                                text-align: left;
+                                color: #99A3BF;
+                            }
+                        `}</style>
                         {styles}
                     </Layout.Header>
                 )
@@ -76,6 +77,14 @@ MainHeader.propTypes = {
     style: PropTypes.object,
     leftRender: PropTypes.node,
     rightRender: PropTypes.node,
+};
+
+MainHeader.defaultProps = {
+    className: "",
+    title: "",
+    style: {},
+    leftRender: null,
+    rightRender: null
 };
 
 export default MainHeader;

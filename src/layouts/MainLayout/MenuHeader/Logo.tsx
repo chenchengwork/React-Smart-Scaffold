@@ -15,8 +15,8 @@ const Logo: React.FC = () => {
                     align-items: center;
                     
                     .logo{
-                        width: 40px;
-                        height: 50px;
+                        width: 80px;
+                        height: 40px;
                     }
                     
                     .title {

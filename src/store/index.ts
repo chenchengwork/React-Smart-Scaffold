@@ -1,5 +1,7 @@
+import React from 'react';
 import { configure } from 'mobx';
 import { createContext } from 'react';
+
 /**
  * mobx的配置
  */
@@ -11,6 +13,8 @@ configure({
 interface StoreCtxVal {
     [index: string]: any
 }
+
+export {default as PaginationStore} from './PaginationStore';
 
 export const StoreCtx: React.Context<StoreCtxVal> = createContext({});
 

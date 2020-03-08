@@ -1,11 +1,12 @@
+import {observable, action, runInAction, toJS} from 'mobx';
 import prompt from '@/utils/prompt';
 import { getPageList } from '../api';
-import {observable, action, runInAction, toJS} from 'mobx';
 import { RespDemoList } from "@/typings/api/response"
+import { PaginationStore } from '@/store';
 
 export type ListStoreType = ListStore;
 
-export default class ListStore {
+export default class ListStore extends PaginationStore{
     @observable data: RespDemoList.DemoPageList = {
         list:[],
         page: 1,
@@ -19,9 +20,10 @@ export default class ListStore {
      * 获取列表
      */
     @action
-    fetchPageList = (params = {}) => {
+    fetchPageList = (page = 1) => {
+        this.setCurrentPage(page);
+        const params = this.getPageListParams();
         this.loading = true;
-        params = Object.assign({ page: 1, pageSize: 10 }, params);
         getPageList(params).then(
             (resp) => runInAction(()=>{
                 this.data = resp.data;
