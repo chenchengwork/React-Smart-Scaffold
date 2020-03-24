@@ -52,14 +52,15 @@ const MainContent: React.FC<MainContentProps> = ({ className , style, children ,
                 .content{
                     height: calc(100% - ${footerH}px);
                 }
+                
                 .footer{
                     width: 100%;
                     display: flex;
                     justify-content: center;
                     align-items: center;
                     height: ${footerH}px;
-                    background-color: #fff;
-                     box-shadow:0px -1px 6px #333333;
+                    background-color: ${theme.mainFooterBgColor};
+                    box-shadow:0px -1px 6px #333333;
                 }
             `}</style>
         </Layout.Content>

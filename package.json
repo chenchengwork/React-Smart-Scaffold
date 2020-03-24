@@ -14,7 +14,7 @@
   },
   "dependencies": {
     "@ant-design/icons": "latest",
-    "antd": "^4.0.0",
+    "antd": "^4.0.3",
     "axios": "^0.19.2",
     "deepmerge": "^4.2.2",
     "is-equal": "^1.6.1",
@@ -24,9 +24,9 @@
     "mobx-react-lite": "^1.5.2",
     "prop-types": "^15.7.2",
     "query-string": "^6.10.1",
-    "react": "^16.12.0",
+    "react": "^16.13.1",
     "react-custom-scrollbars": "^4.2.1",
-    "react-dom": "^16.12.0",
+    "react-dom": "^16.13.1",
     "react-intl": "^3.12.0",
     "react-router-dom": "^5.1.2",
     "styled-jsx": "^3.2.4"

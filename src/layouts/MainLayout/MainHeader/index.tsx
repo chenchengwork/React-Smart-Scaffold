@@ -29,7 +29,7 @@ const MainHeader: React.FC<MainHeaderProps> = ({ className, title, style, leftRe
             flex-direction: row;
             align-items: center;
             justify-content: space-between;
-            background: #fff;
+            background: ${theme.mainHeaderBgColor};
             padding: 0 24px;
             height: ${theme.mainHeaderHeight}px;
              box-shadow:0px 1px 6px #333333;

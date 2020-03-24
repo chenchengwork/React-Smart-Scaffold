@@ -11,7 +11,6 @@ const Right: React.FC<MenuHeaderProps> = ({logout}) => {
 
 	return (
 		<Menu
-			// className={styles["ant-menu-right"]}
 			className={`right ${className}`}
 			mode="horizontal"
 			style={{ lineHeight: '60px', marginLeft: 10, border: 0 }}
