@@ -56,7 +56,7 @@ const MainLayout: React.FC<RouteComponentProps> = (props) => {
     const currentUrl = props.match.path;
 
     return (
-        <LayoutCtx.Provider value={{handleLeftMenuCollapse: onLeftMenuCollapse, leftMenuCollapsed: collapsed, appMenuLeftWidth, theme}}>
+        <LayoutCtx.Provider value={{handleLeftMenuCollapse: onLeftMenuCollapse, leftMenuCollapsed: collapsed, appMenuLeftWidth}}>
             <Layout style={{height: "100%"}}>
                 {/*头部菜单*/}
                 <MenuHeader

@@ -10,6 +10,7 @@ const EnumRouter = {
     login: to('login'),		        // 登录
     demoList: to('demoList'),		        // 我的可视化
     x_components: to("x_components"),  // 测试x-components
+    x_antd_theme: to("x_antd_theme"),  // 测试antd主题
 };
 
 export default EnumRouter;

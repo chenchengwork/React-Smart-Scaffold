@@ -64,11 +64,11 @@ export const EnumDefaultMenus: TypeMenu[] = [
         ]
     },
     {
-        label: '可视化组件11',
+        label: 'antd主题',
         icon: {
             appType: EnumIconType.custom,
             iconType: 'fuwei'
         },
-        url: "s"
+        url: EnumRouter.x_antd_theme
     }
 ];

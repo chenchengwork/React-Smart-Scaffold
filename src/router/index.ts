@@ -26,6 +26,11 @@ const routes = [
             listStore: require("@/pages/DemoList/model/ListStore").default,
         }
     },
+    {
+        uri: EnumRouter.x_antd_theme,
+        component: import("@/pages/X_Antd"),
+        isMainLayout: true
+    },
 ];
 
 

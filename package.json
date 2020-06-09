@@ -14,22 +14,22 @@
   },
   "dependencies": {
     "@ant-design/icons": "latest",
-    "antd": "^4.0.3",
+    "antd": "^4.3.3",
     "axios": "^0.19.2",
     "deepmerge": "^4.2.2",
     "is-equal": "^1.6.1",
     "js-cookie": "^2.2.1",
     "locallyjs": "^0.3.3",
     "mobx": "^5.15.4",
-    "mobx-react-lite": "^1.5.2",
+    "mobx-react-lite": "^2.0.7",
     "prop-types": "^15.7.2",
     "query-string": "^6.10.1",
     "react": "^16.13.1",
     "react-custom-scrollbars": "^4.2.1",
     "react-dom": "^16.13.1",
-    "react-intl": "^3.12.0",
-    "react-router-dom": "^5.1.2",
-    "styled-jsx": "^3.2.4"
+    "react-intl": "^4.6.7",
+    "react-router-dom": "^5.2.0",
+    "styled-jsx": "^3.3.0"
   },
   "devDependencies": {
     "@types/deepmerge": "^2.2.0",

@@ -1,6 +1,7 @@
 import React from 'react';
 import { configure } from 'mobx';
 import { createContext } from 'react';
+import 'mobx-react-lite/batchingForReactDom';
 
 /**
  * mobx的配置
