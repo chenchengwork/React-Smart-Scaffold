@@ -18,9 +18,9 @@ interface MainContentProps extends LayoutProps{
  * 内容组件
  */
 const MainContent: React.FC<MainContentProps> = ({ className , style, children , isShowMainHeader, footerRender, ...rest }) => {
-    const padding = theme.mainInterval;
+    const padding = 5;
     let defaultStyle = {
-        paddingTop:theme.headerHeight + ( isShowMainHeader ? theme.mainHeaderHeight  : 0) + 2 * padding,
+        paddingTop: isShowMainHeader ? theme.headerHeight + theme.mainHeaderHeight + padding : theme.headerHeight + padding,
         paddingLeft: padding,
         paddingRight: padding,
         paddingBottom: padding,
@@ -42,16 +42,25 @@ const MainContent: React.FC<MainContentProps> = ({ className , style, children ,
                 </AutoScrollbars>
             </div>
 
-            {footerRender && <Footer footerH={footerH}>
+            {footerRender && <div className="footer">
                 {footerRender}
-            </Footer>}
+            </div>}
 
             {styles}
             {/*language=SCSS*/}
             <style jsx>{`
                 .content{
                     height: calc(100% - ${footerH}px);
-                    margin-bottom: ${theme.mainInterval}px;
+                }
+                
+                .footer{
+                    width: 100%;
+                    display: flex;
+                    justify-content: center;
+                    align-items: center;
+                    height: ${footerH}px;
+                    background-color: ${theme.mainFooterBgColor};
+                    box-shadow:0px -1px 6px #333333;
                 }
             `}</style>
         </Layout.Content>
@@ -71,26 +80,3 @@ MainContent.defaultProps = {
 }
 
 export default MainContent
-
-const Footer: React.FC<{footerH:number}> = ({ footerH, children }) => {
-
-    // language=SCSS
-    const {styles, className: footerClassName} = css.resolve`
-        .footer{
-            width: 100%;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: ${footerH}px;
-            //background-color: ${theme.mainFooterBgColor};
-            box-shadow:0px -1px 6px #333333;
-        }
-    `;
-
-    return (
-        <Layout.Header className={`${footerClassName} footer`}>
-            {children}
-            {styles}
-        </Layout.Header>
-    )
-}

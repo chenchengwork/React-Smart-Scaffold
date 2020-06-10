@@ -3,12 +3,10 @@ import EnumEnv from "@/constants/EnumEnv";
 import { theme } from '@/constants/theme';
 
 const Logo: React.FC = () => {
-
 	return (
 		<div className="header">
 			<img className="logo" src={EnumEnv.platform.logoUrl} />
 			<span className="title">{EnumEnv.platform.title}</span>
-
 			{/*language=SCSS*/}
 			<style jsx>{`
                 .header{
@@ -17,15 +15,15 @@ const Logo: React.FC = () => {
                     align-items: center;
                     
                     .logo{
-                        width: 32px;
-                        height: 32px;
+                        width: 80px;
+                        height: 40px;
                     }
                     
                     .title {
                         padding: 0px 5px;
-                        font-size: 16px;
+                        font-size: 18px;
                         font-weight: 500;
-                        //color: ${theme.logoTitleColor};
+                        color: ${theme.logoTitleColor};
                         text-overflow: ellipsis;
                         overflow: hidden;
                         white-space: nowrap;

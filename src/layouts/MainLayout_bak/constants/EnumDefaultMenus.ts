@@ -69,47 +69,6 @@ export const EnumDefaultMenus: TypeMenu[] = [
             appType: EnumIconType.custom,
             iconType: 'fuwei'
         },
-        children: [
-            {
-                icon: {
-                    appType: EnumIconType.custom,
-                    iconType: 'fuwei'
-                },
-                label: "通用组件",
-                url: EnumRouter.xAntdCommon,
-            },
-            {
-                icon: {
-                    appType: EnumIconType.custom,
-                    iconType: 'fuwei'
-                },
-                label: "导航组件",
-                url: EnumRouter.xAntdNavigation,
-            },
-            {
-                icon: {
-                    appType: EnumIconType.custom,
-                    iconType: 'fuwei'
-                },
-                label: "数据录入",
-                url: EnumRouter.xAntdDataEntry,
-            },
-            {
-                icon: {
-                    appType: EnumIconType.custom,
-                    iconType: 'fuwei'
-                },
-                label: "数据展示",
-                url: EnumRouter.xAntdDataShow,
-            },
-            {
-                icon: {
-                    appType: EnumIconType.custom,
-                    iconType: 'fuwei'
-                },
-                label: "反馈",
-                url: EnumRouter.xAntdFeedback,
-            },
-        ]
+        url: EnumRouter.x_antd_theme
     }
 ];

@@ -1,5 +1,42 @@
-module.exports = {
-  "theme": "dark",
+const theme = {
+  "primary-color": "@blue-6",           // 主题色
+  "popover-background": "#2F4B6F",      // 弹出
+  "body-background": "#425584",         // body背景色
+  "component-background": "#2F4B6F",    // 组件背景颜色
+  "border-color-base": "#738498",       // 边框基础颜色
+  "border-color-split": "#738498",      // 边框分割颜色
+
+  //------------------------------------------------------------
+  "popover-customize-border-color": "#3a3a3a",
+
+  "table-header-bg": "#1d1d1d",
+  "table-body-sort-bg": "fade(@white, 1%)",
+  "table-row-hover-bg": "#262626",
+  "table-header-sort-bg": "#262626",
+  "table-header-filter-active-bg": "#434343",
+  "table-header-sort-active-bg": "#303030",
+
+  "card-skeleton-bg": "#303030",
+
+  "layout-trigger-background": "#262626",
+
+  "tooltip-bg": "#434343",
+
+  "shadow-color": "rgba(0, 0, 0, 0.45)",
+
+  "btn-text-hover-bg": "rgba(255, 255, 255, 0.03)",
+
+  "picker-basic-cell-disabled-bg": "#303030",
+
+  "transfer-item-hover-bg": "#262626",
+
+  "slider-rail-background-color": "#262626",
+
+  "skeleton-color": "#303030",
+};
+
+
+const colorPalette = {
   "blue-1": "mix(color(~`colorPalette('@{blue-base}', 8) `), @component-background, 15%)",
   "blue-2": "mix(color(~`colorPalette('@{blue-base}', 7) `), @component-background, 25%)",
   "blue-3": "mix(@blue-base, @component-background, 30%)",
@@ -140,15 +177,12 @@ module.exports = {
   "primary-8": "mix(color(~`colorPalette('@{primary-color}', 4) `), @component-background, 95%)",
   "primary-9": "mix(color(~`colorPalette('@{primary-color}', 3) `), @component-background, 97%)",
   "primary-10": "mix(color(~`colorPalette('@{primary-color}', 2) `), @component-background, 98%)",
+}
 
-  // "primary-color": "#fa541c",                     // 主题颜色
-  // "popover-background": "#1f1f1f",                //
-  "popover-background": "#2F4B6F",                //
-  "popover-customize-border-color": "#3a3a3a",
-  // "body-background": "@black",
-  "body-background": "#425584",
-  // "component-background": "#141414",
-  "component-background": "#2F4B6F",
+module.exports = {
+  "theme": "dark",
+  ...colorPalette,
+  ...theme,
   "text-color": "fade(@white, 65%)",
   "text-color-secondary": "fade(@white, 45%)",
   "text-color-inverse": "@white",
@@ -156,10 +190,7 @@ module.exports = {
   "heading-color": "fade(@white, 85%)",
   "item-active-bg": "@primary-1",
   "item-hover-bg": "fade(@white, 8%)",
-  // "border-color-base": "#434343",
-  "border-color-base": "#738498",
-  // "border-color-split": "#303030",
-  "border-color-split": "#738498",
+
   "background-color-light": "fade(@white, 4%)",
   "background-color-base": "fade(@white, 8%)",
   "disabled-color": "fade(@white, 30%)",
@@ -167,7 +198,7 @@ module.exports = {
   "disabled-color-dark": "fade(@white, 30%)",
   "tree-bg": "transparent",
   "list-customize-card-bg": "transparent",
-  "shadow-color": "rgba(0, 0, 0, 0.45)",
+
   "shadow-color-inverse": "@component-background",
   "box-shadow-base": "@shadow-2",
   "shadow-1-up": "0 -6px 16px -8px rgba(0, 0, 0, 0.32), 0 -9px 28px 0 rgba(0, 0, 0, 0.2),\n  0 -12px 48px 16px rgba(0, 0, 0, 0.12)",
@@ -181,7 +212,7 @@ module.exports = {
   "btn-default-ghost-color": "@text-color",
   "btn-default-ghost-border": "fade(@white, 25%)",
   "btn-link-ghost-color": "@text-color",
-  "btn-text-hover-bg": "rgba(255, 255, 255, 0.03)",
+
   "checkbox-check-bg": "transparent",
   "descriptions-bg": "@background-color-light",
   "modal-header-bg": "@popover-background",
@@ -194,7 +225,7 @@ module.exports = {
   "radio-disabled-button-checked-color": "@black",
   "layout-body-background": "@body-background",
   "layout-header-background": "@popover-background",
-  "layout-trigger-background": "#262626",
+
   "input-bg": "transparent",
   "input-placeholder-color": "fade(@white, 30%)",
   "input-icon-color": "fade(@white, 30%)",
@@ -209,7 +240,7 @@ module.exports = {
   "cascader-bg": "transparent",
   "cascader-menu-bg": "@popover-background",
   "cascader-menu-border-color-split": "@border-color-split",
-  "tooltip-bg": "#434343",
+
   "menu-dark-submenu-bg": "@component-background",
   "menu-dark-bg": "@popover-background",
   "menu-popup-bg": "@popover-background",
@@ -217,18 +248,13 @@ module.exports = {
   "notification-bg": "@popover-background",
   "link-hover-color": "@primary-5",
   "link-active-color": "@primary-7",
-  "table-header-bg": "#1d1d1d",
-  "table-body-sort-bg": "fade(@white, 1%)",
-  "table-row-hover-bg": "#262626",
-  "table-header-sort-bg": "#262626",
-  "table-header-filter-active-bg": "#434343",
-  "table-header-sort-active-bg": "#303030",
+
   "table-filter-btns-bg": "@popover-background",
   "table-expanded-row-bg": "@table-header-bg",
   "table-filter-dropdown-bg": "@popover-background",
   "table-expand-icon-bg": "transparent",
   "picker-basic-cell-hover-with-range-color": "darken(@primary-color, 35%)",
-  "picker-basic-cell-disabled-bg": "#303030",
+
   "picker-border-color": "@border-color-split",
   "picker-bg": "transparent",
   "picker-date-hover-range-border-color": "darken(@primary-color, 20%)",
@@ -246,9 +272,9 @@ module.exports = {
   "popover-bg": "@popover-background",
   "drawer-bg": "@popover-background",
   "card-actions-background": "@background-color-light",
-  "card-skeleton-bg": "#303030",
+
   "card-shadow": "0 1px 2px -2px rgba(0, 0, 0, 0.64), 0 3px 6px 0 rgba(0, 0, 0, 0.48),\n  0 5px 12px 4px rgba(0, 0, 0, 0.36)",
-  "transfer-item-hover-bg": "#262626",
+
   "comment-bg": "transparent",
   "comment-author-time-color": "fade(@white, 30%)",
   "comment-action-hover-color": "fade(@white, 65%)",
@@ -262,11 +288,11 @@ module.exports = {
   "pagination-item-input-bg": "@pagination-item-bg",
   "page-header-back-color": "@icon-color",
   "page-header-ghost-bg": "transparent",
-  "slider-rail-background-color": "#262626",
+
   "slider-rail-background-color-hover": "@border-color-base",
   "slider-dot-border-color": "@border-color-split",
   "slider-dot-border-color-active": "@primary-4",
-  "skeleton-color": "#303030",
+
   "skeleton-to-color": "fade(@white, 16%)",
   "alert-success-border-color": "@green-3",
   "alert-success-bg-color": "@green-1",

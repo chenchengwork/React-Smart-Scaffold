@@ -90,6 +90,8 @@ const MenuLeft: React.FC<MenuLeftProps> = ({leftMenu, currentUrl, leftWidth, col
 
     return (
         <Layout.Sider
+            // @ts-ignore
+            theme={theme.theme}
             className={`${className} menu-left`}
             width={leftWidth}
             collapsible
@@ -98,7 +100,7 @@ const MenuLeft: React.FC<MenuLeftProps> = ({leftMenu, currentUrl, leftWidth, col
         >
             <Menu
                 // @ts-ignore
-                // theme={theme.theme}
+                theme={theme.theme}
                 mode="inline"
                 selectedKeys={[currentUrl]}
                 defaultOpenKeys={recursionOpenKeys(leftMenu, currentUrl)}

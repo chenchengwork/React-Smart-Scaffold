@@ -18,13 +18,11 @@ export const getPageList =  (params: {page?: number, pageSize?: number, search?:
     params.search = params.search || {};
 
     return mockRespData({
-        list: [
-            {
-                name: "张三",
-                age: 23,
-                address: "大明湖畔"
-            }
-        ],
+        list: [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15].map((value) => ({
+            name: "张三" + value,
+            age: 23,
+            address: "大明湖畔" + value
+        })),
         page: 1,
         pageCount: 10,
         pageSize: 1,

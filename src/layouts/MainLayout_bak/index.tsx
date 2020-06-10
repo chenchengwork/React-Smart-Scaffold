@@ -8,12 +8,15 @@ import { UrlToExtraInfoMap, getLeftMenu, getMenus, isRemoveLeftMenu } from './me
 import { logout } from '@/services/auth';
 import EnumRouter from '@/constants/EnumRouter';
 import { LayoutCtx } from './layoutContext';
+import {theme} from '@/constants/theme';
 
 import MenuHeader from './MenuHeader';
 import MenuLeft from './MenuLeft';
 
-export { default as MainHeader } from './MainHeader';
-export { default as MainContent } from "./MainContent"
+import MainHeader from './MainHeader';
+export {MainHeader}
+import MainContent from "./MainContent"
+export {MainContent}
 
 const MainLayout: React.FC<RouteComponentProps> = (props) => {
 
@@ -54,7 +57,7 @@ const MainLayout: React.FC<RouteComponentProps> = (props) => {
 
     return (
         <LayoutCtx.Provider value={{handleLeftMenuCollapse: onLeftMenuCollapse, leftMenuCollapsed: collapsed, appMenuLeftWidth}}>
-            <Layout style={{height: "100%"}} hasSider={true}>
+            <Layout style={{height: "100%"}}>
                 {/*头部菜单*/}
                 <MenuHeader
                     currentUrl={currentUrl}

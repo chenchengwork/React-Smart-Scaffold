@@ -10,50 +10,42 @@ interface MainHeaderProps {
     style?: React.CSSProperties;
     leftRender?: React.ReactNode;
     rightRender?: React.ReactNode;
-    leftWidth?: string | number;
-    rightWidth?: string | number;
 }
 
 /**
  * 头部组件
  * @constructor
  */
-const MainHeader: React.FC<MainHeaderProps> = ({ className, title, style, leftRender, rightRender,leftWidth, rightWidth }) => {
+const MainHeader: React.FC<MainHeaderProps> = ({ className, title, style, leftRender, rightRender }) => {
 
     // language=SCSS
-    const getStyle = (leftWidth: number) => {
-        const leftMargin = leftWidth + 2 * theme.mainInterval;
-
-        return css.resolve`
-            .app-header{
-                position: fixed;
-                width: calc(100% - ${leftMargin}px);
-                z-index: 2;
-                left: ${leftMargin - theme.mainInterval}px;
-                top: ${theme.headerHeight + theme.mainInterval}px;
-                display: flex;
-                flex-direction: row;
-                align-items: center;
-                justify-content: space-between;
-                //background: ${theme.mainHeaderBgColor};
-                padding: 0 24px;
-                height: ${theme.mainHeaderHeight}px;
-                box-shadow:0px 1px 6px #333333;
-            }
-        `;
-    }
+    const {styles, className: appHeaderClassName} = css.resolve`
+        .app-header{
+            position: fixed;
+            width: 100%;
+            z-index: 2;
+            top: ${theme.headerHeight}px;
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+            justify-content: space-between;
+            background: ${theme.mainHeaderBgColor};
+            padding: 0 24px;
+            height: ${theme.mainHeaderHeight}px;
+             box-shadow:0px 1px 6px #333333;
+        }
+    `
 
     return (
         <LayoutCtx.Consumer>
             {({appMenuLeftWidth}) => {
-                const {styles, className: appHeaderClassName} = getStyle(appMenuLeftWidth);
                 return (
                     <Layout.Header className={`${appHeaderClassName} app-header ${className}`} style={style}>
-                        <div className="flex-box" style={{width: leftWidth}}>
-                            { title && <div className="title">{title}</div> }
+                        <div className="flex-box">
+                            {title && <div className="title">{title}</div> }
                             {leftRender}
                         </div>
-                        {rightRender && <div className="flex-box" style={{width: rightWidth}}>
+                        {rightRender && <div className="flex-box">
                             {rightRender}
                             <div style={{marginRight: appMenuLeftWidth}}></div>
                         </div>}
@@ -63,15 +55,13 @@ const MainHeader: React.FC<MainHeaderProps> = ({ className, title, style, leftRe
                             .flex-box {
                                 display: flex;
                                 align-items: center;
-                                & > .title{
-                                  flex-shrink: 0;
-                                }
+                                //width: 100%;
                             }
                             .title {
-                                font-size: 16px;
+                                font-size: 18px;
                                 text-align: left;
                                 margin-right: 10px;
-                                //color: #99A3BF;
+                                color: #99A3BF;
                             }
                         `}</style>
                         {styles}
@@ -83,14 +73,19 @@ const MainHeader: React.FC<MainHeaderProps> = ({ className, title, style, leftRe
     );
 };
 
+MainHeader.propTypes = {
+    className: PropTypes.string,
+    style: PropTypes.object,
+    leftRender: PropTypes.node,
+    rightRender: PropTypes.node,
+};
+
 MainHeader.defaultProps = {
     className: "",
     title: "",
     style: {},
     leftRender: null,
-    rightRender: null,
-    leftWidth: "auto",
-    rightWidth: "auto"
+    rightRender: null
 };
 
 export default MainHeader;

@@ -33,7 +33,9 @@ const List: React.FC<ListProps> = ({listStore})=> {
             render: (text: string, record) => (
                 <Fragment>
                     <Sk_Button
-                        type="danger"
+                        type="primary"
+                        danger={true}
+                        size="small"
                         icon={<DeleteOutlined />}
                         style={{marginLeft: 5}}
                     >删除</Sk_Button>
@@ -47,6 +49,7 @@ const List: React.FC<ListProps> = ({listStore})=> {
     return (
         <Sk_Table
             loading={loading}
+            size="small"
             dataSource={data.list}
             columns={columns}
             rowKey={(row) => row.name}

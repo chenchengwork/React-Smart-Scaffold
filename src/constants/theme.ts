@@ -1,7 +1,8 @@
 export const theme = {
 	headerHeight: 50,                   // 头部菜单高度
-	mainHeaderHeight: 45,               // 主header高度
+	mainHeaderHeight: 40,               // 主header高度
 	mainContentFooterHeight: 45,        // footer高度
+	mainInterval: 5,                    // 间隔距离
 
 	//--------亮色色主题配置-----------
 	// theme: "light",

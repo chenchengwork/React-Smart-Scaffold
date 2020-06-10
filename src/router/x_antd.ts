@@ -1,6 +1,5 @@
-import transformRouter from './transformRouter';
 import EnumRouter from '@/constants/EnumRouter';
-import { x_antdRoutes } from './x_antd';
+
 /**
  * 定义路由
  * @type {*[]}
@@ -13,23 +12,29 @@ import { x_antdRoutes } from './x_antd';
          isMainLayout: true,                                // 该字段可选, 是否开启MainLayout布局, 默认是true
      }
  */
-const routes = [
+export const x_antdRoutes = [
     {
-        uri: EnumRouter.login,
-        component: import("@/pages/Login"),
-        isMainLayout: false
+        uri: EnumRouter.xAntdCommon,
+        component: import("@/pages/X_Antd/Common"),
     },
     {
-        uri: EnumRouter.demoList,
-        component: import("@/pages/DemoList"),
-        stores: {
-            listStore: require("@/pages/DemoList/model/ListStore").default,
-        }
+        uri: EnumRouter.xAntdDataEntry,
+        component: import("@/pages/X_Antd/DataEntry"),
     },
-    ...x_antdRoutes,
+    {
+        uri: EnumRouter.xAntdDataShow,
+        component: import("@/pages/X_Antd/DataShow"),
+    },
+    {
+        uri: EnumRouter.xAntdFeedback,
+        component: import("@/pages/X_Antd/Feedback"),
+    },
+    {
+        uri: EnumRouter.xAntdNavigation,
+        component: import("@/pages/X_Antd/Navigation"),
+    },
 ];
 
 
-export default transformRouter(routes);
 
 

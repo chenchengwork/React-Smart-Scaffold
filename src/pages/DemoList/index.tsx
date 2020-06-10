@@ -19,6 +19,6 @@ const DemoList = ()=> {
             </MainContent>
         </Fragment>
     )
-}
+};
 
 export default DemoList;
