@@ -79,9 +79,12 @@ const themeAntd = (config) => {
         (Array.isArray(rule.use) ? rule.use : []).forEach(item => {
             if (item.loader === "less-loader"){
                 item.options = {
-                    ...rule.use.options,
-                    modifyVars: require("./ant_theme")
-                }
+                    ...item.options,
+                    lessOptions:{
+                        ...item.options.lessOptions,
+                        modifyVars: require("./ant_theme")
+                    },
+                };
 
                 return item;
             }

@@ -17,7 +17,7 @@ const MenuHeader: React.FC<MenuHeaderProps> = ({currentUrl, menus, logout}) => {
             width: 100%;
             height: ${theme.headerHeight}px;
             padding: 0;
-            // background-color: ${theme.headerBgColor};
+            background-color: ${theme.headerBgColor};
             display: flex;
         }
     `;

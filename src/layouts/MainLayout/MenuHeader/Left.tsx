@@ -45,6 +45,7 @@ const getStyle = () => {
         .left {
             flex: 1;
             //background-color: ${theme.headerBgColor};
+            background-color: transparent;
             display: flex;
             border: none;
            	
@@ -57,8 +58,7 @@ const getStyle = () => {
                 > :global(a) {
                     font-size: 14px;
                     font-weight: 500;
-                    //color: #6E7A99;
-                    //color: ${theme.headerFontColor};
+                    color: ${theme.headerFontColor};
                     padding: 0 16px 0 26px;
                     //border-right: 1px solid #384466;
                 }
@@ -68,9 +68,9 @@ const getStyle = () => {
 			// hover效果的样式
 			:global(.ant-menu-item.ant-menu-item-active) {
 				border-bottom: none;
-			 	// > :global(a) {
-			 	// 	color: ${theme.headerFontColorActive};
-			 	// }
+			 	> :global(a) {
+			 		color: ${theme.headerFontColorActive};
+			 	}
 			}
 			
             :global(.ant-menu-item:last-child) {
@@ -83,9 +83,9 @@ const getStyle = () => {
             :global(.ant-menu-item.active), :global(.ant-menu-item-selected) {
                 //border-bottom: 2px solid #509be6;
                 background-color: transparent;
-                // > :global(a) {
-                //     color: ${theme.headerFontColorActive};
-                // }
+                > :global(a) {
+                    color: ${theme.headerFontColorActive};
+                }
             }
         }
 	`;

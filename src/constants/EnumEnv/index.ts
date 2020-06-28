@@ -10,7 +10,7 @@ const defaultEnumEnv = {
     // 平台相关的配置
     platform: {
         title: "React-Smart-Scaffold",                        // 平台标题
-        logoUrl: require("./img/logo.svg"),      // logo的url地址
+        logoUrl: require("./img/logo.svg").default,      // logo的url地址
     },
     intl: {
         lang: 'zh',                 // 语言

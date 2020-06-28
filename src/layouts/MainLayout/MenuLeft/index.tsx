@@ -97,8 +97,6 @@ const MenuLeft: React.FC<MenuLeftProps> = ({leftMenu, currentUrl, leftWidth, col
             onCollapse={onLeftMenuCollapse}
         >
             <Menu
-                // @ts-ignore
-                // theme={theme.theme}
                 mode="inline"
                 selectedKeys={[currentUrl]}
                 defaultOpenKeys={recursionOpenKeys(leftMenu, currentUrl)}
