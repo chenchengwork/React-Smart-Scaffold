@@ -60,6 +60,7 @@ const styledJsx = (config) => {
                 "styled-jsx/babel",
                 {
                     "vendorPrefixes": true,     // 为css自动添加前缀
+                    "optimizeForSpeed": process.env.NODE_ENV === 'production' ? true : false,
                     "plugins": [
                         ["styled-jsx-plugin-sass",{sassOptions: {}}]
                     ]
