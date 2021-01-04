@@ -11,7 +11,7 @@
   },
   "dependencies": {
     "antd": "^3.6.5",
-    "axios": "^0.18.0",
+    "axios": "^0.21.1",
     "classnames": "^2.2.6",
     "immutability-helper": "^2.7.1",
     "js-cookie": "^2.2.0",
